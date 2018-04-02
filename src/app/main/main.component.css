@@ -1,0 +1,45 @@
+.menubutton {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 93px;
+  height: 96px;
+  font-size: 0;
+  text-indent: -9999px;
+  cursor: pointer;
+  outline: none;
+  background: none;
+  border: 0;
+}
+
+
+.menubutton span {
+  display: block;
+  position: absolute;
+  top: 44px;
+  left: 18px;
+  right: 18px;
+  height: 8px;
+  background: #1a2580;
+}
+
+.menubutton span::before,
+.menubutton span::after {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: #1a2580;
+  content: "";
+}
+
+.menubutton span::before {
+  top: -20px;
+}
+
+.menubutton span::after {
+  bottom: -20px;
+}
