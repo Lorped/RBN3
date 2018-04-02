@@ -13,8 +13,8 @@
           <input id="password" name="password" type="password" class="form-control" [(ngModel)]="loginCredentials.password" required >
         </div>
 
-        <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid" >Submit</button>
-
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" >Login</button>
+        <a [routerLink]="['/register']" class="btn btn-link">Registrati</a>
       </form>
       {{errmsg}}
     </div>

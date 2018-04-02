@@ -10,5 +10,4 @@ import { LoginComponent } from './login/login.component';
 })
 export class AppComponent {
   title = 'Roma by Night';
-
 }
