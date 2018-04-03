@@ -1,5 +1,5 @@
 :host {
-  background: #1a2580;
+  background: #282c34;
   color: #fff;
   position: fixed;
   left: auto;
@@ -7,7 +7,7 @@
   right: 0;
   bottom: 0;
   width: 20%;
-  min-width: 250px;
+  min-width: 200px;
   z-index: 9999;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }

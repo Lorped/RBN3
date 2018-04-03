@@ -8,6 +8,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { myRouting } from './app.routing' ;
 
 import { AuthenticationService } from './_services/index';
+import { ListpresentiService } from './_services/index';
 import { AuthGuard } from './_guards/auth.guard';
 
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { MenuComponent } from './menu/menu.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { PresentiComponent } from './presenti/presenti.component';
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { RegisterComponent } from './register/register.component';
     MenuComponent,
     MainComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PresentiComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { RegisterComponent } from './register/register.component';
   ],
   providers: [
     AuthenticationService,
+    ListpresentiService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

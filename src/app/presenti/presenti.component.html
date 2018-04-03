@@ -1,0 +1,14 @@
+<p>
+  presenti works!
+</p>
+
+<table class="tabellapresenti">
+  <tr><th colspan="3">{{numeropresenti}}</th></tr>
+  <tr *ngFor="let pres of listapresenti" >
+    <td *ngIf="pres.Sesso == 'M'"><img src="assets/blue_arrow.gif"></td>
+    <td *ngIf="pres.Sesso == 'F'"><img src="assets/rose_arrow.gif"></td>
+    <td style="width:120px;">{{pres.NomeCognome}}</td>
+    <td *ngIf="pres.offgame == '0'"><img src="assets/on.gif"></td>
+    <td *ngIf="pres.offgame == '1'"><img src="assets/off.gif"></td>
+  </tr>
+</table>

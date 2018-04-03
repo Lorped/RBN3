@@ -26,8 +26,8 @@ $request = json_decode($postdata);
 $email = $request->email;
 $password = $request->password;
 
-//$email = "julien@home.com";
-//$password = "kli0loth"; 
+// $email = "julien@home.com";
+// $password = "kli0loth"; 
 
 $email=addslashes($email);
 $password=addslashes($password);
@@ -44,6 +44,7 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		$Cognome=$res['Cognome'];
 		$Email=$res['Email'];
 		$NomeCognome=$Nome.' '.$Cognome;
+		$Sesso=$res['Sesso'];
 		
 		$payload = [      
 			"Userid" => "$Userid",
@@ -64,7 +65,19 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		//
 		//	Do a lot of other stuff !!
 		//
-		
+		// Inserisco/Aggiorno in presenti
+		$MySql = "SELECT * FROM Presenti WHERE Userid = $Userid";
+		$Results = mysql_query($MySql);
+		if (mysql_num_rows($Results) == 0) {
+			$MySql = "INSERT INTO Presenti (Userid, NomeCognome, Stanza, OraEntrata, OraUscita, UltimoRefresh, Sesso, startoff,  Inv) VALUES ( $Userid, '$NomeCognome', 0,  NOW(), '2037-12-31 00:00:00', NOW(),'$Sesso' , '1970-01-01 00:00:00',  NULL)";
+		} else {
+			$MySql = "UPDATE Presenti SET Stanza = 0, OraEntrata=NOW(), UltimoRefresh = NOW(), OraUscita = '2037-12-31 00:00:00' , startoff='1970-01-01 00:00:00', NomeCognome='$NomeCognome' , Sesso='$Sesso', Inv=NULL WHERE Userid = $Userid ";
+			
+		}
+		mysql_query($MySql);
+		if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
+
+		// FINE OPERAZIONI LOGIN
 	
 	} else {
 		header("HTTP/1.1 401 Unauthorized");

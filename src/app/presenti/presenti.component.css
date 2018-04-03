@@ -1,0 +1,10 @@
+
+.tabellapresenti td, th {
+  font-size: 12px;
+}
+.tabellapresenti {
+  margin:auto;
+}
+.tabellapresenti th {
+    text-align: center;
+}

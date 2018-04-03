@@ -1,21 +1,20 @@
-<div div class="mx-auto" style="width: 600px;">
+<div div class="mx-auto" style="width: 600px; margin-top: 50px;">
 
-  <div class="col-sm-6 col-md-6 col-ld-6" >
 
-      <form name="loginForm" (ngSubmit)="doLogin()" #loginForm="ngForm" >
-        <div class="form-group">
-          <label for="Email">Login</label>
-          <input id="email" name="email" type="email" class="form-control" [(ngModel)]="loginCredentials.email" required >
-        </div>
 
-        <div class="form-group" >
-          <label for="Password">Password</label>
-          <input id="password" name="password" type="password" class="form-control" [(ngModel)]="loginCredentials.password" required >
-        </div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid" >Login</button>
-        <a [routerLink]="['/register']" class="btn btn-link">Registrati</a>
-      </form>
-      {{errmsg}}
+  <form name="loginForm" (ngSubmit)="doLogin()" #loginForm="ngForm" class="form-signin" >
+    <h2 class="form-signin-heading">Roma by Night</h2>
+    <div class="form-group">
+      <input id="email" name="email" type="email" class="form-control" [(ngModel)]="loginCredentials.email" placeholder="Indirizzo Email" required autofocus>
     </div>
+
+    <div class="form-group" >
+      <input id="password" name="password" type="password" class="form-control" [(ngModel)]="loginCredentials.password" placeholder="Password" required >
+    </div>
+
+    <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!loginForm.form.valid" >Login</button>
+    <a [routerLink]="['/register']" class="btn btn-link">Registrati</a>
+  </form>
+  {{errmsg}}
+
 </div>
