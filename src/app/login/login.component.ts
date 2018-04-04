@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Personaggio } from '../personaggio';
 import { AuthenticationService } from '../_services/index';
 import { Router, ActivatedRoute } from '@angular/router';
 
-
+import {Status} from '../globals'
 
 @Component({
   selector: 'app-login',
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit {
   errmsg="";
   returnUrl: string;
 
-  constructor( private authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router ) { }
+  constructor( private authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router , private status: Status) { }
 
   ngOnInit() {
     this.authenticationService.logout();
@@ -27,8 +26,8 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.loginCredentials.email, this.loginCredentials.password)
       .subscribe(
         data => {
+          this.status.Userid=data.Userid;
           this.router.navigate([this.returnUrl]);
-
         },
         error => {
           this.errmsg=error.statusText;

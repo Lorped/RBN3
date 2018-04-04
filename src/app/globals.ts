@@ -1,3 +1,6 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
 export class Personaggio {
   constructor(
     public Userid: number,
@@ -9,5 +12,13 @@ export class Personaggio {
     public Esperienza: number
 
   ) {  }
+
+}
+
+@Injectable()
+export class Status {
+  Userid: number = 0;
+  Stanza: number = 0 ;
+  Offgame: number = 0;
 
 }

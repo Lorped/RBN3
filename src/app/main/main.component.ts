@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate} from '@angular/animations';
 
+
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',

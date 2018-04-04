@@ -1,0 +1,21 @@
+.tabellaluoghi td, th {
+  font-size: 12px;
+  text-align: left;
+}
+.tabellaluoghi {
+  margin:auto;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: transparent;
+    border-color: transparent; /*set the color you want here*/
+    text-align: left;
+    font-size: 12px;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+
+    background-color: #3d3d3d;
+    border-color: #285e8e; /*set the color you want here*/
+}

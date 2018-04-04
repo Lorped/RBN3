@@ -19,6 +19,11 @@ import { RegisterComponent } from './register/register.component';
 import { PresentiComponent } from './presenti/presenti.component';
 
 
+import {Status, Personaggio} from './globals';
+import { LuoghiComponent } from './luoghi/luoghi.component';
+import { ChatComponent } from './chat/chat.component'
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +31,9 @@ import { PresentiComponent } from './presenti/presenti.component';
     MainComponent,
     LoginComponent,
     RegisterComponent,
-    PresentiComponent
+    PresentiComponent,
+    LuoghiComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,8 @@ import { PresentiComponent } from './presenti/presenti.component';
   providers: [
     AuthenticationService,
     ListpresentiService,
-    AuthGuard
+    AuthGuard,
+    Status, Personaggio
   ],
   bootstrap: [AppComponent]
 })

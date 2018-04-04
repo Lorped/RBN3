@@ -1,22 +1,21 @@
 <button (click)="toggleMenu()" class="menubutton">
   <span>toggle menu</span>
 </button>
-<p>
-  main works!
-</p>
+
 
 <div class="container">
 
- <div class="row">
-   <div class="col-sm-8" style="background-color:yellow;">
-     <p>Lorem ipsum...</p>
-   </div>
-   <div class="col-sm-2" style="background-color:pink;">
-     <app-presenti></app-presenti>
-   </div>
-   <div class="col-sm-2" style="background-color:green;">
-   </div>
- </div>
+  <div class="row">
+    <div class="col-sm-7" style="background-color:transparent; color:#ffffff">
+      <app-chat></app-chat>
+    </div>
+    <div style="min-width: 230px; height: 370px; background-color:black; background-color:black; background:rgba(0,0,0,0.5);">
+      <app-presenti></app-presenti>
+    </div>
+    <div style="min-width: 230px; height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
+      <app-luoghi></app-luoghi>
+    </div>
+  </div>
 </div>
 
 
