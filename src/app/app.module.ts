@@ -9,6 +9,8 @@ import { myRouting } from './app.routing' ;
 
 import { AuthenticationService } from './_services/index';
 import { ListpresentiService } from './_services/index';
+import { ChatService } from './_services/index';
+
 import { AuthGuard } from './_guards/auth.guard';
 
 import { AppComponent } from './app.component';
@@ -21,7 +23,7 @@ import { PresentiComponent } from './presenti/presenti.component';
 
 import {Status, Personaggio} from './globals';
 import { LuoghiComponent } from './luoghi/luoghi.component';
-import { ChatComponent } from './chat/chat.component'
+import { ChatComponent } from './chat/chat.component';
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { ChatComponent } from './chat/chat.component'
   providers: [
     AuthenticationService,
     ListpresentiService,
+    ChatService,
     AuthGuard,
     Status, Personaggio
   ],

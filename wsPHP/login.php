@@ -45,11 +45,13 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		$Email=$res['Email'];
 		$NomeCognome=$Nome.' '.$Cognome;
 		$Sesso=$res['Sesso'];
+		$MasterAdmin=$res['MasterAdmin'];
 		
 		$payload = [      
 			"Userid" => "$Userid",
 			"NomeCognome" => "$NomeCognome",
-			"Email" => "$Email"
+			"Email" => "$Email",
+			"MasterAdmin" => "$MasterAdmin"
 		];
 		
 		$token=CreaJWT($payload);
@@ -58,10 +60,11 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 			"Userid" => "$Userid",
 			"NomeCognome" => "$NomeCognome",
 			"Email" => "$Email",
+			"MasterAdmin" => "$MasterAdmin",
 			"token" => "$token"
 		];
 		echo json_encode ($out, JSON_UNESCAPED_UNICODE);
-		
+
 		//
 		//	Do a lot of other stuff !!
 		//

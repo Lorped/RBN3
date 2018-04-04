@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { myChat, chatrow , ChatService } from '../_services/index';
+
+import {Status} from '../globals'
 
 @Component({
   selector: 'app-chat',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  constructor() { }
+  statuschat: number;
+  listachat: Array<chatrow>;
+
+
+  constructor( private status: Status, private chatservice: ChatService ) { }
 
   ngOnInit() {
+
+
+
+
+    this.status.Last=0;
+    this.chatservice.getchat()
+    .subscribe((data: myChat) => {
+        this.statuschat=data.Statuschat;
+        this.listachat=data.Listachat;
+        console.log(this.listachat);
+    },
+    error => {
+      console.log(error);
+    });
   }
 
 }

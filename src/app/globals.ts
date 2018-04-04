@@ -20,5 +20,5 @@ export class Status {
   Userid: number = 0;
   Stanza: number = 0 ;
   Offgame: number = 0;
-
+  Last: number = 0;
 }
