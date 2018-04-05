@@ -24,6 +24,7 @@ import { PresentiComponent } from './presenti/presenti.component';
 import {Status, Personaggio} from './globals';
 import { LuoghiComponent } from './luoghi/luoghi.component';
 import { ChatComponent } from './chat/chat.component';
+import { MappaComponent } from './mappa/mappa.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ChatComponent } from './chat/chat.component';
     RegisterComponent,
     PresentiComponent,
     LuoghiComponent,
-    ChatComponent
+    ChatComponent,
+    MappaComponent
   ],
   imports: [
     BrowserModule,

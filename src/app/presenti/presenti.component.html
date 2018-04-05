@@ -1,4 +1,4 @@
-<div style="background-image:url('assets/index.png'); background-position: center top; background-repeat: no-repeat;background-size:200px 365px; height:370px;" >
+<div style="background-image:url('assets/index.png'); background-position: center top; background-repeat: no-repeat;background-size:230px 365px; height:370px;" >
 <p>&nbsp;</p>
 
 <table class="tabellapresenti">
@@ -6,7 +6,7 @@
   <tr *ngFor="let pres of listapresenti" >
     <td *ngIf="pres.Sesso == 'M'"><span class="fa fa-caret-right blue"></span></td>
     <td *ngIf="pres.Sesso == 'F'"><span class="fa fa-caret-right pink"></span></td>
-    <td style="width:120px;">{{pres.NomeCognome}}</td>
+    <td style="width:150px;">{{pres.NomeCognome}}</td>
     <td *ngIf="pres.offgame == '0'"><span class="fa fa-circle green"></span></td>
     <td *ngIf="pres.offgame == '1'"><span class="fa fa-circle red"></span></td>
   </tr>

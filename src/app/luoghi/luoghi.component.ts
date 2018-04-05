@@ -7,10 +7,12 @@ export class Luogo {
   Tipo: string;
   ID: number;
   Breve: string;
-  constructor ( aTipo: string, aID: number, aBreve: string) {
+  NomeMappa: string;
+  constructor ( aTipo: string, aID: number, aBreve: string, aMappa: string) {
     this.Tipo=aTipo;
     this.ID=aID;
     this.Breve=aBreve;
+    this.NomeMappa=aMappa;
   }
 }
 
@@ -35,7 +37,7 @@ export class LuoghiComponent implements OnInit {
     .map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         let item = res[i];
-        let newluogo = new Luogo(item.Tipo, item.ID, item.Breve);
+        let newluogo = new Luogo(item.Tipo, item.ID, item.Breve, item.NomeMappa);
         mialista.push(newluogo);
       }
       return mialista;
