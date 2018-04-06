@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
-import {Status} from '../globals'
+import {Status} from '../../globals'
 
 export class Luogo {
   Tipo: string;
   ID: number;
   Breve: string;
-  NomeMappa: string;
-  constructor ( aTipo: string, aID: number, aBreve: string, aMappa: string) {
+  NomeMappa: number;
+  constructor ( aTipo: string, aID: number, aBreve: string, aMappa: number) {
     this.Tipo=aTipo;
     this.ID=aID;
     this.Breve=aBreve;
@@ -25,7 +26,7 @@ export class LuoghiComponent implements OnInit {
 
   listaluoghi: Array<Luogo>;
 
-  constructor( private status: Status , private http: HttpClient) { }
+  constructor( private status: Status , private http: HttpClient , private router: Router ) { }
 
   ngOnInit() {
     this.getLuoghi();
@@ -47,7 +48,12 @@ export class LuoghiComponent implements OnInit {
     })
   }
 
-  cambialoc(newloc: number) {
+  cambialoc(newloc: number , newmap: number ) {
+    if ( newmap === null  ) {
+      this.router.navigate(['/chat']);
+    } else {
+      this.router.navigate(['/mappa/'+newmap]);
+    }
     this.status.Stanza=newloc;
     this.getLuoghi();
   }

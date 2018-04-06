@@ -1,19 +1,24 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 
-import { MainComponent } from './main/main.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { MainComponent } from './_components/main/main.component';
+import { LoginComponent } from './_components/login/login.component';
+import { RegisterComponent } from './_components/register/register.component';
 
 import { AuthGuard } from './_guards/auth.guard';
 
 
-const appRoutes: Routes = [
-    { path: '', component: MainComponent, canActivate: [AuthGuard] },
+export const APP_ROUTES: Routes = [
+
+    { path: '', redirectTo: 'mappa/0', pathMatch: 'full'},
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: '', component: MainComponent, canActivate: [AuthGuard] ,
+      children: [
+        { path: 'chat', loadChildren: './_modules/chat/chat.module#ChatModule'},
+        { path: 'mappa', loadChildren: './_modules/mappa/mappa.module#MappaModule'}
+      ]
+    },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
-
-export const myRouting = RouterModule.forRoot(appRoutes);

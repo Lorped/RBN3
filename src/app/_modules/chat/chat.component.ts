@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { myChat, chatrow , ChatService } from '../_services/index';
+import { myChat, chatrow , ChatService } from '../../_services/index';
 
-import {Status} from '../globals'
+import { Status } from '../../globals'
 
 @Component({
   selector: 'app-chat',
@@ -17,9 +17,6 @@ export class ChatComponent implements OnInit {
   constructor( private status: Status, private chatservice: ChatService ) { }
 
   ngOnInit() {
-
-
-
 
     this.status.Last=0;
     this.chatservice.getchat()

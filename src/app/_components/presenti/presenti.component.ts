@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListpresentiService , presenti } from '../_services/index';
+import { ListpresentiService , presenti } from '../../_services/index';
 import { IntervalObservable } from "rxjs/observable/IntervalObservable";
 
 @Component({

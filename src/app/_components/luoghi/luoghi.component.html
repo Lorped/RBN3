@@ -4,12 +4,12 @@
   <tr *ngFor="let ll of listaluoghi" >
     <td *ngIf="ll.Tipo == 'Padre' || ll.Tipo == 'Entra'">
       <div style="width:190px;">
-      <button type="button" class="btn btn-sm btn-block btn-primary" (click)="cambialoc(ll.ID)">&nbsp;<span class="fa fa-chevron-up blue"></span>{{ll.Breve}}</button>
+      <button type="button" class="btn btn-sm btn-block btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-up blue"></span>{{ll.Breve}}</button>
       </div>
     </td>
     <td *ngIf="ll.Tipo == 'Std'">
       <div style="width:190px;">
-      <button type="button" class="btn btn-sm btn-block btn-primary" (click)="cambialoc(ll.ID)">&nbsp;<span class="fa fa-chevron-right red"></span>{{ll.Breve}}</button>
+      <button type="button" class="btn btn-sm btn-block btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right red"></span>{{ll.Breve}}</button>
     </div>
     </td>
   </tr>
