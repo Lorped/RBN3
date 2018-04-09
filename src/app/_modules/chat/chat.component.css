@@ -1,0 +1,19 @@
+.chat {
+    list-style: none;
+    background: none;
+    padding: 0;
+    top:0px;
+    left: 0px;
+    height: 365px;
+    width: 100%;
+    overflow-y: scroll;
+}
+.chat li {
+    font-size: 13px;
+    !font-weight: bold;
+    display: flex;
+}
+
+.messaggioF { color: #FF00FF; }
+.messaggioM { color: #1874cd; }
+.ora { color: red; }

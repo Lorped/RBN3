@@ -58,7 +58,7 @@ if ( $rs['0'] == 0 ) {
 
 		$status = -1 ;	//gestione reverse
 			
-		$MySql = "SELECT * FROM Chat WHERE Stanza = '$loc' ";
+		$MySql = "SELECT ID, Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso, ImgRazza, DescRazza, Tipo, Testo, Locazione, CONCAT( Hour( Ora ) , ':', Minute( Ora ) ) AS Ora FROM Chat WHERE Stanza = '$loc' ";
 		if ( $MasterAdmin != 3) {
 			$MySql .=  " AND (IDDestinatario IS NULL OR IDDestinatario = '$Userid' OR IDDestinatario = '0' OR IDMittente = '$Userid') ";
 		}
@@ -69,7 +69,7 @@ if ( $rs['0'] == 0 ) {
 	
 		$status = 1 ;	//gestione normale
 
-		$MySql = "SELECT * FROM Chat WHERE Stanza = '$loc' ";
+		$MySql = "SELECT ID, Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso, ImgRazza, DescRazza, Tipo, Testo, Locazione, CONCAT( Hour( Ora ) , ':', Minute( Ora ) ) AS Ora FROM Chat WHERE Stanza = '$loc' ";
 		if ( $MasterAdmin != 3 ) {
 			$MySql .=  "AND ( IDDestinatario IS NULL OR IDDestinatario = '$Userid' OR IDDestinatario = '0' OR IDMittente = '$Userid' ) ";
 		}
