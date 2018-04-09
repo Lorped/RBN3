@@ -49,12 +49,16 @@ export class LuoghiComponent implements OnInit {
   }
 
   cambialoc(newloc: number , newmap: number ) {
+    this.status.Stanza=newloc;
+    this.status.Last=0;
+
+
     if ( newmap === null  ) {
-      this.router.navigate(['/chat']);
+      this.router.navigate(['/chat/'+newloc]);
     } else {
+      if ( this.status.Subscriber ) this.status.Subscriber.unsubscribe();
       this.router.navigate(['/mappa/'+newmap]);
     }
-    this.status.Stanza=newloc;
     this.getLuoghi();
   }
 }

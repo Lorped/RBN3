@@ -78,7 +78,7 @@ export class ChatService {
 
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/chat.php',  { token: user, loc: this.status.Stanza, last: this.status.Last })
     .map((res: myChat) => {
-      this.status.Stanza=res.Last;
+      this.status.Last=res.Last;
       return res;
     })
 

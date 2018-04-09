@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 @Injectable()
 export class Personaggio {
@@ -21,4 +22,5 @@ export class Status {
   Stanza: number = 0 ;
   Offgame: number = 0;
   Last: number = 0;
+  Subscriber: Subscription;
 }

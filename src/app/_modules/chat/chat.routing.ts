@@ -3,5 +3,6 @@ import {ChatComponent} from './chat.component';
 
 
 export const CHAT_ROUTES: Routes = [
-  {path: '', component: ChatComponent}
+  {path: '', component: ChatComponent },
+  {path: '**', component: ChatComponent}
 ];

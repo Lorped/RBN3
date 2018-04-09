@@ -62,7 +62,7 @@ if ( $rs['0'] == 0 ) {
 		if ( $MasterAdmin != 3) {
 			$MySql .=  " AND (IDDestinatario IS NULL OR IDDestinatario = '$Userid' OR IDDestinatario = '0' OR IDMittente = '$Userid') ";
 		}
-		$MySql .= " ORDER BY ID DESC LIMIT 0, 20 ";
+		$MySql .= " ORDER BY ID ASC LIMIT 0, 30 ";
 		
 			
 	} else {
@@ -89,7 +89,7 @@ if ( $rs['0'] == 0 ) {
 }
 
 $newout = [
-	"Status" => $status ,
+	"Statuschat" => $status ,
 	"Listachat" => $out ,
 	"Last" => $last 
 ];
