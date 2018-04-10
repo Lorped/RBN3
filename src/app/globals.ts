@@ -22,5 +22,5 @@ export class Status {
   Stanza: number = 0 ;
   Offgame: number = 0;
   Last: number = 0;
-  Subscriber: Subscription;
+  Alive: boolean = true;
 }

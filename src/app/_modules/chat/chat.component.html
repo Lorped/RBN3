@@ -4,7 +4,7 @@
 
   <ol class="chat" #chatdiv [scrollTop]="chatdiv.scrollHeight" *ngIf="listachat.length > 0">
       <li [ngClass]="{'std': row.Tipo == '' , 'azione': row.Tipo == '+' }" *ngFor="let row of listachat">
-        <span class="ora">&nbsp;{{ row.Ora }}</span>&nbsp;-&nbsp;<span [ngClass]="{'messaggioM': row.Sesso == 'M' , 'messaggioF': row.Tipo == 'F' }">{{ row.Mittente }}</span>&nbsp;
+        <span class="ora">{{ row.Ora }}</span>&nbsp;-&nbsp;<span [ngClass]="{'messaggioM': row.Sesso == 'M' , 'messaggioF': row.Tipo == 'F' }">{{ row.Mittente }}</span>&nbsp;
         <span>{{ row.Testo }}</span>
       </li>
   </ol>

@@ -56,7 +56,7 @@ export class LuoghiComponent implements OnInit {
     if ( newmap === null  ) {
       this.router.navigate(['/chat/'+newloc]);
     } else {
-      if ( this.status.Subscriber ) this.status.Subscriber.unsubscribe();
+      this.status.Alive= false;
       this.router.navigate(['/mappa/'+newmap]);
     }
     this.getLuoghi();

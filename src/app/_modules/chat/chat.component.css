@@ -7,6 +7,9 @@
     height: 365px;
     width: 100%;
     overflow-y: scroll;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 3px;
 }
 .chat li {
     font-size: 13px;

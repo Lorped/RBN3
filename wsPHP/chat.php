@@ -6,16 +6,16 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 	header('Access-Control-Allow-Credentials: true');
 	header('Access-Control-Max-Age: 86400');    // cache for 1 day
 }
- 
+
 // Access-Control headers are received during OPTIONS requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-		header("Access-Control-Allow-Methods: GET, POST, OPTIONS");         
+		header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 	if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
 		header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 	exit(0);
 }
- 
+
 include ('db.inc.php');
 include ('token.php');
 
@@ -47,51 +47,30 @@ $MySql = "SELECT count(*) FROM Chat WHERE Stanza = '$loc' ";
 $Result = mysql_query($MySql);
 $rs=mysql_fetch_row($Result);
 
-if ( $rs['0'] == 0 ) { 
-		
-	$status = 0 ; // vuota o svuotata
-		
-		
-} else {
+$status = $rs['0'];
 
-	if ($last == 0 ) {
+if ( $status != 0 ) {
 
-		$status = -1 ;	//gestione reverse
-			
-		$MySql = "SELECT ID, Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso, ImgRazza, DescRazza, Tipo, Testo, Locazione, CONCAT( Hour( Ora ) , ':', Minute( Ora ) ) AS Ora FROM Chat WHERE Stanza = '$loc' ";
-		if ( $MasterAdmin != 3) {
-			$MySql .=  " AND (IDDestinatario IS NULL OR IDDestinatario = '$Userid' OR IDDestinatario = '0' OR IDMittente = '$Userid') ";
-		}
-		$MySql .= " ORDER BY ID ASC LIMIT 0, 30 ";
-		
-			
-	} else {
-	
-		$status = 1 ;	//gestione normale
-
-		$MySql = "SELECT ID, Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso, ImgRazza, DescRazza, Tipo, Testo, Locazione, CONCAT( Hour( Ora ) , ':', Minute( Ora ) ) AS Ora FROM Chat WHERE Stanza = '$loc' ";
-		if ( $MasterAdmin != 3 ) {
-			$MySql .=  "AND ( IDDestinatario IS NULL OR IDDestinatario = '$Userid' OR IDDestinatario = '0' OR IDMittente = '$Userid' ) ";
-		}
-		$MySql .= " AND ID > '$last' ORDER BY ID ASC";
-		
-			
+	$MySql = "SELECT ID, Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso, ImgRazza, DescRazza, Tipo, Testo, Locazione, CONCAT( Hour( Ora ) , ':', Minute( Ora ) ) AS Ora FROM Chat WHERE Stanza = '$loc' ";
+	if ( $MasterAdmin != 3) {
+		$MySql .=  " AND (IDDestinatario IS NULL OR IDDestinatario = '$Userid' OR IDDestinatario = '0' OR IDMittente = '$Userid' ) ";
 	}
+
+	$MySql .= " AND ID > '$last' ORDER BY ID ASC";
 
 	$Result = mysql_query($MySql);
 	while ($res=mysql_fetch_array($Result,MYSQL_ASSOC) ) {
-		if ($res['ID'] > $last) {	
+		if ($res['ID'] > $last) {
 			$last = $res['ID'];
 		}
-		$out [] =$res;	
-		
+		$out [] =$res;
 	}
 }
 
 $newout = [
 	"Statuschat" => $status ,
 	"Listachat" => $out ,
-	"Last" => $last 
+	"Last" => $last
 ];
 
 echo json_encode ($newout, JSON_UNESCAPED_UNICODE);

@@ -66,21 +66,8 @@ export class ChatService {
   constructor( private status: Status, private http: HttpClient) { }
 
   getchat(){
-
-    var miostatus: number;
-    var miachatlist = [];
-    var mialista = [];
-
-
-    var mychatcompleta: myChat;
-
     var user = sessionStorage.getItem('RBN3currentUser') ;
 
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/chat.php',  { token: user, loc: this.status.Stanza, last: this.status.Last })
-    .map((res: myChat) => {
-      this.status.Last=res.Last;
-      return res;
-    })
-
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/chat.php',  {token: user, loc: this.status.Stanza, last: this.status.Last})
   }
 }

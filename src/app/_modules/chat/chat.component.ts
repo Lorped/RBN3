@@ -3,10 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 
 import { Observable } from 'rxjs/Observable';
+import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/mergeMapTo';
-import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/takeWhile';
+
+import { takeWhile } from 'rxjs/operators';
 
 import { myChat, chatrow , ChatService } from '../../_services/index';
 
@@ -28,49 +30,41 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.listachat = [];
-    var myEmitter =this.route.url.switchMap( (val) =>   {
-//       console.log("on init swMap="+this.status.Stanza);
-//       console.log(val);
-       return  Observable.interval(20000).startWith(1).mergeMapTo(this.chatservice.getchat())
-     })
+    this.status.Alive = true;
 
-     this.status.Subscriber= myEmitter.subscribe((data: myChat) => {
-
-//      console.log("inside polling chat="+this.status.Stanza);
-      this.statuschat=data.Statuschat;
-      this.status.Last=data.Last;
-      if (this.statuschat==0)  {
-        this.listachat=data.Listachat;
-        this.status.Last=0;
-      } else {
-        for (let i = 0; i < data.Listachat.length; i++) {
-          this.listachat.push(data.Listachat[i]);
-        }
-      };
-    },
-    error => {
-      console.log(error);
+    var Emitter=this.route.url.switchMap( (val) =>   {
+      return TimerObservable.create(0, 20000)
+        .takeWhile(() => this.status.Alive)
     });
 
+    Emitter.subscribe((val) => {
+      this.chatservice.getchat().subscribe((data: myChat) => {
+
+        this.statuschat=data.Statuschat;
+        this.status.Last=data.Last;
+        if (this.statuschat==0)  {
+          this.listachat=data.Listachat;
+          this.status.Last=0;
+        } else {
+          for (let i = 0; i < data.Listachat.length; i++) {
+            this.listachat.push(data.Listachat[i]);
+          }
+        };
+      })
+    })
   }
 
 
   GetNow()   {
-    console.log("on getNow chat="+this.status.Stanza);
-
     this.chatservice.getchat()
-    .subscribe(data => {
+    .subscribe((data: myChat) => {
 
       this.statuschat=data.Statuschat;
       this.status.Last=data.Last;
-
       if (this.statuschat==0)  {
-
         this.listachat=data.Listachat;
         this.status.Last=0;
-
       } else {
-
         for (let i = 0; i < data.Listachat.length; i++) {
           this.listachat.push(data.Listachat[i]);
         }
