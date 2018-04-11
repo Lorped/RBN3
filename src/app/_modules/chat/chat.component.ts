@@ -2,6 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
+
 import { Observable } from 'rxjs/Observable';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import 'rxjs/add/operator/switchMap';
@@ -24,6 +25,8 @@ export class ChatComponent implements OnInit {
 
   statuschat: number;
   listachat: Array<chatrow>;
+
+  testo: string;
 
   constructor( private status: Status, private chatservice: ChatService, private route: ActivatedRoute, private router: Router ) { }
 
