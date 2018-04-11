@@ -22,6 +22,10 @@
 .ora { color: red; }
 .testo {}
 
-.form-chat {
-  padding: 3px;
+.form-group {
+  margin-bottom: 2px;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #f00000 !important;
 }

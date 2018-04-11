@@ -43,11 +43,11 @@ export class ListpresentiService {
 
   }
 
-  getpginstanza(stanza: number){
+  getpginstanza(stanza: number, but: number){
 
     var mialista = [];
 
-    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapginstanza.php?dove='+stanza)
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapginstanza.php?dove='+stanza+"&but="+but)
     .map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         let item = res[i];

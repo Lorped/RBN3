@@ -23,4 +23,5 @@ export class Status {
   Offgame: number = 0;
   Last: number = 0;
   Alive: boolean = true;
+  Sesso: string = "M";
 }

@@ -1,17 +1,15 @@
 import { Component, OnInit  } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-
-
 import { Observable } from 'rxjs/Observable';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/mergeMapTo';
+// import 'rxjs/add/operator/mergeMapTo';
 import 'rxjs/add/operator/takeWhile';
 
 import { takeWhile } from 'rxjs/operators';
 
-import { myChat, chatrow , ChatService } from '../../_services/index';
+import { myChat, chatrow , ChatService, ListpresentiService, PostService, presenti } from '../../_services/index';
 
 import { Status } from '../../globals'
 
@@ -26,16 +24,22 @@ export class ChatComponent implements OnInit {
   statuschat: number;
   listachat: Array<chatrow>;
 
-  testo: string;
+  // per il form di inserimento
+  listapg: Array<presenti>;
+  testo = '';
+  Destinatario = 0 ;
 
-  constructor( private status: Status, private chatservice: ChatService, private route: ActivatedRoute, private router: Router ) { }
+  constructor( private status: Status, private chatservice: ChatService, private postservice: PostService,  private listpresentiservice: ListpresentiService, private route: ActivatedRoute, private router: Router ) { }
 
 
   ngOnInit() {
+
+
     this.listachat = [];
     this.status.Alive = true;
 
     var Emitter=this.route.url.switchMap( (val) =>   {
+      this.Destinatario=0;
       return TimerObservable.create(0, 20000)
         .takeWhile(() => this.status.Alive)
     });
@@ -53,26 +57,43 @@ export class ChatComponent implements OnInit {
             this.listachat.push(data.Listachat[i]);
           }
         };
+      });
+
+      this.listpresentiservice.getpginstanza(this.status.Stanza, this.status.Userid)
+      .subscribe((data: Array<presenti>) => {
+        this.listapg=data;
       })
+
     })
   }
 
 
   GetNow()   {
-    this.chatservice.getchat()
-    .subscribe((data: myChat) => {
 
-      this.statuschat=data.Statuschat;
-      this.status.Last=data.Last;
-      if (this.statuschat==0)  {
-        this.listachat=data.Listachat;
-        this.status.Last=0;
-      } else {
-        for (let i = 0; i < data.Listachat.length; i++) {
-          this.listachat.push(data.Listachat[i]);
+    this.postservice.postchat(this.testo, this.Destinatario)
+    .subscribe();
+
+    /*
+
+    .subscribe( () => {
+
+      this.chatservice.getchat()
+      .subscribe((data: myChat) => {
+
+        this.statuschat=data.Statuschat;
+        this.status.Last=data.Last;
+        if (this.statuschat==0)  {
+          this.listachat=data.Listachat;
+          this.status.Last=0;
+        } else {
+          for (let i = 0; i < data.Listachat.length; i++) {
+            this.listachat.push(data.Listachat[i]);
+          }
         }
-      }
+      });
     });
+*/
+
   }
 
 }
