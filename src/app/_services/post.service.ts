@@ -15,11 +15,6 @@ export class PostService {
 
     var user = sessionStorage.getItem('RBN3currentUser') ;
 
-console.log(testo);
-console.log(destinatario);
-console.log(this.status.Stanza);
-
-
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/post.php', {
       token: user,
       testo: testo,

@@ -34,7 +34,9 @@ export class LuoghiComponent implements OnInit {
 
   getLuoghi () {
     var mialista = [];
-    this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/luoghi.php?dove='+this.status.Stanza )
+    var user = sessionStorage.getItem('RBN3currentUser') ;
+
+    this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/luoghi.php',{Dove: this.status.Stanza, token: user} )
     .map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         let item = res[i];

@@ -71,12 +71,8 @@ export class ChatComponent implements OnInit {
   GetNow()   {
 
     this.postservice.postchat(this.testo, this.Destinatario)
-    .subscribe();
-
-    /*
-
     .subscribe( () => {
-
+      this.testo="";
       this.chatservice.getchat()
       .subscribe((data: myChat) => {
 
@@ -92,7 +88,7 @@ export class ChatComponent implements OnInit {
         }
       });
     });
-*/
+
 
   }
 

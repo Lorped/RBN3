@@ -23,8 +23,6 @@ include ('token.php');
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
-
-
 $token=$request->token;
 $testo=$request->testo;
 $IDdestinatario=$request->destinatario;
@@ -40,11 +38,12 @@ $locazione=mysql_real_escape_string($locazione);
 $MasterAdmin=0;
 $Userid=-1;
 if ( CheckJWT ($token) ) {
-	$payload=GetJWT($token);
-	$Userid= $payload['Userid'];
-	$MasterAdmin= $payload['MasterAdmin'];
-	$NomeCognome= $payload['NomeCognome'];
-	$Sesso= $payload['Sesso'];
+	$xx=GetJWT($token);
+	$payload=json_decode($xx);
+	$Userid= $payload->Userid;
+	$MasterAdmin= $payload->MasterAdmin;
+	$NomeCognome= $payload->NomeCognome;
+	$Sesso= $payload->Sesso;
 } else {
 	header("HTTP/1.1 401 Unauthorized");
 	die ();
@@ -70,4 +69,7 @@ $Result = mysql_query($MySql);
 if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
 
 header("HTTP/1.1 200 OK");
+
+$out=[];
+echo json_encode ($out, JSON_UNESCAPED_UNICODE);
 ?>

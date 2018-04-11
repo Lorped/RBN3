@@ -19,13 +19,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 include ('db.inc.php');
 include ('token.php');
 
-$Dove=$_GET['dove'];
-$token=$_GET['token'];
+// $Dove=$_GET['dove'];
+// $token=$_GET['token'];
+
+$postdata = file_get_contents("php://input");
+$request = json_decode($postdata);
+
+$token=$request->token;
+$Dove=$request->Dove;
 
 if ( CheckJWT($token)  ) {
-	$Userid=GetJWT($token).Userid;
+	$xx=GetJWT($token);
+	$payload=json_decode($xx);
+	$Userid= $payload->Userid;
+	$MasterAdmin= $payload->MasterAdmin;
 } else {
 	$Userid=-1;
+	header("HTTP/1.1 401 Unauthorized");
+	die ();
 }
 
 
@@ -57,7 +68,11 @@ while ( $res=mysql_fetch_row($Results,MYSQL_ASSOC) ) {
 
 
 $aUserid="!".$Userid."!";
-$Mysql="SELECT 'Std' as Tipo  , Breve, ID, NomeMappa FROM Mappa WHERE  Padre=$Dove and ID !=$Dove and ( Segreta != 'S'  or (Segreta = 'S'  and LOCATE('$aUserid', Invitati) != 0) ) ";
+if ( $MasterAdmin == 0 ) {
+	$Mysql="SELECT 'Std' as Tipo  , Breve, ID, NomeMappa FROM Mappa WHERE  Padre=$Dove and ID !=$Dove and ( Segreta != 'S'  or (Segreta = 'S'  and LOCATE('$aUserid', Invitati) != 0) ) ";
+} else {
+	$Mysql="SELECT 'Std' as Tipo  , Breve, ID, NomeMappa FROM Mappa WHERE  Padre=$Dove and ID !=$Dove  ";
+}
 $Results=mysql_query($Mysql);
 while ( $res=mysql_fetch_row($Results,MYSQL_ASSOC) ) {
 

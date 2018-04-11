@@ -40,7 +40,7 @@ function CheckJWT($token = NULL) {
  
 	$receivedHeaderAndPayload = $jwt_values[0] . '.' . $jwt_values[1];
  
-	$resultedsignature = base64_encode(hash_hmac('sha256', $receivedHeaderAndPayload, $secretkey, true));
+	$resultedsignature = base64_encode(hash_hmac('sha256', $receivedHeaderAndPayload, $key, true));
  
 	if ($resultedsignature == $received_signature) return(true);
 	else return(false);

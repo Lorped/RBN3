@@ -34,9 +34,9 @@ $last=$request->last;
 $MasterAdmin=0;
 $Userid=-1;
 if ( CheckJWT ($token) ) {
-	$payload=GetJWT($token);
-	$Userid= $payload['Userid'];
-	$MasterAdmin= $payload['MasterAdmin'];
+	$payload=json_decode(GetJWT($token));
+	$Userid= $payload->Userid;
+	$MasterAdmin= $payload->MasterAdmin;
 }
 
 
@@ -51,7 +51,7 @@ $status = $rs['0'];
 
 if ( $status != 0 ) {
 
-	$MySql = "SELECT ID, Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso, ImgRazza, DescRazza, Tipo, Testo, Locazione, CONCAT( Hour( Ora ) , ':', Minute( Ora ) ) AS Ora FROM Chat WHERE Stanza = '$loc' ";
+	$MySql = "SELECT ID, Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso, ImgRazza, DescRazza, Tipo, Testo, Locazione, DATE_FORMAT( Ora , '%H:%i' ) AS Ora FROM Chat WHERE Stanza = '$loc' ";
 	if ( $MasterAdmin != 3) {
 		$MySql .=  " AND (IDDestinatario IS NULL OR IDDestinatario = '$Userid' OR IDDestinatario = '0' OR IDMittente = '$Userid' ) ";
 	}
