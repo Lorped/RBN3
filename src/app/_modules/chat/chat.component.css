@@ -1,6 +1,6 @@
 .chat {
     list-style: none;
-    background: none;
+    background-color: transparent;
     padding: 0;
     top:0px;
     left: 0px;
@@ -21,6 +21,8 @@
 .messaggioM { color: #1874cd; }
 .ora { color: red; }
 .testo {}
+.suss{ color: #333333; background-color: #cccccc}
+.bold { font-weight: bold;}
 
 .form-group {
   margin-bottom: 2px;

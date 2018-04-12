@@ -74,9 +74,9 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		$MySql = "SELECT * FROM Presenti WHERE Userid = $Userid";
 		$Results = mysql_query($MySql);
 		if (mysql_num_rows($Results) == 0) {
-			$MySql = "INSERT INTO Presenti (Userid, NomeCognome, Stanza, OraEntrata, OraUscita, UltimoRefresh, Sesso, startoff,  Inv) VALUES ( $Userid, '$NomeCognome', 0,  NOW(), '2037-12-31 00:00:00', NOW(),'$Sesso' , '1970-01-01 00:00:00',  NULL)";
+			$MySql = "INSERT INTO Presenti (Userid, NomeCognome, Stanza, OraEntrata, UltimoRefresh, Sesso, startoff,  Inv) VALUES ( $Userid, '$NomeCognome', 0,  NOW(), NOW(),'$Sesso' , '1970-01-01 00:00:00',  NULL)";
 		} else {
-			$MySql = "UPDATE Presenti SET Stanza = 0, OraEntrata=NOW(), UltimoRefresh = NOW(), OraUscita = '2037-12-31 00:00:00' , startoff='1970-01-01 00:00:00', NomeCognome='$NomeCognome' , Sesso='$Sesso', Inv=NULL WHERE Userid = $Userid ";
+			$MySql = "UPDATE Presenti SET Stanza = 0, OraEntrata=NOW(), UltimoRefresh = NOW(), startoff='1970-01-01 00:00:00', NomeCognome='$NomeCognome' , Sesso='$Sesso', Inv=NULL WHERE Userid = $Userid ";
 
 		}
 		mysql_query($MySql);

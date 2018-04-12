@@ -1,23 +1,29 @@
 
 
-<div style=" display:block; width:100%; height: 370px;" >
+<div style=" display:block; width:100%; height: 370px; bakground-color: transparent;" >
 
-  <ul class="chat" #chatdiv [scrollTop]="chatdiv.scrollHeight" *ngIf="listachat.length > 0">
-      <li [ngClass]="{'std': row.Tipo == '' , 'azione': row.Tipo == '+' }" *ngFor="let row of listachat">
-        <span class="ora">{{ row.Ora }}</span>&nbsp;-&nbsp;<span [ngClass]="{'messaggioM': row.Sesso == 'M' , 'messaggioF': row.Sesso == 'F' }">{{ row.Mittente }}</span>&nbsp;{{ row.Testo }}
-      </li>
+
+  <ul class="chat" #chatdiv [scrollTop]="chatdiv.scrollHeight" >
+    <li [ngClass]="{'std': row.Tipo == '' , 'azione': row.Tipo == '+' , 'suss': row.IDDestinatario !='0' }" *ngFor="let row of listachat">
+
+        <span class="ora">{{ row.Ora }}</span>&nbsp;-&nbsp;Da: <span class="bold" [ngClass]="{'messaggioM': row.Sesso == 'M' , 'messaggioF': row.Sesso == 'F' }">{{ row.Mittente }}</span> - {{ row.Testo }}
+
+
+    </li>
   </ul>
 
-
-
 </div>
+
+
+
+<div style=" display:block; width:100%; bakground-color: transparent;" >
 
 <form name="chatForm" (ngSubmit)="GetNow()" #chatForm="ngForm" >
   <div class="form-group" style="font-size:0.9rem">
     Invia a <select id="dest" name="dest" [(ngModel)]="Destinatario">
       <option value="0">Destinatario</option>
       <option *ngFor="let i of listapg" [ngValue]="i.Userid">{{i.NomeCognome}}</option>
-    </select> Locazione <input id="loc" name="loc" type="text"  placeholder="Location">
+    </select> Locazione <input id="loc" name="loc" type="text" [(ngModel)]="location" pattern=".*\S.*" placeholder="Location">
   </div>
   <div class="form-group">
     <input id="txt" name="txt" type="text" class="form-control" pattern=".*\S.*" [(ngModel)]="testo" required>
@@ -26,3 +32,5 @@
     <button type="submit" class="btn btn btn-danger btn-sm btn-block" [disabled]="!chatForm.form.valid">Invia</button>
   </div>
 </form>
+
+</div>

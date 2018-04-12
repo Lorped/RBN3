@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.loginCredentials.email, this.loginCredentials.password)
       .subscribe(
         data => {
+          this.status.Stanza=0;
           this.status.Userid=data.Userid;
           this.router.navigate(['']);
         },

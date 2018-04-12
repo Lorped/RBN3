@@ -54,11 +54,11 @@ export class LuoghiComponent implements OnInit {
     this.status.Stanza=newloc;
     this.status.Last=0;
 
+    this.status.Alive= false;
 
     if ( newmap === null  ) {
       this.router.navigate(['/chat/'+newloc]);
     } else {
-      this.status.Alive= false;
       this.router.navigate(['/mappa/'+newmap]);
     }
     this.getLuoghi();

@@ -11,7 +11,7 @@ export class PostService {
   constructor(private http: HttpClient, private status: Status) { }
 
 
-  postchat(testo: string, destinatario: number) {
+  postchat(testo: string, destinatario: number, location: string ) {
 
     var user = sessionStorage.getItem('RBN3currentUser') ;
 
@@ -19,7 +19,8 @@ export class PostService {
       token: user,
       testo: testo,
       destinatario: destinatario,
-      stanza: this.status.Stanza
+      stanza: this.status.Stanza,
+      locazione: location
     }  );
   }
 
