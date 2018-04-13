@@ -3,10 +3,10 @@
 <div style=" display:block; width:100%; height: 370px; bakground-color: transparent;" >
 
 
-  <ul class="chat" #chatdiv [scrollTop]="chatdiv.scrollHeight" >
-    <li [ngClass]="{'std': row.Tipo == '' , 'azione': row.Tipo == '+' , 'suss': row.IDDestinatario !='0' }" *ngFor="let row of listachat">
+  <ul class="chat" #chatdiv >
+    <li [ngClass]="{'adm': row.Tipo == 'A' , 'master': row.Tipo == 'M', 'azione': row.Tipo == '+' , 'suss': row.IDDestinatario !='0' }" *ngFor="let row of listachat">
 
-        <span class="ora">{{ row.Ora }}</span>&nbsp;-&nbsp;Da: <span class="bold" [ngClass]="{'messaggioM': row.Sesso == 'M' , 'messaggioF': row.Sesso == 'F' }">{{ row.Mittente }}</span> - {{ row.Testo }}
+        <span class="ora">{{ row.Ora }}</span>&nbsp;-&nbsp;<span class="bold" [ngClass]="{'messaggioM': row.Sesso == 'M' , 'messaggioF': row.Sesso == 'F' }">{{ row.Mittente }}</span> {{ row.Testo }}
 
 
     </li>
@@ -24,6 +24,7 @@
       <option value="0">Destinatario</option>
       <option *ngFor="let i of listapg" [ngValue]="i.Userid">{{i.NomeCognome}}</option>
     </select> Locazione <input id="loc" name="loc" type="text" [(ngModel)]="location" pattern=".*\S.*" placeholder="Location">
+    Admin <input type="checkbox"  [(ngModel)]="checkadmin" name="ca" #ca (change)="radiox()"/> Master <input type="checkbox"  [(ngModel)]="checkmaster" name="cm" #cm (change)="radioy()" />
   </div>
   <div class="form-group">
     <input id="txt" name="txt" type="text" class="form-control" pattern=".*\S.*" [(ngModel)]="testo" required>

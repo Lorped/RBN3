@@ -32,6 +32,7 @@ $locazione=$request->locazione;
 
 
 
+
 $testo=mysql_real_escape_string($testo);
 $locazione=mysql_real_escape_string($locazione);
 
@@ -46,6 +47,15 @@ if ( CheckJWT ($token) ) {
 	$Sesso= $payload->Sesso;
 } else {
 	header("HTTP/1.1 401 Unauthorized");
+	$out=[];
+	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
+	die ();
+}
+
+if ($tipo!="" && $MasterAdmin <1) {
+	header("HTTP/1.1 401 Unauthorized");
+	$out=[];
+	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
 	die ();
 }
 

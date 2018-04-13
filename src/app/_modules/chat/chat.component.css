@@ -4,9 +4,9 @@
     padding: 0;
     top:0px;
     left: 0px;
-    height: 365px;
     width: 100%;
-    overflow-y: scroll;
+    height: inherit;
+    overflow-y: auto;
     !margin-left: 3px;
     margin-right: 3px;
     margin-top: 3px;
@@ -21,8 +21,10 @@
 .messaggioM { color: #1874cd; }
 .ora { color: red; }
 .testo {}
-.suss{ color: #333333; background-color: #cccccc}
+.suss{ color: #333333 !important; background-color: #cccccc}
 .bold { font-weight: bold;}
+.master { color: #00ccff; font-weight: bold;}
+.adm { color: #f00000; font-weight: bold; }
 
 .form-group {
   margin-bottom: 2px;

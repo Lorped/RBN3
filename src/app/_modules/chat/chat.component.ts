@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
@@ -19,7 +19,10 @@ import { Status } from '../../globals'
   styleUrls: ['./chat.component.css']
 })
 
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
+@ViewChild('chatdiv') private myScrollContainer: ElementRef;
+@ViewChild('ca') private mycheckadmin: ElementRef;
+@ViewChild('cm') private mycheckmaster: ElementRef;
 
   statuschat: number;
   listachat: Array<chatrow>;
@@ -29,6 +32,8 @@ export class ChatComponent implements OnInit {
   testo = '';
   Destinatario = 0 ;
   location = '';
+  checkadmin: boolean;
+  checkmaster: boolean ;
 
   constructor( private status: Status, private chatservice: ChatService, private postservice: PostService,  private listpresentiservice: ListpresentiService, private route: ActivatedRoute, private router: Router ) { }
 
@@ -40,7 +45,13 @@ export class ChatComponent implements OnInit {
     this.status.Alive = true;
 
     var Emitter=this.route.url.switchMap( (val) =>   {
-      console.log("dentro switchmap"+this.status.Stanza);
+//      console.log("dentro switchmap"+this.status.Stanza);
+
+      this.checkadmin=false;
+      this.checkmaster=false;
+      this.mycheckadmin.nativeElement.checked=this.checkadmin;
+      this.mycheckmaster.nativeElement.checked=this.checkmaster;
+
       this.status.Alive = true;
 
       this.listachat= [];
@@ -67,9 +78,13 @@ export class ChatComponent implements OnInit {
             if ( data.Listachat[i].Locazione!="" ) {
               data.Listachat[i].Testo="["+ data.Listachat[i].Locazione +"] "+ data.Listachat[i].Testo ;
             }
+            if ( data.Listachat[i].Tipo=="A" || data.Listachat[i].Tipo=="M" ) {
+              data.Listachat[i].Mittente="";
+            }
             this.listachat.push(data.Listachat[i]);
           }
         };
+        this.scrollToBottom();
       });
 
 
@@ -85,7 +100,8 @@ export class ChatComponent implements OnInit {
 
   GetNow()   {
 
-    this.postservice.postchat(this.testo, this.Destinatario,this.location)
+
+    this.postservice.postchat(this.testo, this.Destinatario,this.location,this.checkmaster, this.checkadmin)
     .subscribe( () => {
       this.testo="";
       this.chatservice.getchat()
@@ -101,13 +117,46 @@ export class ChatComponent implements OnInit {
             if ( data.Listachat[i].Locazione!="" ) {
               data.Listachat[i].Testo="["+ data.Listachat[i].Locazione +"] "+ data.Listachat[i].Testo ;
             }
+            if ( data.Listachat[i].Tipo=="A" || data.Listachat[i].Tipo=="M" ) {
+              data.Listachat[i].Mittente="";
+            }
             this.listachat.push(data.Listachat[i]);
           }
         }
+        this.scrollToBottom();
+
+        this.mycheckadmin.nativeElement.checked=this.checkadmin;
+        this.mycheckmaster.nativeElement.checked=this.checkmaster;
+
       });
     });
 
 
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }
+  }
+  radiox(): void {
+
+    if (this.mycheckadmin.nativeElement.checked==true) {
+      this.mycheckmaster.nativeElement.checked=false;
+      this.checkmaster=false;
+    }
+  }
+  radioy(): void {
+
+    if (this.mycheckmaster.nativeElement.checked==true) {
+      this.mycheckadmin.nativeElement.checked=false;
+      this.checkadmin=false;
+    }
   }
 
 }
