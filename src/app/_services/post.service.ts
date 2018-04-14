@@ -10,6 +10,14 @@ export class PostService {
 
   constructor(private http: HttpClient, private status: Status) { }
 
+  svuota(){
+    var user = sessionStorage.getItem('RBN3currentUser') ;
+
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/svuota.php', {
+      token: user,
+      stanza: this.status.Stanza
+    }  );
+  }
 
   postchat(testo: string, destinatario: number, location: string, master: boolean, admin: boolean ) {
 

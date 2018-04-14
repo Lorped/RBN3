@@ -33,13 +33,18 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   Destinatario = 0 ;
   location = '';
   checkadmin: boolean;
-  checkmaster: boolean ;
+  checkmaster: boolean;
+  localMaster: string = "hidden";
+  localAdmin: string = "hidden";
+
 
   constructor( private status: Status, private chatservice: ChatService, private postservice: PostService,  private listpresentiservice: ListpresentiService, private route: ActivatedRoute, private router: Router ) { }
 
 
   ngOnInit() {
 
+    if (this.status.MasterAdmin > 1) this.localAdmin="visible";
+    if (this.status.MasterAdmin > 0) this.localMaster="visible";
 
     this.listachat = [];
     this.status.Alive = true;
@@ -66,28 +71,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     Emitter.subscribe((val) => {
 
       this.chatservice.getchat().subscribe((data: myChat) => {
-        this.statuschat=data.Statuschat;
-        this.status.Last=data.Last;
-        if (this.statuschat==0)  {
-
-          this.listachat=data.Listachat;
-          this.status.Last=0;
-        } else {
-
-          for (let i = 0; i < data.Listachat.length; i++) {
-            if ( data.Listachat[i].Locazione!="" ) {
-              data.Listachat[i].Testo="["+ data.Listachat[i].Locazione +"] "+ data.Listachat[i].Testo ;
-            }
-            if ( data.Listachat[i].Tipo=="A" || data.Listachat[i].Tipo=="M" ) {
-              data.Listachat[i].Mittente="";
-            }
-            this.listachat.push(data.Listachat[i]);
-          }
-        };
+        this.dostuffwithdata(data);
         this.scrollToBottom();
       });
-
-
 
       this.listpresentiservice.getpginstanza(this.status.Stanza, this.status.Userid)
       .subscribe((data: Array<presenti>) => {
@@ -100,29 +86,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   GetNow()   {
 
-
     this.postservice.postchat(this.testo, this.Destinatario,this.location,this.checkmaster, this.checkadmin)
     .subscribe( () => {
       this.testo="";
       this.chatservice.getchat()
       .subscribe((data: myChat) => {
 
-        this.statuschat=data.Statuschat;
-        this.status.Last=data.Last;
-        if (this.statuschat==0)  {
-          this.listachat=data.Listachat;
-          this.status.Last=0;
-        } else {
-          for (let i = 0; i < data.Listachat.length; i++) {
-            if ( data.Listachat[i].Locazione!="" ) {
-              data.Listachat[i].Testo="["+ data.Listachat[i].Locazione +"] "+ data.Listachat[i].Testo ;
-            }
-            if ( data.Listachat[i].Tipo=="A" || data.Listachat[i].Tipo=="M" ) {
-              data.Listachat[i].Mittente="";
-            }
-            this.listachat.push(data.Listachat[i]);
-          }
-        }
+        this.dostuffwithdata(data);
         this.scrollToBottom();
 
         this.mycheckadmin.nativeElement.checked=this.checkadmin;
@@ -159,4 +129,35 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  svuota() : void {
+    if(confirm("Stai per svotare la chat. Sei sicuro?")) {
+      this.postservice.svuota().subscribe( () => {
+        this.chatservice.getchat().subscribe((data: myChat) => {
+          this.dostuffwithdata(data);
+          this.scrollToBottom();
+        });
+      });
+    }
+  }
+
+  dostuffwithdata( data: myChat) {
+
+    this.statuschat=data.Statuschat;
+    this.status.Last=data.Last;
+    if (this.statuschat==0)  {
+      this.listachat=data.Listachat;
+      this.status.Last=0;
+    } else {
+      for (let i = 0; i < data.Listachat.length; i++) {
+        if ( data.Listachat[i].Locazione!="" ) {
+          data.Listachat[i].Testo="["+ data.Listachat[i].Locazione +"] "+ data.Listachat[i].Testo ;
+        }
+        if ( data.Listachat[i].Tipo=="A" || data.Listachat[i].Tipo=="M" ) {
+          data.Listachat[i].Mittente="";
+        }
+        this.listachat.push(data.Listachat[i]);
+      }
+    }
+
+  }
 }

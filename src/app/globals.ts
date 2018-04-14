@@ -24,4 +24,5 @@ export class Status {
   Last: number = 0;
   Alive: boolean = true;
   Sesso: string = "M";
+  MasterAdmin: number = 0;
 }

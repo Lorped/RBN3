@@ -20,17 +20,25 @@
 
 <form name="chatForm" (ngSubmit)="GetNow()" #chatForm="ngForm" >
   <div class="form-group" style="font-size:0.9rem">
-    Invia a <select id="dest" name="dest" [(ngModel)]="Destinatario">
+    <div style="float:left;">
+      Invia a <select id="dest" name="dest" [(ngModel)]="Destinatario">
       <option value="0">Destinatario</option>
       <option *ngFor="let i of listapg" [ngValue]="i.Userid">{{i.NomeCognome}}</option>
-    </select> Locazione <input id="loc" name="loc" type="text" [(ngModel)]="location" pattern=".*\S.*" placeholder="Location">
-    Admin <input type="checkbox"  [(ngModel)]="checkadmin" name="ca" #ca (change)="radiox()"/> Master <input type="checkbox"  [(ngModel)]="checkmaster" name="cm" #cm (change)="radioy()" />
+    </select> Locazione <input  size="15" name="loc" type="text" [(ngModel)]="location" pattern=".*\S.*" placeholder="Location">
+    </div>
+    <div [ngStyle]="{'visibility': localMaster}" style="float:left; margin-top: 4px;">
+      Master <input type="checkbox"  [(ngModel)]="checkmaster" name="cm" #cm (change)="radioy()" />
+    </div>
+    <div [ngStyle]="{'visibility': localAdmin}" style="float:left;">
+      Admin <input type="checkbox"  [(ngModel)]="checkadmin" name="ca" #ca (change)="radiox()"/>
+      <button type=button class="btn btn-danger btn-sm" (click)="svuota()">Svuota</button>
+    </div>
   </div>
   <div class="form-group">
     <input id="txt" name="txt" type="text" class="form-control" pattern=".*\S.*" [(ngModel)]="testo" required>
   </div>
   <div class="form-group">
-    <button type="submit" class="btn btn btn-danger btn-sm btn-block" [disabled]="!chatForm.form.valid">Invia</button>
+    <button type="submit" class="btn btn-danger btn-sm btn-block" [disabled]="!chatForm.form.valid">Invia</button>
   </div>
 </form>
 

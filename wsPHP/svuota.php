@@ -24,17 +24,12 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
 $token=$request->token;
-$testo=$request->testo;
-$IDdestinatario=$request->destinatario;
+
 $stanza=$request->stanza;
-$tipo=$request->tipo;
-$locazione=$request->locazione;
 
 
 
 
-$testo=mysql_real_escape_string($testo);
-$locazione=mysql_real_escape_string($locazione);
 
 $MasterAdmin=0;
 $Userid=-1;
@@ -52,31 +47,22 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-if ( ($tipo=="M" && $MasterAdmin <1)  || ($tipo=="A" && $MasterAdmin <2) ) {
+if (  $MasterAdmin <2 ) {
 	header("HTTP/1.1 401 Unauthorized");
 	$out=[];
 	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
 	die ();
 }
 
-$destinatario="";
-if ( $IDdestinatario != "0" ) {
-	$MySql="SELECT CONCAT(Nome,' ', Cognome) as NomeCognome FROM Personaggio WHERE Userid='$IDdestinatario' ";
-	$Result=mysql_query($MySql);
-	$res=mysql_fetch_array($Result);
-	$destinatario=$res['NomeCognome'];
 
-}
-
-$MySql="INSERT INTO Chat ( Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso , Tipo, Testo, Locazione )
-VALUES ($stanza, $Userid, '$NomeCognome' , $IDdestinatario, '$destinatario', '$Sesso', '$tipo', '$testo','$locazione')";
-
+$MySql = "INSERT INTO BakChat  SELECT * FROM Chat WHERE Stanza = $stanza";
 $Result = mysql_query($MySql);
-if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
 
-$MySql = "UPDATE Presenti SET UltimoRefresh = NOW() WHERE Userid = $Userid ";
-$Result = mysql_query($MySql);
-if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
+
+$MySql = "DELETE From Chat WHERE Stanza = $stanza";
+mysql_query($MySql);
+
+
 
 header("HTTP/1.1 200 OK");
 

@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
         data => {
           this.status.Stanza=0;
           this.status.Userid=data.Userid;
+          this.status.MasterAdmin=data.MasterAdmin;
           this.router.navigate(['']);
         },
         error => {
