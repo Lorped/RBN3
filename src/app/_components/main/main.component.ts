@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate} from '@angular/animations';
 
 
+import { Status } from '../../globals'
+
 
 @Component({
   selector: 'app-main',
@@ -20,16 +22,19 @@ import { trigger, state, style, transition, animate} from '@angular/animations';
     ]),
   ]
 })
+
+
 export class MainComponent implements OnInit {
 
-  menuState:string = 'out';
+
+  constructor( private status: Status ) { }
+
+  ngOnInit() {}
+
   toggleMenu() {
-    this.menuState = this.menuState === 'out' ? 'in' : 'out';
+    this.status.menuState = this.status.menuState === 'out' ? 'in' : 'out';
   }
 
-  constructor() { }
 
-  ngOnInit() {
-  }
 
 }

@@ -25,4 +25,6 @@ export class Status {
   Alive: boolean = true;
   Sesso: string = "M";
   MasterAdmin: number = 0;
+  menuState:string = 'out';
+  CurrentModal: any ;
 }

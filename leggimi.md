@@ -2,6 +2,8 @@ npm install --save jquery
 npm install --save popper.js
 npm install --save bootstrap@next
 
+npm install --save-dev @types/jquery
+
 
 .angular-cli.json
 
@@ -23,4 +25,3 @@ npm install font-awesome --save
 Insert into your style.css
 
 @import '~font-awesome/css/font-awesome.css';
-

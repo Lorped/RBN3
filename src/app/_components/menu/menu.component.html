@@ -1,6 +1,10 @@
 <div style="width: 95%;">
+  <button (click)="closemenu()" class="btn btn-std btn-sm" >
+    <span>&times;</span>
+  </button>
 <ul>
-  <li><button type="button" class="btn btn-md btn-std btn-block">Profilo</button></li>
+  <li><button type="button" class="btn btn-md btn-std btn-block" (click)="openmodal('modalscheda')">Scheda Personaggio</button></li>
+  <li><button type="button" class="btn btn-md btn-std btn-block" (click)="openmodal('modalpx')">Quest e PX</button></li>
   <li>Azioni</li>
   <li>Messaggi</li>
   <li>Menu Item</li>

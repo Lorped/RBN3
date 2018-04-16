@@ -10,7 +10,7 @@ import { APP_ROUTES } from './app.routing' ;
 
 import { AuthenticationService } from './_services/index';
 import { ListpresentiService } from './_services/index';
-// import { ChatService } from './_services/index';
+import { ModalService } from './_services/index';
 
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -22,7 +22,7 @@ import { MainComponent } from './_components/main/main.component';
 import { MenuComponent } from './_components/menu/menu.component';
 import { PresentiComponent } from './_components/presenti/presenti.component';
 import { LuoghiComponent } from './_components/luoghi/luoghi.component';
-// import { ChatComponent } from './_components/chat/chat.component';
+import { ModalComponent } from './_components/modal/modal.component';
 
 import { Status, Personaggio } from './globals';
 
@@ -35,7 +35,8 @@ import { Status, Personaggio } from './globals';
     MainComponent,
     MenuComponent,
     PresentiComponent,
-    LuoghiComponent
+    LuoghiComponent,
+    ModalComponent
 
   ],
   imports: [
@@ -49,6 +50,7 @@ import { Status, Personaggio } from './globals';
   providers: [
     AuthenticationService,
     ListpresentiService,
+    ModalService,
     AuthGuard,
     Status, Personaggio
   ],

@@ -1,10 +1,38 @@
+<app-modal #modalscheda id="modalscheda">
+  <div class="app-modal-header">
+    <button type="button" class="close" (click)="modalscheda.hide()">&times;</button>
+    Scheda personaggio
+  </div>
+  <div class="app-modal-body">
+    Qui compare la scheda PG
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="modalscheda.hide()">Close</button>
+  </div>
+</app-modal>
+
+<!-- <app-modal id="modal-scheda"> -->
+<app-modal #modalpx id="modalpx">
+  <div class="app-modal-header">
+    <button type="button" class="close" (click)="modalpx.hide()">&times;</button>
+    Quest e PX
+  </div>
+  <div class="app-modal-body">
+    Qui compare il log PX
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="modalpx.hide()">Close</button>
+  </div>
+</app-modal>
+
+<!-- ----->
+
 <button (click)="toggleMenu()" class="menubutton">
   <span>toggle menu</span>
 </button>
 
 
 <div class="container">
-
   <div class="row">
     <div class="col-sm-7" style="height: 370px; background-color:black; background:rgba(0,0,0,0.5); color: white;">
       <router-outlet></router-outlet>
@@ -20,4 +48,4 @@
 
 
 
-<app-menu [@slideInOut]="menuState"></app-menu>
+<app-menu [@slideInOut]="status.menuState"></app-menu>

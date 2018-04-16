@@ -22,7 +22,6 @@ export class PresentiComponent implements OnInit {
     .subscribe(data => {
         this.listapresenti=data;
         this.numeropresenti=data.length;
-        //console.log(this.listapresenti);
     },
     error => {
       console.log(error);
@@ -34,7 +33,6 @@ export class PresentiComponent implements OnInit {
       .subscribe(data => {
         this.listapresenti=data;
         this.numeropresenti=data.length;
-        //console.log("nuovo");
         //console.log(this.listapresenti);
       });
     });

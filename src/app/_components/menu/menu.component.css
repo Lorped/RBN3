@@ -24,7 +24,7 @@ ul {
     color: #fff;
     background-color: transparent;
     border-color: transparent; /*set the color you want here*/
-    text-align: center;
+    text-align: left;
 
 }
 .btn-std:hover, .btn-std:focus, .btn-std:active, .btn-std.active, .open>.dropdown-toggle.btn-std {

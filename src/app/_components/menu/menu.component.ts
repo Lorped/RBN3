@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService } from '../../_services/index';
+import { ModalService } from '../../_services/index';
+
 import { Router } from '@angular/router';
+
+import { Status } from '../../globals'
+
+
 
 @Component({
   selector: 'app-menu',
@@ -10,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
-  constructor( private authenticationService: AuthenticationService, private router: Router ) { }
+  constructor( private authenticationService: AuthenticationService, private router: Router, private status: Status , private modalService: ModalService) { }
 
   ngOnInit() {
   }
@@ -19,5 +25,15 @@ export class MenuComponent implements OnInit {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
 
+  }
+
+  closemenu() {
+    this.status.menuState = 'out';
+
+  }
+
+  openmodal(id: string ){
+    this.status.menuState = 'out';
+    this.modalService.show(id) ;
   }
 }
