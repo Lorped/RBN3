@@ -1,10 +1,10 @@
 <app-modal #modalscheda id="modalscheda">
   <div class="app-modal-header">
-    <button type="button" class="close" (click)="modalscheda.hide()">&times;</button>
-    Scheda personaggio
+    <i>Scheda Personaggio</i><button type="button" class="close" (click)="modalscheda.hide()">&times;</button>
   </div>
   <div class="app-modal-body">
     Qui compare la scheda PG
+    <app-scheda></app-scheda>
   </div>
   <div class="app-modal-footer">
     <button type="button" class="btn btn-default" (click)="modalscheda.hide()">Close</button>

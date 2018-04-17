@@ -25,6 +25,7 @@ import { LuoghiComponent } from './_components/luoghi/luoghi.component';
 import { ModalComponent } from './_components/modal/modal.component';
 
 import { Status, Personaggio } from './globals';
+import { SchedaComponent } from './_components/scheda/scheda.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { Status, Personaggio } from './globals';
     MenuComponent,
     PresentiComponent,
     LuoghiComponent,
-    ModalComponent
+    ModalComponent,
+    SchedaComponent
 
   ],
   imports: [
