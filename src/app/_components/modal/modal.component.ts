@@ -1,4 +1,4 @@
-import { Component, Input  } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy  } from '@angular/core';
 
 import { ModalService } from '../../_services/index';
 
@@ -7,13 +7,16 @@ import { ModalService } from '../../_services/index';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent {
-  @Input() id: string;
+
+export class ModalComponent implements OnInit, OnDestroy {
+  @Input() modalId: string;
 
   public visible = false;
   private visibleAnimate = false;
 
-  constructor( private modalService: ModalService ){
+  constructor ( private modalService: ModalService ) { }
+
+  ngOnInit() {
     this.modalService.add(this);
   }
 
@@ -31,6 +34,11 @@ export class ModalComponent {
     if ((<HTMLElement>event.target).classList.contains('modal')) {
       this.hide();
     }
+  }
+
+  // remove self from modal service when directive is destroyed
+  ngOnDestroy(): void {
+    this.modalService.remove(this.modalId);
   }
 
 }

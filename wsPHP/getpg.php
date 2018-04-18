@@ -20,18 +20,20 @@ include ('db.inc.php');
 include ('token.php');
 
 
-/* $postdata = file_get_contents("php://input");
+$postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
 $token=$request->token;
 $id=$request->id;
-*/
 
+/*
 $id=$_GET['id'];
 $token=$_GET['token'];
+*/
 
 $MasterAdmin=0;
 $Userid=-1;
+
 
 if ( CheckJWT ($token) ) {
 	$xx=GetJWT($token);
@@ -46,6 +48,8 @@ if ( CheckJWT ($token) ) {
 	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
 	die ();
 }
+
+
 
 
 $full = FALSE;
@@ -66,9 +70,18 @@ if ( ! $full ) {
 }
 
 if ( $full ) {
-	$MySql = "SELECT * ,
+	$MySql = "SELECT 
+	Userid , Nome , Cognome , Email , Pass , 
+    DataIscrizione , Esperienza , IDNatura , 
+    IDCarattere , IDrazza , 
+    Personaggio.IDclan , Clan ,  
+    Sesso , Eta , EtaA , Generazione , PS , PSmax , FdV , FdVmax , 
+    Personaggio.IDsentiero , Valsentiero , DescSentiero ,  
+    Coscienza , Coraggio , SelfControl , IDsalute  , 
+    daurto , aggravati , URLImg , Background , Annotazioni , Soldi , 	
 	 	a1.Archetipo as Natura ,
-		a2.Archetipo as Carattere FROM Personaggio
+		a2.Archetipo as Carattere 
+	FROM Personaggio
 		LEFT JOIN Sentieri ON Personaggio.IDsentiero = Sentieri.IDsentiero
 		LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan
 		LEFT JOIN Archetipi AS a1 ON Personaggio.IDnatura = a1.IDarchetipo
@@ -78,7 +91,9 @@ if ( $full ) {
 	$pg = mysql_fetch_array($Result,MYSQL_ASSOC);
 
 
-	$MySql = "SELECT *  FROM Attributi
+	$MySql = "SELECT 
+	Attributi.IDattributo , NomeAttributo , Tipologia , Livello
+	  FROM Attributi
 		LEFT JOIN Attributi_main ON Attributi.IDattributo = Attributi_main.IDattributo
 		WHERE Userid='$id' ";
 	$Result=mysql_query($MySql);
@@ -88,8 +103,22 @@ if ( $full ) {
 	}
 
 
+	$MySql = "SELECT 
+	Background.IDbackground , NomeBackground , LivelloBG 
+	 FROM Background
+		LEFT JOIN Background_main ON Background.IDbackground = Background_main.IDbackground
+		WHERE Userid='$id'";
+	$Result=mysql_query($MySql);
+	$background=[];
+	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+		$background[]=$res;
+	}
 
-	$MySql = "SELECT *  FROM Discipline
+
+
+	$MySql = "SELECT 
+	Discipline.IDdisciplina , NomeDisc , LivelloDisc , DiClan
+	 FROM Discipline
 		LEFT JOIN Discipline_main ON Discipline.IDdisciplina = Discipline_main.IDdisciplina
 		WHERE Userid='$id'";
 	$Result=mysql_query($MySql);
@@ -98,18 +127,24 @@ if ( $full ) {
 		$discipline[]=$res;
 	}
 
-	$MySql = "SELECT *  FROM Skill_main
-		LEFT JOIN Skill ON Skill_main.IDskill = Skill.IDskill and Skill.Userid='$id'";
+	$MySql = "SELECT 
+	Skill_main.IDskill , NomeSkill , Tipologia , Livello
+	  FROM Skill_main
+		LEFT JOIN Skill ON Skill_main.IDskill = Skill.IDskill and Skill.Userid='$id'
+		WHERE iniziale=1 OR Livello >0";
 	$Result=mysql_query($MySql);
 	$skill=[];
 	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
 		$skill[]=$res;
 	}
+	
+	
 
 
 	$out = [
 		'full' => $full,
 		'pg' => $pg ,
+		'background' => $background,
 		'attr' => $attr,
 		'discipline' => $discipline,
 		'skill' => $skill

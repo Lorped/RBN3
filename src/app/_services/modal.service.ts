@@ -1,29 +1,54 @@
-import * as _ from 'underscore';
+import { Injectable } from '@angular/core';
+import { ModalComponent } from '../_components/modal/modal.component';
+
+// import * as _ from 'underscore';
 
 export class ModalService {
-    private modals: any[] = [];
+  private modals: Array<ModalComponent>;
 
-    add(modal: any) {
+  constructor() {
+    this.modals = [];
+  }
 
-        // add modal to array of active modals
-        this.modals.push(modal);
+  findModal(modalId: string): ModalComponent {
+    for (let modal of this.modals) {
+      if (modal.modalId === modalId) {
+        return modal;
+      }
     }
+    return null;
+  }
 
-    remove(id: string) {
-        // remove modal from array of active modals
-        let modalToRemove = _.findWhere(this.modals, { id: id });
-        this.modals = _.without(this.modals, modalToRemove);
-    }
 
-    show(id: string) {
-        // open modal specified by id
-        let modal = _.findWhere(this.modals, { id: id });
-        modal.show();
-    }
+  add(newModal: ModalComponent) {
 
-    hide(id: string) {
-        // close modal specified by id
-        let modal = _.find(this.modals, { id: id });
-        modal.hide();
+    const modal = this.findModal(newModal.modalId);
+
+    // Delete existing to replace the modal
+    if (modal) {
+      this.modals.splice(this.modals.indexOf(modal), 1);
     }
+    // add modal to array of active modals
+    this.modals.push(newModal);
+  }
+
+  remove(id: string) {
+
+    let modalToRemove = this.findModal(id);
+    // remove modal from array of active modals
+    this.modals.splice(this.modals.indexOf(modalToRemove), 1);
+
+  }
+
+  show(id: string) {
+    // open modal specified by id
+    const modal = this.findModal(id);
+    modal.show();
+  }
+
+  hide(id: string) {
+    // close modal specified by id
+    const modal = this.findModal(id);
+    modal.hide();
+  }
 }

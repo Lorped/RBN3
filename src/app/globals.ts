@@ -3,93 +3,101 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Background {
-  public IDbackground: number;
-  public NomeBackground: string;
-  public LivelloBG: number;
-  constructor () {}
+  public IDbackground = 0;
+  public NomeBackground = '';
+  public LivelloBG = 0;
 }
 
 @Injectable()
 export class Attributo {
-  public IDattributo: number;
-  public NomeAttributo: string;
-  public Tipologia: string;
-  public Livello: number;
-  constructor () {}
+  public IDattributo = 0;
+  public NomeAttributo = '';
+  public Tipologia = '';
+  public Livello = 0;
 }
 
 @Injectable()
 export class Skill {
-  public IDskill: number;
-  public NomeSkill: string;
-  public Tipologia: string;
-  public Livello: number;
-  constructor () {}
+  public IDskill = 0;
+  public NomeSkill = '';
+  public Tipologia = '';
+  public Livello = 0;
 }
 
 @Injectable()
 export class Disciplina {
-  public IDdisciplina: number;
-  public NomeDisc: string;
-  public LivelloDisc: number;
-  constructor () {}
+  public IDdisciplina = 0;
+  public NomeDisc = '';
+  public LivelloDisc = 0;
+  public DiClan = '';
 }
 
+@Injectable()
+export class Basicpg {
+  public Userid = 0 ;
+  public Nome = '' ;
+  public Cognome = '';
+  public Email = '';
+  public Pass = '';
+  public DataIscrizione = '';
+  public Esperienza  = 0;
+  public IDNatura = 0;
+  public Natura = '';  // from LEFT Join
+  public IDCarattere = 0;
+  public Carattere = ''; // from LEFT Join
+  public IDrazza = 0;
+  public IDclan = 0;
+  public Clan = ''; // from LEFT Join
+  public Sesso = '';
+  public Eta = 0;
+  public EtaA = 0;
+  public Generazione = 0;
+  public PS = 0;
+  public PSmax = 0;
+  public FdV = 0;
+  public FdVmax = 0;
+  public IDsentiero = 0;
+  public Valsentiero = 0;
+  public DescSentiero = ''; // from LEFT Join
+  public Coscienza = 0;
+  public Coraggio = 0;
+  public SelfControl = 0;
+  public IDsalute = 0;
+  public daurto = 0;
+  public aggravati = 0;
+  public URLImg = '';
+  public Background = '';
+  public Annotazioni = '';
+  public Soldi = 0;
+}
 
 @Injectable()
 export class Personaggio {
 
-    public Userid: number;
-    public Nome: string;
-    public Cognome: string;
-    public Email: string;
-    public Pass: string;
-    public DataIscrizione: string;
-    public Esperienza: number;
-    public IDNatura: number;
-    public Natura: string;  //from LEFT Join
-    public IDCarattere: number;
-    public Carattere: string; //from LEFT Join
-    public IDrazza: number;
-    public IDclan: number;
-    public Clan: string; //from LEFT Join
-    public Sesso: string;
-    public Eta: number;
-    public EtaA: number;
-    public Generazione: number;
-    public PS: number;
-    public PSmax: number;
-    public FdV: number;
-    public FdVmax: number;
-    public IDsentiero: number;
-    public Valsentiero: number;
-    public DescSentiero: string; //from LEFT Join
-    public Coscienza: number;
-    public Coraggio: number;
-    public SelfControl: number;
-    public IDsalute: number ;
-    public daurto: number;
-    public aggravati: number;
-    public URLImg: string;
-    public Background: string;
-    public Annotazioni: string;
-    public Soldi: number;
+  public aPG: Basicpg;
 
-    public listaAttributo: Array<Attributo>;
-    public listaSkill: Array<Skill>;
-    public listaBackground: Array<Background> ;
+  public listaAttributi: Array<Attributo>;
+  public listaSkill: Array<Skill>;
+  public listaBackground: Array<Background> ;
+  public listaDiscipline: Array<Disciplina> ;
 
-    constructor () {}
+  constructor ( ) {
+    this.aPG = new Basicpg ;
+    this.listaAttributi = [];
+    this.listaSkill = [];
+    this.listaBackground = [];
+    this.listaDiscipline = [];
+  }
 }
 
 @Injectable()
 export class Status {
-  Userid: number = 0;
-  Stanza: number = 0 ;
-  Offgame: number = 0;
-  Last: number = 0;
-  Alive: boolean = true;
-  Sesso: string = "M";
-  MasterAdmin: number = 0;
-  menuState:string = 'out';
+  Userid = 0;
+  Stanza = 0;
+  Offgame = 0;
+  Last = 0;
+  Alive = true;
+  Sesso = 'M';
+  MasterAdmin = 0;
+  menuState = 'out';
 }

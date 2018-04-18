@@ -1,3 +1,24 @@
 <p>
-  scheda works!
-</p>
+  scheda di {{myPG.aPG.Nome}} {{myPG.aPG.Cognome}} works!
+  </p>
+  <div style="display: inline-block;">
+  <table>
+    <tr *ngFor="let attr of myPG.listaAttributi">
+      <td *ngIf="attr.Tipologia == 'F'">{{attr.NomeAttributo}} {{attr.Livello}}</td>
+    </tr>
+  </table>
+</div>
+<div style="display: inline-block;">
+<table>
+  <tr *ngFor="let attr of myPG.listaAttributi">
+    <td *ngIf="attr.Tipologia == 'S'">{{attr.NomeAttributo}} {{attr.Livello}}</td>
+  </tr>
+</table>
+</div>
+<div style="display: inline-block;">
+<table>
+  <tr *ngFor="let attr of myPG.listaAttributi">
+    <td *ngIf="attr.Tipologia == 'M'">{{attr.NomeAttributo}} {{attr.Livello}}</td>
+  </tr>
+</table>
+</div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import {Status} from '../../globals'
+import {Status} from '../../globals';
 
 export class Luogo {
   Tipo: string;
@@ -10,10 +10,10 @@ export class Luogo {
   Breve: string;
   NomeMappa: number;
   constructor ( aTipo: string, aID: number, aBreve: string, aMappa: number) {
-    this.Tipo=aTipo;
-    this.ID=aID;
-    this.Breve=aBreve;
-    this.NomeMappa=aMappa;
+    this.Tipo = aTipo;
+    this.ID = aID;
+    this.Breve = aBreve;
+    this.NomeMappa = aMappa;
   }
 }
 
@@ -33,33 +33,33 @@ export class LuoghiComponent implements OnInit {
   }
 
   getLuoghi () {
-    var mialista = [];
-    var user = sessionStorage.getItem('RBN3currentUser') ;
+    const mialista = [];
+    const user = sessionStorage.getItem('RBN3currentUser') ;
 
-    this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/luoghi.php',{Dove: this.status.Stanza, token: user} )
+    this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/luoghi.php', {Dove: this.status.Stanza, token: user} )
     .map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
-        let item = res[i];
-        let newluogo = new Luogo(item.Tipo, item.ID, item.Breve, item.NomeMappa);
+        const item = res[i];
+        const newluogo = new Luogo(item.Tipo, item.ID, item.Breve, item.NomeMappa);
         mialista.push(newluogo);
       }
       return mialista;
     })
     .subscribe( data => {
-      this.listaluoghi=data;
-    })
+      this.listaluoghi = data;
+    });
   }
 
   cambialoc(newloc: number , newmap: number ) {
-    this.status.Stanza=newloc;
-    this.status.Last=0;
+    this.status.Stanza = newloc;
+    this.status.Last = 0;
 
-    this.status.Alive= false;
+    this.status.Alive = false;
 
     if ( newmap === null  ) {
-      this.router.navigate(['/chat/'+newloc]);
+      this.router.navigate(['/chat/' + newloc]);
     } else {
-      this.router.navigate(['/mappa/'+newmap]);
+      this.router.navigate(['/mappa/' + newmap]);
     }
     this.getLuoghi();
   }

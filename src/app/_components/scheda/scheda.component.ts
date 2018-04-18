@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { SchedaService } from '../../_services/index';
+
+import { Status } from '../../globals';
+import { Background, Attributo, Skill, Disciplina, Basicpg, Personaggio } from '../../globals';
+
 
 @Component({
   selector: 'app-scheda',
@@ -7,9 +14,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SchedaComponent implements OnInit {
 
-  constructor() { }
+  myPG: Personaggio = new Personaggio;
+
+
+  constructor( private schedaService: SchedaService, private status: Status ) { }
 
   ngOnInit() {
+
+    this.schedaService.getpg(this.status.Userid)
+    .subscribe( (data: Personaggio) => {
+      this.myPG = data;
+    });
+
   }
+
+
 
 }

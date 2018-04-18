@@ -9,9 +9,9 @@ import 'rxjs/add/operator/takeWhile';
 
 import { takeWhile } from 'rxjs/operators';
 
-import { myChat, chatrow , ChatService, ListpresentiService, PostService, presenti } from '../../_services/index';
+import { MyChat, Chatrow , ChatService, ListpresentiService, PostService, Presenti } from '../../_services/index';
 
-import { Status } from '../../globals'
+import { Status } from '../../globals';
 
 @Component({
   selector: 'app-chat',
@@ -25,78 +25,78 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 @ViewChild('cm') private mycheckmaster: ElementRef;
 
   statuschat: number;
-  listachat: Array<chatrow>;
+  listachat: Array<Chatrow>;
 
   // per il form di inserimento
-  listapg: Array<presenti>;
+  listapg: Array<Presenti>;
   testo = '';
   Destinatario = 0 ;
   location = '';
   checkadmin: boolean;
   checkmaster: boolean;
-  localMaster: string = "hidden";
-  localAdmin: string = "hidden";
+  localMaster = 'hidden';
+  localAdmin = 'hidden';
 
 
-  constructor( private status: Status, private chatservice: ChatService, private postservice: PostService,  private listpresentiservice: ListpresentiService, private route: ActivatedRoute, private router: Router ) { }
+  constructor( private status: Status, private chatservice: ChatService, private postservice: PostService,
+    private listpresentiservice: ListpresentiService, private route: ActivatedRoute, private router: Router ) { }
 
 
   ngOnInit() {
 
-    if (this.status.MasterAdmin > 1) this.localAdmin="visible";
-    if (this.status.MasterAdmin > 0) this.localMaster="visible";
+    if (this.status.MasterAdmin > 1) { this.localAdmin = 'visible'; }
+    if (this.status.MasterAdmin > 0) { this.localMaster = 'visible'; }
 
     this.listachat = [];
     this.status.Alive = true;
 
-    var Emitter=this.route.url.switchMap( (val) =>   {
+    const Emitter = this.route.url.switchMap( (val) =>   {
 //      console.log("dentro switchmap"+this.status.Stanza);
 
-      this.checkadmin=false;
-      this.checkmaster=false;
-      this.mycheckadmin.nativeElement.checked=this.checkadmin;
-      this.mycheckmaster.nativeElement.checked=this.checkmaster;
+      this.checkadmin = false;
+      this.checkmaster = false;
+      this.mycheckadmin.nativeElement.checked = this.checkadmin;
+      this.mycheckmaster.nativeElement.checked = this.checkmaster;
 
       this.status.Alive = true;
 
-      this.listachat= [];
-      this.listachat.length=0;
-      this.Destinatario=0;
-      this.location='';
+      this.listachat = [];
+      this.listachat.length = 0;
+      this.Destinatario = 0;
+      this.location = '';
 
       return TimerObservable.create(0, 20000)
-        .takeWhile(() => this.status.Alive)
+        .takeWhile(() => this.status.Alive);
     });
 
     Emitter.subscribe((val) => {
 
-      this.chatservice.getchat().subscribe((data: myChat) => {
+      this.chatservice.getchat().subscribe((data: MyChat) => {
         this.dostuffwithdata(data);
         this.scrollToBottom();
       });
 
       this.listpresentiservice.getpginstanza(this.status.Stanza, this.status.Userid)
-      .subscribe((data: Array<presenti>) => {
-        this.listapg=data;
-      })
-
-    })
+      .subscribe((data: Array<Presenti>) => {
+        this.listapg = data;
+      });
+    });
   }
 
 
   GetNow()   {
 
-    this.postservice.postchat(this.testo, this.Destinatario,this.location,this.checkmaster, this.checkadmin)
+    this.postservice.postchat( this.testo, this.Destinatario, this.location, this.checkmaster, this.checkadmin)
     .subscribe( () => {
-      this.testo="";
+      this.testo = '';
       this.chatservice.getchat()
-      .subscribe((data: myChat) => {
+      .subscribe((data: MyChat) => {
 
         this.dostuffwithdata(data);
         this.scrollToBottom();
 
-        this.mycheckadmin.nativeElement.checked=this.checkadmin;
-        this.mycheckmaster.nativeElement.checked=this.checkmaster;
+        this.mycheckadmin.nativeElement.checked = this.checkadmin;
+        this.mycheckmaster.nativeElement.checked = this.checkmaster;
 
       });
     });
@@ -112,27 +112,27 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { }
+    } catch (err) { }
   }
   radiox(): void {
 
-    if (this.mycheckadmin.nativeElement.checked==true) {
-      this.mycheckmaster.nativeElement.checked=false;
-      this.checkmaster=false;
+    if (this.mycheckadmin.nativeElement.checked === true) {
+      this.mycheckmaster.nativeElement.checked = false;
+      this.checkmaster = false;
     }
   }
   radioy(): void {
 
-    if (this.mycheckmaster.nativeElement.checked==true) {
-      this.mycheckadmin.nativeElement.checked=false;
-      this.checkadmin=false;
+    if (this.mycheckmaster.nativeElement.checked === true) {
+      this.mycheckadmin.nativeElement.checked = false;
+      this.checkadmin = false;
     }
   }
 
-  svuota() : void {
-    if(confirm("Stai per svotare la chat. Sei sicuro?")) {
+  svuota(): void {
+    if ( confirm('Stai per svotare la chat. Sei sicuro?') ) {
       this.postservice.svuota().subscribe( () => {
-        this.chatservice.getchat().subscribe((data: myChat) => {
+        this.chatservice.getchat().subscribe((data: MyChat) => {
           this.dostuffwithdata(data);
           this.scrollToBottom();
         });
@@ -140,24 +140,23 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  dostuffwithdata( data: myChat) {
+  dostuffwithdata( data: MyChat) {
 
-    this.statuschat=data.Statuschat;
-    this.status.Last=data.Last;
-    if (this.statuschat==0)  {
-      this.listachat=data.Listachat;
-      this.status.Last=0;
+    this.statuschat = data.Statuschat;
+    this.status.Last = data.Last;
+    if (this.statuschat === 0)  {
+      this.listachat = data.Listachat;
+      this.status.Last = 0;
     } else {
       for (let i = 0; i < data.Listachat.length; i++) {
-        if ( data.Listachat[i].Locazione!="" ) {
-          data.Listachat[i].Testo="["+ data.Listachat[i].Locazione +"] "+ data.Listachat[i].Testo ;
+        if ( data.Listachat[i].Locazione !== '' ) {
+          data.Listachat[i].Testo = '[' + data.Listachat[i].Locazione + '] ' + data.Listachat[i].Testo ;
         }
-        if ( data.Listachat[i].Tipo=="A" || data.Listachat[i].Tipo=="M" ) {
-          data.Listachat[i].Mittente="";
+        if ( data.Listachat[i].Tipo === 'A' || data.Listachat[i].Tipo === 'M' ) {
+          data.Listachat[i].Mittente = '';
         }
         this.listachat.push(data.Listachat[i]);
       }
     }
-
   }
 }

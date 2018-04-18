@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate} from '@angular/animations';
 
 
-import { Status } from '../../globals'
+import { Status } from '../../globals';
 
 
 @Component({

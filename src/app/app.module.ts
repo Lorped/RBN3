@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpModule } from '@angular/http'
+// import { HttpModule } from '@angular/http';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -11,6 +11,7 @@ import { APP_ROUTES } from './app.routing' ;
 import { AuthenticationService } from './_services/index';
 import { ListpresentiService } from './_services/index';
 import { ModalService } from './_services/index';
+import { SchedaService } from './_services/index';
 
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -45,7 +46,7 @@ import { SchedaComponent } from './_components/scheda/scheda.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule,
+//    HttpModule,
     HttpClientModule,
     RouterModule.forRoot(APP_ROUTES, {useHash: true})
   ],
@@ -53,8 +54,9 @@ import { SchedaComponent } from './_components/scheda/scheda.component';
     AuthenticationService,
     ListpresentiService,
     ModalService,
+    SchedaService,
     AuthGuard,
-    Status, Personaggio
+    Status
   ],
   bootstrap: [AppComponent]
 })
