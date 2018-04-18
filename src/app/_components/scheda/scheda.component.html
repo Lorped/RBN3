@@ -1,24 +1,76 @@
 <p>
-  scheda di {{myPG.aPG.Nome}} {{myPG.aPG.Cognome}} works!
-  </p>
-  <div style="display: inline-block;">
-  <table>
-    <tr *ngFor="let attr of myPG.listaAttributi">
-      <td *ngIf="attr.Tipologia == 'F'">{{attr.NomeAttributo}} {{attr.Livello}}</td>
-    </tr>
-  </table>
+scheda di {{myPG.aPG.Nome}} {{myPG.aPG.Cognome}} works!
+</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table class="full">
+        <tr *ngFor="let attr of myPG.listaAttributi">
+        <td *ngIf="attr.Tipologia == 'F'">{{attr.NomeAttributo}}</td>
+        <td *ngIf="attr.Tipologia == 'F'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
+      </tr>
+      </table>
+    </div>
+    <div class="col">
+      <table class="full">
+        <tr *ngFor="let attr of myPG.listaAttributi">
+        <td *ngIf="attr.Tipologia == 'S'">{{attr.NomeAttributo}}</td>
+        <td *ngIf="attr.Tipologia == 'S'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
+      </tr>
+      </table>
+    </div>
+    <div class="col">
+      <table class="full">
+        <tr *ngFor="let attr of myPG.listaAttributi">
+        <td *ngIf="attr.Tipologia == 'M'">{{attr.NomeAttributo}}</td>
+        <td *ngIf="attr.Tipologia == 'M'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
+      </tr>
+    </table>
+    </div>
+  </div>
 </div>
-<div style="display: inline-block;">
-<table>
-  <tr *ngFor="let attr of myPG.listaAttributi">
-    <td *ngIf="attr.Tipologia == 'S'">{{attr.NomeAttributo}} {{attr.Livello}}</td>
-  </tr>
-</table>
-</div>
-<div style="display: inline-block;">
-<table>
-  <tr *ngFor="let attr of myPG.listaAttributi">
-    <td *ngIf="attr.Tipologia == 'M'">{{attr.NomeAttributo}} {{attr.Livello}}</td>
-  </tr>
-</table>
+
+<div class="container">
+  <div class="row">
+    <div class="col alc">
+      Abilità
+    </div>
+  </div>
+  <div class="row">
+    <div class="col alc">
+      Attitudini
+    </div>
+    <div class="col alc">
+      Capacità
+    </div>
+    <div class="col alc">
+      Conoscenze
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="full">
+        <tr *ngFor="let attr of myPG.listaSkill">
+        <td *ngIf="attr.Tipologia == '1'">{{attr.NomeSkill}}</td>
+        <td *ngIf="attr.Tipologia == '1'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
+      </tr>
+      </table>
+    </div>
+    <div class="col">
+      <table class="full">
+        <tr *ngFor="let attr of myPG.listaSkill">
+        <td *ngIf="attr.Tipologia == '2'">{{attr.NomeSkill}}</td>
+        <td *ngIf="attr.Tipologia == '2'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
+      </tr>
+      </table>
+    </div>
+    <div class="col">
+      <table class="full">
+        <tr *ngFor="let attr of myPG.listaSkill">
+        <td *ngIf="attr.Tipologia == '3'">{{attr.NomeSkill}}</td>
+        <td *ngIf="attr.Tipologia == '3'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
+      </tr>
+      </table>
+    </div>
+  </div>
 </div>

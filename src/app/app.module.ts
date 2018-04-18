@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { HttpModule } from '@angular/http';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -24,9 +23,11 @@ import { MenuComponent } from './_components/menu/menu.component';
 import { PresentiComponent } from './_components/presenti/presenti.component';
 import { LuoghiComponent } from './_components/luoghi/luoghi.component';
 import { ModalComponent } from './_components/modal/modal.component';
-
-import { Status, Personaggio } from './globals';
 import { SchedaComponent } from './_components/scheda/scheda.component';
+
+import { Status } from './globals';
+
+import { TimesPipe } from './_pipes/times.pipe';
 
 
 @NgModule({
@@ -39,14 +40,14 @@ import { SchedaComponent } from './_components/scheda/scheda.component';
     PresentiComponent,
     LuoghiComponent,
     ModalComponent,
-    SchedaComponent
+    SchedaComponent,
+    TimesPipe
 
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-//    HttpModule,
     HttpClientModule,
     RouterModule.forRoot(APP_ROUTES, {useHash: true})
   ],
