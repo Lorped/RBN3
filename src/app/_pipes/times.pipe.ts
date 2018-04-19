@@ -15,5 +15,5 @@ export class TimesPipe implements PipeTransform {
     };
     return iterable;
   }
-  
+
 }

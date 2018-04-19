@@ -1,13 +1,10 @@
 import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Observable } from 'rxjs/Observable';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import 'rxjs/add/operator/switchMap';
-// import 'rxjs/add/operator/mergeMapTo';
 import 'rxjs/add/operator/takeWhile';
-
-import { takeWhile } from 'rxjs/operators';
+// import { takeWhile } from 'rxjs/operators';
 
 import { MyChat, Chatrow , ChatService, ListpresentiService, PostService, Presenti } from '../../_services/index';
 
@@ -24,7 +21,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 @ViewChild('ca') private mycheckadmin: ElementRef;
 @ViewChild('cm') private mycheckmaster: ElementRef;
 
-  statuschat: number;
+  statuschat = 0;
   listachat: Array<Chatrow>;
 
   // per il form di inserimento
@@ -142,7 +139,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   dostuffwithdata( data: MyChat) {
 
-    this.statuschat = data.Statuschat;
+    this.statuschat = Number (data.Statuschat);
     this.status.Last = data.Last;
     if (this.statuschat === 0)  {
       this.listachat = data.Listachat;

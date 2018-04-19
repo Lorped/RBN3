@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalComponent } from '../_components/modal/modal.component';
 
-// import * as _ from 'underscore';
-
 export class ModalService {
   private modals: Array<ModalComponent>;
 
@@ -11,7 +9,7 @@ export class ModalService {
   }
 
   findModal(modalId: string): ModalComponent {
-    for (let modal of this.modals) {
+    for (const modal of this.modals) {
       if (modal.modalId === modalId) {
         return modal;
       }
@@ -34,7 +32,7 @@ export class ModalService {
 
   remove(id: string) {
 
-    let modalToRemove = this.findModal(id);
+    const modalToRemove = this.findModal(id);
     // remove modal from array of active modals
     this.modals.splice(this.modals.indexOf(modalToRemove), 1);
 

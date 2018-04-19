@@ -21,13 +21,16 @@ export class SchedaComponent implements OnInit {
 
   ngOnInit() {
 
+    this.refreshpg ();
+
+  }
+
+  refreshpg () {
     this.schedaService.getpg(this.status.Userid)
     .subscribe( (data: Personaggio) => {
       this.myPG = data;
     });
-
   }
-
 
 
 }

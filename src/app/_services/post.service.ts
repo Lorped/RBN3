@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
 
-import {Status} from '../globals';
+import { Status } from '../globals';
 
 @Injectable()
 export class PostService {
@@ -16,7 +14,7 @@ export class PostService {
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/svuota.php', {
       token: user,
       stanza: this.status.Stanza
-    }  );
+    } );
   }
 
   postchat(testo: string, destinatario: number, location: string, master: boolean, admin: boolean ) {
@@ -38,7 +36,7 @@ export class PostService {
       stanza: this.status.Stanza,
       locazione: location,
       tipo: tipo
-    }  );
+    } );
   }
 
 

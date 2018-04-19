@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 
 import { Background, Attributo, Skill, Disciplina, Basicpg, Personaggio } from '../globals';
 
+
 @Injectable()
 export class SchedaService {
 
@@ -13,7 +14,10 @@ export class SchedaService {
 
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getpg.php', {token: user, id: id})
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getpg.php', {
+      token: user,
+      id: id
+    })
     .map( (data) => {
       const full = data.full;
       const myPG: Personaggio = new Personaggio;
@@ -25,4 +29,5 @@ export class SchedaService {
       return myPG;
     });
   }
+
 }

@@ -57,6 +57,7 @@ import { TimesPipe } from './_pipes/times.pipe';
     ModalService,
     SchedaService,
     AuthGuard,
+    SchedaComponent,
     Status
   ],
   bootstrap: [AppComponent]

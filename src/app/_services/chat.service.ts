@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs/Observable';
-// import 'rxjs/add/operator/map'
 
 import { Status } from '../globals';
 
@@ -68,7 +66,10 @@ export class ChatService {
   getchat() {
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/chat.php', {token: user, loc: this.status.Stanza,
-      last: this.status.Last});
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/chat.php', {
+      token: user,
+      loc: this.status.Stanza,
+      last: this.status.Last
+    });
   }
 }
