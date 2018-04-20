@@ -41,9 +41,7 @@ export class Basicpg {
   public Pass = '';
   public DataIscrizione = '';
   public Esperienza  = 0;
-  public IDNatura = 0;
   public Natura = '';  // from LEFT Join
-  public IDCarattere = 0;
   public Carattere = ''; // from LEFT Join
   public IDrazza = 0;
   public IDclan = 0;
@@ -56,7 +54,6 @@ export class Basicpg {
   public PSmax = 0;
   public FdV = 0;
   public FdVmax = 0;
-  public IDsentiero = 0;
   public Valsentiero = 0;
   public DescSentiero = ''; // from LEFT Join
   public Coscienza = 0;
@@ -69,6 +66,8 @@ export class Basicpg {
   public Background = '';
   public Annotazioni = '';
   public Soldi = 0;
+  public MaxStat = 5;
+  public UsoPS = 1;
 }
 
 @Injectable()

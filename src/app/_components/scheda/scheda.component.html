@@ -1,15 +1,71 @@
-<p>
-scheda di {{myPG.aPG.Nome}} {{myPG.aPG.Cognome}} works!
-</p>
+
+<!--  base -->
+
+
+<div class="container bigf">
+  <div class="row">
+    <div class="col-2"><img src="assets/nopicture.gif"></div>
+    <div class="col">
+      <div class="container"> <!-- inizio container interno -->
+        <div class="row">
+          <div class="col-1 red">Nome</div>
+          <div class="col-3">{{myaPG.Nome}} {{myaPG.Cognome}}</div>
+          <div class="col-2 red">Clan</div>
+          <div class="col-2">{{myaPG.Clan}}</div>
+          <div class="col-2 alr red">Generazione</div>
+          <div class="col-2 alr">{{myaPG.Generazione}}</div>
+        </div>
+        <div class="row">
+          <div class="col">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+          <div class="col red">Natura</div>
+          <div class="col">{{myaPG.Natura}}</div>
+          <div class="col red">Carattere</div>
+          <div class="col alr">{{myaPG.Carattere}}</div>
+        </div>
+        <div class="row">
+          <div class="col">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+          <div class="col red">Sentiero</div>
+          <div class="col">{{myaPG.DescSentiero}}</div>
+          <div class="col-4"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myaPG.Valsentiero , 'red': ix < myaPG.Valsentiero }"></i></div>
+        </div>
+        <div class="row">
+          <div class="col">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+          <div class="col red">FdV</div>
+          <div class="col">{{myaPG.FdV}}/{{myaPG.FdVmax}}</div>
+          <div class="col-4">
+            <i *ngFor="let i of myaPG.FdVmax | times ; let ix = index" class="fa" [ngClass]="{'fa-circle red': (ix < myaPG.FdV) , 'fa-times-circle white': ((ix+1 > myaPG.FdV) && (ix < myaPG.FdVmax))   }"></i><i *ngFor="let i of 10-myaPG.FdVmax | times " class="fa fa-circle white" ></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+          <div class="col red">PS</div>
+          <div class="col-1">{{myaPG.UsoPS}}/turno</div>
+          <div class="col-5 alr"><i *ngFor="let i of myaPG.PSmax | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > myaPG.PS , 'red': ix < myaPG.PS }"></i></div>
+        </div>
+      </div> <!-- fine container interno -->
+    </div>
+  </div>
+</div>
+
+
 
 <!--  ATTRIBUTI -->
 <div class="container">
+  <div class="row">
+    <div class="col"><hr></div>
+    <div class="col-2 alc bigf">Attributi</div>
+    <div class="col"><hr></div>
+  </div>
   <div class="row">
     <div class="col">
       <table class="full">
         <tr *ngFor="let attr of myPG.listaAttributi">
         <td *ngIf="attr.Tipologia == 'F'">{{attr.NomeAttributo}}</td>
-        <td *ngIf="attr.Tipologia == 'F'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
+        <td *ngIf="attr.Tipologia == 'F'" class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
       </tr>
       </table>
     </div>
@@ -17,7 +73,7 @@ scheda di {{myPG.aPG.Nome}} {{myPG.aPG.Cognome}} works!
       <table class="full">
         <tr *ngFor="let attr of myPG.listaAttributi">
         <td *ngIf="attr.Tipologia == 'S'">{{attr.NomeAttributo}}</td>
-        <td *ngIf="attr.Tipologia == 'S'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
+        <td *ngIf="attr.Tipologia == 'S'" class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
       </tr>
       </table>
     </div>
@@ -25,7 +81,7 @@ scheda di {{myPG.aPG.Nome}} {{myPG.aPG.Cognome}} works!
       <table class="full">
         <tr *ngFor="let attr of myPG.listaAttributi">
           <td *ngIf="attr.Tipologia == 'M'">{{attr.NomeAttributo}}</td>
-          <td *ngIf="attr.Tipologia == 'M'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
+          <td *ngIf="attr.Tipologia == 'M'" class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'red': ix < attr.Livello }"></i></td>
         </tr>
       </table>
     </div>
@@ -35,9 +91,11 @@ scheda di {{myPG.aPG.Nome}} {{myPG.aPG.Cognome}} works!
 <!--  ABILITA' -->
 <div class="container">
   <div class="row">
-    <div class="col alc">
+    <div class="col"><hr></div>
+    <div class="col-2 alc bigf">
       Abilità
     </div>
+    <div class="col"><hr></div>
   </div>
   <div class="row">
     <div class="col alc">
@@ -81,9 +139,11 @@ scheda di {{myPG.aPG.Nome}} {{myPG.aPG.Cognome}} works!
 <!-- VANTAGGI -->
 <div class="container">
   <div class="row">
-    <div class="col alc">
+    <div class="col"><hr></div>
+    <div class="col-2 alc bigf">
       Vantaggi
     </div>
+    <div class="col"><hr></div>
   </div>
   <div class="row">
     <div class="col alc">

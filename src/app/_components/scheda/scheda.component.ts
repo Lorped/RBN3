@@ -15,7 +15,7 @@ import { Background, Attributo, Skill, Disciplina, Basicpg, Personaggio } from '
 export class SchedaComponent implements OnInit {
 
   myPG: Personaggio = new Personaggio;
-
+  myaPG: Basicpg = this.myPG.aPG;
 
   constructor( private schedaService: SchedaService, private status: Status ) { }
 
@@ -29,6 +29,7 @@ export class SchedaComponent implements OnInit {
     this.schedaService.getpg(this.status.Userid)
     .subscribe( (data: Personaggio) => {
       this.myPG = data;
+      this.myaPG=this.myPG.aPG;
     });
   }
 

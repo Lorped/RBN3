@@ -70,28 +70,29 @@ if ( ! $full ) {
 }
 
 if ( $full ) {
-	$MySql = "SELECT 
-	Userid , Nome , Cognome , Email , Pass , 
-    DataIscrizione , Esperienza , IDNatura , 
-    IDCarattere , IDrazza , 
-    Personaggio.IDclan , Clan ,  
-    Sesso , Eta , EtaA , Generazione , PS , PSmax , FdV , FdVmax , 
-    Personaggio.IDsentiero , Valsentiero , DescSentiero ,  
-    Coscienza , Coraggio , SelfControl , IDsalute  , 
-    daurto , aggravati , URLImg , Background , Annotazioni , Soldi , 	
-	 	a1.Archetipo as Natura ,
-		a2.Archetipo as Carattere 
+	$MySql = "SELECT
+	Userid , Nome , Cognome , Email , Pass ,
+    DataIscrizione , Esperienza ,
+		a1.Archetipo as Natura ,
+		a2.Archetipo as Carattere ,
+ 		Clan ,
+    Sesso , Eta , EtaA , Personaggio.Generazione , PS , PSmax , FdV , FdVmax ,
+    Valsentiero , DescSentiero ,
+    Coscienza , Coraggio , SelfControl , IDsalute  ,
+    daurto , aggravati , URLImg , Background , Annotazioni , Soldi ,
+		MaxStat ,	UsoPS
 	FROM Personaggio
 		LEFT JOIN Sentieri ON Personaggio.IDsentiero = Sentieri.IDsentiero
 		LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan
 		LEFT JOIN Archetipi AS a1 ON Personaggio.IDnatura = a1.IDarchetipo
 		LEFT JOIN Archetipi AS a2 ON Personaggio.IDcarattere = a2.IDarchetipo
+		LEFT JOIN Generazioni ON Personaggio.Generazione = Generazioni.Generazione
 		WHERE Userid='$id'";
 	$Result=mysql_query($MySql);
 	$pg = mysql_fetch_array($Result,MYSQL_ASSOC);
 
 
-	$MySql = "SELECT 
+	$MySql = "SELECT
 	Attributi.IDattributo , NomeAttributo , Tipologia , Livello
 	  FROM Attributi
 		LEFT JOIN Attributi_main ON Attributi.IDattributo = Attributi_main.IDattributo
@@ -103,8 +104,8 @@ if ( $full ) {
 	}
 
 
-	$MySql = "SELECT 
-	Background.IDbackground , NomeBackground , LivelloBG 
+	$MySql = "SELECT
+	Background.IDbackground , NomeBackground , LivelloBG
 	 FROM Background
 		LEFT JOIN Background_main ON Background.IDbackground = Background_main.IDbackground
 		WHERE Userid='$id'";
@@ -116,7 +117,7 @@ if ( $full ) {
 
 
 
-	$MySql = "SELECT 
+	$MySql = "SELECT
 	Discipline.IDdisciplina , NomeDisc , LivelloDisc , DiClan
 	 FROM Discipline
 		LEFT JOIN Discipline_main ON Discipline.IDdisciplina = Discipline_main.IDdisciplina
@@ -127,7 +128,7 @@ if ( $full ) {
 		$discipline[]=$res;
 	}
 
-	$MySql = "SELECT 
+	$MySql = "SELECT
 	Skill_main.IDskill , NomeSkill , Tipologia , Livello
 	  FROM Skill_main
 		LEFT JOIN Skill ON Skill_main.IDskill = Skill.IDskill and Skill.Userid='$id'
@@ -137,8 +138,8 @@ if ( $full ) {
 	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
 		$skill[]=$res;
 	}
-	
-	
+
+
 
 
 	$out = [
