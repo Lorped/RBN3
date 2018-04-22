@@ -43,8 +43,8 @@ export class Basicpg {
   public Esperienza  = 0;
   public Natura = '';  // from LEFT Join
   public Carattere = ''; // from LEFT Join
-  public IDrazza = 0;
-  public IDclan = 0;
+  // public IDrazza = 0;
+  // public IDclan = 0;
   public Clan = ''; // from LEFT Join
   public Sesso = '';
   public Eta = 0;
@@ -68,6 +68,8 @@ export class Basicpg {
   public Soldi = 0;
   public MaxStat = 5;
   public UsoPS = 1;
+  public DescSalute = ''; // from LEFT Join
+  public ModSalute = 0; // from LEFT Join
 }
 
 @Injectable()
