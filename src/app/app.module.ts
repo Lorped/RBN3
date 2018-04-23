@@ -24,10 +24,12 @@ import { PresentiComponent } from './_components/presenti/presenti.component';
 import { LuoghiComponent } from './_components/luoghi/luoghi.component';
 import { ModalComponent } from './_components/modal/modal.component';
 import { SchedaComponent } from './_components/scheda/scheda.component';
+import { QuestpxComponent } from './_components/questpx/questpx.component';
 
 import { Status } from './globals';
 
 import { TimesPipe } from './_pipes/times.pipe';
+
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { TimesPipe } from './_pipes/times.pipe';
     LuoghiComponent,
     ModalComponent,
     SchedaComponent,
-    TimesPipe
+    TimesPipe,
+    QuestpxComponent
 
   ],
   imports: [
@@ -57,7 +60,6 @@ import { TimesPipe } from './_pipes/times.pipe';
     ModalService,
     SchedaService,
     AuthGuard,
-    SchedaComponent,
     Status
   ],
   bootstrap: [AppComponent]

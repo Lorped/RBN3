@@ -101,4 +101,6 @@ export class Status {
   Sesso = 'M';
   MasterAdmin = 0;
   menuState = 'out';
+  schedaon = false ;
+  pxon = false;
 }

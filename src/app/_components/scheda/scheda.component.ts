@@ -17,21 +17,18 @@ export class SchedaComponent implements OnInit {
   myPG: Personaggio = new Personaggio;
   myaPG: Basicpg = this.myPG.aPG;
 
-  constructor( private schedaService: SchedaService, private status: Status ) { }
-
-  ngOnInit() {
-
-    this.refreshpg ();
-
+  constructor( private schedaService: SchedaService, private status: Status  ) {
   }
 
-  refreshpg () {
+  ngOnInit() {
     this.schedaService.getpg(this.status.Userid)
     .subscribe( (data: Personaggio) => {
       this.myPG = data;
-      this.myaPG=this.myPG.aPG;
+      this.myaPG = this.myPG.aPG;
     });
   }
+
+
 
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 
 import { AuthenticationService } from '../../_services/index';
 import { ModalService } from '../../_services/index';
@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 
 import { Status } from '../../globals';
 
-import { SchedaComponent } from '../scheda/scheda.component';
 
 @Component({
   selector: 'app-menu',
@@ -17,7 +16,7 @@ import { SchedaComponent } from '../scheda/scheda.component';
 export class MenuComponent implements OnInit {
 
   constructor( private authenticationService: AuthenticationService, private router: Router,
-    private status: Status, private modalService: ModalService,  private schedacomponent: SchedaComponent ) { }
+    private status: Status, private modalService: ModalService  ) { }
 
   ngOnInit() {
   }
@@ -34,7 +33,13 @@ export class MenuComponent implements OnInit {
   }
 
   openmodal(id: string ) {
-    this.schedacomponent.refreshpg();
+    if ( id === 'modalscheda') {
+      this.status.schedaon = true ;
+    }
+    if ( id === 'modalpx') {
+      this.status.pxon = true ;
+    }
+    // this.schedacomponent.refreshpg();
     this.status.menuState = 'out';
     this.modalService.show(id) ;
   }
