@@ -11,6 +11,7 @@ import { AuthenticationService } from './_services/index';
 import { ListpresentiService } from './_services/index';
 import { ModalService } from './_services/index';
 import { SchedaService } from './_services/index';
+import { QuestpxService } from './_services/index';
 
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -59,6 +60,7 @@ import { TimesPipe } from './_pipes/times.pipe';
     ListpresentiService,
     ModalService,
     SchedaService,
+    QuestpxService,
     AuthGuard,
     Status
   ],

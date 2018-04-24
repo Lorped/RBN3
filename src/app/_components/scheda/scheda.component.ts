@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
 import { SchedaService } from '../../_services/index';
 
 import { Status } from '../../globals';

@@ -17,10 +17,14 @@
   color: #ffffff;
 }
 
+.dred {
+  color: #b00000;
+}
+
 html, body {
 	background-color: #000000;
 	color: #ffffff;
-	background-image: url('assets/Rome-1600x900.jpg');	
+	background-image: url('assets/Rome-1600x900.jpg');
 	background-repeat: no-repeat;
 	background-position: center top;
 }

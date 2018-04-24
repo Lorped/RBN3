@@ -3,10 +3,56 @@
     <a class="nav-link active" id="quest-tab" data-toggle="tab" href="#quest" role="tab">Quest</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="log-tab" data-toggle="tab" href="#logpx" role="tab">Log PX</a>
+    <a class="nav-link" id="log-tab" data-toggle="tab" href="#log" role="tab">Log PX</a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="quest-tab" role="tabpanel">...</div>
-  <div class="tab-pane fade" id="og-tab" role="tabpanel">...</div>
+  <div class="tab-pane fade show active" id="quest" role="tabpanel">
+
+    <p></p>
+    <div class="container">
+      <div class="row rborder">
+        <div class="col-2">Data Apertura</div>
+        <div class="col-6">Quest</div>
+        <div class="col-1">PX</div>
+        <div class="col-1">Status</div>
+        <div class="col-2">Data Chiusura</div>
+      </div>
+      <div class="row" *ngFor="let q of quests" [ngClass]="{'green': q.Status=='OK' , 'red': q.Status=='KO'}">
+        <div class="col-2">{{q.DataOpen | date:'dd.MM.yyyy'}}</div>
+        <div class="col-6">{{q.Quest}}</div>
+        <div class="col-1">{{q.Px}}</div>
+        <div class="col-1">{{q.Status}}</div>
+        <div class="col-2">{{q.DataClose | date:'dd.MM.yyyy'}}</div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="tab-pane fade" id="log" role="tabpanel">
+    <p></p>
+    <div class="container">
+      <div class="row">
+        <div class="col">PX Guadagnati:</div>
+        <div class="col red">{{mylog.pxin}}</div>
+        <div class="col">PX Spesi:</div>
+        <div class="col red">{{mylog.pxout}}</div>
+        <div class="col">PX Disponibili</div>
+        <div class="col red">{{mylog.pxin - mylog.pxout}}</div>
+      </div>
+      <p></p>
+      <div class="row rborder">
+        <div class="col-2">Data</div>
+        <div class="col-8">Spesa</div>
+        <div class="col-1">PX</div>
+        <div class="col-1">&nbsp;</div>
+      </div>
+      <div class="row" *ngFor="let l of mylog.log">
+        <div class="col-2">{{l.data | date:'dd.MM.yyyy'}}</div>
+        <div class="col-8">{{l.dati}}</div>
+        <div class="col-1">{{l.px}}</div>
+        <div class="col-1">{{l.Master == "0" ? '':'M'}}</div>
+      </div>
+    </div>
+  </div>
 </div>
