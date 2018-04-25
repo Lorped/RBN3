@@ -32,7 +32,6 @@ import { Status } from './globals';
 import { TimesPipe } from './_pipes/times.pipe';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

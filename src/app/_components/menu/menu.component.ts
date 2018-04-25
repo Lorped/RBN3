@@ -23,6 +23,7 @@ export class MenuComponent implements OnInit {
 
   dologout() {
     this.status.menuState = 'out';
+    this.status.Alive = false ;
     this.authenticationService.logout();
     this.router.navigate(['/login']);
 
@@ -42,5 +43,12 @@ export class MenuComponent implements OnInit {
     // this.schedacomponent.refreshpg();
     this.status.menuState = 'out';
     this.modalService.show(id) ;
+  }
+
+  gotomodule(where: string) {
+    this.status.menuState = 'out';
+    this.status.Alive = false ;
+    this.status.Last = 0 ;
+    this.router.navigate([where]);
   }
 }

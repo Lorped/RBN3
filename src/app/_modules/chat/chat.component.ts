@@ -41,6 +41,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
 
+    // console.log("dentro chat component");
+
     if (this.status.MasterAdmin > 1) { this.localAdmin = 'visible'; }
     if (this.status.MasterAdmin > 0) { this.localMaster = 'visible'; }
 
@@ -48,7 +50,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.status.Alive = true;
 
     const Emitter = this.route.url.switchMap( (val) =>   {
-//      console.log("dentro switchmap"+this.status.Stanza);
+      // console.log("dentro switchmap"+this.status.Stanza);
 
       this.checkadmin = false;
       this.checkmaster = false;

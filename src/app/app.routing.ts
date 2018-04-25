@@ -12,6 +12,7 @@ export const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'mappa/0', pathMatch: 'full'},
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'spesapx', loadChildren: './_modules/spesapx/spesapx.module#SpesapxModule' },
     { path: '', component: MainComponent, canActivate: [AuthGuard] ,
       children: [
         { path: 'chat', loadChildren: './_modules/chat/chat.module#ChatModule'},
