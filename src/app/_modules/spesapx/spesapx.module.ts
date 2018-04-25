@@ -7,11 +7,14 @@ import { SPESAPX_ROUTES } from './spesapx.routing';
 
 import { SpesapxComponent } from './spesapx.component';
 
+import { UtilityModule } from '../utility/utility.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild(SPESAPX_ROUTES)
+    RouterModule.forChild(SPESAPX_ROUTES) ,
+    UtilityModule
   ],
   declarations: [
     SpesapxComponent

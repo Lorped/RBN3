@@ -79,7 +79,7 @@ if ( $full ) {
     Sesso , Eta , EtaA , Personaggio.Generazione , PS , PSmax , FdV , FdVmax ,
     Valsentiero , DescSentiero ,
     Coscienza , Coraggio , SelfControl , Personaggio.IDsalute  ,
-    daurto , aggravati , URLImg , Background , Annotazioni , Soldi ,
+    daurto , aggravati , URLImg , Soldi ,
 		MaxStat ,	UsoPS,
 		DescSalute , ModSalute
 	FROM Personaggio

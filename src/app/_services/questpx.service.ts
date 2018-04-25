@@ -105,4 +105,14 @@ export class QuestpxService {
     });
   }
 
+  getpx () {
+
+    interface apx {
+      px: number;
+    }
+    let numpx = 0;
+    return this.http.get ('https://www.roma-by-night.it/RBN3/wsPHP/getpx.php?id=' + this.status.Userid)
+    .map((res: apx) => res.px);
+  }
+
 }

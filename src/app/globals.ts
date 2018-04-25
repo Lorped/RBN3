@@ -63,8 +63,6 @@ export class Basicpg {
   public daurto = 0;
   public aggravati = 0;
   public URLImg = '';
-  public Background = '';
-  public Annotazioni = '';
   public Soldi = 0;
   public MaxStat = 5;
   public UsoPS = 1;

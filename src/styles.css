@@ -28,3 +28,21 @@ html, body {
 	background-repeat: no-repeat;
 	background-position: center top;
 }
+
+
+.alr {
+  text-align: right;
+}
+
+.alc {
+  text-align: center;
+}
+
+.full {
+  width: 100%;
+}
+
+
+.tre {
+  width: 32.5%;
+}

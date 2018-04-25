@@ -29,7 +29,7 @@ import { QuestpxComponent } from './_components/questpx/questpx.component';
 
 import { Status } from './globals';
 
-import { TimesPipe } from './_pipes/times.pipe';
+import { UtilityModule } from './_modules/utility/utility.module';
 
 
 @NgModule({
@@ -43,7 +43,6 @@ import { TimesPipe } from './_pipes/times.pipe';
     LuoghiComponent,
     ModalComponent,
     SchedaComponent,
-    TimesPipe,
     QuestpxComponent
 
   ],
@@ -52,7 +51,8 @@ import { TimesPipe } from './_pipes/times.pipe';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(APP_ROUTES, {useHash: true})
+    RouterModule.forRoot(APP_ROUTES, {useHash: true}),
+    UtilityModule
   ],
   providers: [
     AuthenticationService,

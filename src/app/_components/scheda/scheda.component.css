@@ -1,19 +1,10 @@
-.full {
-  width: 100%;
-}
 
-.tre {
-  width: 32.5%;
-}
 
-.alr {
-  text-align: right;
-}
 
-.alc {
-  text-align: center;
-}
 
+.bigf {
+  font-size: 1.1em;
+}
 
 hr {
   color: #ff0000;
@@ -23,12 +14,4 @@ hr {
   border-top: 1px solid #f00;
   margin: 1em 0;
   padding: 0;
-}
-
-.bigf {
-  font-size: 1.1em;
-}
-
-.dred {
-  color: #b00000;
 }
