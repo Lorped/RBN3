@@ -98,7 +98,8 @@ if ( $full ) {
 	Attributi.IDattributo , NomeAttributo , Tipologia , Livello
 	  FROM Attributi
 		LEFT JOIN Attributi_main ON Attributi.IDattributo = Attributi_main.IDattributo
-		WHERE Userid='$id' ";
+		WHERE Userid='$id'
+		ORDER BY Attributi.IDattributo ASC";
 	$Result=mysql_query($MySql);
 	$attr=[];
 	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
@@ -134,7 +135,8 @@ if ( $full ) {
 	Skill_main.IDskill , NomeSkill , Tipologia , Livello
 	  FROM Skill_main
 		LEFT JOIN Skill ON Skill_main.IDskill = Skill.IDskill and Skill.Userid='$id'
-		WHERE iniziale=1 OR Livello >0";
+		WHERE iniziale=1 OR Livello >0
+		ORDER BY Skill_main.IDskill ASC";
 	$Result=mysql_query($MySql);
 	$skill=[];
 	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {

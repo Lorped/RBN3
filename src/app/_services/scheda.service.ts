@@ -30,4 +30,13 @@ export class SchedaService {
     });
   }
 
+  getnewdiscipline (id: number) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getnewdiscipline.php', {
+      token: user,
+      id: id
+    });
+  }
+
 }

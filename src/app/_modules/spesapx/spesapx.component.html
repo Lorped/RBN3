@@ -7,12 +7,21 @@
     <div class="col">
 
 
+      <div class="alc"><h3>Spesa Punti Esperienza</h3></div>
+      <div class="alc"><h4>Punti a disposizione <span class="dred">{{px}}</span></h4></div>
+
+
       <div class="container">
         <div class="row">
+          <div class="col"><hr></div>
+          <div class="col-2 alc bigf">&nbsp;</div>
+          <div class="col"><hr></div>
+        </div>
+        <div class="row">
           <div class="col">FdV</div>
-          <div class="col"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < myaPG.FdVmax , 'white': ix+1 > myaPG.FdVmax }"></i><button  class="btn btn-primary btn-xs" (click)="addfdv()" [disabled]="px < myaPG.FdVmax"><i class="fa fa-plus"></i></button> </div>
+          <div class="col"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < myPG.aPG.FdVmax , 'white': ix+1 > myPG.aPG.FdVmax }"></i><button  *ngIf="myPG.aPG.FdVmax<10" class="btn btn-primary btn-xs" (click)="addfdv()" [disabled]="px < myPG.aPG.FdVmax"><i class="fa fa-plus"></i></button></div>
           <div class="col">Sentiero</div>
-          <div class="col"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myaPG.Valsentiero , 'dred': ix < myaPG.Valsentiero }"></i></div>
+          <div class="col"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Valsentiero , 'dred': ix < myPG.aPG.Valsentiero }"></i><button  *ngIf="myaPG.Valsentiero<10" class="btn btn-primary btn-xs" (click)="addsentiero()" [disabled]="px < 2 * myPG.aPG.Valsentiero"><i class="fa fa-plus"></i></button></div>
           <div class="col">&nbsp;</div>
           <div class="col">&nbsp;</div>
         </div>
@@ -21,11 +30,11 @@
       <div class="container">
         <div class="row">
           <div class="col">Coscienza</div>
-          <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coscienza , 'dred': ix < myPG.aPG.Coscienza }"></i></div>
+          <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coscienza , 'dred': ix < myPG.aPG.Coscienza }"></i><button  *ngIf="myPG.aPG.Coscienza<5" class="btn btn-primary btn-xs" (click)="addcoscienza()" [disabled]="px < 2 * myPG.aPG.Coscienza"><i class="fa fa-plus"></i></button></div>
           <div class="col">SelfControl</div>
-          <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.SelfControl , 'dred': ix < myPG.aPG.SelfControl }"></i></div>
+          <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.SelfControl , 'dred': ix < myPG.aPG.SelfControl }"></i><button  *ngIf="myPG.aPG.SelfControl<5" class="btn btn-primary btn-xs" (click)="addselfcontrol()" [disabled]="px < 2 * myPG.aPG.SelfControl"><i class="fa fa-plus"></i></button></div>
           <div class="col">Coraggio</div>
-          <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coraggio , 'dred': ix < myPG.aPG.Coraggio }"></i></div>
+          <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coraggio , 'dred': ix < myPG.aPG.Coraggio }"></i><button  *ngIf="myPG.aPG.Coraggio<5" class="btn btn-primary btn-xs" (click)="addcoraggio()" [disabled]="px < 2 * myPG.aPG.Coraggio"><i class="fa fa-plus"></i></button></div>
         </div>
       </div>
 
@@ -39,28 +48,28 @@
         </div>
         <div class="row">
           <div class="col">
-            <table class="full">
-              <tr *ngFor="let attr of myPG.listaAttributi">
-              <td *ngIf="attr.Tipologia == 'F'">{{attr.NomeAttributo}}</td>
-              <td *ngIf="attr.Tipologia == 'F'" > <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-            </tr>
-            </table>
+            <div class="container">
+              <div class="row" *ngFor="let attr of myPG.listaAttributi">
+              <div class="col" *ngIf="attr.Tipologia == 'F'">{{attr.NomeAttributo}}</div>
+              <div class="col" *ngIf="attr.Tipologia == 'F'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 4 * attr.Livello"><i class="fa fa-plus"></i></button></div>
+            </div>
+          </div>
           </div>
           <div class="col">
-            <table class="full">
-              <tr *ngFor="let attr of myPG.listaAttributi">
-              <td *ngIf="attr.Tipologia == 'S'">{{attr.NomeAttributo}}</td>
-              <td *ngIf="attr.Tipologia == 'S'" > <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-            </tr>
-            </table>
+            <div class="container">
+              <div class="row" *ngFor="let attr of myPG.listaAttributi">
+              <div class="col" *ngIf="attr.Tipologia == 'S'">{{attr.NomeAttributo}}</div>
+              <div class="col" *ngIf="attr.Tipologia == 'S'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 4 * attr.Livello"><i class="fa fa-plus"></i></button></div>
+            </div>
+          </div>
           </div>
           <div class="col">
-            <table class="full">
-              <tr *ngFor="let attr of myPG.listaAttributi">
-                <td *ngIf="attr.Tipologia == 'M'">{{attr.NomeAttributo}}</td>
-                <td *ngIf="attr.Tipologia == 'M'" > <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-              </tr>
-            </table>
+            <div class="container">
+              <div class="row" *ngFor="let attr of myPG.listaAttributi">
+                <div class="col" *ngIf="attr.Tipologia == 'M'">{{attr.NomeAttributo}}</div>
+                <div class="col" *ngIf="attr.Tipologia == 'M'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 4 * attr.Livello"><i class="fa fa-plus"></i></button></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -76,28 +85,28 @@
         </div>
         <div class="row">
           <div class="col">
-            <table class="full">
-              <tr *ngFor="let attr of myPG.listaSkill">
-                <td *ngIf="attr.Tipologia == '1'">{{attr.NomeSkill}}</td>
-                <td *ngIf="attr.Tipologia == '1'" class="alc"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-              </tr>
-            </table>
+            <div class="container">
+              <div class="row" *ngFor="let skill of myPG.listaSkill">
+                <div class="col" *ngIf="skill.Tipologia == '1'">{{skill.NomeSkill}}</div>
+                <div class="col" *ngIf="skill.Tipologia == '1'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
+              </div>
+            </div>
           </div>
           <div class="col">
-            <table class="full">
-              <tr *ngFor="let attr of myPG.listaSkill">
-                <td *ngIf="attr.Tipologia == '2'">{{attr.NomeSkill}}</td>
-                <td *ngIf="attr.Tipologia == '2'" class="alc"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-              </tr>
-            </table>
+            <div class="container">
+              <div class="row" *ngFor="let skill of myPG.listaSkill">
+                <div class="col" *ngIf="skill.Tipologia == '2'">{{skill.NomeSkill}}</div>
+                <div class="col" *ngIf="skill.Tipologia == '2'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
+              </div>
+            </div>
           </div>
           <div class="col">
-            <table class="full">
-              <tr *ngFor="let attr of myPG.listaSkill">
-                <td *ngIf="attr.Tipologia == '3'">{{attr.NomeSkill}}</td>
-                <td *ngIf="attr.Tipologia == '3'" class="alc"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-              </tr>
-            </table>
+            <div class="container">
+              <div class="row" *ngFor="let skill of myPG.listaSkill">
+                <div class="col" *ngIf="skill.Tipologia == '3'">{{skill.NomeSkill}}</div>
+                <div class="col" *ngIf="skill.Tipologia == '3'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -111,28 +120,36 @@
         </div>
         <div class="row">
           <div class="col">
-            <table class="full">
-              <tr *ngFor="let disc of myPG.listaDiscipline">
-                <td>{{disc.NomeDisc}}</td>
-                <td class="alc"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i></td>
-              </tr>
-            </table>
+            <div class="container">
+              <div class="row" *ngFor="let disc of myPG.listaDiscipline">
+                <div class="col">{{disc.NomeDisc}}</div>
+                <div class="col" class="alc"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i></div>
+              </div>
+            </div>
           </div>
           <div class="col">
-            <table class="full">
-              <tr>
-                <td>Altra Disciplina</td>
-                <td class="alc"> ~ Filler ~ </td>
-              </tr>
-            </table>
+            <div class="container">
+              <div class="row">
+                <div class="col alc">Altre Disciplina</div>
+              </div>
+              <div class="row">
+                <div class="col alc">
+                  <select id="newdisc" name="newdisc" [(ngModel)]="nuovadisciplina">
+                    <option value="0">- Disciplina -</option>
+                    <option *ngFor="let i of newdiscipline" [ngValue]="i.IDdisciplina">{{i.NomeDisc}}</option>
+                  </select>
+                  <button  *ngIf="newdiscipline.length > 0" class="btn btn-primary btn-xs" (click)="adddisc()" [disabled]="px < 10 || nuovadisciplina == 0"><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="col">
-            <table class="full">
-              <tr>
-                <td>Taumaturgie e Necromanzie</td>
-                <td class="alc"> ~ Filler ~ </td>
-              </tr>
-            </table>
+            <div class="container">
+              <div class="row">
+                <div class="col">Taumaturgie e Necromanzie</div>
+                <div class="col" class="alc"> ~ Filler ~ </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
