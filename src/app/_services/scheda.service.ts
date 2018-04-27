@@ -39,4 +39,9 @@ export class SchedaService {
     });
   }
 
+  getnecrotaum (id: number) {
+
+    return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/getnecrotaum.php?id=' + id );
+  }
+
 }

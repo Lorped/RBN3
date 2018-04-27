@@ -24,6 +24,14 @@ export class SpesapxComponent implements OnInit {
 
   nuovadisciplina = 0 ;
 
+
+  taum = [];
+  Tprincipale = 0;
+  Tmaxlev = 0;
+  necro = [];
+  Nprincipale = 0;
+  Nmaxlev = 0;
+
   constructor( private status: Status, private location: Location, private schedaService: SchedaService, private questpxservice: QuestpxService  ) { }
 
   ngOnInit() {
@@ -42,6 +50,17 @@ export class SpesapxComponent implements OnInit {
     .subscribe ( data => {
       this.newdiscipline = data;
 console.log(this.newdiscipline);
+    });
+
+    this.schedaService.getnecrotaum(this.status.Userid)
+    .subscribe ( data => {
+      this.necro = data.necro;
+      this.taum = data.taum;
+      this.Tprincipale = data.Tprincipale;
+      this.Nprincipale = data.Nprincipale;
+      this.Tmaxlev = data.Tmaxlev;
+      this.Nmaxlev = data.Nmaxlev;
+
     });
   }
 
@@ -89,7 +108,8 @@ console.log(this.newdiscipline);
 
   addskill(skill: number) {
     console.log("addskill "+skill);
-    if ( this.myPG.listaSkill[skill-1].Livello == 0 ){
+    console.log(this.myPG.listaSkill[skill-1].Livello);
+    if ( this.myPG.listaSkill[skill-1].Livello == null || this.myPG.listaSkill[skill-1].Livello == 0){
       this.px = this.px - 3;
     } else {
       this.px = this.px - 2 * this.myPG.listaSkill[skill-1].Livello;
@@ -99,5 +119,15 @@ console.log(this.newdiscipline);
 
   adddisc() {
     console.log("adddisc "+this.nuovadisciplina);
+  }
+
+  plustaum(ataum: number) {
+    console.log("addtaum "+ataum);
+    for (let i = 0; i< this.taum.length ; i++) {
+      if (this.taum[i].IDtaum == ataum) {
+        this.px = this.px - 4 * this.taum[i].Livello;
+        this.taum[i].Livello++;
+      }
+    }
   }
 }
