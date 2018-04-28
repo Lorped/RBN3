@@ -123,20 +123,20 @@
             <div class="container">
               <div class="row" *ngFor="let disc of myPG.listaDiscipline">
                 <div class="col">{{disc.NomeDisc}}</div>
-                <div class="col" class="alc"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i></div>
+                <div class="col"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i><button  *ngIf="disc.LivelloDisc < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="plusdisc(disc.IDdisciplina)" [disabled]="px < disc.LivelloDisc * (disc.DiClan=='S'?5:7)"><i class="fa fa-plus"></i></button></div>
               </div>
             </div>
           </div>
           <div class="col">
             <div class="container">
               <div class="row">
-                <div class="col alc">Altre Disciplina</div>
+                <div class="col alc">Altre Discipline</div>
               </div>
               <div class="row">
                 <div class="col alc">
                   <select id="newdisc" name="newdisc" [(ngModel)]="nuovadisciplina">
-                    <option value="0">- Disciplina -</option>
-                    <option *ngFor="let i of newdiscipline" [ngValue]="i.IDdisciplina">{{i.NomeDisc}}</option>
+                    <!-- <option value="0">- Disciplina -</option> -->
+                    <option *ngFor="let i of newdiscipline" [ngValue]="i">{{i.NomeDisc}}</option>
                   </select>
                   <button  *ngIf="newdiscipline.length > 0" class="btn btn-primary btn-xs" (click)="adddisc()" [disabled]="px < 10 || nuovadisciplina == 0"><i class="fa fa-plus"></i></button>
                 </div>
@@ -147,9 +147,19 @@
             <div class="container">
               <div class="row">
                 <div class="container">
+                  <div class="row" *ngIf="taum.length>0">
+                    <div class="col alc"> Taumaturgie </div>
+                  </div>
                   <div class="row" *ngFor="let t of taum">
                     <div class="col">{{t.NomeTaum}}</div>
-                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < t.Livello , 'white': ix+1 > t.Livello }"></i><button  *ngIf="t.Principale != 'P' && t.Livello<5" class="btn btn-primary btn-xs" (click)="plustaum(t.IDtaum)" [disabled]="px < t.Livello*4 || (t.Livello+1 < Tmaxlev && Tmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
+                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < t.Livello , 'white': ix+1 > t.Livello }"></i><button  *ngIf="t.Principale != 'S' && t.Livello<5" class="btn btn-primary btn-xs" (click)="plustaum(t.IDtaum)" [disabled]="px < t.Livello*4 || (t.Livello+1 < Tmaxlev && Tmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
+                  </div>
+                  <div class="row" *ngIf="necro.legth>0">
+                    <div class="col alc"> Necromanzie </div>
+                  </div>
+                  <div class="row" *ngFor="let n of necro">
+                    <div class="col">{{t.NomeNecro}}</div>
+                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < n.Livello , 'white': ix+1 > n.Livello }"></i><button  *ngIf="n.Principale != 'S' && n.Livello<5" class="btn btn-primary btn-xs" (click)="plusnecro(n.IDnecro)" [disabled]="px < n.Livello*4 || (n.Livello+1 < Nmaxlev && Nmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
                   </div>
                 </div>
               </div>

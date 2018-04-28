@@ -50,28 +50,36 @@ if ( CheckJWT ($token) ) {
 }
 
 
-$out=[];
+$taum=[];
 
 $MySql = "SELECT
-		Discipline_main.IDdisciplina , NomeDisc, DiClan
-		FROM Discipline_main
-		LEFT JOIN Discipline ON Discipline_main.IDdisciplina = Discipline.IDdisciplina AND Userid = '$id'
+		Taumaturgie_main.IDtaum , NomeTaum
+		FROM Taumaturgie_main
+		LEFT JOIN Taumaturgie ON Taumaturgie_main.IDtaum = Taumaturgie.IDtaum AND Userid = '$id'
 		WHERE  LivelloDisc IS NULL AND Acquisibile = 1";
 
 $Result=mysql_query($MySql);
 while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
-	$testdisc=$res['IDdisciplina'];
-	$MySql2="SELECT * FROM Personaggio LEFT JOIN Clan ON Personaggio.IDclan=Clan.IDclan
-		WHERE Userid='$id' AND ( Disc1 = '$testdisc' OR Disc2 = '$testdisc' OR Disc3 = '$testdisc' ) ";
-	$Result2=mysql_query($MySql2);
-	if ( $res2=mysql_fetch_array($Result2) ) {
-		$res['DiClan'] = 'S';
-	} else {
-		$res['DiClan'] = 'N';
-	}
-	$out[]=$res;
+		$taum[]=$res;
 }
 
+$necro=[];
+
+$MySql = "SELECT
+		Necromanzie_main.IDnecro , NomeNecro
+		FROM Necromanzie_main
+		LEFT JOIN Necromanzie ON Necromanzie_main.IDnecro = Necromanzie.IDnecro AND Userid = '$id'
+		WHERE  LivelloDisc IS NULL AND Acquisibile = 1";
+
+$Result=mysql_query($MySql);
+while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+		$necro[]=$res;
+}
+
+$out = [
+	"newtaum" => $taum,
+	"newnecro" => $necro
+];
 
 header("HTTP/1.1 200 OK");
 

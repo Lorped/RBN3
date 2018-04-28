@@ -22,7 +22,8 @@ export class SpesapxComponent implements OnInit {
 
   newdiscipline = [];
 
-  nuovadisciplina = 0 ;
+  nuovadisciplina =  {IDdisciplina: 0, NomeDisc: '', DiClan: ''} ;
+
 
 
   taum = [];
@@ -118,15 +119,73 @@ console.log(this.newdiscipline);
   }
 
   adddisc() {
-    console.log("adddisc "+this.nuovadisciplina);
+    console.log("adddisc ");
+    console.log(this.nuovadisciplina);
+    let newd = new Disciplina;
+    newd.IDdisciplina = this.nuovadisciplina.IDdisciplina;
+    newd.NomeDisc = this.nuovadisciplina.NomeDisc;
+    newd.DiClan = this.nuovadisciplina.DiClan;
+    newd.LivelloDisc = 1;
+    this.myPG.listaDiscipline.push(newd);
+
+    for ( let j = 0 ; j < this.newdiscipline.length ; j ++ ) {
+      if ( this.newdiscipline[j].IDdisciplina === this.nuovadisciplina.IDdisciplina ) {
+        this.newdiscipline.splice(j, 1);
+      }
+    }
+
+    this.px = this.px - 10 ;
+    this.nuovadisciplina =  {IDdisciplina: 0, NomeDisc: '', DiClan: ''} ;
   }
 
   plustaum(ataum: number) {
-    console.log("addtaum "+ataum);
+    console.log("plustaum "+ataum);
     for (let i = 0; i< this.taum.length ; i++) {
       if (this.taum[i].IDtaum == ataum) {
         this.px = this.px - 4 * this.taum[i].Livello;
         this.taum[i].Livello++;
+      }
+    }
+  }
+  plusnecro(anecro: number) {
+    console.log("plusnecro "+anecro);
+    for (let i = 0; i< this.necro.length ; i++) {
+      if (this.necro[i].IDnecro == anecro) {
+        this.px = this.px - 4 * this.necro[i].Livello;
+        this.necro[i].Livello++;
+      }
+    }
+  }
+
+  plusdisc (disc: number) {
+    console.log("plusdisc "+disc);
+    for (let i = 0; i< this.myPG.listaDiscipline.length ; i++) {
+      if (this.myPG.listaDiscipline[i].IDdisciplina == disc) {
+console.log(this.myPG.listaDiscipline[i]);
+        this.px = this.px -  this.myPG.listaDiscipline[i].LivelloDisc * (this.myPG.listaDiscipline[i].DiClan == 'S' ? 5 : 7);
+        this.myPG.listaDiscipline[i].LivelloDisc++;
+
+        if (disc == 15 ) {  // Taumaturgia
+          if ( this.myPG.listaDiscipline[i].LivelloDisc < 6 ) {
+            for (let j = 0; j < this.taum.length ; j++) {
+              if (this.taum[j].Principale == 'S') {
+                this.taum[j].Livello++;
+                this.Tmaxlev=this.taum[j].Livello;
+              }
+            }
+          }
+        }
+        if (disc == 7 ) {  // Taumaturgia
+          if ( this.myPG.listaDiscipline[i].LivelloDisc < 6 ) {
+            for (let j = 0; j < this.necro.length ; j++) {
+              if (this.necro[j].Principale == 'S') {
+                this.necro[j].Livello++;
+                this.Nmaxlev=this.necro[j].Livello;
+              }
+            }
+          }
+        }
+
       }
     }
   }
