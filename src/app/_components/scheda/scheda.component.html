@@ -28,7 +28,7 @@
           <div class="col">&nbsp;</div>
           <div class="col red">FdV</div>
           <div class="col">{{myaPG.FdV}}/{{myaPG.FdVmax}}</div>
-          <div class="col-4 alr"><i *ngFor="let i of myaPG.FdVmax | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': (ix < myaPG.FdV) , 'white': ((ix+1 > myaPG.FdV) && (ix < myaPG.FdVmax)) }"></i><i *ngFor="let i of 10-myaPG.FdVmax | times " class="fa fa-times-circle white" ></i></div>
+          <div class="col-4 alr"><i *ngFor="let i of myaPG.FdVmax | times ; let ix = index" class="fa " [ngClass]="{'fa-circle dred': (ix < myaPG.FdV) , 'fa-times-circle white': ((ix+1 > myaPG.FdV) && (ix < myaPG.FdVmax)) }"></i><i *ngFor="let i of 10-myaPG.FdVmax | times " class="fa fa-circle white" ></i></div>
         </div>
         <div class="row">
           <div class="col-4">&nbsp;</div>

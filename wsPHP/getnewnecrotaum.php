@@ -56,7 +56,7 @@ $MySql = "SELECT
 		Taumaturgie_main.IDtaum , NomeTaum
 		FROM Taumaturgie_main
 		LEFT JOIN Taumaturgie ON Taumaturgie_main.IDtaum = Taumaturgie.IDtaum AND Userid = '$id'
-		WHERE  LivelloDisc IS NULL AND Acquisibile = 1";
+		WHERE  Livello IS NULL AND Acquisibile = 1";
 
 $Result=mysql_query($MySql);
 while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
@@ -69,7 +69,7 @@ $MySql = "SELECT
 		Necromanzie_main.IDnecro , NomeNecro
 		FROM Necromanzie_main
 		LEFT JOIN Necromanzie ON Necromanzie_main.IDnecro = Necromanzie.IDnecro AND Userid = '$id'
-		WHERE  LivelloDisc IS NULL AND Acquisibile = 1";
+		WHERE  Livello IS NULL AND Acquisibile = 1";
 
 $Result=mysql_query($MySql);
 while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {

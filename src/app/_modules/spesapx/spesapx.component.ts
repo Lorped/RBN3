@@ -21,10 +21,7 @@ export class SpesapxComponent implements OnInit {
   px = 0 ;
 
   newdiscipline = [];
-
-  nuovadisciplina =  {IDdisciplina: 0, NomeDisc: '', DiClan: ''} ;
-
-
+  nuovadisciplina = {IDdisciplina: 0, NomeDisc: '', DiClan: ''} ;
 
   taum = [];
   Tprincipale = 0;
@@ -32,6 +29,21 @@ export class SpesapxComponent implements OnInit {
   necro = [];
   Nprincipale = 0;
   Nmaxlev = 0;
+
+  //
+  newnecro = [];
+  newtaum = [];
+
+  nuovanecro = {IDnecro: 0, NomeNecro: '', Primaria: 'N'} ;
+  nuovataum = {IDtaum: 0, NomeTaum: '', Primaria: 'N'} ;
+
+
+  //
+  listaspesa = [] ;
+
+  // per il modal
+  visible = false;
+  visibleAnimate = false;
 
   constructor( private status: Status, private location: Location, private schedaService: SchedaService, private questpxservice: QuestpxService  ) { }
 
@@ -63,14 +75,29 @@ console.log(this.newdiscipline);
       this.Nmaxlev = data.Nmaxlev;
 
     });
+
+    this.schedaService.getnewnecrotaum(this.status.Userid)
+    .subscribe ( data => {
+console.log(data);
+      this.newnecro = data.newnecro;
+      this.newtaum = data.newtaum;
+
+    });
+
+
+
   }
 
   goback () {
+    console.log(this.listaspesa);
+    //this.show();
     this.location.back();
   }
 
   addfdv () {
     console.log("addfdv");
+    this.listaspesa.push( {x: 'FdV' , y: 0} );
+
     this.px = this.px - this.myPG.aPG.FdVmax;
     this.myPG.aPG.FdVmax++;
     this.myPG.aPG.FdV++;
@@ -79,30 +106,40 @@ console.log(this.newdiscipline);
 
   addsentiero () {
     console.log("addsentiero");
+    this.listaspesa.push( {x: 'Sentiero' , y: 0} );
+
     this.px = this.px - 2 * this.myPG.aPG.Valsentiero;
     this.myPG.aPG.Valsentiero++;
   }
 
   addcoscienza () {
     console.log("addcoscienza");
+    this.listaspesa.push( {x: 'Coscienza' , y: 0} );
+
     this.px = this.px - 2 * this.myPG.aPG.Coscienza;
     this.myPG.aPG.Coscienza++;
   }
 
   addcoraggio () {
     console.log("addcoraggio");
+    this.listaspesa.push( {x: 'Coraggio' , y: 0} );
+
     this.px = this.px - 2 * this.myPG.aPG.Coraggio;
     this.myPG.aPG.Coraggio++;
   }
 
   addselfcontrol () {
     console.log("addselfcontrol");
+    this.listaspesa.push( {x: 'SelfControl' , y: 0} );
+
     this.px = this.px - 2 * this.myPG.aPG.SelfControl;
     this.myPG.aPG.SelfControl++;
   }
 
   addattr(attr: number) {
     console.log("addattr "+attr);
+    this.listaspesa.push( {x: 'Attributi' , y: attr} );
+
     this.px = this.px - 4 * this.myPG.listaAttributi[attr-1].Livello;
     this.myPG.listaAttributi[attr-1].Livello++;
   }
@@ -110,6 +147,9 @@ console.log(this.newdiscipline);
   addskill(skill: number) {
     console.log("addskill "+skill);
     console.log(this.myPG.listaSkill[skill-1].Livello);
+    this.listaspesa.push( {x: 'Skill' , y: skill} );
+
+
     if ( this.myPG.listaSkill[skill-1].Livello == null || this.myPG.listaSkill[skill-1].Livello == 0){
       this.px = this.px - 3;
     } else {
@@ -121,6 +161,8 @@ console.log(this.newdiscipline);
   adddisc() {
     console.log("adddisc ");
     console.log(this.nuovadisciplina);
+    this.listaspesa.push( {x: 'Disciplina' , y: this.nuovadisciplina.IDdisciplina} );
+
     let newd = new Disciplina;
     newd.IDdisciplina = this.nuovadisciplina.IDdisciplina;
     newd.NomeDisc = this.nuovadisciplina.NomeDisc;
@@ -138,8 +180,32 @@ console.log(this.newdiscipline);
     this.nuovadisciplina =  {IDdisciplina: 0, NomeDisc: '', DiClan: ''} ;
   }
 
+
+  addtaum() {
+    console.log("addtaum ");
+    console.log(this.nuovataum);
+    this.listaspesa.push( {x: 'Taumaturgia' , y: this.nuovataum.IDtaum} );
+
+
+    this.taum.push({IDtaum: this.nuovataum.IDtaum , NomeTaum: this.nuovataum.NomeTaum, Livello: 1 , Primaria: 'N' });
+
+    for ( let j = 0 ; j < this.newtaum.length ; j ++ ) {
+      if ( this.newtaum[j].IDtaum === this.nuovataum.IDtaum ) {
+        this.newtaum.splice(j, 1);
+      }
+    }
+
+    this.px = this.px - 7 ;
+    this.nuovataum =  {IDtaum: 0, NomeTaum: '', Primaria: 'N'} ;
+  }
+
+
+
+
   plustaum(ataum: number) {
     console.log("plustaum "+ataum);
+    this.listaspesa.push( {x: 'Taum' , y: ataum} );
+
     for (let i = 0; i< this.taum.length ; i++) {
       if (this.taum[i].IDtaum == ataum) {
         this.px = this.px - 4 * this.taum[i].Livello;
@@ -149,6 +215,8 @@ console.log(this.newdiscipline);
   }
   plusnecro(anecro: number) {
     console.log("plusnecro "+anecro);
+    this.listaspesa.push( {x: 'Necro' , y: anecro} );
+
     for (let i = 0; i< this.necro.length ; i++) {
       if (this.necro[i].IDnecro == anecro) {
         this.px = this.px - 4 * this.necro[i].Livello;
@@ -157,8 +225,13 @@ console.log(this.newdiscipline);
     }
   }
 
+
+
   plusdisc (disc: number) {
     console.log("plusdisc "+disc);
+    this.listaspesa.push( {x: 'Disciplina' , y: disc} );
+
+
     for (let i = 0; i< this.myPG.listaDiscipline.length ; i++) {
       if (this.myPG.listaDiscipline[i].IDdisciplina == disc) {
 console.log(this.myPG.listaDiscipline[i]);
@@ -187,6 +260,24 @@ console.log(this.myPG.listaDiscipline[i]);
         }
 
       }
+    }
+  }
+
+
+
+  public show(): void {
+    this.visible = true;
+    setTimeout(() => this.visibleAnimate = true, 100);
+  }
+
+  public hide(): void {
+    this.visibleAnimate = false;
+    setTimeout(() => this.visible = false, 300);
+  }
+
+  public onContainerClicked(event: MouseEvent): void {
+    if ((<HTMLElement>event.target).classList.contains('modal')) {
+      this.hide();
     }
   }
 }

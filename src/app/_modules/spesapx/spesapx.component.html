@@ -18,10 +18,10 @@
           <div class="col"><hr></div>
         </div>
         <div class="row">
-          <div class="col">FdV</div>
-          <div class="col"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < myPG.aPG.FdVmax , 'white': ix+1 > myPG.aPG.FdVmax }"></i><button  *ngIf="myPG.aPG.FdVmax<10" class="btn btn-primary btn-xs" (click)="addfdv()" [disabled]="px < myPG.aPG.FdVmax"><i class="fa fa-plus"></i></button></div>
-          <div class="col">Sentiero</div>
-          <div class="col"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Valsentiero , 'dred': ix < myPG.aPG.Valsentiero }"></i><button  *ngIf="myaPG.Valsentiero<10" class="btn btn-primary btn-xs" (click)="addsentiero()" [disabled]="px < 2 * myPG.aPG.Valsentiero"><i class="fa fa-plus"></i></button></div>
+          <div class="col" style="padding-left: 30px;">FdV</div>
+          <div class="col" style="padding-left: 0px;"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < myPG.aPG.FdVmax , 'white': ix+1 > myPG.aPG.FdVmax }"></i><button  *ngIf="myPG.aPG.FdVmax<10" class="btn btn-primary btn-xs" (click)="addfdv()" [disabled]="px < myPG.aPG.FdVmax"><i class="fa fa-plus"></i></button></div>
+          <div class="col" style="padding-left: 30px;">Sentiero</div>
+          <div class="col" style="padding-left: 0px;"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Valsentiero , 'dred': ix < myPG.aPG.Valsentiero }"></i><button  *ngIf="myaPG.Valsentiero<10" class="btn btn-primary btn-xs" (click)="addsentiero()" [disabled]="px < 2 * myPG.aPG.Valsentiero"><i class="fa fa-plus"></i></button></div>
           <div class="col">&nbsp;</div>
           <div class="col">&nbsp;</div>
         </div>
@@ -29,12 +29,30 @@
 
       <div class="container">
         <div class="row">
-          <div class="col">Coscienza</div>
-          <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coscienza , 'dred': ix < myPG.aPG.Coscienza }"></i><button  *ngIf="myPG.aPG.Coscienza<5" class="btn btn-primary btn-xs" (click)="addcoscienza()" [disabled]="px < 2 * myPG.aPG.Coscienza"><i class="fa fa-plus"></i></button></div>
-          <div class="col">SelfControl</div>
-          <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.SelfControl , 'dred': ix < myPG.aPG.SelfControl }"></i><button  *ngIf="myPG.aPG.SelfControl<5" class="btn btn-primary btn-xs" (click)="addselfcontrol()" [disabled]="px < 2 * myPG.aPG.SelfControl"><i class="fa fa-plus"></i></button></div>
-          <div class="col">Coraggio</div>
-          <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coraggio , 'dred': ix < myPG.aPG.Coraggio }"></i><button  *ngIf="myPG.aPG.Coraggio<5" class="btn btn-primary btn-xs" (click)="addcoraggio()" [disabled]="px < 2 * myPG.aPG.Coraggio"><i class="fa fa-plus"></i></button></div>
+          <div class="col">
+            <div class="container">
+              <div class="row">
+                <div class="col">Coscienza</div>
+                <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coscienza , 'dred': ix < myPG.aPG.Coscienza }"></i><button  *ngIf="myPG.aPG.Coscienza<5" class="btn btn-primary btn-xs" (click)="addcoscienza()" [disabled]="px < 2 * myPG.aPG.Coscienza"><i class="fa fa-plus"></i></button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="container">
+              <div class="row">
+                <div class="col">SelfControl</div>
+                <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.SelfControl , 'dred': ix < myPG.aPG.SelfControl }"></i><button  *ngIf="myPG.aPG.SelfControl<5" class="btn btn-primary btn-xs" (click)="addselfcontrol()" [disabled]="px < 2 * myPG.aPG.SelfControl"><i class="fa fa-plus"></i></button></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="container">
+              <div class="row">
+                <div class="col">Coraggio</div>
+                <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coraggio , 'dred': ix < myPG.aPG.Coraggio }"></i><button  *ngIf="myPG.aPG.Coraggio<5" class="btn btn-primary btn-xs" (click)="addcoraggio()" [disabled]="px < 2 * myPG.aPG.Coraggio"><i class="fa fa-plus"></i></button></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -138,7 +156,31 @@
                     <!-- <option value="0">- Disciplina -</option> -->
                     <option *ngFor="let i of newdiscipline" [ngValue]="i">{{i.NomeDisc}}</option>
                   </select>
-                  <button  *ngIf="newdiscipline.length > 0" class="btn btn-primary btn-xs" (click)="adddisc()" [disabled]="px < 10 || nuovadisciplina == 0"><i class="fa fa-plus"></i></button>
+                  <button  *ngIf="newdiscipline.length > 0" class="btn btn-primary btn-xs" (click)="adddisc()" [disabled]="px < 10 || nuovadisciplina.IDdisciplina == 0"><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+              <div class="row" *ngIf="necro.length > 0">
+                <div class="col alc">Altre Necromanzie</div>
+              </div>
+              <div class="row" *ngIf="necro.length > 0">
+                <div class="col alc">
+                  <select id="newxnecro" name="newxnecro" [(ngModel)]="nuovanecro">
+                    <!-- <option value="0">- Disciplina -</option> -->
+                    <option *ngFor="let i of newnecro" [ngValue]="i">{{i.NomeNecro}}</option>
+                  </select>
+                  <button  *ngIf="newnecro.length > 0" class="btn btn-primary btn-xs" (click)="addnecro()" [disabled]="px < 7 || nuovanecro.IDnecro == 0 || Nmaxlev == 1" ><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+              <div class="row" *ngIf="taum.length > 0">
+                <div class="col alc" >Altre Taumaturgie</div>
+              </div>
+              <div class="row" *ngIf="taum.length > 0">
+                <div class="col alc">
+                  <select id="newxtaum" name="newxtaum" [(ngModel)]="nuovataum">
+                    <!-- <option value="0">- Disciplina -</option> -->
+                    <option *ngFor="let i of newtaum" [ngValue]="i">{{i.NomeTaum}}</option>
+                  </select>
+                  <button  *ngIf="newtaum.length > 0 " class="btn btn-primary btn-xs" (click)="addtaum()" [disabled]="px < 7 || nuovataum.IDtaum == 0 || Tmaxlev == 1 "><i class="fa fa-plus"></i></button>
                 </div>
               </div>
             </div>
@@ -147,19 +189,19 @@
             <div class="container">
               <div class="row">
                 <div class="container">
-                  <div class="row" *ngIf="taum.length>0">
+                  <div class="row" *ngIf="taum.length > 0">
                     <div class="col alc"> Taumaturgie </div>
                   </div>
                   <div class="row" *ngFor="let t of taum">
                     <div class="col">{{t.NomeTaum}}</div>
-                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < t.Livello , 'white': ix+1 > t.Livello }"></i><button  *ngIf="t.Principale != 'S' && t.Livello<5" class="btn btn-primary btn-xs" (click)="plustaum(t.IDtaum)" [disabled]="px < t.Livello*4 || (t.Livello+1 < Tmaxlev && Tmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
+                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < t.Livello , 'white': ix+1 > t.Livello }"></i><button  *ngIf="t.Principale != 'S' && t.Livello<5" class="btn btn-primary btn-xs" (click)="plustaum(t.IDtaum)" [disabled]="px < t.Livello*4 || ( t.Livello == Tmaxlev-1 && Tmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
                   </div>
-                  <div class="row" *ngIf="necro.legth>0">
+                  <div class="row" *ngIf="necro.length > 0">
                     <div class="col alc"> Necromanzie </div>
                   </div>
                   <div class="row" *ngFor="let n of necro">
                     <div class="col">{{t.NomeNecro}}</div>
-                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < n.Livello , 'white': ix+1 > n.Livello }"></i><button  *ngIf="n.Principale != 'S' && n.Livello<5" class="btn btn-primary btn-xs" (click)="plusnecro(n.IDnecro)" [disabled]="px < n.Livello*4 || (n.Livello+1 < Nmaxlev && Nmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
+                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < n.Livello , 'white': ix+1 > n.Livello }"></i><button  *ngIf="n.Principale != 'S' && n.Livello<5" class="btn btn-primary btn-xs" (click)="plusnecro(n.IDnecro)" [disabled]="px < n.Livello*4 || (n.Livello == Nmaxlev-1 && Nmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
                   </div>
                 </div>
               </div>
@@ -168,6 +210,27 @@
         </div>
       </div>
 
+    </div>
+  </div>
+  <button type="button" class="btn btn-danger btn-block">Indietro</button>
+</div>
+
+
+<!--- MODAL di conferma -->
+<div (click)="onContainerClicked($event)" class="modal fade" tabindex="-1" [ngClass]="{'show': visibleAnimate}"
+     [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <div class="modal-dialog modal-dialog-centered modal-lg" >
+    <div class="modal-content">
+      <div class="modal-header" style="display: block;">
+        <i>Conferma Spesa PX</i>
+      </div>
+      <div class="modal-body" style="overflow-y: auto;">
+        <ng-content select=".app-modal-body"></ng-content>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Cancella</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Conferma</button>
+      </div>
     </div>
   </div>
 </div>
