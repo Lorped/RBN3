@@ -124,7 +124,8 @@ if ( $full ) {
 	Discipline.IDdisciplina , NomeDisc , LivelloDisc , DiClan
 	 FROM Discipline
 		LEFT JOIN Discipline_main ON Discipline.IDdisciplina = Discipline_main.IDdisciplina
-		WHERE Userid='$id'";
+		WHERE Userid='$id'
+		ORDER BY NomeDisc";
 	$Result=mysql_query($MySql);
 	$discipline=[];
 	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {

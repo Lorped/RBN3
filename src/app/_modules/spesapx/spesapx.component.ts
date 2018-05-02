@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
 import { SchedaService } from '../../_services/index';
 import { QuestpxService } from '../../_services/index';
 
@@ -42,10 +44,10 @@ export class SpesapxComponent implements OnInit {
   listaspesa = [] ;
 
   // per il modal
-  visible = false;
-  visibleAnimate = false;
+  visible = [false , false];
+  visibleAnimate = [false, false];
 
-  constructor( private status: Status, private location: Location, private schedaService: SchedaService, private questpxservice: QuestpxService  ) { }
+  constructor( private http: HttpClient, private status: Status, private location: Location, private schedaService: SchedaService, private questpxservice: QuestpxService  ) { }
 
   ngOnInit() {
     this.schedaService.getpg(this.status.Userid)
@@ -62,7 +64,6 @@ export class SpesapxComponent implements OnInit {
     this.schedaService.getnewdiscipline(this.status.Userid)
     .subscribe ( data => {
       this.newdiscipline = data;
-console.log(this.newdiscipline);
     });
 
     this.schedaService.getnecrotaum(this.status.Userid)
@@ -78,25 +79,42 @@ console.log(this.newdiscipline);
 
     this.schedaService.getnewnecrotaum(this.status.Userid)
     .subscribe ( data => {
-console.log(data);
       this.newnecro = data.newnecro;
       this.newtaum = data.newtaum;
 
     });
 
-
+    this.show(0);
 
   }
 
+  indietro() {
+    if (this.listaspesa.length > 0 ) {
+      this.show(1);
+    } else {
+      this.location.back();
+    }
+
+  }
   goback () {
-    console.log(this.listaspesa);
+    this.location.back();
+  }
+
+  save_goback () {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    for (let i = 0 ; i < this.listaspesa.length ; i++){
+      this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/'+this.listaspesa[i].x , {
+        token: user,
+        y: this.listaspesa[i].y ,
+        z: this.listaspesa[i].z
+      }).subscribe();
+    }
     //this.show();
     this.location.back();
   }
 
   addfdv () {
-    console.log("addfdv");
-    this.listaspesa.push( {x: 'FdV' , y: 0} );
+    this.listaspesa.push( {x: 'addfdv.php' , y: 0, z: 'Forza di Volontà'} );
 
     this.px = this.px - this.myPG.aPG.FdVmax;
     this.myPG.aPG.FdVmax++;
@@ -105,49 +123,42 @@ console.log(data);
   }
 
   addsentiero () {
-    console.log("addsentiero");
-    this.listaspesa.push( {x: 'Sentiero' , y: 0} );
+    this.listaspesa.push( {x: 'addsentiero.php' , y: 0, z: 'Sentiero'} );
 
     this.px = this.px - 2 * this.myPG.aPG.Valsentiero;
     this.myPG.aPG.Valsentiero++;
   }
 
   addcoscienza () {
-    console.log("addcoscienza");
-    this.listaspesa.push( {x: 'Coscienza' , y: 0} );
+    this.listaspesa.push( {x: 'addcoscienza.php' , y: 0, z: 'Coscienza'} );
 
     this.px = this.px - 2 * this.myPG.aPG.Coscienza;
     this.myPG.aPG.Coscienza++;
   }
 
   addcoraggio () {
-    console.log("addcoraggio");
-    this.listaspesa.push( {x: 'Coraggio' , y: 0} );
+    this.listaspesa.push( {x: 'addcoraggio.php' , y: 0, z: 'Coraggio'} );
 
     this.px = this.px - 2 * this.myPG.aPG.Coraggio;
     this.myPG.aPG.Coraggio++;
   }
 
   addselfcontrol () {
-    console.log("addselfcontrol");
-    this.listaspesa.push( {x: 'SelfControl' , y: 0} );
+    this.listaspesa.push( {x: 'addselfcontrol.php' , y: 0, z: 'Self Control'} );
 
     this.px = this.px - 2 * this.myPG.aPG.SelfControl;
     this.myPG.aPG.SelfControl++;
   }
 
   addattr(attr: number) {
-    console.log("addattr "+attr);
-    this.listaspesa.push( {x: 'Attributi' , y: attr} );
+    this.listaspesa.push( {x: 'addattr.php' , y: attr, z: this.myPG.listaAttributi[attr-1].NomeAttributo } );
 
     this.px = this.px - 4 * this.myPG.listaAttributi[attr-1].Livello;
     this.myPG.listaAttributi[attr-1].Livello++;
   }
 
   addskill(skill: number) {
-    console.log("addskill "+skill);
-    console.log(this.myPG.listaSkill[skill-1].Livello);
-    this.listaspesa.push( {x: 'Skill' , y: skill} );
+    this.listaspesa.push( {x: 'addskill.php' , y: skill, z: this.myPG.listaSkill[skill-1].NomeSkill } );
 
 
     if ( this.myPG.listaSkill[skill-1].Livello == null || this.myPG.listaSkill[skill-1].Livello == 0){
@@ -159,9 +170,7 @@ console.log(data);
   }
 
   adddisc() {
-    console.log("adddisc ");
-    console.log(this.nuovadisciplina);
-    this.listaspesa.push( {x: 'Disciplina' , y: this.nuovadisciplina.IDdisciplina} );
+    this.listaspesa.push( {x: 'adddisc.php' , y: this.nuovadisciplina.IDdisciplina , z: this.nuovadisciplina.NomeDisc} );
 
     let newd = new Disciplina;
     newd.IDdisciplina = this.nuovadisciplina.IDdisciplina;
@@ -182,10 +191,7 @@ console.log(data);
 
 
   addtaum() {
-    console.log("addtaum ");
-    console.log(this.nuovataum);
-    this.listaspesa.push( {x: 'Taumaturgia' , y: this.nuovataum.IDtaum} );
-
+    this.listaspesa.push( {x: 'addtaum.php' , y: this.nuovataum.IDtaum, z: this.nuovataum.NomeTaum} );
 
     this.taum.push({IDtaum: this.nuovataum.IDtaum , NomeTaum: this.nuovataum.NomeTaum, Livello: 1 , Primaria: 'N' });
 
@@ -199,26 +205,45 @@ console.log(data);
     this.nuovataum =  {IDtaum: 0, NomeTaum: '', Primaria: 'N'} ;
   }
 
+  addnecro() {
+    this.listaspesa.push( {x: 'addnecro.php' , y: this.nuovanecro.IDnecro, z: this.nuovanecro.NomeNecro} );
+
+    this.necro.push({IDnecro: this.nuovanecro.IDnecro , NomeNecro: this.nuovanecro.NomeNecro, Livello: 1 , Primaria: 'N' });
+
+    for ( let j = 0 ; j < this.newnecro.length ; j ++ ) {
+      if ( this.newnecro[j].IDnecro === this.nuovanecro.IDnecro ) {
+        this.newnecro.splice(j, 1);
+      }
+    }
+
+    this.px = this.px - 7 ;
+    this.nuovanecro =  {IDnecro: 0, NomeNecro: '', Primaria: 'N'} ;
+  }
 
 
 
   plustaum(ataum: number) {
-    console.log("plustaum "+ataum);
-    this.listaspesa.push( {x: 'Taum' , y: ataum} );
+    // this.listaspesa.push( {x: 'Taum' , y: ataum} );
 
     for (let i = 0; i< this.taum.length ; i++) {
       if (this.taum[i].IDtaum == ataum) {
+
+        this.listaspesa.push( {x: 'plustaum.php' , y: ataum, z:this.taum[i].NomeTaum } );
+
         this.px = this.px - 4 * this.taum[i].Livello;
         this.taum[i].Livello++;
       }
     }
   }
+
   plusnecro(anecro: number) {
-    console.log("plusnecro "+anecro);
-    this.listaspesa.push( {x: 'Necro' , y: anecro} );
+    // this.listaspesa.push( {x: 'Necro' , y: anecro} );
 
     for (let i = 0; i< this.necro.length ; i++) {
       if (this.necro[i].IDnecro == anecro) {
+
+        this.listaspesa.push( {x: 'plusnecro.php' , y: anecro, z:this.necro[i].NomeNecro } );
+
         this.px = this.px - 4 * this.necro[i].Livello;
         this.necro[i].Livello++;
       }
@@ -228,13 +253,13 @@ console.log(data);
 
 
   plusdisc (disc: number) {
-    console.log("plusdisc "+disc);
-    this.listaspesa.push( {x: 'Disciplina' , y: disc} );
-
+    //this.listaspesa.push( {x: 'plusdisc.php' , y: disc} );
 
     for (let i = 0; i< this.myPG.listaDiscipline.length ; i++) {
       if (this.myPG.listaDiscipline[i].IDdisciplina == disc) {
-console.log(this.myPG.listaDiscipline[i]);
+
+        this.listaspesa.push( {x: 'plusdisc.php' , y: disc, z: this.myPG.listaDiscipline[i].NomeDisc} );
+
         this.px = this.px -  this.myPG.listaDiscipline[i].LivelloDisc * (this.myPG.listaDiscipline[i].DiClan == 'S' ? 5 : 7);
         this.myPG.listaDiscipline[i].LivelloDisc++;
 
@@ -265,19 +290,19 @@ console.log(this.myPG.listaDiscipline[i]);
 
 
 
-  public show(): void {
-    this.visible = true;
-    setTimeout(() => this.visibleAnimate = true, 100);
+  public show(i: number): void {
+    this.visible[i] = true;
+    setTimeout(() => this.visibleAnimate[i] = true, 100);
   }
 
-  public hide(): void {
-    this.visibleAnimate = false;
-    setTimeout(() => this.visible = false, 300);
+  public hide(i: number): void {
+    this.visibleAnimate[i] = false;
+    setTimeout(() => this.visible[i] = false, 300);
   }
 
-  public onContainerClicked(event: MouseEvent): void {
+  public onContainerClicked(event: MouseEvent, i: number): void {
     if ((<HTMLElement>event.target).classList.contains('modal')) {
-      this.hide();
+      this.hide(i);
     }
   }
 }

@@ -1,6 +1,3 @@
-<p>
-  <span style="color: #ffffff;">spesapx works!</span> <button type="button" (click)="goback()">Back!</button>
-</p>
 
 <div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em;">
   <div class="row">
@@ -106,7 +103,7 @@
             <div class="container">
               <div class="row" *ngFor="let skill of myPG.listaSkill">
                 <div class="col" *ngIf="skill.Tipologia == '1'">{{skill.NomeSkill}}</div>
-                <div class="col" *ngIf="skill.Tipologia == '1'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="skill.Tipologia == '1'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
               </div>
             </div>
           </div>
@@ -114,7 +111,7 @@
             <div class="container">
               <div class="row" *ngFor="let skill of myPG.listaSkill">
                 <div class="col" *ngIf="skill.Tipologia == '2'">{{skill.NomeSkill}}</div>
-                <div class="col" *ngIf="skill.Tipologia == '2'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="skill.Tipologia == '2'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
               </div>
             </div>
           </div>
@@ -122,7 +119,7 @@
             <div class="container">
               <div class="row" *ngFor="let skill of myPG.listaSkill">
                 <div class="col" *ngIf="skill.Tipologia == '3'">{{skill.NomeSkill}}</div>
-                <div class="col" *ngIf="skill.Tipologia == '3'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="skill.Tipologia == '3'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
               </div>
             </div>
           </div>
@@ -200,7 +197,7 @@
                     <div class="col alc"> Necromanzie </div>
                   </div>
                   <div class="row" *ngFor="let n of necro">
-                    <div class="col">{{t.NomeNecro}}</div>
+                    <div class="col">{{n.NomeNecro}}</div>
                     <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < n.Livello , 'white': ix+1 > n.Livello }"></i><button  *ngIf="n.Principale != 'S' && n.Livello<5" class="btn btn-primary btn-xs" (click)="plusnecro(n.IDnecro)" [disabled]="px < n.Livello*4 || (n.Livello == Nmaxlev-1 && Nmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
                   </div>
                 </div>
@@ -212,24 +209,57 @@
 
     </div>
   </div>
-  <button type="button" class="btn btn-danger btn-block">Indietro</button>
+  <button type="button" class="btn btn-danger btn-block" (click)="indietro()">Indietro</button>
 </div>
 
 
 <!--- MODAL di conferma -->
-<div (click)="onContainerClicked($event)" class="modal fade" tabindex="-1" [ngClass]="{'show': visibleAnimate}"
-     [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+<div (click)="onContainerClicked($event,1)" class="modal fade" tabindex="-1" [ngClass]="{'show': visibleAnimate[1]}"
+     [ngStyle]="{'display': visible[1] ? 'block' : 'none', 'opacity': visibleAnimate[1] ? 1 : 0}">
   <div class="modal-dialog modal-dialog-centered modal-lg" >
     <div class="modal-content">
       <div class="modal-header" style="display: block;">
         <i>Conferma Spesa PX</i>
       </div>
       <div class="modal-body" style="overflow-y: auto;">
-        <ng-content select=".app-modal-body"></ng-content>
+        Confermi la spesa dei PX su:
+        <ul>
+          <li *ngFor="let item of listaspesa">{{item.z}}</li>
+        </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">Cancella</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Conferma</button>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" (click)="goback()">Cancella</button>
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" (click)="save_goback()">Conferma</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--- MODAL di into -->
+<div (click)="onContainerClicked($event,0)" class="modal fade" tabindex="-1" [ngClass]="{'show': visibleAnimate[0]}"
+     [ngStyle]="{'display': visible[0] ? 'block' : 'none', 'opacity': visibleAnimate[0] ? 1 : 0}">
+  <div class="modal-dialog modal-dialog-centered modal-lg" >
+    <div class="modal-content">
+      <div class="modal-header" style="display: block;">
+        <i>Costo in PX</i>
+      </div>
+      <div class="modal-body" style="overflow-y: auto;">
+        <div class="container">
+          <div class="row"><div class="col">Nuova Abilità</div><div class="col">3</div></div>
+          <div class="row"><div class="col">Nuova Disciplina</div><div class="col">10</div></div>
+          <div class="row"><div class="col">Nuova Via (Taumaturgica o Necromantica)</div><div class="col">7</div></div>
+          <div class="row"><div class="col">Attributo</div><div class="col">Valore corrente x 4</div></div>
+          <div class="row"><div class="col">Abilità</div><div class="col">Valore corrente x 2</div></div>
+          <div class="row"><div class="col">Disciplina di Clan</div><div class="col">Valore corrente x 5</div></div>
+          <div class="row"><div class="col">Altra Disciplina</div><div class="col">Valore corrente x 7</div></div>
+          <div class="row"><div class="col">Via Secondaria</div><div class="col">Valore corrente x 4</div></div>
+          <div class="row"><div class="col">Virtù, Umanità/Sentiero</div><div class="col">Valore corrente x 2</div></div>
+          <div class="row"><div class="col">Forza di volontà</div><div class="col">Valore corrente</div></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" (click)="hide(0)">OK</button>
       </div>
     </div>
   </div>

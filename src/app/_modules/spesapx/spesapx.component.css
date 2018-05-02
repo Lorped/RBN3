@@ -18,3 +18,21 @@ hr {
 .btn.btn-primary:disabled{
     background-color: #a0a0a0;
 }
+
+
+.modal {
+    background: rgba(0,0,0,0.6);
+  }
+
+
+.modal-content {
+  background-color: #202020 !important ;
+  color: white;
+  font-size: 0.8rem;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.modal-body {
+  background-color: #303030;
+}

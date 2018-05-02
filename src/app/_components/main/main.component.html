@@ -6,7 +6,7 @@
     <app-scheda *ngIf="this.status.schedaon"></app-scheda>
   </div>
   <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger" (click)="this.status.schedaon=false; modalscheda.hide()">Close</button>
+    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.schedaon=false; modalscheda.hide()">Chiudi</button>
   </div>
 </app-modal>
 
@@ -19,7 +19,7 @@
     <app-questpx *ngIf="this.status.pxon"></app-questpx>
   </div>
   <div class="app-modal-footer">
-    <button type="button" class="btn btn-default" (click)="this.status.pxon=false; modalpx.hide()">Close</button>
+    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.pxon=false; modalpx.hide()">Chiudi</button>
   </div>
 </app-modal>
 
