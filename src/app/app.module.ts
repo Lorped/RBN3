@@ -18,7 +18,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AppComponent } from './app.component';
 
 import { LoginComponent } from './_components/login/login.component';
-import { RegisterComponent } from './_components/register/register.component';
+// import { RegisterComponent } from './_components/register/register.component';
 import { MainComponent } from './_components/main/main.component';
 import { MenuComponent } from './_components/menu/menu.component';
 import { PresentiComponent } from './_components/presenti/presenti.component';
@@ -36,7 +36,7 @@ import { UtilityModule } from './_modules/utility/utility.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
+//    RegisterComponent,
     MainComponent,
     MenuComponent,
     PresentiComponent,

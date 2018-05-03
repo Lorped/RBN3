@@ -15,6 +15,9 @@ export class SchedaComponent implements OnInit {
   myPG: Personaggio = new Personaggio;
   myaPG: Basicpg = this.myPG.aPG;
 
+  necro = [];
+  taum = [];
+
   constructor( private schedaService: SchedaService, private status: Status  ) {
   }
 
@@ -24,6 +27,14 @@ export class SchedaComponent implements OnInit {
       this.myPG = data;
       this.myaPG = this.myPG.aPG;
     });
+
+    this.schedaService.getnecrotaum(this.status.Userid)
+    .subscribe ( data => {
+      this.necro = data.necro;
+      this.taum = data.taum;
+    });
+
+
   }
 
 

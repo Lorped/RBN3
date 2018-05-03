@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-2"><img src="assets/nopicture.gif"></div>
+    <div class="col-2"><img src="assets/{{myaPG.URLImg}}" height="130" width="130"></div>
     <div class="col">
       <div class="container"> <!-- inizio container interno -->
         <div class="row">
@@ -166,7 +166,25 @@
       <table class="full">
         <tr *ngFor="let disc of myPG.listaDiscipline">
           <td>{{disc.NomeDisc}}</td>
-          <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i></td>
+          <td class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i></td>
+        </tr>
+      </table>
+      <table class="full" *ngIf="taum.length > 0">
+        <tr>
+          <td class="alc" colspan="2">Vie Taumaturgiche</td>
+        </tr>
+        <tr *ngFor="let t of taum">
+          <td>{{t.NomeTaum}}</td>
+          <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > t.Livello , 'dred': ix < t.Livello }"></i></td>
+        </tr>
+      </table>
+      <table class="full" *ngIf="necro.length > 0">
+        <tr>
+          <td class="alc" colspan="2">Vie Necromantiche</td>
+        </tr>
+        <tr *ngFor="let t of necro">
+          <td>{{t.NomeNecro}}</td>
+          <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > t.Livello , 'dred': ix < t.Livello }"></i></td>
         </tr>
       </table>
     </div>
