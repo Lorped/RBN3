@@ -6,3 +6,4 @@ export * from './post.service';
 export * from './modal.service';
 export * from './scheda.service';
 export * from './questpx.service';
+export * from './signup.service';

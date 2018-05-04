@@ -14,7 +14,8 @@ import { Registra0Component } from './registra0/registra0.component';
     CommonModule,
     FormsModule,
     RouterModule.forChild(REGISTRA_ROUTES) ,
-    UtilityModule
+    UtilityModule,
+    ReactiveFormsModule
   ],
   declarations: [
     Registra0Component

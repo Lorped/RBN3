@@ -12,6 +12,7 @@ import { ListpresentiService } from './_services/index';
 import { ModalService } from './_services/index';
 import { SchedaService } from './_services/index';
 import { QuestpxService } from './_services/index';
+import { SignupService } from './_services/index';
 
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -60,6 +61,7 @@ import { UtilityModule } from './_modules/utility/utility.module';
     ModalService,
     SchedaService,
     QuestpxService,
+    SignupService,
     AuthGuard,
     Status
   ],
