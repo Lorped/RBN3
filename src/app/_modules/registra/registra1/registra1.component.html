@@ -1,0 +1,146 @@
+<div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em; margin-top: 20px;">
+  <div class="row justify-content-center">
+    <div class="col">
+      <h3 class="dred alc">Dati Iniziali del Personaggio</h3>
+    </div>
+  </div>
+
+
+
+  <div class="row justify-content-center">
+    <div class="col-9">
+  <form [formGroup]="registrationForm" #reg1Form="ngForm">
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="nomePg">Nome</label>
+          <input id="nomePg" name="nomePg" class="form-control" type="text" placeholder="Nome" required formControlName="nomePG">
+          <div *ngIf="nomePG.invalid && (nomePG.dirty || nomePG.touched)" class="alert alert-danger" color="red">
+            <div *ngIf="nomePG.errors.required">Inserire un nome</div>
+            <div *ngIf="nomePG.errors.pattern">Solo caratteri alfabetici senza spazi</div>
+          </div>
+        </div>
+        <div class="form-group col">
+          <label for="cognomePg">Cognome</label>
+          <input id="cognomePg" name="cognomePg" class="form-control" type="text" placeholder="Cognome" formControlName="cognomePG">
+          <div *ngIf="cognomePG.invalid && (cognomePG.dirty || cognomePG.touched)" class="alert alert-danger" color="red">
+            <div *ngIf="cognomePG.errors.pattern">Solo caratteri alfabetici, spazi e singolo apice</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-2">
+          <label for="etaPg">Anno di nascita</label>
+          <input id="etaPg" name="etaPg" type="number" class="form-control" placeholder="1950" required  min=1900 max=2000 formControlName="etaPG">
+            <div *ngIf="etaPG.invalid && (etaPG.dirty || etaPG.touched)" class="alert alert-danger" color="red">
+              <div *ngIf="etaPG.errors.required">Inserire un anno di nascita</div>
+              <div *ngIf="etaPG.errors.max">Troppo giovane</div>
+              <div *ngIf="etaPG.errors.min">Troppo anziano. Per vampiri più vecchi di un secolo contattare la narrazione</div>
+            </div>
+        </div>
+        <div class="form-group col-2">
+          <label for="etaAPg">Età apparente</label>
+          <input id="etaAPg" name="etaAPg" type="number" class="form-control" placeholder="20" required min=16 max=80 formControlName="etaAPG">
+          <div *ngIf="etaAPG.invalid && (etaAPG.dirty || etaAPG.touched)" class="alert alert-danger" color="red">
+            <div *ngIf="etaAPG.errors.required">Inserire una età</div>
+            <div *ngIf="etaAPG.errors.min||etaAPG.errors.max">Età ammessa: 16 - 80 anni</div>
+          </div>
+        </div>
+        <div class="form-group col-2">
+          <label for="clanPG">Clan</label>
+          <select id="clanPG" name="clanPG" class="form-control" required formControlName="clanPG">
+          <option *ngFor="let i of clan" [ngValue]="i.IDclan">{{i.NomeClan}}</option>
+          </select>
+        </div>
+        <div class="form-group col-3">
+          <label for="naturaPG">Natura</label>
+          <select id="naturaPG" name="naturaPG" class="form-control" required formControlName="naturaPG">
+          <option *ngFor="let i of archetipi" [ngValue]="i.IDarchetipo">{{i.Archetipo}}</option>
+          </select>
+        </div>
+        <div class="form-group col-3">
+          <label for="caratterePG">Carattere</label>
+          <select id="caratterePG" name="caratterePG" class="form-control" required formControlName="caratterePG">
+          <option *ngFor="let i of archetipi" [ngValue]="i.IDarchetipo">{{i.Archetipo}}</option>
+          </select>
+        </div>
+      </div>
+  </form>
+      <!--  ATTRIBUTI -->
+
+      <div class="row">
+        <div class="col"><hr></div>
+        <div class="col-2 alc bigf">
+          Attributi
+        </div>
+        <div class="col"><hr></div>
+      </div>
+      <div class="row">
+        <div class="col alc">
+          Fisici ({{sommaF-3}})
+        </div>
+        <div class="col alc">
+          Sociali ({{sommaS-3}})
+        </div>
+        <div class="col alc">
+          Mentali ({{sommaM-3}})
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="full">
+            <tr *ngFor="let a of attributi">
+            <td *ngIf="a.Tipologia == 'F'">{{a.NomeAttributo}}</td>
+            <td *ngIf="a.Tipologia == 'F'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button></td>
+          </tr>
+          </table>
+        </div>
+        <div class="col">
+          <table class="full">
+            <tr *ngFor="let a of attributi">
+            <td *ngIf="a.Tipologia == 'S'">{{a.NomeAttributo}}</td>
+            <td *ngIf="a.Tipologia == 'S'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button></td>
+          </tr>
+          </table>
+        </div>
+        <div class="col">
+          <table class="full">
+            <tr *ngFor="let a of attributi">
+              <td *ngIf="a.Tipologia == 'M'">{{a.NomeAttributo}}</td>
+              <td *ngIf="a.Tipologia == 'M'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col">Distribuire 7 pallini in una categoria di attributi (mentali, fisici o sociali), 5 in una categoria secondaria e 3 nella rimanente terziaria</div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <button type="button" [disabled]="!reg1Form.form.valid || !formOK " (click)="goto2()" class="btn btn-danger btn-block">Prosegui</button>
+            <div class="alc"><a [routerLink]="['/login']" class="btn btn-link">Torna al login</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%;" >20%</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

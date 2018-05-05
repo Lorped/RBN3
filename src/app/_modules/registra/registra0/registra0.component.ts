@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { SignupService } from '../../../_services/signup.service';
 
@@ -10,40 +11,34 @@ import { SignupService } from '../../../_services/signup.service';
 })
 export class Registra0Component implements OnInit {
 
-  registrazione = {
-    xemail: '',
-    passwd: '',
-    passwd2: ''
-  };
-
   accetta = '';
 
   registrationForm: FormGroup;
 
 
-  constructor( private signupService: SignupService ) { }
+  constructor( private signupService: SignupService , private router: Router  ) { }
 
   ngOnInit() {
 
 
     this.registrationForm = new FormGroup ({
-      regemail: new FormControl(this.registrazione.xemail, [
+      regemail: new FormControl('', [
         Validators.required,
         Validators.email
       ], [
         this.validateEmailNotTaken.bind(this)
       ]),
 
-      password: new FormControl(this.registrazione.passwd, [
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(8)
       ]),
 
-      password2: new FormControl(this.registrazione.passwd2, [
+      password2: new FormControl('', [
         Validators.required
       ]),
 
-      check: new FormControl(this.accetta, [
+      check: new FormControl('', [
         Validators.required
       ])
     });
@@ -63,12 +58,19 @@ export class Registra0Component implements OnInit {
   }
 
   validateEmailNotTaken(control: AbstractControl) {
-
     return this.signupService.checkEmail(control.value)
     .map(res => {
-      return res=='OK' ? null: { emailTaken: true };
+      return res === 'OK' ? null : { emailTaken: true };
     });
+  }
 
+  goto1() {
+    const myobj = {
+      'regemail': this.regemail.value,
+      'passwd': this.password.value
+    };
+    sessionStorage.setItem('RBN3registration0', JSON.stringify(myobj) );
+    this.router.navigate(['/registra/1']);
   }
 
 }

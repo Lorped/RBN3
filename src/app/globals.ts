@@ -90,6 +90,18 @@ export class Personaggio {
 }
 
 @Injectable()
+export class Archetipo {
+  IDarchetipo = 0;
+  Archetipo = '';
+}
+
+@Injectable()
+export class Clan {
+  IDclan = 0;
+  NomeClan = '';
+}
+
+@Injectable()
 export class Status {
   Userid = 0;
   Stanza = 0;

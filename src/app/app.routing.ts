@@ -11,7 +11,7 @@ export const APP_ROUTES: Routes = [
 
     { path: '', redirectTo: 'mappa/0', pathMatch: 'full'},
     { path: 'login', component: LoginComponent },
-    { path: 'register', loadChildren: './_modules/registra/registra.module#RegistraModule' },
+    { path: 'registra', loadChildren: './_modules/registra/registra.module#RegistraModule' },
     { path: 'spesapx', loadChildren: './_modules/spesapx/spesapx.module#SpesapxModule' },
     { path: '', component: MainComponent, canActivate: [AuthGuard] ,
       children: [
