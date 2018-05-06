@@ -1,0 +1,95 @@
+<div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em; margin-top: 20px;">
+  <div class="row justify-content-center">
+    <div class="col">
+      <h3 class="dred alc">Abilità e Conoscenze del Personaggio</h3>
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center">
+    <div class="col-9">
+
+      <!--  ATTRIBUTI -->
+
+      <div class="row">
+        <div class="col"><hr></div>
+        <div class="col-2 alc bigf">
+          Abilità
+        </div>
+        <div class="col"><hr></div>
+      </div>
+      <div class="row">
+        <div class="col alc">
+          Attitudini ({{sommaA}})
+        </div>
+        <div class="col alc">
+          Capacità ({{sommaC}})
+        </div>
+        <div class="col alc">
+          Conoscenze ({{sommaK}})
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="full">
+            <tr *ngFor="let a of skills">
+            <td *ngIf="a.Tipologia == '1'">{{a.NomeSkill}}</td>
+            <td *ngIf="a.Tipologia == '1'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button></td>
+          </tr>
+          </table>
+        </div>
+        <div class="col">
+          <table class="full">
+            <tr *ngFor="let a of skills">
+              <td *ngIf="a.Tipologia == '2'">{{a.NomeSkill}}</td>
+              <td *ngIf="a.Tipologia == '2'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button  class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button></td>
+          </tr>
+          </table>
+        </div>
+        <div class="col">
+          <table class="full">
+            <tr *ngFor="let a of skills">
+              <td *ngIf="a.Tipologia == '3'">{{a.NomeSkill}}</td>
+              <td *ngIf="a.Tipologia == '3'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button  class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col">Distribuire <span class="red">13</span> pallini in una categoria di Abilità (attitudini, capacità o conoscenze), <span class="red">9</span> in una categoria secondaria e <span class="red">5</span> nella rimanente terziaria.<br> Al momento nessuna abilità può superare il livello 3.</div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="btn-group d-flex">
+            <div class="btn-group w-100" >
+              <button type="button" (click)="goback()" class="btn btn-primary btn-block btn-sm" >Indietro</button>
+            </div>
+            <div class="btn-group w-100" >
+              <button type="button" [disabled]=" !formOK " (click)="goto3()" class="btn btn-danger btn-block btn-sm" >Prosegui</button>
+            </div>
+          </div>
+          <div class="alc"><a [routerLink]="['/login']" class="btn btn-link">Torna al login</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 40%;" >40%</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

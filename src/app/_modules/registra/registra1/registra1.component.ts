@@ -28,6 +28,9 @@ export class Registra1Component implements OnInit {
 
   ngOnInit() {
 
+    let olddata: any;
+    let olddatastring: string;
+
     this.registrationForm = new FormGroup ({
       nomePG: new FormControl('', [
         Validators.required,
@@ -62,17 +65,49 @@ export class Registra1Component implements OnInit {
 
     });
 
+    if ( olddatastring = sessionStorage.getItem('RBN3registration1') ) {
+      olddata = JSON.parse(olddatastring);
+    }
+
+
     this.signupservice.getregistra1()
     .subscribe(
       (res: any) => {
         this.archetipi = res.archetipi;
         this.clan = res.clan;
-        this.attributi = res.attributi;
 
-        for (let j = 0; j < this.attributi.length; j++ ) {
-          this.attributi[j].Livello = Number(this.attributi[j].Livello);
+        if ( !olddata ) {
+          this.attributi = res.attributi;
+          for (let j = 0; j < this.attributi.length; j++ ) {
+            this.attributi[j].Livello = Number(this.attributi[j].Livello);
+          }
+        } else {
+          this.attributi = olddata.attributi;
         }
+
     });
+
+
+    if ( olddata ) {
+
+      this.attributi = olddata.attributi;
+      this.registrationForm.patchValue({
+        nomePG: olddata.nomePG,
+        cognomePG: olddata.cognomePG,
+        etaPG: olddata.etaPG,
+        etaAPG: olddata.etaAPG,
+        clanPG: olddata.clanPG,
+        naturaPG: olddata.naturaPG,
+        caratterePG: olddata.caratterePG
+      });
+
+      this.sommaF = this.attributi[0].Livello + this.attributi[1].Livello + this.attributi[2].Livello;
+      this.sommaS = this.attributi[3].Livello + this.attributi[4].Livello + this.attributi[5].Livello;
+      this.sommaM = this.attributi[6].Livello + this.attributi[7].Livello + this.attributi[8].Livello;
+      this.formOK = true;
+    }
+
+
   }
 
   get nomePG() {

@@ -21,4 +21,14 @@ export class SignupService {
       .get('https://www.roma-by-night.it/RBN3/wsPHP/getregistra1.php');
   }
 
+  getregistra2 () {
+    return this.http
+      .get('https://www.roma-by-night.it/RBN3/wsPHP/getregistra2.php');
+  }
+
+  getregistra3 (clan: number) {
+    return this.http
+      .get('https://www.roma-by-night.it/RBN3/wsPHP/getregistra3.php?IDclan=' + clan);
+  }
+
 }

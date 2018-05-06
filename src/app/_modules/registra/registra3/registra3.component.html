@@ -1,0 +1,172 @@
+<div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em; margin-top: 20px;">
+  <div class="row justify-content-center">
+    <div class="col">
+      <h3 class="dred alc">Discipline, Background e Virtù</h3>
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center">
+    <div class="col-9">
+
+      <div class="row">
+        <div class="col"><hr></div>
+        <div class="col-2 alc bigf">
+          Discipline ({{sommadisc}})
+        </div>
+        <div class="col"><hr></div>
+      </div>
+
+      <div class="row">
+        <div class="col" *ngFor="let d of discipline">
+          <table class="full">
+            <tr>
+            <td>{{d.NomeDisc}}</td>
+            <td class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(d.IDdisciplina)" [disabled]="d.LivelloDisc<1"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > d.LivelloDisc , 'dred': ix < d.LivelloDisc }"></i><button class="btn btn-primary btn-xs" (click)="addattr(d.IDdisciplina)" [disabled]="d.LivelloDisc>5"><i class="fa fa-plus"></i></button></td>
+          </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+
+      <form #necrotaumForm=ngForm  >
+      <div class="form-group row" *ngIf="necro.length>0">
+        <label for="necroPG" class="col-2 col-form-label" >Via necromantica iniziale</label>
+        <div class="col">
+          <select id="necroPG" name="necroPG" class="form-control" [required]="discipline[1].LivelloDisc>0" [disabled]="discipline[z].LivelloDisc<1" [(ngModel)]="necroPg">
+          <option *ngFor="let i of necro" [ngValue]="i.IDnecro">{{i.NomeNecro}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" *ngIf="taum.length>0">
+        <label for="taumPG" class="col-2 col-form-label">Via taumaturgica iniziale</label>
+        <div class="col">
+          <select id="taumPG" name="taumPG" class="form-control" [required]="discipline[2].LivelloDisc>0" [disabled]="discipline[z].LivelloDisc<1" [(ngModel)]="taumPg">
+          <option *ngFor="let i of taum" [ngValue]="i.IDtaum">{{i.NomeTaum}}</option>
+          </select>
+        </div>
+      </div>
+      </form>
+
+      <div class="row">
+        <div class="col"><hr></div>
+        <div class="col-2 alc bigf">
+          Background ({{sommabg}})
+        </div>
+        <div class="col"><hr></div>
+      </div>
+
+      <div class="row" *ngFor="let b of bg">
+        <div class="col-4">
+          <table class="full">
+            <tr>
+              <td>{{b.NomeBackground}}</td>
+              <td class="alr"><button  class="btn btn-primary btn-xs" (click)="minbg(b.IDbackground)" [disabled]="b.LivelloBG<1"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > b.LivelloBG , 'dred': ix < b.LivelloBG }"></i><button class="btn btn-primary btn-xs" (click)="addbg(b.IDbackground)" [disabled]="b.LivelloBG>4"><i class="fa fa-plus"></i></button></td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+
+
+
+
+      <div class="row">
+        <div class="col"><hr></div>
+        <div class="col-2 alc bigf">
+          Virtù ({{sommavirtu-3}})
+        </div>
+        <div class="col"><hr></div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <table class="full">
+            <tr>
+            <td>Coscienza</td>
+            <td class="alr"><button  class="btn btn-primary btn-xs" (click)="mincoscienza()" [disabled]="coscienza<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > coscienza , 'dred': ix < coscienza }"></i><button class="btn btn-primary btn-xs" (click)="addcoscienza()" [disabled]="coscienza>4"><i class="fa fa-plus"></i></button></td>
+          </tr>
+          </table>
+        </div>
+        <div class="col">
+          <table class="full">
+            <tr>
+            <td>Self Control</td>
+            <td class="alr"><button  class="btn btn-primary btn-xs" (click)="minselfcontrol()" [disabled]="selfcontrol<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > selfcontrol , 'dred': ix < selfcontrol }"></i><button class="btn btn-primary btn-xs" (click)="addselfcontrol()" [disabled]="selfcontrol>4"><i class="fa fa-plus"></i></button></td>
+          </tr>
+          </table>
+        </div>
+        <div class="col">
+          <table class="full">
+            <tr>
+            <td>Coraggio</td>
+            <td class="alr"><button  class="btn btn-primary btn-xs" (click)="mincoraggio()" [disabled]="coraggio<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > coraggio , 'dred': ix < coraggio }"></i><button class="btn btn-primary btn-xs" (click)="addcoraggio()" [disabled]="coraggio>4"><i class="fa fa-plus"></i></button></td>
+          </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <table class="full">
+            <tr>
+            <td>Forza di Volontà</td>
+            <td class="alr"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > coraggio , 'dred': ix < coraggio }"></i></td>
+          </tr>
+          </table>
+        </div>
+        <div class="col-4">
+          <table class="full">
+            <tr>
+            <td>Umanità/Sentiero</td>
+            <td class="alr"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > selfcontrol+coscienza , 'dred': ix < selfcontrol+coscienza }"></i></td>
+          </tr>
+          </table>
+        </div>
+        <div class="col-4">
+
+          <select id="sent" name="sent" class="form-control" [disabled]="coscienza+selfcontrol<6" [(ngModel)]="sentieroPG" >
+          <option *ngFor="let i of sent" [ngValue]="i" >{{i.DescSentiero}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col">Distribuire <span class="red">3</span> pallini tra le Discipline, <span class="red">5</span> tra i Background e <span class="red">5</span> tra le Virtù. FdV e Umanità sono valori derivati.<br>Per scegliere un Sentiero di Illuminazione, il valore di Sentiero deve essere almeno 6.</div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="btn-group d-flex">
+            <div class="btn-group w-100" >
+              <button type="button" (click)="goback()" class="btn btn-primary btn-block btn-sm" >Indietro</button>
+            </div>
+            <div class="btn-group w-100" >
+              <button type="button" [disabled]="!bgOK || !virtuOK || !discOK || !(necrotaumForm.form.valid||discipline[z].LivelloDisc<1) " (click)="goto4()" class="btn btn-danger btn-block btn-sm" >Prosegui</button>
+            </div>
+          </div>
+          <div class="alc"><a [routerLink]="['/login']" class="btn btn-link">Torna al login</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 60%;" >60%</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

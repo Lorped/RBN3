@@ -9,6 +9,8 @@ import { UtilityModule } from '../utility/utility.module';
 
 import { Registra0Component } from './registra0/registra0.component';
 import { Registra1Component } from './registra1/registra1.component';
+import { Registra2Component } from './registra2/registra2.component';
+import { Registra3Component } from './registra3/registra3.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,9 @@ import { Registra1Component } from './registra1/registra1.component';
   ],
   declarations: [
     Registra0Component,
-    Registra1Component
+    Registra1Component,
+    Registra2Component,
+    Registra3Component
   ]
 })
 export class RegistraModule { }

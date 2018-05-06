@@ -1,0 +1,33 @@
+
+.bigf {
+  font-size: 1.1em;
+}
+
+hr {
+  color: #ff0000;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #f00;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.btn-xs {
+    padding: 0px 2px;
+    /*font-size: 20px; */
+    border-radius: 3px;
+    font-size: 0.7em;
+}
+
+.btn.btn-primary:disabled{
+    background-color: #a0a0a0;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
