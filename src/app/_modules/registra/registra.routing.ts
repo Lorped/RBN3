@@ -3,6 +3,7 @@ import {Registra0Component} from './registra0/registra0.component';
 import {Registra1Component} from './registra1/registra1.component';
 import {Registra2Component} from './registra2/registra2.component';
 import {Registra3Component} from './registra3/registra3.component';
+import {Registra4Component} from './registra4/registra4.component';
 
 
 export const REGISTRA_ROUTES: Routes = [
@@ -11,5 +12,6 @@ export const REGISTRA_ROUTES: Routes = [
   {path: '1', component: Registra1Component},
   {path: '2', component: Registra2Component},
   {path: '3', component: Registra3Component},
+  {path: '4', component: Registra4Component},
   {path: '**', component: Registra0Component}
 ];

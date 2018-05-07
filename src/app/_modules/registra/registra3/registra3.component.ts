@@ -177,4 +177,17 @@ export class Registra3Component implements OnInit {
     this.router.navigate(['/registra/2']);
   }
 
+  goto4() {
+    const myobj = {
+      'sentieroPG': this.sentieroPG,
+      'coscienza': this.coscienza,
+      'selfcontrol': this.selfcontrol,
+      'coraggio': this.coraggio,
+      'bg': this.bg,
+      'discipline': this.discipline
+    };
+    sessionStorage.setItem('RBN3registration3', JSON.stringify(myobj) );
+    this.router.navigate(['/registra/4']);
+  }
+
 }

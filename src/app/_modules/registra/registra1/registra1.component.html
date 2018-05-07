@@ -8,7 +8,7 @@
 
 
   <div class="row justify-content-center">
-    <div class="col-9">
+    <div class="col-10">
   <form [formGroup]="registrationForm" #reg1Form="ngForm">
       <div class="form-row">
         <div class="form-group col">
@@ -28,6 +28,19 @@
         </div>
       </div>
       <div class="form-row">
+        <div class="form-group col-3">
+          <label for="clanPG">Clan</label>
+          <select id="clanPG" name="clanPG" class="form-control" required formControlName="clanPG">
+          <option *ngFor="let i of clan" [ngValue]="i.IDclan">{{i.NomeClan}}</option>
+          </select>
+        </div>
+        <div class="form-group col-1">
+          <label for="sessoPG">Sesso</label>
+          <select id="sessoPG" name="sessoPG" class="form-control" required formControlName="Sesso">
+            <option [ngValue]='F'>F</option>
+            <option [ngValue]='M'>M</option>
+          </select>
+        </div>
         <div class="form-group col-2">
           <label for="etaPg">Anno di nascita</label>
           <input id="etaPg" name="etaPg" type="number" class="form-control" placeholder="1950" required  min=1900 max=2000 formControlName="etaPG">
@@ -46,18 +59,12 @@
           </div>
         </div>
         <div class="form-group col-2">
-          <label for="clanPG">Clan</label>
-          <select id="clanPG" name="clanPG" class="form-control" required formControlName="clanPG">
-          <option *ngFor="let i of clan" [ngValue]="i.IDclan">{{i.NomeClan}}</option>
-          </select>
-        </div>
-        <div class="form-group col-3">
           <label for="naturaPG">Natura</label>
           <select id="naturaPG" name="naturaPG" class="form-control" required formControlName="naturaPG">
           <option *ngFor="let i of archetipi" [ngValue]="i.IDarchetipo">{{i.Archetipo}}</option>
           </select>
         </div>
-        <div class="form-group col-3">
+        <div class="form-group col-2">
           <label for="caratterePG">Carattere</label>
           <select id="caratterePG" name="caratterePG" class="form-control" required formControlName="caratterePG">
           <option *ngFor="let i of archetipi" [ngValue]="i.IDarchetipo">{{i.Archetipo}}</option>

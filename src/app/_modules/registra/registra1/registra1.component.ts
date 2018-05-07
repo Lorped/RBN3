@@ -22,6 +22,9 @@ export class Registra1Component implements OnInit {
   sommaM = 3;
   formOK = false ;
 
+  M = 'M';
+  F = 'F';
+
 
 
   constructor( private signupservice: SignupService, private router: Router) { }
@@ -56,12 +59,18 @@ export class Registra1Component implements OnInit {
       naturaPG: new FormControl('', [
         Validators.required,
       ]),
+
       clanPG: new FormControl('', [
         Validators.required,
       ]),
+
       caratterePG: new FormControl('', [
         Validators.required,
       ]),
+
+      Sesso: new FormControl('', [
+        Validators.required
+      ])
 
     });
 
@@ -98,7 +107,8 @@ export class Registra1Component implements OnInit {
         etaAPG: olddata.etaAPG,
         clanPG: olddata.clanPG,
         naturaPG: olddata.naturaPG,
-        caratterePG: olddata.caratterePG
+        caratterePG: olddata.caratterePG,
+        Sesso: olddata.Sesso
       });
 
       this.sommaF = this.attributi[0].Livello + this.attributi[1].Livello + this.attributi[2].Livello;
@@ -130,6 +140,9 @@ export class Registra1Component implements OnInit {
   }
   get clanPG() {
       return this.registrationForm.get('clanPG');
+  }
+  get Sesso() {
+      return this.registrationForm.get('Sesso');
   }
 
 
@@ -171,12 +184,31 @@ export class Registra1Component implements OnInit {
   }
 
   goto2() {
+    let clanname = '';
+    for (let j = 0; j<this.clan.length; j++ ){
+      if (this.clan[j].IDclan === this.clanPG.value ) {
+        clanname = this.clan[j].NomeClan ;
+      }
+    }
+    let naturaname = '';
+    let caratterename = '';
+    for (let j = 0; j<this.archetipi.length; j++ ){
+      if (this.archetipi[j].IDarchetipo === this.naturaPG.value ) {
+        naturaname = this.archetipi[j].Archetipo ;
+      } else if (this.archetipi[j].IDarchetipo === this.caratterePG.value ) {
+        caratterename = this.archetipi[j].Archetipo ;
+      }
+    }
     const myobj = {
       'nomePG': this.nomePG.value,
       'cognomePG': this.cognomePG.value,
       'clanPG': this.clanPG.value,
+      'Sesso': this.Sesso.value,
+      'clanname': clanname,
       'naturaPG': this.naturaPG.value,
+      'naturaname': naturaname,
       'caratterePG': this.caratterePG.value,
+      'caratterename': caratterename,
       'etaPG': this.etaPG.value,
       'etaAPG': this.etaAPG.value,
       'attributi': this.attributi

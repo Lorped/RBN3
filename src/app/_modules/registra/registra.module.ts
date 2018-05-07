@@ -11,6 +11,7 @@ import { Registra0Component } from './registra0/registra0.component';
 import { Registra1Component } from './registra1/registra1.component';
 import { Registra2Component } from './registra2/registra2.component';
 import { Registra3Component } from './registra3/registra3.component';
+import { Registra4Component } from './registra4/registra4.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { Registra3Component } from './registra3/registra3.component';
     Registra0Component,
     Registra1Component,
     Registra2Component,
-    Registra3Component
+    Registra3Component,
+    Registra4Component
   ]
 })
 export class RegistraModule { }
