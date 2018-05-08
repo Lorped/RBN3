@@ -7,7 +7,7 @@
 
 
   <div class="row justify-content-center">
-    <div class="col-9">
+    <div class="col-10">
 
       <!--  ATTRIBUTI -->
 
@@ -34,7 +34,11 @@
           <table class="full">
             <tr *ngFor="let a of skills">
             <td *ngIf="a.Tipologia == '1'">{{a.NomeSkill}}</td>
-            <td *ngIf="a.Tipologia == '1'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button></td>
+            <td *ngIf="a.Tipologia == '1'" class="alr">
+              <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
+              <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
+              <button class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button>
+            </td>
           </tr>
           </table>
         </div>
@@ -42,7 +46,11 @@
           <table class="full">
             <tr *ngFor="let a of skills">
               <td *ngIf="a.Tipologia == '2'">{{a.NomeSkill}}</td>
-              <td *ngIf="a.Tipologia == '2'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button  class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button></td>
+              <td *ngIf="a.Tipologia == '2'" class="alr">
+                <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
+                <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
+                <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button>
+              </td>
           </tr>
           </table>
         </div>
@@ -50,7 +58,11 @@
           <table class="full">
             <tr *ngFor="let a of skills">
               <td *ngIf="a.Tipologia == '3'">{{a.NomeSkill}}</td>
-              <td *ngIf="a.Tipologia == '3'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button  class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button></td>
+              <td *ngIf="a.Tipologia == '3'" class="alr">
+                <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
+                <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
+                <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button>
+              </td>
             </tr>
           </table>
         </div>

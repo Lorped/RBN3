@@ -1,57 +1,11 @@
 
-<div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em;">
-  <div class="row">
+
+<div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em; margin-top: 20px;">
+  <div class="row justify-content-center">
     <div class="col">
 
+      <h3 class="dred alc">Spesa Punti liberi</h3>
 
-      <div class="alc"><h3>Punti Liberi</h3></div>
-      <div class="alc"><h4>Punti a disposizione <span class="dred">{{px}}</span></h4></div>
-
-
-      <div class="container">
-        <div class="row">
-          <div class="col"><hr></div>
-          <div class="col-2 alc bigf">&nbsp;</div>
-          <div class="col"><hr></div>
-        </div>
-        <div class="row">
-          <div class="col" style="padding-left: 30px;">FdV</div>
-          <div class="col" style="padding-left: 0px;"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < newPG.FdVmax , 'white': ix+1 > newPG.FdVmax }"></i><button  *ngIf="newPG.FdVmax<10" class="btn btn-primary btn-xs" (click)="addfdv()" [disabled]="px < 1"><i class="fa fa-plus"></i></button></div>
-          <div class="col" style="padding-left: 30px;">Sentiero</div>
-          <div class="col" style="padding-left: 0px;"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > newPG.Valsentiero , 'dred': ix < newPG.Valsentiero }"></i><button  *ngIf="newPG.Valsentiero<10" class="btn btn-primary btn-xs" (click)="addsentiero()" [disabled]="px < 1"><i class="fa fa-plus"></i></button></div>
-          <div class="col">&nbsp;</div>
-          <div class="col">&nbsp;</div>
-        </div>
-      </div>
-
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="container">
-              <div class="row">
-                <div class="col">Coscienza</div>
-                <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > newPG.Coscienza , 'dred': ix < newPG.Coscienza }"></i><button  *ngIf="newPG.Coscienza<5" class="btn btn-primary btn-xs" (click)="addcoscienza()" [disabled]="px < 2 "><i class="fa fa-plus"></i></button></div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="container">
-              <div class="row">
-                <div class="col">SelfControl</div>
-                <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > newPG.SelfControl , 'dred': ix < newPG.SelfControl }"></i><button  *ngIf="newPG.SelfControl<5" class="btn btn-primary btn-xs" (click)="addselfcontrol()" [disabled]="px < 2 "><i class="fa fa-plus"></i></button></div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="container">
-              <div class="row">
-                <div class="col">Coraggio</div>
-                <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > newPG.Coraggio , 'dred': ix < newPG.Coraggio }"></i><button  *ngIf="newPG.Coraggio<5" class="btn btn-primary btn-xs" (click)="addcoraggio()" [disabled]="px < 2 "><i class="fa fa-plus"></i></button></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
 
       <!--  ATTRIBUTI -->
@@ -64,25 +18,37 @@
         <div class="row">
           <div class="col">
             <div class="container">
-              <div class="row" *ngFor="let attr of listaAttributi">
+              <div class="row" *ngFor="let attr of listaAttributi ; let ix = index">
               <div class="col" *ngIf="attr.Tipologia == 'F'">{{attr.NomeAttributo}}</div>
-              <div class="col" *ngIf="attr.Tipologia == 'F'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < 5" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 5 "><i class="fa fa-plus"></i></button></div>
+              <div class="col" *ngIf="attr.Tipologia == 'F'">
+                <button class="btn btn-primary btn-xs" (click)="minattr(attr.IDattributo)" [disabled]="listaAttributi_orig[ix].Livello==attr.Livello "><i class="fa fa-minus"></i></button>
+                <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i>
+                <button  *ngIf="attr.Livello < 5" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 5 "><i class="fa fa-plus"></i></button>
+              </div>
             </div>
           </div>
           </div>
           <div class="col">
             <div class="container">
-              <div class="row" *ngFor="let attr of listaAttributi">
+              <div class="row" *ngFor="let attr of listaAttributi ; let ix = index">
               <div class="col" *ngIf="attr.Tipologia == 'S'">{{attr.NomeAttributo}}</div>
-              <div class="col" *ngIf="attr.Tipologia == 'S'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < 5" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 5 "><i class="fa fa-plus"></i></button></div>
+              <div class="col" *ngIf="attr.Tipologia == 'S'">
+                <button class="btn btn-primary btn-xs" (click)="minattr(attr.IDattributo)" [disabled]="listaAttributi_orig[ix].Livello==attr.Livello "><i class="fa fa-minus"></i></button>
+                <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i>
+                <button  *ngIf="attr.Livello < 5" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 5 "><i class="fa fa-plus"></i></button>
+              </div>
             </div>
           </div>
           </div>
           <div class="col">
             <div class="container">
-              <div class="row" *ngFor="let attr of listaAttributi">
+              <div class="row" *ngFor="let attr of listaAttributi ; let ix = index">
                 <div class="col" *ngIf="attr.Tipologia == 'M'">{{attr.NomeAttributo}}</div>
-                <div class="col" *ngIf="attr.Tipologia == 'M'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < 5" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 5 "><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="attr.Tipologia == 'M'">
+                  <button class="btn btn-primary btn-xs" (click)="minattr(attr.IDattributo)" [disabled]="listaAttributi_orig[ix].Livello==attr.Livello "><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i>
+                  <button  *ngIf="attr.Livello < 5" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 5 "><i class="fa fa-plus"></i></button>
+                </div>
               </div>
             </div>
           </div>
@@ -101,25 +67,37 @@
         <div class="row">
           <div class="col">
             <div class="container">
-              <div class="row" *ngFor="let skill of listaSkill">
+              <div class="row" *ngFor="let skill of listaSkill; let ix = index ">
                 <div class="col" *ngIf="skill.Tipologia == '1'">{{skill.NomeSkill}}</div>
-                <div class="col" *ngIf="skill.Tipologia == '1'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 "><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="skill.Tipologia == '1'">
+                  <button class="btn btn-primary btn-xs" (click)="minskill(skill.IDskill)" [disabled]="listaSkill_orig[ix].Livello==skill.Livello"><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i>
+                  <button *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 "><i class="fa fa-plus"></i></button>
+                </div>
               </div>
             </div>
           </div>
           <div class="col">
             <div class="container">
-              <div class="row" *ngFor="let skill of listaSkill">
+              <div class="row" *ngFor="let skill of listaSkill; let ix = index">
                 <div class="col" *ngIf="skill.Tipologia == '2'">{{skill.NomeSkill}}</div>
-                <div class="col" *ngIf="skill.Tipologia == '2'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 "><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="skill.Tipologia == '2'">
+                  <button class="btn btn-primary btn-xs" (click)="minskill(skill.IDskill)" [disabled]="listaSkill_orig[ix].Livello==skill.Livello"><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i>
+                  <button *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 "><i class="fa fa-plus"></i></button>
+                </div>
               </div>
             </div>
           </div>
           <div class="col">
             <div class="container">
-              <div class="row" *ngFor="let skill of listaSkill">
+              <div class="row" *ngFor="let skill of listaSkill; let ix = index">
                 <div class="col" *ngIf="skill.Tipologia == '3'">{{skill.NomeSkill}}</div>
-                <div class="col" *ngIf="skill.Tipologia == '3'"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 "><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="skill.Tipologia == '3'">
+                  <button class="btn btn-primary btn-xs" (click)="minskill(skill.IDskill)" [disabled]="listaSkill_orig[ix].Livello==skill.Livello"><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i>
+                  <button *ngIf="skill.Livello < 5" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 "><i class="fa fa-plus"></i></button>
+                </div>
               </div>
             </div>
           </div>
@@ -128,23 +106,91 @@
       <!-- VANTAGGI -->
       <div class="container">
         <div class="row">
-          <div class="col"><hr></div>
+          <div class="col-1"><hr></div>
           <div class="col-2 alc bigf">Discipline</div>
-          <div class="col"><hr></div>
+          <div class="col-2"><hr></div>
+          <div class="col-2 alc bigf">Background</div>
+          <div class="col-5"><hr></div>
         </div>
         <div class="row">
           <div class="col">
             <div class="container">
-              <div class="row" *ngFor="let disc of listaDiscipline">
+              <div class="row" *ngFor="let disc of listaDiscipline; let ix = index">
                 <div class="col">{{disc.NomeDisc}}</div>
-                <div class="col"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i><button  *ngIf="disc.LivelloDisc < 5" class="btn btn-primary btn-xs" (click)="plusdisc(disc.IDdisciplina)" [disabled]="px < 5"><i class="fa fa-plus"></i></button></div>
+                <div class="col">
+                  <button class="btn btn-primary btn-xs" (click)="mindisc(ix)" [disabled]="listaDiscipline_orig[ix].LivelloDisc==disc.LivelloDisc"><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i>
+                  <button *ngIf="disc.LivelloDisc < 5" class="btn btn-primary btn-xs" (click)="plusdisc(ix)" [disabled]="px < 7"><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+              <div class="row" *ngIf="necroPG.IDnecro!=0">
+                <div class="col">{{necroPG.NomeNecro}}</div>
+                <div class="col" style="padding-left: 48px;">
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > necroPG.Livello , 'dred': ix < necroPG.Livello }"></i>
+                </div>
+              </div>
+              <div class="row" *ngIf="taumPG.IDtaum!=0">
+                <div class="col">{{taumPG.NomeTaum}}</div>
+                <div class="col" style="padding-left: 48px;">
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > taumPG.Livello , 'dred': ix < taumPG.Livello }"></i>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col"><hr></div>
+                <div class="col alc">Virtù</div>
+                <div class="col"><hr></div>
+              </div>
+              <div class="row">
+                <div class="col">Coscienza</div>
+                <div class="col">
+                  <button class="btn btn-primary btn-xs" (click)="mincoscienza()" [disabled]="newPG.Coscienza==newPG_orig.Coscienza "><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > newPG.Coscienza , 'dred': ix < newPG.Coscienza }"></i>
+                  <button *ngIf="newPG.Coscienza<5" class="btn btn-primary btn-xs" (click)="addcoscienza()" [disabled]="px < 2 "><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">SelfControl</div>
+                <div class="col">
+                  <button class="btn btn-primary btn-xs" (click)="minselfcontrol()" [disabled]="newPG.SelfControl==newPG_orig.SelfControl "><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > newPG.SelfControl , 'dred': ix < newPG.SelfControl }"></i>
+                  <button  *ngIf="newPG.SelfControl<5" class="btn btn-primary btn-xs" (click)="addselfcontrol()" [disabled]="px < 2 "><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">Coraggio</div>
+                <div class="col">
+                  <button class="btn btn-primary btn-xs" (click)="mincoraggio()" [disabled]="newPG.Coraggio==newPG_orig.Coraggio "><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > newPG.Coraggio , 'dred': ix < newPG.Coraggio }"></i>
+                  <button  *ngIf="newPG.Coraggio<5" class="btn btn-primary btn-xs" (click)="addcoraggio()" [disabled]="px < 2 "><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">FdV</div>
+                <div class="col" style="padding-right: 0px;padding-left: 0px;">
+                  <button class="btn btn-primary btn-xs" (click)="minfdv()" [disabled]="newPG.FdVmax==newPG_orig.FdVmax"><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < newPG.FdVmax , 'white': ix+1 > newPG.FdVmax }"></i>
+                  <button *ngIf="newPG.FdVmax<10" class="btn btn-primary btn-xs" (click)="addfdv()" [disabled]="px < 1"><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">Sentiero</div>
+                <div class="col" style="padding-right: 0px;padding-left: 0px;">
+                  <button class="btn btn-primary btn-xs" (click)="minsentiero()" [disabled]="newPG.Valsentiero==newPG_orig.Valsentiero"><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > newPG.Valsentiero , 'dred': ix < newPG.Valsentiero }"></i>
+                  <button  *ngIf="newPG.Valsentiero<10" class="btn btn-primary btn-xs" (click)="addsentiero()" [disabled]="px < 1"><i class="fa fa-plus"></i></button>
+                </div>
               </div>
             </div>
           </div>
           <div class="col">
             <div class="container">
-              <div class="row">
-                <div class="col alc">Altre Discipline</div>
+              <div class="row" *ngFor="let bg of listaBackground; let ix = index">
+                <div class="col">{{bg.NomeBackground}}</div>
+                <div class="col">
+                  <button class="btn btn-primary btn-xs" (click)="minbg(ix)" [disabled]="listaBackground_orig[ix].LivelloBG==bg.LivelloBG"><i class="fa fa-minus"></i></button>
+                  <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > bg.LivelloBG , 'dred': ix < bg.LivelloBG }"></i>
+                  <button *ngIf="bg.LivelloBG < 5" class="btn btn-primary btn-xs" (click)="plusbg(ix)" [disabled]="px < 1"><i class="fa fa-plus"></i></button>
+                </div>
               </div>
               <div class="row">
                 <div class="col alc">
@@ -154,30 +200,68 @@
           </div>
           <div class="col">
             <div class="container">
+              Spendere 15 Punti liberi tra i vari tratti. Di seguito i costi per singolo pallino.
               <div class="row">
-                <div class="container">
-                  <div class="row" *ngIf="taum.length > 0">
-                    <div class="col alc"> Taumaturgie </div>
-                  </div>
-                  <div class="row" *ngFor="let t of taum">
-                    <div class="col">{{t.NomeTaum}}</div>
-                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < t.Livello , 'white': ix+1 > t.Livello }"></i><button  *ngIf="t.Principale != 'S' && t.Livello<5" class="btn btn-primary btn-xs" (click)="plustaum(t.IDtaum)" [disabled]="px < t.Livello*4 || ( t.Livello == Tmaxlev-1 && Tmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
-                  </div>
-                  <div class="row" *ngIf="necro.length > 0">
-                    <div class="col alc"> Necromanzie </div>
-                  </div>
-                  <div class="row" *ngFor="let n of necro">
-                    <div class="col">{{n.NomeNecro}}</div>
-                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < n.Livello , 'white': ix+1 > n.Livello }"></i><button  *ngIf="n.Principale != 'S' && n.Livello<5" class="btn btn-primary btn-xs" (click)="plusnecro(n.IDnecro)" [disabled]="px < n.Livello*4 || (n.Livello == Nmaxlev-1 && Nmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
-                  </div>
-                </div>
+                <div class="col">Attributi</div>
+                <div class="col">5 pt.</div>
               </div>
+              <div class="row">
+                <div class="col">Abilità</div>
+                <div class="col">2 pt.</div>
+              </div>
+              <div class="row">
+                <div class="col">Discipline</div>
+                <div class="col">7 pt.</div>
+              </div>
+              <div class="row">
+                <div class="col">Background</div>
+                <div class="col">1 pt.</div>
+              </div>
+              <div class="row">
+                <div class="col">Virtù</div>
+                <div class="col">2 pt.</div>
+              </div>
+              <div class="row">
+                <div class="col">Umanità/Sentiero</div>
+                <div class="col">1 pt.</div>
+              </div>
+              <div class="row">
+                <div class="col">FdV</div>
+                <div class="col">1 pt</div>
+              </div>
+              Punti rimasti: <span class="red bigf">{{px}}</span>
             </div>
           </div>
         </div>
       </div>
 
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="btn-group d-flex">
+            <div class="btn-group w-100" >
+              <button type="button" (click)="goback()" class="btn btn-primary btn-block btn-sm" >Indietro</button>
+            </div>
+            <div class="btn-group w-100" >
+              <button type="button" [disabled]="!px==0 " (click)="goto5()" class="btn btn-danger btn-block btn-sm" >Prosegui</button>
+            </div>
+          </div>
+          <div class="alc"><a [routerLink]="['/login']" class="btn btn-link">Torna al login</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="progress">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 80%;" >80%</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+
     </div>
   </div>
-  <button type="button" class="btn btn-danger btn-block" (click)="indietro()">Indietro</button>
 </div>

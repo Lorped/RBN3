@@ -24,8 +24,9 @@ export class Registra3Component implements OnInit {
 
   necro = [];
   taum = [];
-  necroPg: number;
-  taumPg: number;
+  necroPG = { IDnecro: 0 , NomeNecro: '', Acquisibile: 0 , Livello: 0 };
+  taumPG = { IDtaum: 0 , NomeTaum: '', Acquisibile: 0 , Livello: 0 };
+
 
   sommadisc = 0;
   discOK = false;
@@ -33,16 +34,17 @@ export class Registra3Component implements OnInit {
   sommabg = 0;
   bgOK = false;
 
-  sent = [ {IDsentiero: 1 , DescSentiero: 'Umanità' } ];
-  sentieroPG =  {IDsentiero: 1 , DescSentiero: 'Umanità' } ;
+  sent = [ {IDsentiero: '1' , DescSentiero: 'Umanità' } ];
+  sentieroPG =  {IDsentiero: '1' , DescSentiero: 'Umanità' } ;
 
   z = 0;
 
   constructor( private signupservice: SignupService, private router: Router ) { }
 
   ngOnInit() {
-    const prevdatastring = sessionStorage.getItem('RBN3registration1') ;
-    const prevdata = JSON.parse(prevdatastring);
+    let prevdatastring = sessionStorage.getItem('RBN3registration1') ;
+    let prevdata = JSON.parse(prevdatastring);
+
 
     this.signupservice.getregistra3(prevdata.clanPG)
     .subscribe(
@@ -61,7 +63,35 @@ export class Registra3Component implements OnInit {
           this.z = 2;
         }
         this.sent=res.sent;
+
+        if ( prevdatastring = sessionStorage.getItem('RBN3registration3') ) {
+          prevdata = JSON.parse(prevdatastring);
+
+          this.coscienza = prevdata.coscienza;
+          this.coraggio = prevdata.coraggio;
+          this.selfcontrol = prevdata.selfcontrol;
+          this.bg = prevdata.bg;
+          this.sentieroPG = this.sent[prevdata.sentieroPG.IDsentiero-1];
+
+          if ( this.necro.length > 0) {
+            this.necroPG = this.necro[prevdata.necroPG.IDnecro-1];
+          }
+          if (this.taum.length > 0) {
+            this.taumPG = this.taum[prevdata.taumPG.IDtaum-1];
+          }
+
+          for (let k = 0; k < prevdata.discipline.length; k++) {
+            this.discipline[k].LivelloDisc = prevdata.discipline[k].LivelloDisc;
+          }
+          this.sommadisc=3;
+          this.discOK = true;
+          this.sommavirtu = 8;
+          this.virtuOK = true ;
+          this.sommabg = 5;
+          this.bgOK = true ;
+        }
     });
+
 
   }
 
@@ -178,13 +208,16 @@ export class Registra3Component implements OnInit {
   }
 
   goto4() {
+
     const myobj = {
       'sentieroPG': this.sentieroPG,
       'coscienza': this.coscienza,
       'selfcontrol': this.selfcontrol,
       'coraggio': this.coraggio,
       'bg': this.bg,
-      'discipline': this.discipline
+      'discipline': this.discipline,
+      'necroPG': this.necroPG,
+      'taumPG': this.taumPG
     };
     sessionStorage.setItem('RBN3registration3', JSON.stringify(myobj) );
     this.router.navigate(['/registra/4']);

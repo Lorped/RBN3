@@ -22,7 +22,11 @@
           <table class="full">
             <tr>
             <td>{{d.NomeDisc}}</td>
-            <td class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(d.IDdisciplina)" [disabled]="d.LivelloDisc<1"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > d.LivelloDisc , 'dred': ix < d.LivelloDisc }"></i><button class="btn btn-primary btn-xs" (click)="addattr(d.IDdisciplina)" [disabled]="d.LivelloDisc>5"><i class="fa fa-plus"></i></button></td>
+            <td class="alr">
+              <button  class="btn btn-primary btn-xs" (click)="minattr(d.IDdisciplina)" [disabled]="d.LivelloDisc<1"><i class="fa fa-minus"></i></button>
+              <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > d.LivelloDisc , 'dred': ix < d.LivelloDisc }"></i>
+              <button class="btn btn-primary btn-xs" (click)="addattr(d.IDdisciplina)" [disabled]="d.LivelloDisc>5"><i class="fa fa-plus"></i></button>
+            </td>
           </tr>
           </table>
         </div>
@@ -33,18 +37,18 @@
 
       <form #necrotaumForm=ngForm  >
       <div class="form-group row" *ngIf="necro.length>0">
-        <label for="necroPG" class="col-2 col-form-label" >Via necromantica iniziale</label>
+        <label for="necropg" class="col-2 col-form-label" >Via necromantica iniziale</label>
         <div class="col">
-          <select id="necroPG" name="necroPG" class="form-control" [required]="discipline[1].LivelloDisc>0" [disabled]="discipline[z].LivelloDisc<1" [(ngModel)]="necroPg">
-          <option *ngFor="let i of necro" [ngValue]="i.IDnecro">{{i.NomeNecro}}</option>
+          <select id="necropg" name="necropg" class="form-control" [required]="discipline[1].LivelloDisc>0" [disabled]="discipline[z].LivelloDisc<1" [(ngModel)]="necroPG">
+          <option *ngFor="let i of necro" [ngValue]="i">{{i.NomeNecro}}</option>
           </select>
         </div>
       </div>
       <div class="row" *ngIf="taum.length>0">
-        <label for="taumPG" class="col-2 col-form-label">Via taumaturgica iniziale</label>
+        <label for="taumpg" class="col-2 col-form-label">Via taumaturgica iniziale</label>
         <div class="col">
-          <select id="taumPG" name="taumPG" class="form-control" [required]="discipline[2].LivelloDisc>0" [disabled]="discipline[z].LivelloDisc<1" [(ngModel)]="taumPg">
-          <option *ngFor="let i of taum" [ngValue]="i.IDtaum">{{i.NomeTaum}}</option>
+          <select id="taumpg" name="taumpg" class="form-control" [required]="discipline[2].LivelloDisc>0" [disabled]="discipline[z].LivelloDisc<1" [(ngModel)]="taumPG">
+          <option *ngFor="let i of taum" [ngValue]="i">{{i.NomeTaum}}</option>
           </select>
         </div>
       </div>
@@ -63,7 +67,11 @@
           <table class="full">
             <tr>
               <td>{{b.NomeBackground}}</td>
-              <td class="alr"><button  class="btn btn-primary btn-xs" (click)="minbg(b.IDbackground)" [disabled]="b.LivelloBG<1"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > b.LivelloBG , 'dred': ix < b.LivelloBG }"></i><button class="btn btn-primary btn-xs" (click)="addbg(b.IDbackground)" [disabled]="b.LivelloBG>4"><i class="fa fa-plus"></i></button></td>
+              <td class="alr">
+                <button  class="btn btn-primary btn-xs" (click)="minbg(b.IDbackground)" [disabled]="b.LivelloBG<1"><i class="fa fa-minus"></i></button>
+                <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > b.LivelloBG , 'dred': ix < b.LivelloBG }"></i>
+                <button class="btn btn-primary btn-xs" (click)="addbg(b.IDbackground)" [disabled]="b.LivelloBG>4"><i class="fa fa-plus"></i></button>
+              </td>
             </tr>
           </table>
         </div>
@@ -86,7 +94,11 @@
           <table class="full">
             <tr>
             <td>Coscienza</td>
-            <td class="alr"><button  class="btn btn-primary btn-xs" (click)="mincoscienza()" [disabled]="coscienza<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > coscienza , 'dred': ix < coscienza }"></i><button class="btn btn-primary btn-xs" (click)="addcoscienza()" [disabled]="coscienza>4"><i class="fa fa-plus"></i></button></td>
+            <td class="alr">
+              <button  class="btn btn-primary btn-xs" (click)="mincoscienza()" [disabled]="coscienza<2"><i class="fa fa-minus"></i></button>
+              <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > coscienza , 'dred': ix < coscienza }"></i>
+              <button class="btn btn-primary btn-xs" (click)="addcoscienza()" [disabled]="coscienza>4"><i class="fa fa-plus"></i></button>
+            </td>
           </tr>
           </table>
         </div>
@@ -94,7 +106,11 @@
           <table class="full">
             <tr>
             <td>Self Control</td>
-            <td class="alr"><button  class="btn btn-primary btn-xs" (click)="minselfcontrol()" [disabled]="selfcontrol<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > selfcontrol , 'dred': ix < selfcontrol }"></i><button class="btn btn-primary btn-xs" (click)="addselfcontrol()" [disabled]="selfcontrol>4"><i class="fa fa-plus"></i></button></td>
+            <td class="alr">
+              <button  class="btn btn-primary btn-xs" (click)="minselfcontrol()" [disabled]="selfcontrol<2"><i class="fa fa-minus"></i></button>
+              <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > selfcontrol , 'dred': ix < selfcontrol }"></i>
+              <button class="btn btn-primary btn-xs" (click)="addselfcontrol()" [disabled]="selfcontrol>4"><i class="fa fa-plus"></i></button>
+            </td>
           </tr>
           </table>
         </div>
@@ -102,7 +118,11 @@
           <table class="full">
             <tr>
             <td>Coraggio</td>
-            <td class="alr"><button  class="btn btn-primary btn-xs" (click)="mincoraggio()" [disabled]="coraggio<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > coraggio , 'dred': ix < coraggio }"></i><button class="btn btn-primary btn-xs" (click)="addcoraggio()" [disabled]="coraggio>4"><i class="fa fa-plus"></i></button></td>
+            <td class="alr">
+              <button  class="btn btn-primary btn-xs" (click)="mincoraggio()" [disabled]="coraggio<2"><i class="fa fa-minus"></i></button>
+              <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > coraggio , 'dred': ix < coraggio }"></i>
+              <button class="btn btn-primary btn-xs" (click)="addcoraggio()" [disabled]="coraggio>4"><i class="fa fa-plus"></i></button>
+            </td>
           </tr>
           </table>
         </div>
