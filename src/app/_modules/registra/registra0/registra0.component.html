@@ -18,6 +18,7 @@
           <input id="password1" class="form-control" type="password" formControlName="password" placeholder="Password">
           <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger" color="red">
             <div *ngIf="password.errors.required">Inserire la password</div>
+            <div *ngIf="password.errors.pattern">Solo caratteri alfanumerici, almeno una lettera e un numero</div>
             <div *ngIf="password.errors.minlength">La lunghezza minima è 8 caratteri</div>
           </div>
         </div>

@@ -31,7 +31,8 @@ export class Registra0Component implements OnInit {
 
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(8)
+        Validators.minLength(8),
+        Validators.pattern('^.*((\\d.*[a-zA-Z])|([a-zA-Z].*\\d)).*$')
       ]),
 
       password2: new FormControl('', [

@@ -71,6 +71,8 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		//	Do a lot of other stuff !!
 		//
 		// Inserisco/Aggiorno in presenti
+		$NomeCognome=mysql_real_escape_string($NomeCognome);
+
 		$MySql = "SELECT * FROM Presenti WHERE Userid = $Userid";
 		$Results = mysql_query($MySql);
 		if (mysql_num_rows($Results) == 0) {

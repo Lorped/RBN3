@@ -188,6 +188,7 @@ export class Registra4Component implements OnInit {
       'newPG': this.newPG,
       'listaBackground': this.listaBackground,
       'listaDiscipline': this.listaDiscipline,
+      'listaAttributi': this.listaAttributi,
       'listaSkill': this.listaSkill,
       'necroPG': this.necroPG,
       'taumPG': this.taumPG

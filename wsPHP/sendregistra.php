@@ -27,9 +27,9 @@ $request = json_decode($postdata)->myobj;
 $newPG = $request->newPG;
 
 
-
 $listaBackground = $request->listaBackground;
 $listaDiscipline = $request->listaDiscipline;
+$listaAttributi = $request->listaAttributi;
 $listaSkill = $request->listaSkill;
 $necroPG = $request->necroPG;
 $taumPG = $request->taumPG;
@@ -50,7 +50,10 @@ $gen=0;
 $gen=13-(int)$generazionebg;
 $ps=10+(int)$generazionebg;
 
-
+$nome=mysql_real_escape_string($newPG->Nome);
+$cognome=mysql_real_escape_string($newPG->Cognome);
+$email=mysql_real_escape_string($newPG->Email);
+$pass=mysql_real_escape_string($newPG->Pass);
 
 $MySql="INSERT INTO Personaggio ( Nome, Cognome, Email, Pass, DataIscrizione,
  IDNatura, IDCarattere,  IDclan, Sesso, Eta, EtaA,
@@ -60,7 +63,7 @@ $MySql="INSERT INTO Personaggio ( Nome, Cognome, Email, Pass, DataIscrizione,
  Coscienza, Coraggio, SelfControl
  )
 VALUES (
-	'$newPG->Nome' , '$newPG->Cognome' ,'$newPG->Email' , '$newPG->Pass' , NOW() ,
+	'$nome' , '$cognome' ,'$email' , '$pass' , NOW() ,
 	$newPG->Natura , $newPG->Carattere, $newPG->Clan, '$newPG->Sesso', $newPG->Eta, $newPG->EtaA,
 	$gen, $ps, $ps,
 	$newPG->FdVmax, $newPG->FdVmax,
@@ -70,6 +73,40 @@ VALUES (
 
 mysql_query($MySql);
 if (mysql_errno()) { die ( mysql_errno().": ".mysql_error(). "  >>".$MySql ); }
+
+$MySql="SELECT Userid FROM Personaggio WHERE Email='$email'";
+$Result=mysql_query($MySql);
+$res=mysql_fetch_array($Result);
+$Userid=$res['Userid'];
+
+
+forEach ($listaBackground as $bg ) {
+	if ( $bg->LivelloBG != 0 ) {
+		$MySql="INSERT INTO Background ( Userid, IDbackground, LivelloBG ) VALUES ('$Userid', $bg->IDbackground, $bg->LivelloBG)";
+		mysql_query($MySql);
+		if (mysql_errno()) { die ( mysql_errno().": ".mysql_error(). "  >>".$MySql ); }
+	}
+}
+forEach ($listaSkill as $bg ) {
+	if ( $bg->Livello != 0 ) {
+		$MySql="INSERT INTO Skill ( Userid, IDskill, Livello ) VALUES ('$Userid', $bg->IDskill, $bg->Livello)";
+		mysql_query($MySql);
+		if (mysql_errno()) { die ( mysql_errno().": ".mysql_error(). "  >>".$MySql ); }
+	}
+}
+forEach ($listaAttributi as $bg ) {
+		$MySql="INSERT INTO Attributi ( Userid, IDattributo, Livello ) VALUES ('$Userid', $bg->IDattributo, $bg->Livello)";
+		mysql_query($MySql);
+		if (mysql_errno()) { die ( mysql_errno().": ".mysql_error(). "  >>".$MySql ); }
+}
+forEach ($listaDiscipline as $bg ) {
+	if ( $bg->LivelloDisc != 0 ) {
+		$MySql="INSERT INTO Discipline ( Userid, IDdisciplina, LivelloDisc ) VALUES ('$Userid', $bg->IDdisciplina, $bg->LivelloDisc)";
+		mysql_query($MySql);
+		if (mysql_errno()) { die ( mysql_errno().": ".mysql_error(). "  >>".$MySql ); }
+	}
+}
+
 
 
 $out = [];

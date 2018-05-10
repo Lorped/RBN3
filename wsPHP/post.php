@@ -68,6 +68,11 @@ if ( $IDdestinatario != "0" ) {
 
 }
 
+$NomeCognome=mysql_real_escape_string($NomeCognome);
+$destinatario=mysql_real_escape_string($destinatario);
+
+
+
 $MySql="INSERT INTO Chat ( Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso , Tipo, Testo, Locazione )
 VALUES ($stanza, $Userid, '$NomeCognome' , $IDdestinatario, '$destinatario', '$Sesso', '$tipo', '$testo','$locazione')";
 
