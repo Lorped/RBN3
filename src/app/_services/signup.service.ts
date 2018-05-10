@@ -31,4 +31,10 @@ export class SignupService {
       .get('https://www.roma-by-night.it/RBN3/wsPHP/getregistra3.php?IDclan=' + clan);
   }
 
+  sendregistra (myobj: any) {
+      return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/sendregistra.php', {
+        myobj: myobj
+      });
+  }
+
 }

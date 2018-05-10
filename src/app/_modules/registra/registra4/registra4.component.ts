@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Basicpg, Skill, Attributo, Personaggio, Disciplina, Background } from '../../../globals';
 import { Router } from '@angular/router';
+import { SignupService } from '../../../_services/signup.service';
 
 @Component({
   selector: 'app-registra4',
@@ -26,7 +27,7 @@ export class Registra4Component implements OnInit {
 
   px = 15;
 
-  constructor( private router: Router  ) { }
+  constructor( private router: Router , private signupservice: SignupService ) { }
 
   ngOnInit() {
 
@@ -46,6 +47,7 @@ export class Registra4Component implements OnInit {
     this.newPG.Sesso = datajson.Sesso;
     this.newPG.Eta = datajson.etaPG;
     this.newPG.EtaA = datajson.etaAPG;
+    this.newPG.Clan = datajson.clanPG;
 
     this.listaAttributi = datajson.attributi;
 
@@ -190,8 +192,16 @@ export class Registra4Component implements OnInit {
       'necroPG': this.necroPG,
       'taumPG': this.taumPG
     };
+
     sessionStorage.setItem('RBN3registration4', JSON.stringify(myobj) );
-    this.router.navigate(['/registra/5']);
+
+    this.signupservice.sendregistra(myobj)
+    .subscribe( res => {
+      console.log(res);
+      //this.router.navigate(['/registra/5']);
+    });
+
+
   }
 
 }

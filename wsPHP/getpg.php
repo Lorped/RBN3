@@ -72,7 +72,7 @@ if ( ! $full ) {
 if ( $full ) {
 	$MySql = "SELECT
 	Userid , Nome , Cognome , Email , Pass ,
-    DataIscrizione , Esperienza ,
+    DataIscrizione ,  
 		a1.Archetipo as Natura ,
 		a2.Archetipo as Carattere ,
  		Clan ,

@@ -97,7 +97,11 @@
           <table class="full">
             <tr *ngFor="let a of attributi">
             <td *ngIf="a.Tipologia == 'F'">{{a.NomeAttributo}}</td>
-            <td *ngIf="a.Tipologia == 'F'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button></td>
+            <td *ngIf="a.Tipologia == 'F'" class="alr">
+              <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button>
+              <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
+              <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button>
+            </td>
           </tr>
           </table>
         </div>
@@ -105,7 +109,11 @@
           <table class="full">
             <tr *ngFor="let a of attributi">
             <td *ngIf="a.Tipologia == 'S'">{{a.NomeAttributo}}</td>
-            <td *ngIf="a.Tipologia == 'S'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button></td>
+            <td *ngIf="a.Tipologia == 'S'" class="alr">
+              <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button>
+              <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
+              <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button>
+            </td>
           </tr>
           </table>
         </div>
@@ -113,7 +121,11 @@
           <table class="full">
             <tr *ngFor="let a of attributi">
               <td *ngIf="a.Tipologia == 'M'">{{a.NomeAttributo}}</td>
-              <td *ngIf="a.Tipologia == 'M'" class="alr"><button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i><button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button></td>
+              <td *ngIf="a.Tipologia == 'M'" class="alr">
+                <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button>
+                <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
+                <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button>
+              </td>
             </tr>
           </table>
         </div>
@@ -122,7 +134,7 @@
         <div class="col">&nbsp;</div>
       </div>
       <div class="row">
-        <div class="col">Distribuire 7 pallini in una categoria di attributi (mentali, fisici o sociali), 5 in una categoria secondaria e 3 nella rimanente terziaria</div>
+        <div class="col">Distribuire <span class="red">7</span> pallini in una categoria di attributi (mentali, fisici o sociali), <span class="red">5</span> in una categoria secondaria e <span class="red">3</span> nella rimanente terziaria</div>
       </div>
       <div class="row">
         <div class="col">&nbsp;</div>
