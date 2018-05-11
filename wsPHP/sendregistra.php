@@ -101,13 +101,22 @@ forEach ($listaAttributi as $bg ) {
 }
 forEach ($listaDiscipline as $bg ) {
 	if ( $bg->LivelloDisc != 0 ) {
-		$MySql="INSERT INTO Discipline ( Userid, IDdisciplina, LivelloDisc ) VALUES ('$Userid', $bg->IDdisciplina, $bg->LivelloDisc)";
+		$MySql="INSERT INTO Discipline ( Userid, IDdisciplina, LivelloDisc, DiClan ) VALUES ('$Userid', $bg->IDdisciplina, $bg->LivelloDisc, 'S')";
 		mysql_query($MySql);
 		if (mysql_errno()) { die ( mysql_errno().": ".mysql_error(). "  >>".$MySql ); }
 	}
 }
 
-
+if ($taumPG->IDtaum != 0) {
+	$MySql="INSERT INTO Taumaturgie ( Userid, IDtaum, Livello, Principale ) VALUES ('$Userid', $taumPG->IDtaum, $taumPG->Livello, 'S')";
+	mysql_query($MySql);
+	if (mysql_errno()) { die ( mysql_errno().": ".mysql_error(). "  >>".$MySql ); }
+}
+if ($necroPG->IDnecro != 0) {
+	$MySql="INSERT INTO Necromanzie ( Userid, IDnecro, Livello, Principale ) VALUES ('$Userid', $necroPG->IDnecro, $necroPG->Livello, 'S')";
+	mysql_query($MySql);
+	if (mysql_errno()) { die ( mysql_errno().": ".mysql_error(). "  >>".$MySql ); }
+}
 
 $out = [];
 

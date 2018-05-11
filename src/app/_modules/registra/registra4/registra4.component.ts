@@ -198,8 +198,7 @@ export class Registra4Component implements OnInit {
 
     this.signupservice.sendregistra(myobj)
     .subscribe( res => {
-      console.log(res);
-      //this.router.navigate(['/registra/5']);
+      this.router.navigate(['/registra/5']);
     });
 
 

@@ -10,6 +10,10 @@ export class Registra5Component implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    sessionStorage.removeItem('RBN3registration1');
+    sessionStorage.removeItem('RBN3registration2');
+    sessionStorage.removeItem('RBN3registration3');
+    sessionStorage.removeItem('RBN3registration4');
   }
 
 }
