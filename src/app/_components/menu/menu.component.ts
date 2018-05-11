@@ -40,7 +40,9 @@ export class MenuComponent implements OnInit {
     if ( id === 'modalpx') {
       this.status.pxon = true ;
     }
-    // this.schedacomponent.refreshpg();
+    if ( id === 'modalbio') {
+      this.status.bioon = true ;
+    }
     this.status.menuState = 'out';
     this.modalService.show(id) ;
   }

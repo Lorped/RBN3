@@ -23,6 +23,20 @@
   </div>
 </app-modal>
 
+<!-- <app-modal id="modal-scheda"> -->
+
+<app-modal #modalbio modalId="modalbio">
+  <div class="app-modal-header">
+    <i>Biografia e Profilo Personaggio</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.bioon=false; modalbio.hide()">&times;</button>
+  </div>
+  <div class="app-modal-body">
+    <app-bio *ngIf="this.status.bioon"></app-bio>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.bioon=false; modalbio.hide()">Chiudi</button>
+  </div>
+</app-modal>
+
 <!-- ----->
 
 <button (click)="toggleMenu()" class="menubutton">

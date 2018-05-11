@@ -55,4 +55,14 @@ export class SchedaService {
     return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/getnecrotaum.php?id=' + id );
   }
 
+
+  getbio (id: number) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getbio.php', {
+      token: user,
+      id: id
+    });
+  }
+
 }

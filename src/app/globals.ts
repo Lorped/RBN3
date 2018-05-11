@@ -113,4 +113,5 @@ export class Status {
   menuState = 'out';
   schedaon = false ;
   pxon = false;
+  bioon = false;
 }

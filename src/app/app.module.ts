@@ -26,10 +26,12 @@ import { LuoghiComponent } from './_components/luoghi/luoghi.component';
 import { ModalComponent } from './_components/modal/modal.component';
 import { SchedaComponent } from './_components/scheda/scheda.component';
 import { QuestpxComponent } from './_components/questpx/questpx.component';
+import { BioComponent } from './_components/bio/bio.component';
 
 import { Status } from './globals';
 
 import { UtilityModule } from './_modules/utility/utility.module';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { UtilityModule } from './_modules/utility/utility.module';
     LuoghiComponent,
     ModalComponent,
     SchedaComponent,
-    QuestpxComponent
+    QuestpxComponent,
+    BioComponent
   ],
   imports: [
     BrowserModule,
