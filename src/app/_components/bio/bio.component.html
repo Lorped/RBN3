@@ -9,7 +9,7 @@
         </div>
       </label>
     </div>
-      <input id="avatar" name="avatar" type="file" accept="image/*" style="display:none;" >
+      <input id="avatar" name="avatar" type="file" accept="image/*" style="display:none;" (change)="fileChange($event.target.files)" >
     </div>
 
 
@@ -18,7 +18,7 @@
       <div class="container"> <!-- inizio container interno -->
         <div class="form-group row">
           <label for="descrizione">Descrizione</label>
-          <textarea class="form-control block" rows="3" placeholder="Inserire descrizione fisica" id="descrizione" [(ngModel)]="annotazioni"></textarea>
+          <textarea class="form-control block" rows="3" placeholder="Inserire descrizione fisica" id="descrizione" [(ngModel)]="descrizione"></textarea>
         </div>
         <div class="form-group row">
           <label for="idbio">Biografia</label>

@@ -10,8 +10,10 @@ import { Status } from '../../globals';
 export class BioComponent implements OnInit {
 
   bio: string;
-  annotazioni: string;
+  descrizione: string;
   URLImg: string;
+
+  fileToUpload: File = null;
 
   constructor( private schedaService: SchedaService, private status: Status  ) { }
 
@@ -20,10 +22,24 @@ export class BioComponent implements OnInit {
     this.schedaService.getbio(this.status.Userid)
     .subscribe( (data: any) => {
       this.bio = data.pg.Background;
-      this.annotazioni = data.pg.Annotazioni;
+      this.descrizione = data.pg.Descrizione;
       this.URLImg = data.pg.URLImg;
     });
 
   }
+  fileChange(files: FileList) {
+    if (files.length > 0) {
+      const fileToUpload = files[0];
 
+      this.schedaService.putavatar(fileToUpload)
+      .subscribe(data => {
+          this.schedaService.getbio(this.status.Userid)
+          .subscribe( (data: any) => {
+            this.URLImg = data.pg.URLImg;
+          });
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
 }

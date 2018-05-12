@@ -65,4 +65,16 @@ export class SchedaService {
     });
   }
 
+  putavatar(fileToUpload: File) {
+    const formData: FormData = new FormData();
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    formData.append('token', user);
+    formData.append('fileKey', fileToUpload, fileToUpload.name);
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/putavatar.php', formData )
+      .map(() => { return true; });
+
+}
+
+
+
 }

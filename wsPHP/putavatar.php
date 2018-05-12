@@ -20,11 +20,8 @@ include ('db.inc.php');
 include ('token.php');
 
 
-$postdata = file_get_contents("php://input");
-$request = json_decode($postdata);
 
-$token=$request->token;
-$id=$request->id;
+$token=$_POST['token'];
 
 /*
 $id=$_GET['id'];
@@ -45,37 +42,38 @@ if ( CheckJWT ($token) ) {
 } else {
 	header("HTTP/1.1 401 Unauthorized");
 	$out=[];
+
 	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
 	die ();
 }
 
 
+$target_path = "/web/htdocs/www.roma-by-night.it/home/RBN3/assets/imgs/";
+$filename=urlencode ( basename( $_FILES['fileKey']['name']) );
+
+$ext = pathinfo($filename, PATHINFO_EXTENSION);
+
+$newfile=$target_path.$Userid.'.'.$ext;
+
+/*
+header("HTTP/1.1 200 OK");
+$xx=getcwd();
+$out=['rc' => $rc, 'old' => $_FILES['fileKey']['tmp_name'], 'pwd' => $xx  ];
+echo json_encode ($out, JSON_UNESCAPED_UNICODE);
+die();
+*/
+
+$rc=move_uploaded_file($_FILES['fileKey']['tmp_name'], $newfile);
+
+$target_path = "imgs/";
+$newfile=$target_path.$Userid.'.'.$ext;
 
 
-$full = FALSE;
-if ( $id == $Userid || $MasterAdmin > 0 ) {
-	$full = TRUE;
-}
-
-
-if ( ! $full ) {
-	$MySql = "SELECT URLImg, Descrizione FROM Personaggio WHERE Userid='$id'";
-
-} else {
-	$MySql = "SELECT URLImg, Background, Descrizione FROM Personaggio WHERE Userid='$id'";
-}
-
+$MySql="UPDATE Personaggio SET URLImg = '$newfile' WHERE Userid = '$Userid' ";
 $Result=mysql_query($MySql);
-$res = mysql_fetch_array($Result,MYSQL_ASSOC);
-
-$out = [
-	'full' => $full,
-	'pg' => $res
-];
-
-
 
 header("HTTP/1.1 200 OK");
+$out=[];
 
 echo json_encode ($out, JSON_UNESCAPED_UNICODE);
 ?>
