@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SchedaService } from '../../_services/index';
 import { Status } from '../../globals';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-bio',
@@ -8,6 +9,7 @@ import { Status } from '../../globals';
   styleUrls: ['./bio.component.css']
 })
 export class BioComponent implements OnInit {
+  @ViewChild("bioForm") bioForm: NgForm;
 
   bio: string;
   descrizione: string;
@@ -41,5 +43,12 @@ export class BioComponent implements OnInit {
         console.log(error);
       });
     }
+  }
+
+  addbio() {
+    this.schedaService.addbio(this.bio, this.descrizione)
+    .subscribe( (data: any) => {
+      this.bioForm.form.markAsPristine();
+    });
   }
 }

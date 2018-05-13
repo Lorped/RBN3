@@ -16,14 +16,19 @@
 
     <div class="col-9">
       <div class="container"> <!-- inizio container interno -->
-        <div class="form-group row">
-          <label for="descrizione">Descrizione</label>
-          <textarea class="form-control block" rows="3" placeholder="Inserire descrizione fisica" id="descrizione" [(ngModel)]="descrizione"></textarea>
-        </div>
-        <div class="form-group row">
-          <label for="idbio">Biografia</label>
-          <textarea class="form-control block" rows="7" placeholder="Biografia" id="idbio" [(ngModel)]="bio"></textarea>
-        </div>
+        <form #bioForm="ngForm" (submit)="addbio();">
+          <div class="form-group row">
+            <label for="descrizione">Descrizione</label>
+            <textarea class="form-control block" rows="3" placeholder="Inserire descrizione fisica" id="descrizione" name="descrizione" [(ngModel)]="descrizione" #desc="ngModel"></textarea>
+          </div>
+          <div class="form-group row">
+            <label for="idbio">Biografia</label>
+            <textarea class="form-control block" rows="7" placeholder="Biografia" id="idbio" name="idbio" [(ngModel)]="bio" #biox="ngModel"></textarea>
+          </div>
+          <div class="form-group row">
+            <button type="submit" class="btn btn-sm btn-danger btn-block" [disabled]="!biox.dirty && !desc.dirty" >Modifica</button>
+          </div>
+        </form>
       </div> <!-- fine container interno -->
     </div>
   </div>

@@ -65,6 +65,16 @@ export class SchedaService {
     });
   }
 
+  addbio (bio: string, descrizione: string) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/addbio.php', {
+      token: user,
+      bio: bio,
+      descr: descrizione
+    });
+  }
+
   putavatar(fileToUpload: File) {
     const formData: FormData = new FormData();
     const user = sessionStorage.getItem('RBN3currentUser') ;
