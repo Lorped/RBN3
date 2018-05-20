@@ -43,6 +43,9 @@ export class MenuComponent implements OnInit {
     if ( id === 'modalbio') {
       this.status.bioon = true ;
     }
+    if ( id === 'modalanagrafe') {
+      this.status.anagon = true ;
+    }
     this.status.menuState = 'out';
     this.modalService.show(id) ;
   }

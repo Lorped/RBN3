@@ -83,8 +83,6 @@ export class SchedaService {
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/putavatar.php', formData )
       .map(() => { return true; });
 
-}
-
-
+  }
 
 }

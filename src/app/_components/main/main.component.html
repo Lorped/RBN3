@@ -39,6 +39,23 @@
 
 <!-- ----->
 
+<!-- <app-modal id="modal-scheda"> -->
+
+<app-modal #modalanagrafe modalId="modalanagrafe">
+  <div class="app-modal-header">
+    <i>Anagrafe Personaggi</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.anagon=false; modalanagrafe.hide()">&times;</button>
+  </div>
+  <div class="app-modal-body">
+    <app-anagrafe *ngIf="this.status.anagon"></app-anagrafe>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.anagon=false; modalanagrafe.hide()">Chiudi</button>
+  </div>
+</app-modal>
+
+<!-- ----->
+
+
 <button (click)="toggleMenu()" class="menubutton">
   <span>toggle menu</span>
 </button>

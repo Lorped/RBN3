@@ -13,6 +13,7 @@ import { ModalService } from './_services/index';
 import { SchedaService } from './_services/index';
 import { QuestpxService } from './_services/index';
 import { SignupService } from './_services/index';
+import { AnagrafeService } from './_services/index';
 
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -27,10 +28,12 @@ import { ModalComponent } from './_components/modal/modal.component';
 import { SchedaComponent } from './_components/scheda/scheda.component';
 import { QuestpxComponent } from './_components/questpx/questpx.component';
 import { BioComponent } from './_components/bio/bio.component';
+import { AnagrafeComponent } from './_components/anagrafe/anagrafe.component';
 
 import { Status } from './globals';
 
 import { UtilityModule } from './_modules/utility/utility.module';
+
 
 
 @NgModule({
@@ -44,7 +47,8 @@ import { UtilityModule } from './_modules/utility/utility.module';
     ModalComponent,
     SchedaComponent,
     QuestpxComponent,
-    BioComponent
+    BioComponent,
+    AnagrafeComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,7 @@ import { UtilityModule } from './_modules/utility/utility.module';
     SchedaService,
     QuestpxService,
     SignupService,
+    AnagrafeService,
     AuthGuard,
     Status
   ],
