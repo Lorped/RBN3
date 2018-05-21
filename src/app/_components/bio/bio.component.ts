@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./bio.component.css']
 })
 export class BioComponent implements OnInit {
-  @ViewChild("bioForm") bioForm: NgForm;
+  @ViewChild('bioForm') bioForm: NgForm;
 
   bio: string;
   descrizione: string;
@@ -34,7 +34,7 @@ export class BioComponent implements OnInit {
       const fileToUpload = files[0];
 
       this.schedaService.putavatar(fileToUpload)
-      .subscribe(data => {
+      .subscribe(res => {
           this.schedaService.getbio(this.status.Userid)
           .subscribe( (data: any) => {
             this.URLImg = data.pg.URLImg;

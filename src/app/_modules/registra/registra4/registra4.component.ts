@@ -80,10 +80,10 @@ export class Registra4Component implements OnInit {
     this.necroPG = datajson.necroPG;
     this.taumPG = datajson.taumPG;
 
-    if (this.necroPG.IDnecro != 0) {
+    if (this.necroPG.IDnecro !== 0) {
       this.necroPG.Livello = this.listaDiscipline[1].LivelloDisc; // da scrievre meglio
     }
-    if (this.taumPG.IDtaum != 0) {
+    if (this.taumPG.IDtaum !== 0) {
       this.taumPG.Livello = this.listaDiscipline[2].LivelloDisc; // da scrievre meglio
     }
 
@@ -153,18 +153,18 @@ export class Registra4Component implements OnInit {
   plusdisc(disc: number) {
     this.listaDiscipline[disc].LivelloDisc++;
     this.px = this.px - 7;
-    if (this.listaDiscipline[disc].IDdisciplina == 7) {
+    if (this.listaDiscipline[disc].IDdisciplina === 7) {
       this.necroPG.Livello++;
-    } else if ( this.listaDiscipline[disc].IDdisciplina == 15 ){
+    } else if ( this.listaDiscipline[disc].IDdisciplina === 15 ) {
       this.taumPG.Livello++;
     }
   }
   mindisc(disc: number) {
     this.listaDiscipline[disc].LivelloDisc--;
     this.px = this.px + 7;
-    if (this.listaDiscipline[disc].IDdisciplina == 7) {
+    if (this.listaDiscipline[disc].IDdisciplina === 7) {
       this.necroPG.Livello--;
-    } else if ( this.listaDiscipline[disc].IDdisciplina == 15 ){
+    } else if ( this.listaDiscipline[disc].IDdisciplina === 15 ) {
       this.taumPG.Livello--;
     }
   }

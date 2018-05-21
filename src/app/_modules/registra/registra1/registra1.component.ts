@@ -185,14 +185,14 @@ export class Registra1Component implements OnInit {
 
   goto2() {
     let clanname = '';
-    for (let j = 0; j<this.clan.length; j++ ){
+    for (let j = 0; j < this.clan.length; j++ ) {
       if (this.clan[j].IDclan === this.clanPG.value ) {
         clanname = this.clan[j].NomeClan ;
       }
     }
     let naturaname = '';
     let caratterename = '';
-    for (let j = 0; j<this.archetipi.length; j++ ){
+    for (let j = 0; j < this.archetipi.length; j++ ) {
       if (this.archetipi[j].IDarchetipo === this.naturaPG.value ) {
         naturaname = this.archetipi[j].Archetipo ;
       } else if (this.archetipi[j].IDarchetipo === this.caratterePG.value ) {
