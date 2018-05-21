@@ -9,6 +9,8 @@ import { AnagrafeRow, AnagrafeService } from '../../_services/index';
 export class AnagrafeComponent implements OnInit {
 
   anagrafe: Array<AnagrafeRow> = [];
+  order = 1;
+  propertyName = '';
 
   constructor( private anagrafeservice: AnagrafeService,  ) { }
 
@@ -18,6 +20,16 @@ export class AnagrafeComponent implements OnInit {
       this.anagrafe = data;
       console.log(this.anagrafe);
     });
+  }
+
+  sortBy ( prop: string) {
+    this.propertyName = prop;
+    this.anagrafe.sort ( (a, b) => {
+      return (a[prop] > b[prop]) ? this.order : (-1) * this.order ;
+    });
+    this.order = -1 * this.order;
+
+    console.log(this.order);
   }
 
 }

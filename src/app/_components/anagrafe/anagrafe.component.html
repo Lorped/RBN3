@@ -1,3 +1,33 @@
-<p>
-  anagrafe works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-sm btn-block btn-std" (click)="sortBy('Nome')">Nome
+      <span class="sortorder" *ngIf="propertyName === 'Nome'" [ngClass]="{reverse: order == 1}"></span>
+      </button>
+    </div>
+    <div class="col">
+      <button class="btn btn-sm btn-block btn-std" (click)="sortBy('Cognome')">Cognome
+      <span class="sortorder" *ngIf="propertyName === 'Cognome'" [ngClass]="{reverse: order == 1}"></span>
+      </button>
+    </div>
+    <div class="col">
+      <button class="btn btn-sm btn-block btn-std" (click)="sortBy('Sesso')">Sesso
+      <span class="sortorder" *ngIf="propertyName === 'Sesso'" [ngClass]="{reverse: order == 1}"></span>
+      </button>
+    </div>
+    <div class="col">
+      <button class="btn btn-sm btn-block btn-std" (click)="sortBy('Clan')">Clan
+      <span class="sortorder" *ngIf="propertyName === 'Clan'" [ngClass]="{reverse: order == 1}"></span>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"><hr></div>
+  </div>
+  <div class="row" *ngFor="let item of anagrafe">
+    <div class="col"><span [ngClass]="{'messaggioM': item.Sesso == 'M' , 'messaggioF': item.Sesso == 'F' }">{{item.Nome}}</span></div>
+    <div class="col"><span [ngClass]="{'messaggioM': item.Sesso == 'M' , 'messaggioF': item.Sesso == 'F' }">{{item.Cognome}}</span></div>
+    <div class="col">{{item.Sesso}}</div>
+    <div class="col"><img src="assets/{{item.ClanImg}}"> {{item.Clan}}</div>
+  </div>
+</div>
