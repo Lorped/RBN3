@@ -59,7 +59,8 @@ if ( $id == $Userid || $MasterAdmin > 0 ) {
 
 
 if ( ! $full ) {
-	$MySql = "SELECT Nome, Cognome, DataIscrizione, URLImg FROM Personaggio WHERE Userid='$id'";
+	$MySql = "SELECT Nome, Cognome, DataIscrizione, URLImg, EtaA, Clan FROM Personaggio
+	LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan WHERE Userid='$id'";
 	$Result=mysql_query($MySql);
 	$res = mysql_fetch_array($Result,MYSQL_ASSOC);
 
@@ -72,7 +73,7 @@ if ( ! $full ) {
 if ( $full ) {
 	$MySql = "SELECT
 	Userid , Nome , Cognome , Email , Pass ,
-    DataIscrizione ,  
+    DataIscrizione ,
 		a1.Archetipo as Natura ,
 		a2.Archetipo as Carattere ,
  		Clan ,

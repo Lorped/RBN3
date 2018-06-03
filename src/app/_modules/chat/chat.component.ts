@@ -7,6 +7,7 @@ import 'rxjs/add/operator/takeWhile';
 // import { takeWhile } from 'rxjs/operators';
 
 import { MyChat, Chatrow , ChatService, ListpresentiService, PostService, Presenti } from '../../_services/index';
+import { ModalService } from '../../_services/index';
 
 import { Status } from '../../globals';
 
@@ -36,7 +37,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
 
   constructor( private status: Status, private chatservice: ChatService, private postservice: PostService,
-    private listpresentiservice: ListpresentiService, private route: ActivatedRoute, private router: Router ) { }
+    private listpresentiservice: ListpresentiService, private route: ActivatedRoute, private router: Router,
+    private modalService: ModalService ) { }
 
 
   ngOnInit() {
@@ -156,6 +158,19 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         }
         this.listachat.push(data.Listachat[i]);
       }
+    }
+  }
+
+
+
+  showoth  (id: number) {
+    if ( id === this.status.Userid ) {
+      this.status.schedaon = true ;
+      this.modalService.show('modalscheda') ;
+    } else {
+      this.status.schedaothon = true ;
+      this.status.otherID = id ;
+      this.modalService.show('modalschedaoth') ;
     }
   }
 }

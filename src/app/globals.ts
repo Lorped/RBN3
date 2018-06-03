@@ -115,4 +115,6 @@ export class Status {
   pxon = false;
   bioon = false;
   anagon = false;
+  schedaothon = false;
+  otherID = 0;
 }

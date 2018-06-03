@@ -6,7 +6,7 @@
   <ul class="chat" #chatdiv >
     <li [ngClass]="{'adm': row.Tipo == 'A' , 'master': row.Tipo == 'M', 'azione': row.Tipo == '+' , 'suss': row.IDDestinatario !='0' }" *ngFor="let row of listachat">
 
-        <span class="ora">{{ row.Ora }}</span>&nbsp;-&nbsp;<span class="bold" [ngClass]="{'messaggioM': row.Sesso == 'M' , 'messaggioF': row.Sesso == 'F' }">{{ row.Mittente }}</span> {{ row.Testo }}
+        <span class="ora">{{ row.Ora }}</span>&nbsp;-&nbsp;<span class="bold" [ngClass]="{'messaggioM': row.Sesso == 'M' , 'messaggioF': row.Sesso == 'F' }"><a href="javascript:void(0)" (click)="showoth(row.IDMittente)">{{ row.Mittente }}</a></span> {{ row.Testo }}
 
 
     </li>

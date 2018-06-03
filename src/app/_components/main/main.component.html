@@ -55,6 +55,22 @@
 
 <!-- ----->
 
+<!-- <app-modal id="modal-scheda"> -->
+
+<app-modal #modalschedaoth modalId="modalschedaoth">
+  <div class="app-modal-header">
+    <i>Scheda Personaggio</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.schedaothon=false; modalschedaoth.hide()">&times;</button>
+  </div>
+  <div class="app-modal-body">
+    <app-schedaother *ngIf="this.status.schedaothon"></app-schedaother>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.schedaothon=false; modalschedaoth.hide()">Chiudi</button>
+  </div>
+</app-modal>
+
+<!-- ----->
+
 
 <button (click)="toggleMenu()" class="menubutton">
   <span>toggle menu</span>
