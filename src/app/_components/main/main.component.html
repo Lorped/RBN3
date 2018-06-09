@@ -1,14 +1,4 @@
-<app-modal #modalscheda modalId="modalscheda" >
-  <div class="app-modal-header">
-    <i>Scheda Personaggio</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.schedaon=false; modalscheda.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-scheda *ngIf="this.status.schedaon"></app-scheda>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.schedaon=false; modalscheda.hide()">Chiudi</button>
-  </div>
-</app-modal>
+
 
 <!-- <app-modal id="modal-scheda"> -->
 <app-modal #modalpx modalId="modalpx">
@@ -54,7 +44,17 @@
 </app-modal>
 
 <!-- ----->
-
+<app-modal #modalscheda modalId="modalscheda" >
+  <div class="app-modal-header">
+    <i>Scheda Personaggio</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.schedaon=false; modalscheda.hide()">&times;</button>
+  </div>
+  <div class="app-modal-body">
+    <app-scheda *ngIf="this.status.schedaon"></app-scheda>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.schedaon=false; modalscheda.hide()">Chiudi</button>
+  </div>
+</app-modal>
 <!-- <app-modal id="modal-scheda"> -->
 
 <app-modal #modalschedaoth modalId="modalschedaoth">

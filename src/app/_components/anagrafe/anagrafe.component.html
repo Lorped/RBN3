@@ -25,8 +25,8 @@
     <div class="col"><hr></div>
   </div>
   <div class="row" *ngFor="let item of anagrafe">
-    <div class="col"><span [ngClass]="{'messaggioM': item.Sesso == 'M' , 'messaggioF': item.Sesso == 'F' }">{{item.Nome}}</span></div>
-    <div class="col"><span [ngClass]="{'messaggioM': item.Sesso == 'M' , 'messaggioF': item.Sesso == 'F' }">{{item.Cognome}}</span></div>
+    <div class="col"><span [ngClass]="{'messaggioM': item.Sesso == 'M' , 'messaggioF': item.Sesso == 'F' }"><a href="javascript:void(0)" (click)="showoth(item.Userid)">{{item.Nome}}</a></span></div>
+    <div class="col"><span [ngClass]="{'messaggioM': item.Sesso == 'M' , 'messaggioF': item.Sesso == 'F' }"><a href="javascript:void(0)" (click)="showoth(item.Userid)">{{item.Cognome}}</a></span></div>
     <div class="col">{{item.Sesso}}</div>
     <div class="col"><img src="assets/{{item.ClanImg}}"> {{item.Clan}}</div>
   </div>
