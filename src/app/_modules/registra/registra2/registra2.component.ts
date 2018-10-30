@@ -12,9 +12,26 @@ export class Registra2Component implements OnInit {
 
   skills: Array<Skill> = [];
 
-  sommaA = 0;
-  sommaC = 0;
-  sommaK = 0;
+  num4 = 0;
+  num3 = 0;
+  num2 = 0;
+  num1 = 0;
+
+  max1a = 10;
+  max2a = 8;
+  max3a = 1;
+  max4a = 0;
+
+  max1b = 7;
+  max2b = 5;
+  max3b = 3;
+  max4b = 0;
+
+  max1c = 3;
+  max2c = 3;
+  max3c = 3;
+  max4c = 1;
+
   formOK = false ;
 
   constructor( private signupservice: SignupService, private router: Router ) { }
@@ -29,12 +46,14 @@ export class Registra2Component implements OnInit {
       this.skills = olddata.skill;
 
       for ( let j = 0; j < this.skills.length; j++ ) {
-        if (this.skills[j].Tipologia === '1' ) {
-          this.sommaA = this.sommaA + this.skills[j].Livello;
-        } else if (this.skills[j].Tipologia === '2' ) {
-          this.sommaC = this.sommaC + this.skills[j].Livello;
-        } else if (this.skills[j].Tipologia === '3' ) {
-          this.sommaK = this.sommaK + this.skills[j].Livello;
+        if (this.skills[j].Livello === 1 ) {
+          this.num1++ ;
+        } else if (this.skills[j].Livello === 2 ) {
+          this.num2++ ;
+        } else if (this.skills[j].Livello === 3 ) {
+          this.num3++ ;
+        } else if (this.skills[j].Livello === 4 ) {
+          this.num4++ ;
         }
       }
       this.formOK = true ;
@@ -55,27 +74,17 @@ export class Registra2Component implements OnInit {
   addattr (attr: number) {
     this.skills[attr - 1].Livello++;
 
-    for ( let j = 0; j < this.skills.length; j++ ) {
-      if (this.skills[j].IDskill === attr ) {
-        if (this.skills[j].Tipologia === '1' ) {
-          this.sommaA++;
-        } else if (this.skills[j].Tipologia === '2' ) {
-          this.sommaC++;
-        } else if (this.skills[j].Tipologia === '3' ) {
-          this.sommaK++;
-        }
-      }
-    }
+    if ( this.skills[attr - 1].Livello === 1 )  {              this.num1++;}
+    if ( this.skills[attr - 1].Livello === 2 )  { this.num1--; this.num2++;}
+    if ( this.skills[attr - 1].Livello === 3 )  { this.num2--; this.num3++;}
+    if ( this.skills[attr - 1].Livello === 4 )  { this.num3--; this.num4++;}
 
 
     this.formOK = false;
     if (
-      (this.sommaA === 13 && this.sommaC === 9 && this.sommaK === 5) ||
-      (this.sommaA === 13 && this.sommaC === 5 && this.sommaK === 9) ||
-      (this.sommaA === 9 && this.sommaC === 13 && this.sommaK === 5) ||
-      (this.sommaA === 9 && this.sommaC === 5 && this.sommaK === 13) ||
-      (this.sommaA === 5 && this.sommaC === 9 && this.sommaK === 13) ||
-      (this.sommaA === 5 && this.sommaC === 13 && this.sommaK === 9)
+      (this.max1a === this.num1 && this.max2a === this.num2 && this.max3a === this.num3 && this.max4a === this.num4) ||
+      (this.max1b === this.num1 && this.max2b === this.num2 && this.max3b === this.num3 && this.max4b === this.num4) ||
+      (this.max1c === this.num1 && this.max2c === this.num2 && this.max3c === this.num3 && this.max4c === this.num4)
     ) {
       this.formOK = true;
     }
@@ -84,26 +93,18 @@ export class Registra2Component implements OnInit {
   minattr (attr: number) {
     this.skills[attr - 1].Livello--;
 
-    for ( let j = 0; j < this.skills.length; j++ ) {
-      if (this.skills[j].IDskill === attr ) {
-        if (this.skills[j].Tipologia === '1' ) {
-          this.sommaA--;
-        } else if (this.skills[j].Tipologia === '2' ) {
-          this.sommaC--;
-        } else if (this.skills[j].Tipologia === '3' ) {
-          this.sommaK--;
-        }
-      }
-    }
+    if ( this.skills[attr - 1].Livello === 0 )  { this.num1--;             }
+    if ( this.skills[attr - 1].Livello === 1 )  { this.num2--; this.num1++;}
+    if ( this.skills[attr - 1].Livello === 2 )  { this.num3--; this.num2++;}
+    if ( this.skills[attr - 1].Livello === 3 )  { this.num4--; this.num3++;}
+
+
 
     this.formOK = false;
     if (
-      (this.sommaA === 13 && this.sommaC === 9 && this.sommaK === 5) ||
-      (this.sommaA === 13 && this.sommaC === 5 && this.sommaK === 9) ||
-      (this.sommaA === 9 && this.sommaC === 13 && this.sommaK === 5) ||
-      (this.sommaA === 9 && this.sommaC === 5 && this.sommaK === 13) ||
-      (this.sommaA === 5 && this.sommaC === 9 && this.sommaK === 13) ||
-      (this.sommaA === 5 && this.sommaC === 13 && this.sommaK === 9)
+      (this.max1a === this.num1 && this.max2a === this.num2 && this.max3a === this.num3 && this.max4a === this.num4) ||
+      (this.max1b === this.num1 && this.max2b === this.num2 && this.max3b === this.num3 && this.max4b === this.num4) ||
+      (this.max1c === this.num1 && this.max2c === this.num2 && this.max3c === this.num3 && this.max4c === this.num4)
     ) {
       this.formOK = true;
     }

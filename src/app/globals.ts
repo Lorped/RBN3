@@ -68,6 +68,7 @@ export class Basicpg {
   public UsoPS = 1;
   public DescSalute = ''; // from LEFT Join
   public ModSalute = 0; // from LEFT Join
+  public Sete;
   public BloodP = 0;  // from LEFT JOIN da BloodPotency
   public Surge = 0 ;
   public Danni = 0 ;

@@ -28,6 +28,8 @@ export class SchedaComponent implements OnInit {
     .subscribe( (data: Personaggio) => {
       this.myPG = data;
       this.myaPG = this.myPG.aPG;
+      console.log("today "+this.today);
+      console.log(this.myPG);
     });
 
     this.schedaService.getnecrotaum(this.status.Userid)
