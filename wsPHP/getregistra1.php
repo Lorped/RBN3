@@ -38,7 +38,7 @@ while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
 
 $attributi=[];
 
-$MySql="SELECT * , '1' as Livello FROM Attributi_main   ";
+$MySql="SELECT * , '0' as Livello FROM Attributi_main   ";
 $Result=mysql_query($MySql);
 while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
 	$attributi[] = $res;

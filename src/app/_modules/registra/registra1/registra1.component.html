@@ -83,13 +83,13 @@
       </div>
       <div class="row">
         <div class="col alc">
-          Fisici ({{sommaF-3}})
+          Fisici
         </div>
         <div class="col alc">
-          Sociali ({{sommaS-3}})
+          Sociali
         </div>
         <div class="col alc">
-          Mentali ({{sommaM-3}})
+          Mentali
         </div>
       </div>
       <div class="row">
@@ -98,9 +98,9 @@
             <tr *ngFor="let a of attributi">
             <td *ngIf="a.Tipologia == 'F'">{{a.NomeAttributo}}</td>
             <td *ngIf="a.Tipologia == 'F'" class="alr">
-              <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button>
+              <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
               <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
-              <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button>
+              <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>3"><i class="fa fa-plus"></i></button>
             </td>
           </tr>
           </table>
@@ -110,9 +110,9 @@
             <tr *ngFor="let a of attributi">
             <td *ngIf="a.Tipologia == 'S'">{{a.NomeAttributo}}</td>
             <td *ngIf="a.Tipologia == 'S'" class="alr">
-              <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button>
+              <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
               <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
-              <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button>
+              <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>3"><i class="fa fa-plus"></i></button>
             </td>
           </tr>
           </table>
@@ -122,9 +122,9 @@
             <tr *ngFor="let a of attributi">
               <td *ngIf="a.Tipologia == 'M'">{{a.NomeAttributo}}</td>
               <td *ngIf="a.Tipologia == 'M'" class="alr">
-                <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<2"><i class="fa fa-minus"></i></button>
+                <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDattributo)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
                 <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
-                <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>4"><i class="fa fa-plus"></i></button>
+                <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDattributo)" [disabled]="a.Livello>3"><i class="fa fa-plus"></i></button>
               </td>
             </tr>
           </table>
@@ -134,7 +134,35 @@
         <div class="col">&nbsp;</div>
       </div>
       <div class="row">
-        <div class="col">Distribuire <span class="red">7</span> pallini in una categoria di attributi (mentali, fisici o sociali), <span class="red">5</span> in una categoria secondaria e <span class="red">3</span> nella rimanente terziaria</div>
+        <div class="col">
+          <table class="full">
+            <tr>
+              <td>Salute</td>
+              <td class="alr"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > salute , 'dred': ix < salute }"></i></td>
+            </tr>
+          </table>
+        </div>
+        <div class="col">
+          <table class="full">
+            <tr>
+              <td>Forza di Volontà</td>
+              <td class="alr"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > fdv , 'dred': ix < fdv }"></i></td>
+            </tr>
+          </table>
+        </div>
+        <div class="col">
+          &nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+      <div class="row">
+        <div class="col">Distribuire i pallini così da avere:<br>
+          - un attributo a <span class="red">4</span> <span *ngIf="num4==max4" class="fa fa-check dgreen"></span> <br>
+          - tre attributi a <span class="red">3</span> <span *ngIf="num3==max3" class="fa fa-check dgreen"></span> <br>
+          - quattro attributi a <span class="red">2</span> <span *ngIf="num2==max2" class="fa fa-check dgreen"></span> <br>
+          - un attributo a <span class="red">1</span> <span *ngIf="num1==max1" class="fa fa-check dgreen"></span> </div>
       </div>
       <div class="row">
         <div class="col">&nbsp;</div>

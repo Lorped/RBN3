@@ -21,6 +21,10 @@
   color: #b00000;
 }
 
+.dgreen {
+  color: #228B22;
+}
+
 html, body {
 	background-color: #000000;
 	color: #ffffff;

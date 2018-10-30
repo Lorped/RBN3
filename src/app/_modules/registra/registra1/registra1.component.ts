@@ -17,15 +17,23 @@ export class Registra1Component implements OnInit {
   clan: Array<Clan> = [];
   attributi: Array<Attributo> = [];
 
-  sommaF = 3;
-  sommaS = 3;
-  sommaM = 3;
+  num4 = 0;
+  num3 = 0;
+  num2 = 0;
+  num1 = 0;
+
+  max1 = 1;
+  max2 = 4;
+  max3 = 3;
+  max4 = 1;
+
   formOK = false ;
 
   M = 'M';
   F = 'F';
 
-
+  salute = 3;
+  fdv = 0;
 
   constructor( private signupservice: SignupService, private router: Router) { }
 
@@ -111,10 +119,15 @@ export class Registra1Component implements OnInit {
         Sesso: olddata.Sesso
       });
 
-      this.sommaF = this.attributi[0].Livello + this.attributi[1].Livello + this.attributi[2].Livello;
-      this.sommaS = this.attributi[3].Livello + this.attributi[4].Livello + this.attributi[5].Livello;
-      this.sommaM = this.attributi[6].Livello + this.attributi[7].Livello + this.attributi[8].Livello;
+      this.num1 = this.max1;
+      this.num2 = this.max2;
+      this.num3 = this.max3;
+      this.num4 = this.max4;
+
       this.formOK = true;
+
+      this.salute=this.attributi[2].Livello + 3 ;   //costituzione + 3
+      this.fdv=this.attributi[5].Livello + this.attributi[8].Livello ;   //determ. + compost.
     }
 
 
@@ -149,38 +162,41 @@ export class Registra1Component implements OnInit {
 
   addattr (attr: number) {
     this.attributi[attr - 1].Livello++;
-    this.sommaF = this.attributi[0].Livello + this.attributi[1].Livello + this.attributi[2].Livello;
-    this.sommaS = this.attributi[3].Livello + this.attributi[4].Livello + this.attributi[5].Livello;
-    this.sommaM = this.attributi[6].Livello + this.attributi[7].Livello + this.attributi[8].Livello;
+    if (this.attributi[attr - 1].Livello === 1 ) { this.num1++; }
+    if (this.attributi[attr - 1].Livello === 2 ) { this.num2++; this.num1--; }
+    if (this.attributi[attr - 1].Livello === 3 ) { this.num3++; this.num2--; }
+    if (this.attributi[attr - 1].Livello === 4 ) { this.num4++; this.num3--; }
 
     this.formOK = false;
     if (
-      (this.sommaF === 10 && this.sommaS === 8 && this.sommaM === 6) ||
-      (this.sommaF === 10 && this.sommaS === 6 && this.sommaM === 8) ||
-      (this.sommaF === 8 && this.sommaS === 10 && this.sommaM === 6) ||
-      (this.sommaF === 8 && this.sommaS === 6 && this.sommaM === 10) ||
-      (this.sommaF === 6 && this.sommaS === 8 && this.sommaM === 10) ||
-      (this.sommaF === 6 && this.sommaS === 10 && this.sommaM === 8)
+      (this.num1 === this.max1)  &&
+      (this.num2 === this.max2)  &&
+      (this.num3 === this.max3)  &&
+      (this.num4 === this.max4)
     ) {
       this.formOK = true;
     }
+    this.salute=this.attributi[2].Livello + 3 ;   //costituzione + 3
+    this.fdv=this.attributi[5].Livello + this.attributi[8].Livello ;   //determ. + compost.
   }
   minattr (attr: number) {
     this.attributi[attr - 1].Livello--;
-    this.sommaF = this.attributi[0].Livello + this.attributi[1].Livello + this.attributi[2].Livello;
-    this.sommaS = this.attributi[3].Livello + this.attributi[4].Livello + this.attributi[5].Livello;
-    this.sommaM = this.attributi[6].Livello + this.attributi[7].Livello + this.attributi[8].Livello;
+    if (this.attributi[attr - 1].Livello === 0 ) {              this.num1--; }
+    if (this.attributi[attr - 1].Livello === 1 ) { this.num1++; this.num2--; }
+    if (this.attributi[attr - 1].Livello === 2 ) { this.num2++; this.num3--; }
+    if (this.attributi[attr - 1].Livello === 3 ) { this.num3++; this.num4--; }
+    //if (this.attributi[attr - 1].Livello === 4 ) { this.num4++; }
     this.formOK = false;
     if (
-      (this.sommaF === 10 && this.sommaS === 8 && this.sommaM === 6) ||
-      (this.sommaF === 10 && this.sommaS === 6 && this.sommaM === 8) ||
-      (this.sommaF === 8 && this.sommaS === 10 && this.sommaM === 6) ||
-      (this.sommaF === 8 && this.sommaS === 6 && this.sommaM === 10) ||
-      (this.sommaF === 6 && this.sommaS === 8 && this.sommaM === 10) ||
-      (this.sommaF === 6 && this.sommaS === 10 && this.sommaM === 8)
+      (this.num1 === this.max1)  &&
+      (this.num2 === this.max2)  &&
+      (this.num3 === this.max3)  &&
+      (this.num4 === this.max4)
     ) {
       this.formOK = true;
     }
+    this.salute=this.attributi[2].Livello + 3 ;   //costituzione + 3
+    this.fdv=this.attributi[5].Livello + this.attributi[8].Livello ;   //determ. + compost.
   }
 
   goto2() {

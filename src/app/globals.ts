@@ -50,8 +50,8 @@ export class Basicpg {
   public Eta = 0;
   public EtaA = 0;
   public Generazione = 0;
-  public PS = 0;
-  public PSmax = 0;
+  public PS = 0;  // inutile, andrà eliminato
+  public PSmax = 0; // inutile, andrà eliminato
   public FdV = 0;
   public FdVmax = 0;
   public Valsentiero = 0;
@@ -68,6 +68,15 @@ export class Basicpg {
   public UsoPS = 1;
   public DescSalute = ''; // from LEFT Join
   public ModSalute = 0; // from LEFT Join
+  public BloodP = 0;  // from LEFT JOIN da BloodPotency
+  public Surge = 0 ;
+  public Danni = 0 ;
+  public BonusD = 0;
+  public Bane = 0 ;
+  public MinSete = 0;
+  public MinBP = 0 ; // from LEFT JOIN da Generazioni
+  public MaxBP = 0 ;
+
 }
 
 @Injectable()

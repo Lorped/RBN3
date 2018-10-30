@@ -51,7 +51,6 @@ if ( CheckJWT ($token) ) {
 
 
 
-
 $full = FALSE;
 if ( $id == $Userid || $MasterAdmin > 0 ) {
 	$full = TRUE;
@@ -90,6 +89,7 @@ if ( $full ) {
 		LEFT JOIN Archetipi AS a2 ON Personaggio.IDcarattere = a2.IDarchetipo
 		LEFT JOIN Generazioni ON Personaggio.Generazione = Generazioni.Generazione
 		LEFT JOIN Livelli_salute ON Personaggio.IDsalute = Livelli_salute.IDsalute
+		LEFT JOIN BloodPotency ON Personaggio.BloodP = BloodPotency.BloodP
 		WHERE Userid='$id'";
 	$Result=mysql_query($MySql);
 	$pg = mysql_fetch_array($Result,MYSQL_ASSOC);
