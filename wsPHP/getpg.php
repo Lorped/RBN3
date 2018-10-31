@@ -73,8 +73,7 @@ if ( $full ) {
 	$MySql = "SELECT
 	Userid , Nome , Cognome , Email , Pass ,
     DataIscrizione ,
-		a1.Archetipo as Natura ,
-		a2.Archetipo as Carattere ,
+		Concetto , Predatore ,
  		Clan ,
     Sesso , Eta , EtaA , Personaggio.Generazione , PS , PSmax , FdV , FdVmax ,
     Valsentiero , DescSentiero ,
@@ -86,15 +85,14 @@ if ( $full ) {
 	FROM Personaggio
 		LEFT JOIN Sentieri ON Personaggio.IDsentiero = Sentieri.IDsentiero
 		LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan
-		LEFT JOIN Archetipi AS a1 ON Personaggio.IDnatura = a1.IDarchetipo
-		LEFT JOIN Archetipi AS a2 ON Personaggio.IDcarattere = a2.IDarchetipo
+		LEFT JOIN Concetto ON Personaggio.IDconcetto = Concetto.IDconcetto
+		LEFT JOIN Predatore  ON Personaggio.IDpredatore = Predatore.IDpredatore
 		LEFT JOIN Generazioni ON Personaggio.Generazione = Generazioni.Generazione
 		LEFT JOIN Livelli_salute ON Personaggio.IDsalute = Livelli_salute.IDsalute
 		LEFT JOIN BloodPotency ON Personaggio.BloodP = BloodPotency.BloodP
 		WHERE Userid='$id'";
 	$Result=mysql_query($MySql);
 	$pg = mysql_fetch_array($Result,MYSQL_ASSOC);
-
 
 	$MySql = "SELECT
 	Attributi.IDattributo , NomeAttributo , Tipologia , Livello

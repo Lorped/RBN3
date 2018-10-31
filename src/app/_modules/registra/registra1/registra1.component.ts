@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { Attributo, Clan, Archetipo } from '../../../globals';
+import { Attributo, Clan, Concetto } from '../../../globals';
 import { SignupService } from '../../../_services/signup.service';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ export class Registra1Component implements OnInit {
 
   registrationForm: FormGroup;
 
-  archetipi: Array<Archetipo> = [];
+  concetti: Array<Concetto> = [];
   clan: Array<Clan> = [];
   attributi: Array<Attributo> = [];
 
@@ -64,7 +64,7 @@ export class Registra1Component implements OnInit {
         Validators.max(80)
       ]),
 
-      naturaPG: new FormControl('', [
+      concettoPG: new FormControl('', [
         Validators.required,
       ]),
 
@@ -72,9 +72,6 @@ export class Registra1Component implements OnInit {
         Validators.required,
       ]),
 
-      caratterePG: new FormControl('', [
-        Validators.required,
-      ]),
 
       Sesso: new FormControl('', [
         Validators.required
@@ -90,7 +87,7 @@ export class Registra1Component implements OnInit {
     this.signupservice.getregistra1()
     .subscribe(
       (res: any) => {
-        this.archetipi = res.archetipi;
+        this.concetti = res.concetti;
         this.clan = res.clan;
 
         if ( !olddata ) {
@@ -114,8 +111,7 @@ export class Registra1Component implements OnInit {
         etaPG: olddata.etaPG,
         etaAPG: olddata.etaAPG,
         clanPG: olddata.clanPG,
-        naturaPG: olddata.naturaPG,
-        caratterePG: olddata.caratterePG,
+        concettoPG: olddata.concettoPG,
         Sesso: olddata.Sesso
       });
 
@@ -145,11 +141,8 @@ export class Registra1Component implements OnInit {
   get etaAPG() {
       return this.registrationForm.get('etaAPG');
   }
-  get naturaPG() {
-      return this.registrationForm.get('naturaPG');
-  }
-  get caratterePG() {
-      return this.registrationForm.get('caratterePG');
+  get concettoPG() {
+      return this.registrationForm.get('concettoPG');
   }
   get clanPG() {
       return this.registrationForm.get('clanPG');
@@ -206,13 +199,10 @@ export class Registra1Component implements OnInit {
         clanname = this.clan[j].NomeClan ;
       }
     }
-    let naturaname = '';
-    let caratterename = '';
-    for (let j = 0; j < this.archetipi.length; j++ ) {
-      if (this.archetipi[j].IDarchetipo === this.naturaPG.value ) {
-        naturaname = this.archetipi[j].Archetipo ;
-      } else if (this.archetipi[j].IDarchetipo === this.caratterePG.value ) {
-        caratterename = this.archetipi[j].Archetipo ;
+    let concettoname = '';
+    for (let j = 0; j < this.concetti.length; j++ ) {
+      if (this.concetti[j].IDconcetto === this.concettoPG.value ) {
+        concettoname = this.concetti[j].Concetto ;
       }
     }
     const myobj = {
@@ -221,10 +211,8 @@ export class Registra1Component implements OnInit {
       'clanPG': this.clanPG.value,
       'Sesso': this.Sesso.value,
       'clanname': clanname,
-      'naturaPG': this.naturaPG.value,
-      'naturaname': naturaname,
-      'caratterePG': this.caratterePG.value,
-      'caratterename': caratterename,
+      'concettoPG': this.concettoPG.value,
+      'concettoname': concettoname,
       'etaPG': this.etaPG.value,
       'etaAPG': this.etaAPG.value,
       'attributi': this.attributi

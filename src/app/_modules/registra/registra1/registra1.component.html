@@ -34,7 +34,7 @@
           <option *ngFor="let i of clan" [ngValue]="i.IDclan">{{i.NomeClan}}</option>
           </select>
         </div>
-        <div class="form-group col-1">
+        <div class="form-group col-2">
           <label for="sessoPG">Sesso</label>
           <select id="sessoPG" name="sessoPG" class="form-control" required formControlName="Sesso">
             <option [ngValue]='F'>F</option>
@@ -58,16 +58,10 @@
             <div *ngIf="etaAPG.errors.min||etaAPG.errors.max">Età ammessa: 16 - 80 anni</div>
           </div>
         </div>
-        <div class="form-group col-2">
-          <label for="naturaPG">Natura</label>
-          <select id="naturaPG" name="naturaPG" class="form-control" required formControlName="naturaPG">
-          <option *ngFor="let i of archetipi" [ngValue]="i.IDarchetipo">{{i.Archetipo}}</option>
-          </select>
-        </div>
-        <div class="form-group col-2">
-          <label for="caratterePG">Carattere</label>
-          <select id="caratterePG" name="caratterePG" class="form-control" required formControlName="caratterePG">
-          <option *ngFor="let i of archetipi" [ngValue]="i.IDarchetipo">{{i.Archetipo}}</option>
+        <div class="form-group col-3">
+          <label for="concettoPG">Concetto</label>
+          <select id="concettoPG" name="concettoPG" class="form-control" required formControlName="concettoPG">
+          <option *ngFor="let i of concetti" [ngValue]="i.IDconcetto">{{i.Concetto}}</option>
           </select>
         </div>
       </div>

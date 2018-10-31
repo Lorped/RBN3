@@ -56,7 +56,7 @@ $email=mysql_real_escape_string($newPG->Email);
 $pass=mysql_real_escape_string($newPG->Pass);
 
 $MySql="INSERT INTO Personaggio ( Nome, Cognome, Email, Pass, DataIscrizione,
- IDNatura, IDCarattere,  IDclan, Sesso, Eta, EtaA,
+ IDconcetto,  IDclan, Sesso, Eta, EtaA,
  Generazione, PS, PSmax,
  FdV, FdVmax,
  IDsentiero, Valsentiero,
@@ -64,7 +64,7 @@ $MySql="INSERT INTO Personaggio ( Nome, Cognome, Email, Pass, DataIscrizione,
  )
 VALUES (
 	'$nome' , '$cognome' ,'$email' , '$pass' , NOW() ,
-	$newPG->Natura , $newPG->Carattere, $newPG->Clan, '$newPG->Sesso', $newPG->Eta, $newPG->EtaA,
+	$newPG->Concetto , $newPG->Clan, '$newPG->Sesso', $newPG->Eta, $newPG->EtaA,
 	$gen, $ps, $ps,
 	$newPG->FdVmax, $newPG->FdVmax,
 	$newPG->DescSentiero, $newPG->Valsentiero,

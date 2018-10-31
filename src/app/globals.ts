@@ -41,8 +41,8 @@ export class Basicpg {
   public Pass = '';
   public DataIscrizione = '';
   public Esperienza  = 0;
-  public Natura = '';  // from LEFT Join
-  public Carattere = ''; // from LEFT Join
+  public Concetto = '';  // from LEFT Join
+  public Predatore = '';  // from LEFT Join
   // public IDrazza = 0;
   // public IDclan = 0;
   public Clan = ''; // from LEFT Join
@@ -100,9 +100,9 @@ export class Personaggio {
 }
 
 @Injectable()
-export class Archetipo {
-  IDarchetipo = 0;
-  Archetipo = '';
+export class Concetto {
+  IDconcetto = 0;
+  Concetto = '';
 }
 
 @Injectable()

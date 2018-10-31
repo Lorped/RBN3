@@ -42,8 +42,7 @@ export class Registra4Component implements OnInit {
 
     this.newPG.Nome = datajson.nomePG;
     this.newPG.Cognome = datajson.cognomePG;
-    this.newPG.Natura = datajson.naturaPG;
-    this.newPG.Carattere = datajson.caratterePG;
+    this.newPG.Concetto = datajson.concettoPG;
     this.newPG.Sesso = datajson.Sesso;
     this.newPG.Eta = datajson.etaPG;
     this.newPG.EtaA = datajson.etaAPG;
