@@ -4,11 +4,14 @@ import { Attributo, Clan, Concetto } from '../../../globals';
 import { SignupService } from '../../../_services/signup.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-registra1',
   templateUrl: './registra1.component.html',
   styleUrls: ['./registra1.component.css']
 })
+
+
 export class Registra1Component implements OnInit {
 
   registrationForm: FormGroup;
@@ -35,12 +38,18 @@ export class Registra1Component implements OnInit {
   salute = 3;
   fdv = 0;
 
+  today: number = (new Date()).getFullYear();
+
+
+
+
   constructor( private signupservice: SignupService, private router: Router) { }
 
   ngOnInit() {
 
     let olddata: any;
     let olddatastring: string;
+
 
     this.registrationForm = new FormGroup ({
       nomePG: new FormControl('', [
@@ -52,10 +61,10 @@ export class Registra1Component implements OnInit {
         Validators.pattern('^[A-Za-zàèìòù \']+$')
       ]),
 
-      etaPG: new FormControl('', [
+      etaPG: new FormControl('1980', [
         Validators.required,
         Validators.min(1900),
-        Validators.max(2000)
+        Validators.max(this.today-16)
       ]),
 
       etaAPG: new FormControl('', [
@@ -125,8 +134,6 @@ export class Registra1Component implements OnInit {
       this.salute=this.attributi[2].Livello + 3 ;   //costituzione + 3
       this.fdv=this.attributi[5].Livello + this.attributi[8].Livello ;   //determ. + compost.
     }
-
-
   }
 
   get nomePG() {
@@ -150,6 +157,9 @@ export class Registra1Component implements OnInit {
   get Sesso() {
       return this.registrationForm.get('Sesso');
   }
+
+
+
 
 
 

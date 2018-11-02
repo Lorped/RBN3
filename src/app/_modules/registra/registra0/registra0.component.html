@@ -39,7 +39,7 @@ l’indirizzo email verrà registrato come dato di login per l’accesso al sito
         </div>
         <div class="form-group">
           <p></p>
-            <button type="button" [disabled]="!formDir.form.valid" (click)="goto1()" class="btn btn-danger btn-block">Prosegui</button>
+            <button type="button" [disabled]="!formDir.form.valid || password2.value != password.value" (click)="goto1()" class="btn btn-danger btn-block">Prosegui</button>
             <div class="alc">
               <a [routerLink]="['/login']" class="btn btn-link">Torna al login</a>
             </div>
