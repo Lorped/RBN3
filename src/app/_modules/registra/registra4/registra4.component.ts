@@ -90,22 +90,22 @@ export class Registra4Component implements OnInit {
 
   addattr (attr: number) {
     this.listaAttributi[attr - 1].Livello++;
-    this.px = this.px - 5;
+    this.px = this.px - 5 * this.listaAttributi[attr - 1].Livello;
   }
 
   minattr (attr: number) {
+    this.px = this.px + 5 * this.listaAttributi[attr - 1].Livello
     this.listaAttributi[attr - 1].Livello--;
-    this.px = this.px + 5;
   }
 
   addskill (attr: number) {
     this.listaSkill[attr - 1].Livello++;
-    this.px = this.px - 2;
+    this.px = this.px - 3 * this.listaSkill[attr - 1].Livello ;
   }
 
   minskill (attr: number) {
+    this.px = this.px + 3 * this.listaSkill[attr - 1].Livello ;
     this.listaSkill[attr - 1].Livello--;
-    this.px = this.px + 2;
   }
 
   addfdv() {
@@ -116,6 +116,7 @@ export class Registra4Component implements OnInit {
     this.newPG.FdVmax--;
     this.px = this.px + 1;
   }
+
   addsentiero() {
     this.newPG.Valsentiero++;
     this.px = this.px - 2;
@@ -124,34 +125,11 @@ export class Registra4Component implements OnInit {
     this.newPG.Valsentiero--;
     this.px = this.px + 2;
   }
-  addcoscienza() {
-    this.newPG.Coscienza++;
-    this.px = this.px - 2;
-  }
-  mincoscienza() {
-    this.newPG.Coscienza--;
-    this.px = this.px + 2;
-  }
-  addcoraggio() {
-    this.newPG.Coraggio++;
-    this.px = this.px - 2;
-  }
-  mincoraggio() {
-    this.newPG.Coraggio--;
-    this.px = this.px + 2;
-  }
-  addselfcontrol() {
-    this.newPG.SelfControl++;
-    this.px = this.px - 2;
-  }
-  minselfcontrol() {
-    this.newPG.SelfControl--;
-    this.px = this.px + 2;
-  }
+
 
   plusdisc(disc: number) {
     this.listaDiscipline[disc].LivelloDisc++;
-    this.px = this.px - 7;
+    this.px = this.px - 5 * this.listaDiscipline[disc].LivelloDisc;
     if (this.listaDiscipline[disc].IDdisciplina === 7) {
       this.necroPG.Livello++;
     } else if ( this.listaDiscipline[disc].IDdisciplina === 15 ) {
@@ -159,8 +137,8 @@ export class Registra4Component implements OnInit {
     }
   }
   mindisc(disc: number) {
+    this.px = this.px + 5 * this.listaDiscipline[disc].LivelloDisc;
     this.listaDiscipline[disc].LivelloDisc--;
-    this.px = this.px + 7;
     if (this.listaDiscipline[disc].IDdisciplina === 7) {
       this.necroPG.Livello--;
     } else if ( this.listaDiscipline[disc].IDdisciplina === 15 ) {

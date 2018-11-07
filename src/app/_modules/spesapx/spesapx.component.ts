@@ -129,6 +129,7 @@ export class SpesapxComponent implements OnInit {
     this.myPG.aPG.Valsentiero++;
   }
 
+/* **********
   addcoscienza () {
     this.listaspesa.push( {x: 'addcoscienza.php' , y: 0, z: 'Coscienza'} );
 
@@ -149,6 +150,8 @@ export class SpesapxComponent implements OnInit {
     this.px = this.px - 2 * this.myPG.aPG.SelfControl;
     this.myPG.aPG.SelfControl++;
   }
+
+********** */
 
   addattr (attr: number) {
     this.listaspesa.push( {x: 'addattr.php' , y: attr, z: this.myPG.listaAttributi[attr - 1].NomeAttributo } );

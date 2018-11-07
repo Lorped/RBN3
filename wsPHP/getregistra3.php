@@ -24,7 +24,7 @@ $IDclan=$_GET['IDclan'];
 $bg=[];
 
 
-$MySql="SELECT * , '0' as LivelloBG FROM Background_main WHERE iniziale = 0 ";
+$MySql="SELECT * , '0' as LivelloBG FROM Background_main WHERE iniziale = 0 ORDER BY NomeBackground";
 $Result=mysql_query($MySql);
 while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
 	$bg[] = $res;

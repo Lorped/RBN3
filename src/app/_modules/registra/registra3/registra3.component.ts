@@ -14,13 +14,7 @@ export class Registra3Component implements OnInit {
   bg: Array<Background> = [];
   discipline: Array<Disciplina> = [];
 
-  coscienza = 1;
-  selfcontrol = 1;
-  coraggio = 1;
 
-
-  sommavirtu = 3 ;
-  virtuOK = false ;
 
   necro = [];
   taum = [];
@@ -39,12 +33,16 @@ export class Registra3Component implements OnInit {
 
   z = 0;
 
+  fdv = 0;
+
   constructor( private signupservice: SignupService, private router: Router ) { }
 
   ngOnInit() {
     let prevdatastring = sessionStorage.getItem('RBN3registration1') ;
     let prevdata = JSON.parse(prevdatastring);
 
+    this.fdv = prevdata.attributi[5].Livello + prevdata.attributi[8].Livello;
+    //console.log(prevdata);
 
     this.signupservice.getregistra3(prevdata.clanPG)
     .subscribe(
@@ -67,9 +65,6 @@ export class Registra3Component implements OnInit {
         if ( prevdatastring = sessionStorage.getItem('RBN3registration3') ) {
           prevdata = JSON.parse(prevdatastring);
 
-          this.coscienza = prevdata.coscienza;
-          this.coraggio = prevdata.coraggio;
-          this.selfcontrol = prevdata.selfcontrol;
           this.bg = prevdata.bg;
           this.sentieroPG = this.sent[prevdata.sentieroPG.IDsentiero - 1];
 
@@ -85,8 +80,6 @@ export class Registra3Component implements OnInit {
           }
           this.sommadisc = 3;
           this.discOK = true;
-          this.sommavirtu = 8;
-          this.virtuOK = true ;
           this.sommabg = 5;
           this.bgOK = true ;
         }
@@ -121,6 +114,7 @@ export class Registra3Component implements OnInit {
     }
   }
 
+/**** *********
   mincoscienza () {
     this.coscienza--;
     this.sommavirtu--;
@@ -176,6 +170,8 @@ export class Registra3Component implements OnInit {
     }
   }
 
+  *******/
+
   addbg (bg: number) {
     this.bgOK = false ;
     for (let j = 0; j < this.bg.length; j++ ) {
@@ -211,9 +207,6 @@ export class Registra3Component implements OnInit {
 
     const myobj = {
       'sentieroPG': this.sentieroPG,
-      'coscienza': this.coscienza,
-      'selfcontrol': this.selfcontrol,
-      'coraggio': this.coraggio,
       'bg': this.bg,
       'discipline': this.discipline,
       'necroPG': this.necroPG,

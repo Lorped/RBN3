@@ -77,7 +77,7 @@ if ( $full ) {
  		Clan ,
     Sesso , Eta , EtaA , Personaggio.Generazione , PS , PSmax , FdV , FdVmax ,
     Valsentiero , DescSentiero ,
-    Coscienza , Coraggio , SelfControl , Personaggio.IDsalute  ,
+    Personaggio.IDsalute  ,
     daurto , aggravati , URLImg , Soldi ,
 		MaxStat ,	UsoPS,
 		DescSalute , ModSalute,

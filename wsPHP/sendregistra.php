@@ -59,16 +59,14 @@ $MySql="INSERT INTO Personaggio ( Nome, Cognome, Email, Pass, DataIscrizione,
  IDconcetto,  IDclan, Sesso, Eta, EtaA,
  Generazione, PS, PSmax,
  FdV, FdVmax,
- IDsentiero, Valsentiero,
- Coscienza, Coraggio, SelfControl
+ IDsentiero, Valsentiero
  )
 VALUES (
 	'$nome' , '$cognome' ,'$email' , '$pass' , NOW() ,
 	$newPG->Concetto , $newPG->Clan, '$newPG->Sesso', $newPG->Eta, $newPG->EtaA,
 	$gen, $ps, $ps,
 	$newPG->FdVmax, $newPG->FdVmax,
-	$newPG->DescSentiero, $newPG->Valsentiero,
-	$newPG->Coscienza, $newPG->Coraggio, $newPG->SelfControl
+	$newPG->DescSentiero, $newPG->Valsentiero
 )";
 
 mysql_query($MySql);

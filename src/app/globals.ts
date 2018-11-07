@@ -56,9 +56,6 @@ export class Basicpg {
   public FdVmax = 0;
   public Valsentiero = 0;
   public DescSentiero = ''; // from LEFT Join
-  public Coscienza = 0;
-  public Coraggio = 0;
-  public SelfControl = 0;
   public IDsalute = 0;
   public daurto = 0;
   public aggravati = 0;
