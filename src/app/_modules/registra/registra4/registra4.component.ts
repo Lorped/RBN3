@@ -27,6 +27,8 @@ export class Registra4Component implements OnInit {
 
   px = 15;
 
+  export = false ;
+
   constructor( private router: Router , private signupservice: SignupService ) { }
 
   ngOnInit() {
@@ -50,6 +52,9 @@ export class Registra4Component implements OnInit {
 
     this.listaAttributi = datajson.attributi;
 
+    this.newPG.FdVmax = this.listaAttributi[5].Livello + this.listaAttributi[8].Livello;
+    this.newPG.IDsalute = this.listaAttributi[2].Livello + 3;
+
     data = sessionStorage.getItem('RBN3registration2');
     datajson = JSON.parse(data);
 
@@ -62,12 +67,6 @@ export class Registra4Component implements OnInit {
 
     this.newPG.Generazione = 13;
     this.newPG.DescSentiero = datajson.sentieroPG.IDsentiero ;  // Warning non desc ma ID !
-
-    //this.newPG.Coscienza = datajson.coscienza;
-    //this.newPG.Coraggio = datajson.coraggio;
-    //this.newPG.SelfControl = datajson.selfcontrol;
-    //this.newPG.Valsentiero = this.newPG.Coscienza + this.newPG.SelfControl;
-    //this.newPG.FdVmax = this.newPG.Coraggio;
 
 
     this.newPG_orig = JSON.parse(JSON.stringify(this.newPG));
@@ -91,11 +90,17 @@ export class Registra4Component implements OnInit {
   addattr (attr: number) {
     this.listaAttributi[attr - 1].Livello++;
     this.px = this.px - 5 * this.listaAttributi[attr - 1].Livello;
+
+    this.newPG.FdVmax = this.listaAttributi[5].Livello + this.listaAttributi[8].Livello;
+    this.newPG.IDsalute = this.listaAttributi[2].Livello + 3;
   }
 
   minattr (attr: number) {
     this.px = this.px + 5 * this.listaAttributi[attr - 1].Livello;
     this.listaAttributi[attr - 1].Livello--;
+
+    this.newPG.FdVmax = this.listaAttributi[5].Livello + this.listaAttributi[8].Livello;
+    this.newPG.IDsalute = this.listaAttributi[2].Livello + 3;
   }
 
   addskill (attr: number) {
@@ -108,51 +113,37 @@ export class Registra4Component implements OnInit {
     this.listaSkill[attr - 1].Livello--;
   }
 
-  addfdv() {
-    this.newPG.FdVmax++;
-    this.px = this.px - 1;
-  }
-  minfdv() {
-    this.newPG.FdVmax--;
-    this.px = this.px + 1;
-  }
-
-  addsentiero() {
-    this.newPG.Valsentiero++;
-    this.px = this.px - 2;
-  }
-  minsentiero() {
-    this.newPG.Valsentiero--;
-    this.px = this.px + 2;
-  }
 
 
   plusdisc(disc: number) {
     this.listaDiscipline[disc].LivelloDisc++;
     this.px = this.px - 5 * this.listaDiscipline[disc].LivelloDisc;
-    if (this.listaDiscipline[disc].IDdisciplina === 7) {
+
+    if (this.listaDiscipline[disc].IDdisciplina == 7 ) {
       this.necroPG.Livello++;
-    } else if ( this.listaDiscipline[disc].IDdisciplina === 15 ) {
+    } else if ( this.listaDiscipline[disc].IDdisciplina == 15 ) {
       this.taumPG.Livello++;
     }
   }
   mindisc(disc: number) {
     this.px = this.px + 5 * this.listaDiscipline[disc].LivelloDisc;
     this.listaDiscipline[disc].LivelloDisc--;
-    if (this.listaDiscipline[disc].IDdisciplina === 7) {
+    if (this.listaDiscipline[disc].IDdisciplina == 7 ) {
       this.necroPG.Livello--;
-    } else if ( this.listaDiscipline[disc].IDdisciplina === 15 ) {
+    } else if ( this.listaDiscipline[disc].IDdisciplina == 15 ) {
       this.taumPG.Livello--;
     }
   }
 
   plusbg(bg: number) {
     this.listaBackground[bg].LivelloBG++;
-    this.px = this.px - 1;
+    this.px = this.px - 3;
   }
   minbg(bg: number) {
     this.listaBackground[bg].LivelloBG--;
-    this.px = this.px + 1;
+    this.px = this.px + 3;
+
+    console.log(this.export);
   }
 
   goback() {
@@ -168,7 +159,8 @@ export class Registra4Component implements OnInit {
       'listaAttributi': this.listaAttributi,
       'listaSkill': this.listaSkill,
       'necroPG': this.necroPG,
-      'taumPG': this.taumPG
+      'taumPG': this.taumPG,
+      'px': this.px
     };
 
     sessionStorage.setItem('RBN3registration4', JSON.stringify(myobj) );
