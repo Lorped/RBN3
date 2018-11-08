@@ -1,6 +1,8 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map' ;
+
 
 @Injectable()
 export class AuthenticationService {
@@ -11,15 +13,15 @@ export class AuthenticationService {
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/login.php', {
       email: email,
       password: password
-    })
-    .map(user => {
+    }).pipe(
+    map(user => {
       // login successful if there's a jwt token in the response
       if (user && user.token) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         sessionStorage.setItem('RBN3currentUser', user.token );
       }
       return user;
-    });
+    }));
   }
 
   logout() {

@@ -1,9 +1,11 @@
+
+import {takeWhile, switchMap} from 'rxjs/operators';
 import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/takeWhile';
+
+
 // import { takeWhile } from 'rxjs/operators';
 
 import { MyChat, Chatrow , ChatService, ListpresentiService, PostService, Presenti } from '../../_services/index';
@@ -51,7 +53,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.listachat = [];
     this.status.Alive = true;
 
-    const Emitter = this.route.url.switchMap( (val) =>   {
+    const Emitter = this.route.url.pipe(switchMap( (val) =>   {
       // console.log("dentro switchmap"+this.status.Stanza);
 
       this.checkadmin = false;
@@ -66,9 +68,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.Destinatario = 0;
       this.location = '';
 
-      return TimerObservable.create(0, 20000)
-        .takeWhile(() => this.status.Alive);
-    });
+      return TimerObservable.create(0, 20000).pipe(
+        takeWhile(() => this.status.Alive));
+    }));
 
     Emitter.subscribe((val) => {
 

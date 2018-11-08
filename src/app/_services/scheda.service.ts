@@ -1,6 +1,8 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+
 
 import { Background, Attributo, Skill, Disciplina, Basicpg, Personaggio } from '../globals';
 
@@ -17,8 +19,8 @@ export class SchedaService {
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getpg.php', {
       token: user,
       id: id
-    })
-    .map( (data) => {
+    }).pipe(
+    map( (data) => {
       const full = data.full;
       const myPG: Personaggio = new Personaggio;
       myPG.aPG = data.pg;
@@ -27,7 +29,7 @@ export class SchedaService {
       myPG.listaBackground = data.background;
       myPG.listaDiscipline = data.discipline;
       return myPG;
-    });
+    }));
   }
 
   getnewdiscipline (id: number) {
@@ -80,8 +82,8 @@ export class SchedaService {
     const user = sessionStorage.getItem('RBN3currentUser') ;
     formData.append('token', user);
     formData.append('fileKey', fileToUpload, fileToUpload.name);
-    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/putavatar.php', formData )
-      .map(() => { return  true;} )
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/putavatar.php', formData ).pipe(
+      map(() => { return  true;} ))
 
   }
 

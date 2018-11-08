@@ -16,8 +16,8 @@ export class SchedaotherComponent implements OnInit {
   necro = [];
   taum = [];
 
-  bio = "";
-  descrizione = "";
+  bio = '';
+  descrizione = '';
 
   today: number = (new Date()).getFullYear();
 

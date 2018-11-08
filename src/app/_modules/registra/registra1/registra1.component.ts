@@ -64,7 +64,7 @@ export class Registra1Component implements OnInit {
       etaPG: new FormControl('1980', [
         Validators.required,
         Validators.min(1900),
-        Validators.max(this.today-16)
+        Validators.max(this.today - 16)
       ]),
 
       etaAPG: new FormControl('', [
@@ -131,8 +131,8 @@ export class Registra1Component implements OnInit {
 
       this.formOK = true;
 
-      this.salute=this.attributi[2].Livello + 3 ;   //costituzione + 3
-      this.fdv=this.attributi[5].Livello + this.attributi[8].Livello ;   //determ. + compost.
+      this.salute = this.attributi[2].Livello + 3 ;   // costituzione + 3
+      this.fdv = this.attributi[5].Livello + this.attributi[8].Livello ;   // determ. + compost.
     }
   }
 
@@ -179,8 +179,8 @@ export class Registra1Component implements OnInit {
     ) {
       this.formOK = true;
     }
-    this.salute=this.attributi[2].Livello + 3 ;   //costituzione + 3
-    this.fdv=this.attributi[5].Livello + this.attributi[8].Livello ;   //determ. + compost.
+    this.salute = this.attributi[2].Livello + 3 ;   // costituzione + 3
+    this.fdv = this.attributi[5].Livello + this.attributi[8].Livello ;   // determ. + compost.
   }
   minattr (attr: number) {
     this.attributi[attr - 1].Livello--;
@@ -188,7 +188,7 @@ export class Registra1Component implements OnInit {
     if (this.attributi[attr - 1].Livello === 1 ) { this.num1++; this.num2--; }
     if (this.attributi[attr - 1].Livello === 2 ) { this.num2++; this.num3--; }
     if (this.attributi[attr - 1].Livello === 3 ) { this.num3++; this.num4--; }
-    //if (this.attributi[attr - 1].Livello === 4 ) { this.num4++; }
+    // if (this.attributi[attr - 1].Livello === 4 ) { this.num4++; }
     this.formOK = false;
     if (
       (this.num1 === this.max1)  &&
@@ -198,8 +198,8 @@ export class Registra1Component implements OnInit {
     ) {
       this.formOK = true;
     }
-    this.salute=this.attributi[2].Livello + 3 ;   //costituzione + 3
-    this.fdv=this.attributi[5].Livello + this.attributi[8].Livello ;   //determ. + compost.
+    this.salute = this.attributi[2].Livello + 3 ;   // costituzione + 3
+    this.fdv = this.attributi[5].Livello + this.attributi[8].Livello ;   // determ. + compost.
   }
 
   goto2() {

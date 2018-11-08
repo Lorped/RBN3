@@ -42,7 +42,7 @@ export class Registra3Component implements OnInit {
     let prevdata = JSON.parse(prevdatastring);
 
     this.fdv = prevdata.attributi[5].Livello + prevdata.attributi[8].Livello;
-    //console.log(prevdata);
+    // console.log(prevdata);
 
     this.signupservice.getregistra3(prevdata.clanPG)
     .subscribe(
@@ -114,7 +114,7 @@ export class Registra3Component implements OnInit {
     }
   }
 
-/**** *********
+/* *** *********
   mincoscienza () {
     this.coscienza--;
     this.sommavirtu--;
@@ -170,7 +170,7 @@ export class Registra3Component implements OnInit {
     }
   }
 
-  *******/
+  ****** */
 
   addbg (bg: number) {
     this.bgOK = false ;

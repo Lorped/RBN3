@@ -63,11 +63,11 @@ export class Registra4Component implements OnInit {
     this.newPG.Generazione = 13;
     this.newPG.DescSentiero = datajson.sentieroPG.IDsentiero ;  // Warning non desc ma ID !
 
-    this.newPG.Coscienza = datajson.coscienza;
-    this.newPG.Coraggio = datajson.coraggio;
-    this.newPG.SelfControl = datajson.selfcontrol;
-    this.newPG.Valsentiero = this.newPG.Coscienza + this.newPG.SelfControl;
-    this.newPG.FdVmax = this.newPG.Coraggio;
+    //this.newPG.Coscienza = datajson.coscienza;
+    //this.newPG.Coraggio = datajson.coraggio;
+    //this.newPG.SelfControl = datajson.selfcontrol;
+    //this.newPG.Valsentiero = this.newPG.Coscienza + this.newPG.SelfControl;
+    //this.newPG.FdVmax = this.newPG.Coraggio;
 
 
     this.newPG_orig = JSON.parse(JSON.stringify(this.newPG));
@@ -94,7 +94,7 @@ export class Registra4Component implements OnInit {
   }
 
   minattr (attr: number) {
-    this.px = this.px + 5 * this.listaAttributi[attr - 1].Livello
+    this.px = this.px + 5 * this.listaAttributi[attr - 1].Livello;
     this.listaAttributi[attr - 1].Livello--;
   }
 

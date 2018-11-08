@@ -74,10 +74,10 @@ export class Registra2Component implements OnInit {
   addattr (attr: number) {
     this.skills[attr - 1].Livello++;
 
-    if ( this.skills[attr - 1].Livello === 1 )  {              this.num1++;}
-    if ( this.skills[attr - 1].Livello === 2 )  { this.num1--; this.num2++;}
-    if ( this.skills[attr - 1].Livello === 3 )  { this.num2--; this.num3++;}
-    if ( this.skills[attr - 1].Livello === 4 )  { this.num3--; this.num4++;}
+    if ( this.skills[attr - 1].Livello === 1 )  {              this.num1++; }
+    if ( this.skills[attr - 1].Livello === 2 )  { this.num1--; this.num2++; }
+    if ( this.skills[attr - 1].Livello === 3 )  { this.num2--; this.num3++; }
+    if ( this.skills[attr - 1].Livello === 4 )  { this.num3--; this.num4++; }
 
 
     this.formOK = false;
@@ -93,10 +93,10 @@ export class Registra2Component implements OnInit {
   minattr (attr: number) {
     this.skills[attr - 1].Livello--;
 
-    if ( this.skills[attr - 1].Livello === 0 )  { this.num1--;             }
-    if ( this.skills[attr - 1].Livello === 1 )  { this.num2--; this.num1++;}
-    if ( this.skills[attr - 1].Livello === 2 )  { this.num3--; this.num2++;}
-    if ( this.skills[attr - 1].Livello === 3 )  { this.num4--; this.num3++;}
+    if ( this.skills[attr - 1].Livello === 0 )  { this.num1--;              }
+    if ( this.skills[attr - 1].Livello === 1 )  { this.num2--; this.num1++; }
+    if ( this.skills[attr - 1].Livello === 2 )  { this.num3--; this.num2++; }
+    if ( this.skills[attr - 1].Livello === 3 )  { this.num4--; this.num3++; }
 
 
 

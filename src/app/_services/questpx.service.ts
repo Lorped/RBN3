@@ -1,6 +1,8 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+
 
 import { Status } from '../globals';
 
@@ -78,8 +80,8 @@ export class QuestpxService {
 
     const mialista = [];
 
-    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/quest.php?id=' + this.status.Userid)
-    .map((res: Array<any>) => {
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/quest.php?id=' + this.status.Userid).pipe(
+    map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         const item = res[i];
         const newquest = new Questrow ( item.IDquest, item.Quest, item.MasterOpen, item.DataOpen,
@@ -88,7 +90,7 @@ export class QuestpxService {
       }
 
       return mialista;
-    });
+    }));
 
   }
 
@@ -96,13 +98,13 @@ export class QuestpxService {
 
     const miologpx = new Logpx;
 
-    return this.http.get ('https://www.roma-by-night.it/RBN3/wsPHP/getlogpx.php?id=' + this.status.Userid)
-    .map((res: Logpx) => {
+    return this.http.get ('https://www.roma-by-night.it/RBN3/wsPHP/getlogpx.php?id=' + this.status.Userid).pipe(
+    map((res: Logpx) => {
       miologpx.pxin = Number( res.pxin );
       miologpx.pxout = Number( res.pxout );
       miologpx.log = res.log;
       return miologpx;
-    });
+    }));
   }
 
   getpx () {
@@ -110,8 +112,8 @@ export class QuestpxService {
     interface Apx {
       px: number;
     }
-    return this.http.get ('https://www.roma-by-night.it/RBN3/wsPHP/getpx.php?id=' + this.status.Userid)
-    .map((res: Apx) => res.px);
+    return this.http.get ('https://www.roma-by-night.it/RBN3/wsPHP/getpx.php?id=' + this.status.Userid).pipe(
+    map((res: Apx) => res.px));
   }
 
 }
