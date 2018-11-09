@@ -191,7 +191,7 @@
                   </div>
                   <div class="row" *ngFor="let t of taum">
                     <div class="col">{{t.NomeTaum}}</div>
-                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < t.Livello , 'white': ix+1 > t.Livello }"></i><button  *ngIf="t.Principale != 'S' && t.Livello<5" class="btn btn-primary btn-xs" (click)="plustaum(t.IDtaum)" [disabled]="px < t.Livello*4 || ( t.Livello == Tmaxlev-1 && Tmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
+                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < t.Livello , 'white': ix+1 > t.Livello }"></i><button  *ngIf=" t.Livello<5" class="btn btn-primary btn-xs" (click)="plustaum(t.IDtaum)" [disabled]="px < t.Livello*4 || ( t.Livello == Tmaxlev-1 && Tmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
                   </div>
                   <div class="row" *ngIf="necro.length > 0">
                     <div class="col alc"> Necromanzie </div>
