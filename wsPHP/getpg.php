@@ -73,7 +73,7 @@ if ( $full ) {
 	$MySql = "SELECT
 	Userid , Nome , Cognome , Email , Pass ,
     DataIscrizione ,
-		Concetto , Predatore ,
+		Concetto , 
  		Clan ,
     Sesso , Eta , EtaA , Personaggio.Generazione , PS , PSmax , FdV , FdVmax ,
     Valsentiero , DescSentiero ,
@@ -86,7 +86,6 @@ if ( $full ) {
 		LEFT JOIN Sentieri ON Personaggio.IDsentiero = Sentieri.IDsentiero
 		LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan
 		LEFT JOIN Concetto ON Personaggio.IDconcetto = Concetto.IDconcetto
-		LEFT JOIN Predatore  ON Personaggio.IDpredatore = Predatore.IDpredatore
 		LEFT JOIN Generazioni ON Personaggio.Generazione = Generazioni.Generazione
 		LEFT JOIN Livelli_salute ON Personaggio.IDsalute = Livelli_salute.IDsalute
 		LEFT JOIN BloodPotency ON Personaggio.BloodP = BloodPotency.BloodP

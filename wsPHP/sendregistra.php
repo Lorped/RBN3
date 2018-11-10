@@ -33,6 +33,7 @@ $listaAttributi = $request->listaAttributi;
 $listaSkill = $request->listaSkill;
 $necroPG = $request->necroPG;
 $taumPG = $request->taumPG;
+$px = $request->px;
 
 $generazionebg=0;
 
@@ -48,7 +49,8 @@ forEach ($listaBackground as $bg ) {
 
 $gen=0;
 $gen=13-(int)$generazionebg;
-$ps=10+(int)$generazionebg;
+
+
 
 $nome=mysql_real_escape_string($newPG->Nome);
 $cognome=mysql_real_escape_string($newPG->Cognome);
@@ -57,16 +59,18 @@ $pass=mysql_real_escape_string($newPG->Pass);
 
 $MySql="INSERT INTO Personaggio ( Nome, Cognome, Email, Pass, DataIscrizione,
  IDconcetto,  IDclan, Sesso, Eta, EtaA,
- Generazione, PS, PSmax,
+ Generazione, BloodP,
  FdV, FdVmax,
  IDsentiero, Valsentiero
+ IDsalute
  )
 VALUES (
 	'$nome' , '$cognome' ,'$email' , '$pass' , NOW() ,
 	$newPG->Concetto , $newPG->Clan, '$newPG->Sesso', $newPG->Eta, $newPG->EtaA,
-	$gen, $ps, $ps,
+	$gen, 1 ,
 	$newPG->FdVmax, $newPG->FdVmax,
-	$newPG->DescSentiero, $newPG->Valsentiero
+	$newPG->DescSentiero, 7 ,
+	$newPG->IDsalute
 )";
 
 mysql_query($MySql);
