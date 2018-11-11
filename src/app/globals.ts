@@ -42,7 +42,7 @@ export class Basicpg {
   public DataIscrizione = '';
   public Esperienza  = 0;
   public Concetto = '';  // from LEFT Join
-  public Predatore = '';  // from LEFT Join
+  // public Predatore = '';  // from LEFT Join
   // public IDrazza = 0;
   // public IDclan = 0;
   public Clan = ''; // from LEFT Join
