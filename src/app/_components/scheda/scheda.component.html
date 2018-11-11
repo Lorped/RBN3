@@ -18,10 +18,10 @@
         <div class="row">
           <div class="col">&nbsp;</div>
           <div class="col">&nbsp;</div>
-          <div class="col-2 red">Concetto</div>
-          <div class="col-2">{{myaPG.Concetto}}</div>
-          <div class="col-1 red">Predatore</div>
-          <div class="col-3 alr">{{myaPG.Predatore}}</div>
+          <div class="col-2 red">&nbsp;</div>
+          <div class="col-2">&nbsp;</div>
+          <div class="col-1 red">&nbsp;</div>
+          <div class="col-3 alr">&nbsp;</div>
         </div>
         <div class="row">
           <div class="col red">Età</div>
@@ -42,8 +42,8 @@
           <div class="col">&nbsp;</div>
           <div class="col">&nbsp;</div>
           <div class="col red">Liv.Salute</div>
-          <div class="col">{{myaPG.DescSalute}}  <span *ngIf="myaPG.ModSalute != 0">({{myaPG.ModSalute}})</span></div>
-          <div class="col-4 alr" *ngIf="myaPG.IDsalute > -1"><i *ngFor="let i of myaPG.daurto | times" class="fa fa-minus-square"></i><i *ngFor="let i of 7 - myaPG.IDsalute - myaPG.daurto - myaPG.aggravati | times" class="fa fa-check-square"></i><i *ngFor="let i of myaPG.aggravati | times" class="fa fa-check-square dred"></i><i *ngFor="let i of myaPG.IDsalute | times" class="fa fa-square"></i></div>
+          <div class="col">{{myaPG.DescSalute}}  <span *ngIf="myaPG.ModSalute != 0">({{myaPG.IDsalute - myaPG.daurto - myaPG.aggravati}}/{{myaPG.IDsalute}})</span></div>
+          <div class="col-4 alr" *ngIf="myaPG.IDsalute > -1"><i *ngFor="let i of  myaPG.IDsalute - myaPG.daurto - myaPG.aggravati | times" class="fa fa-square dred"></i><i *ngFor="let i of myaPG.daurto | times" class="fa fa-minus-square white"></i><i *ngFor="let i of myaPG.aggravati | times" class="fa fa-check-square white"></i> <i *ngFor="let i of   myaPG.aggravati | times" class="fa fa-minus-square white"></i></div>
         </div>
         <div class="row">
           <div class="col">&nbsp;</div>

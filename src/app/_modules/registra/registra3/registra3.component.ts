@@ -34,6 +34,7 @@ export class Registra3Component implements OnInit {
   z = 0;
 
   fdv = 0;
+  salute = 0;
 
   constructor( private signupservice: SignupService, private router: Router ) { }
 
@@ -42,6 +43,7 @@ export class Registra3Component implements OnInit {
     let prevdata = JSON.parse(prevdatastring);
 
     this.fdv = prevdata.attributi[5].Livello + prevdata.attributi[8].Livello;
+    this.salute = prevdata.attributi[2].Livello + 3;
     // console.log(prevdata);
 
     this.signupservice.getregistra3(prevdata.clanPG)
@@ -99,6 +101,7 @@ export class Registra3Component implements OnInit {
     if (this.sommadisc === 3 ) {
       this.discOK = true ;
     }
+
   }
 
   minattr (disc: number) {
@@ -112,6 +115,7 @@ export class Registra3Component implements OnInit {
     if (this.sommadisc === 3 ) {
       this.discOK = true ;
     }
+
   }
 
 /* *** *********
@@ -210,7 +214,8 @@ export class Registra3Component implements OnInit {
       'bg': this.bg,
       'discipline': this.discipline,
       'necroPG': this.necroPG,
-      'taumPG': this.taumPG
+      'taumPG': this.taumPG,
+      'salute': this.salute
     };
     sessionStorage.setItem('RBN3registration3', JSON.stringify(myobj) );
     this.router.navigate(['/registra/4']);

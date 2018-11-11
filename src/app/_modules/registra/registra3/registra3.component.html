@@ -1,7 +1,7 @@
 <div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em; margin-top: 20px;">
   <div class="row justify-content-center">
     <div class="col">
-      <h3 class="dred alc">Discipline, Background e Virtù</h3>
+      <h3 class="dred alc">Discipline e  Background</h3>
     </div>
   </div>
 
@@ -83,7 +83,7 @@
       <div class="row">
         <div class="col"><hr></div>
         <div class="col-2 alc bigf">
-          Virtù
+          Attributi derivati
         </div>
         <div class="col"><hr></div>
       </div>
@@ -93,7 +93,7 @@
           <table class="full">
             <tr>
             <td>Forza di Volontà</td>
-            <td class="alr"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > fdv , 'dred': ix < fdv }"></i></td>
+            <td class="alr"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > fdv , 'dred': ix < fdv }"></i></td>
           </tr>
           </table>
         </div>
@@ -101,7 +101,7 @@
           <table class="full">
             <tr>
             <td>Umanità/Sentiero</td>
-            <td class="alr"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > 7 , 'dred': ix < 7 }"></i></td>
+            <td class="alr"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > 7 , 'dred': ix < 7 }"></i></td>
           </tr>
           </table>
         </div>
@@ -112,6 +112,17 @@
           </select>
         </div>
       </div>
+      <div class="row">
+        <div class="col-4">
+          <table class="full">
+            <tr>
+            <td>Livelli di salute</td>
+            <td class="alr"><i *ngFor="let i of 13 | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > salute , 'dred': ix < salute }"></i></td>
+          </tr>
+          </table>
+        </div>
+      </div>
+
 
       <div class="row">
         <div class="col">&nbsp;</div>
