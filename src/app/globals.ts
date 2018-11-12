@@ -41,7 +41,7 @@ export class Basicpg {
   public Pass = '';
   public DataIscrizione = '';
   public Esperienza  = 0;
-  public Concetto = '';  // from LEFT Join
+  // public Concetto = '';  // from LEFT Join
   // public Predatore = '';  // from LEFT Join
   // public IDrazza = 0;
   // public IDclan = 0;
@@ -50,8 +50,8 @@ export class Basicpg {
   public Eta = 0;
   public EtaA = 0;
   public Generazione = 0;
-  public PS = 0;  // inutile, andrà eliminato
-  public PSmax = 0; // inutile, andrà eliminato
+  // public PS = 0;  // inutile, andrà eliminato
+  // public PSmax = 0; // inutile, andrà eliminato
   public FdV = 0;
   public FdVmax = 0;
   public Valsentiero = 0;
@@ -62,9 +62,9 @@ export class Basicpg {
   public URLImg = '';
   public Soldi = 0;
   public MaxStat = 5;
-  public UsoPS = 1;
-  public DescSalute = ''; // from LEFT Join
-  public ModSalute = 0; // from LEFT Join
+  // public UsoPS = 1;
+  // public DescSalute = ''; // from LEFT Join
+  // public ModSalute = 0; // from LEFT Join
   public Sete;
   public BloodP = 0;  // from LEFT JOIN da BloodPotency
   public Surge = 0 ;
@@ -74,6 +74,7 @@ export class Basicpg {
   public MinSete = 0;
   public MinBP = 0 ; // from LEFT JOIN da Generazioni
   public MaxBP = 0 ;
+  public Taumaturgo = 0;
 
 }
 
@@ -87,6 +88,7 @@ export class Personaggio {
   public listaBackground: Array<Background> ;
   public listaDiscipline: Array<Disciplina> ;
 
+
   constructor ( ) {
     this.aPG = new Basicpg ;
     this.listaAttributi = [];
@@ -94,6 +96,7 @@ export class Personaggio {
     this.listaBackground = [];
     this.listaDiscipline = [];
   }
+
 }
 
 @Injectable()

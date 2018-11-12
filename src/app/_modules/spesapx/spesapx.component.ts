@@ -57,6 +57,7 @@ export class SpesapxComponent implements OnInit {
       this.myaPG = this.myPG.aPG;
     });
 
+
     this.questpxservice.getpx()
     .subscribe ( (data: number) => {
       this.px = data;
@@ -82,7 +83,6 @@ export class SpesapxComponent implements OnInit {
     .subscribe ( data => {
       this.newnecro = data.newnecro;
       this.newtaum = data.newtaum;
-
     });
 
     this.show(0);
@@ -113,14 +113,18 @@ export class SpesapxComponent implements OnInit {
     this.location.back();
   }
 
-  addfdv () {
-    this.listaspesa.push( {x: 'addfdv.php' , y: 0, z: 'Forza di Volontà'} );
+  addbp () {
+    this.listaspesa.push( {x: 'addbp.php' , y: 0, z: 'Blood Potency'} );
 
-    this.px = this.px - this.myPG.aPG.FdVmax;
-    this.myPG.aPG.FdVmax++;
-    this.myPG.aPG.FdV++;
+    this.px = this.px - 10*(this.myPG.aPG.BloodP+1);
+    this.myPG.aPG.BloodP++;
+
 
   }
+
+
+
+/* **********
 
   addsentiero () {
     this.listaspesa.push( {x: 'addsentiero.php' , y: 0, z: 'Sentiero'} );
@@ -129,7 +133,7 @@ export class SpesapxComponent implements OnInit {
     this.myPG.aPG.Valsentiero++;
   }
 
-/* **********
+
   addcoscienza () {
     this.listaspesa.push( {x: 'addcoscienza.php' , y: 0, z: 'Coscienza'} );
 
@@ -156,8 +160,12 @@ export class SpesapxComponent implements OnInit {
   addattr (attr: number) {
     this.listaspesa.push( {x: 'addattr.php' , y: attr, z: this.myPG.listaAttributi[attr - 1].NomeAttributo } );
 
-    this.px = this.px - 4 * this.myPG.listaAttributi[attr - 1].Livello;
+    this.px = this.px - 5 * (this.myPG.listaAttributi[attr - 1].Livello + 1 );
     this.myPG.listaAttributi[attr - 1].Livello++;
+
+    if ( attr == 3 ) {   // costituzione
+      this.myPG.aPG.IDsalute++;
+    }
   }
 
   addskill (skill: number) {
@@ -167,7 +175,7 @@ export class SpesapxComponent implements OnInit {
     if ( this.myPG.listaSkill[skill - 1].Livello === null || this.myPG.listaSkill[skill - 1].Livello === 0) {
       this.px = this.px - 3;
     } else {
-      this.px = this.px - 2 * this.myPG.listaSkill[skill - 1].Livello;
+      this.px = this.px - 3 * ( this.myPG.listaSkill[skill - 1].Livello + 1 );
     }
     this.myPG.listaSkill[skill - 1].Livello++;
   }
@@ -188,7 +196,12 @@ export class SpesapxComponent implements OnInit {
       }
     }
 
-    this.px = this.px - 10 ;
+    if ( this.nuovadisciplina.DiClan == 'S' ) {
+      this.px = this.px - 5 ;
+    } else {
+      this.px = this.px - 7 ;
+    }
+
     this.nuovadisciplina =  {IDdisciplina: 0, NomeDisc: '', DiClan: ''} ;
   }
 
@@ -204,7 +217,7 @@ export class SpesapxComponent implements OnInit {
       }
     }
 
-    this.px = this.px - 7 ;
+    this.px = this.px - 5 ;
     this.nuovataum =  {IDtaum: 0, NomeTaum: '', Primaria: 'N'} ;
   }
 
@@ -218,7 +231,7 @@ export class SpesapxComponent implements OnInit {
       }
     }
 
-    this.px = this.px - 7 ;
+    this.px = this.px - 5 ;
     this.nuovanecro =  {IDnecro: 0, NomeNecro: '', Primaria: 'N'} ;
   }
 
@@ -230,7 +243,7 @@ export class SpesapxComponent implements OnInit {
 
         this.listaspesa.push( {x: 'plustaum.php' , y: ataum, z: this.taum[i].NomeTaum } );
 
-        this.px = this.px - 4 * this.taum[i].Livello;
+        this.px = this.px - 5 * (this.taum[i].Livello +1 );
         this.taum[i].Livello++;
       }
     }
@@ -242,7 +255,7 @@ export class SpesapxComponent implements OnInit {
 
         this.listaspesa.push( {x: 'plusnecro.php' , y: anecro, z: this.necro[i].NomeNecro } );
 
-        this.px = this.px - 4 * this.necro[i].Livello;
+        this.px = this.px - 5 * ( this.necro[i].Livello + 1 );
         this.necro[i].Livello++;
       }
     }
@@ -256,19 +269,13 @@ export class SpesapxComponent implements OnInit {
 
         this.listaspesa.push( {x: 'plusdisc.php' , y: disc, z: this.myPG.listaDiscipline[i].NomeDisc} );
 
-        this.px = this.px -  this.myPG.listaDiscipline[i].LivelloDisc * (this.myPG.listaDiscipline[i].DiClan === 'S' ? 5 : 7);
+        this.px = this.px -  ( this.myPG.listaDiscipline[i].LivelloDisc + 1 ) * (this.myPG.listaDiscipline[i].DiClan === 'S' ? 5 : 7);
         this.myPG.listaDiscipline[i].LivelloDisc++;
 
         if (disc === 15 ) {  // Taumaturgia
-          if ( this.myPG.listaDiscipline[i].LivelloDisc < 6 ) {
-            for (let j = 0; j < this.taum.length ; j++) {
-              if (this.taum[j].Principale === 'S') {
-                this.taum[j].Livello++;
-                this.Tmaxlev = this.taum[j].Livello;
-              }
-            }
-          }
+          this.Tmaxlev++ ;
         }
+
         if (disc === 7 ) {  // Taumaturgia
           if ( this.myPG.listaDiscipline[i].LivelloDisc < 6 ) {
             for (let j = 0; j < this.necro.length ; j++) {

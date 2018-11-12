@@ -39,11 +39,18 @@ $MySql="SELECT
 $Result=mysql_query($MySql);
 while ($res=mysql_fetch_array($Result,MYSQL_ASSOC) ) {
 	$taum [] =$res;
+	/* no "principale" per le taumaturgie /*
+	/*
 	if ($res['Principale'] == "S") {
 		$Tprincipale=$res['IDtaum'];
 		$Tmaxlev=$res['Livello'];
 	}
+	*/
 }
+$MySql="SELECT LivelloDisc FROM Discipline WHERE IDdisciplina= 15 AND Userid = '$Userid'";
+$Result=mysql_query($MySql);
+$res=mysql_fetch_array($Result);
+$Tmaxlev=$res['LivelloDisc'];
 
 
 $MySql="SELECT

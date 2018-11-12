@@ -50,6 +50,11 @@ forEach ($listaBackground as $bg ) {
 $gen=0;
 $gen=13-(int)$generazionebg;
 
+$taumaturgo = 0;
+if ( IDclan == 7 ) {
+	$taumaturgo = 1;
+}
+
 
 
 $nome=mysql_real_escape_string($newPG->Nome);
@@ -58,19 +63,21 @@ $email=mysql_real_escape_string($newPG->Email);
 $pass=mysql_real_escape_string($newPG->Pass);
 
 $MySql="INSERT INTO Personaggio ( Nome, Cognome, Email, Pass, DataIscrizione,
- IDconcetto,  IDclan, Sesso, Eta, EtaA,
+	IDclan, Sesso, Eta, EtaA,
  Generazione, BloodP,
  FdV, FdVmax,
  IDsentiero, Valsentiero
- IDsalute
+ IDsalute,
+ Taumaturgo
  )
 VALUES (
 	'$nome' , '$cognome' ,'$email' , '$pass' , NOW() ,
-	$newPG->Concetto , $newPG->Clan, '$newPG->Sesso', $newPG->Eta, $newPG->EtaA,
+	$newPG->Clan, '$newPG->Sesso', $newPG->Eta, $newPG->EtaA,
 	$gen, 1 ,
 	$newPG->FdVmax, $newPG->FdVmax,
 	$newPG->DescSentiero, 7 ,
-	$newPG->IDsalute
+	$newPG->IDsalute ,
+	$taumaturgo
 )";
 
 mysql_query($MySql);

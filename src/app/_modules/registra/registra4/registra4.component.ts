@@ -44,7 +44,7 @@ export class Registra4Component implements OnInit {
 
     this.newPG.Nome = datajson.nomePG;
     this.newPG.Cognome = datajson.cognomePG;
-    this.newPG.Concetto = datajson.concettoPG;
+    // this.newPG.Concetto = datajson.concettoPG;
     this.newPG.Sesso = datajson.Sesso;
     this.newPG.Eta = datajson.etaPG;
     this.newPG.EtaA = datajson.etaAPG;
@@ -143,7 +143,7 @@ export class Registra4Component implements OnInit {
     this.listaBackground[bg].LivelloBG--;
     this.px = this.px + 3;
 
-    console.log(this.export);
+    // console.log(this.export);
   }
 
   goback() {

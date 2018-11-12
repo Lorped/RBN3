@@ -16,7 +16,7 @@ export class Registra1Component implements OnInit {
 
   registrationForm: FormGroup;
 
-  concetti: Array<Concetto> = [];
+  // concetti: Array<Concetto> = [];
   clan: Array<Clan> = [];
   attributi: Array<Attributo> = [];
 
@@ -73,9 +73,11 @@ export class Registra1Component implements OnInit {
         Validators.max(80)
       ]),
 
+      /*
       concettoPG: new FormControl('', [
         Validators.required,
       ]),
+      */
 
       clanPG: new FormControl('', [
         Validators.required,
@@ -96,7 +98,7 @@ export class Registra1Component implements OnInit {
     this.signupservice.getregistra1()
     .subscribe(
       (res: any) => {
-        this.concetti = res.concetti;
+        // this.concetti = res.concetti;
         this.clan = res.clan;
 
         if ( !olddata ) {
@@ -148,9 +150,12 @@ export class Registra1Component implements OnInit {
   get etaAPG() {
       return this.registrationForm.get('etaAPG');
   }
+
+  /*
   get concettoPG() {
       return this.registrationForm.get('concettoPG');
   }
+  */
   get clanPG() {
       return this.registrationForm.get('clanPG');
   }
@@ -209,20 +214,22 @@ export class Registra1Component implements OnInit {
         clanname = this.clan[j].NomeClan ;
       }
     }
+    /*
     let concettoname = '';
     for (let j = 0; j < this.concetti.length; j++ ) {
       if (this.concetti[j].IDconcetto === this.concettoPG.value ) {
         concettoname = this.concetti[j].Concetto ;
       }
     }
+    */
     const myobj = {
       'nomePG': this.nomePG.value,
       'cognomePG': this.cognomePG.value,
       'clanPG': this.clanPG.value,
       'Sesso': this.Sesso.value,
       'clanname': clanname,
-      'concettoPG': this.concettoPG.value,
-      'concettoname': concettoname,
+      // 'concettoPG': this.concettoPG.value,
+      // 'concettoname': concettoname,
       'etaPG': this.etaPG.value,
       'etaAPG': this.etaAPG.value,
       'attributi': this.attributi

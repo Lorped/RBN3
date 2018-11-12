@@ -28,6 +28,18 @@ export class SchedaService {
       myPG.listaSkill = data.skill;
       myPG.listaBackground = data.background;
       myPG.listaDiscipline = data.discipline;
+      for (let i = 0 ; i < myPG.listaSkill.length ; i++) {
+        myPG.listaSkill[i].Livello = +myPG.listaSkill[i].Livello;
+        myPG.listaSkill[i].IDskill = +myPG.listaSkill[i].IDskill;
+      }
+      for (let i = 0 ; i < myPG.listaAttributi.length ; i++) {
+        myPG.listaAttributi[i].Livello = +myPG.listaAttributi[i].Livello;
+        myPG.listaAttributi[i].IDattributo = +myPG.listaAttributi[i].IDattributo;
+      }
+      for (let i = 0 ; i < myPG.listaDiscipline.length ; i++) {
+        myPG.listaDiscipline[i].LivelloDisc = +myPG.listaDiscipline[i].LivelloDisc;
+        myPG.listaDiscipline[i].IDdisciplina = +myPG.listaDiscipline[i].IDdisciplina;
+      }
       return myPG;
     }));
   }

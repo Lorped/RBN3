@@ -29,12 +29,14 @@ while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
 	$clan[] = $res;
 }
 
+/*
 $concetti=[];
 $MySql="SELECT * FROM Concetto   ";
 $Result=mysql_query($MySql);
 while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
 	$concetti[] = $res;
 }
+*/
 
 $attributi=[];
 
@@ -46,7 +48,7 @@ while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
 
 $out = [
 "clan" => $clan ,
-"concetti" => $concetti ,
+// "concetti" => $concetti ,
 "attributi" => $attributi
 ];
 

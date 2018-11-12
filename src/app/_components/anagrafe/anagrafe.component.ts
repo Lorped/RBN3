@@ -22,7 +22,7 @@ export class AnagrafeComponent implements OnInit {
     this.anagrafeservice.anagrafe()
     .subscribe( (data: any) => {
       this.anagrafe = data;
-      console.log(this.anagrafe);
+      // console.log(this.anagrafe);
     });
   }
 
@@ -33,7 +33,7 @@ export class AnagrafeComponent implements OnInit {
     });
     this.order = -1 * this.order;
 
-    console.log(this.order);
+    // console.log(this.order);
   }
 
 
