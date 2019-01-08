@@ -7,13 +7,21 @@ function dado ( $neri , $rossi, $difficolta ) {
 	$BlackSuccess=0;
 	$BlackTens=0;
 
-	for ( $i = 1 ; $i < $neri ; $i++) {
-		$x = mt_rand ( 1, 10);
-		if ($x < 6 ) { $BlackFailure++;   print ". "; }
+	$visualblack='';
 
-		if ($x > 5 && $x != 10 ) { $BlackSuccess++;  print "x "; }
+	for ( $i = 0 ; $i < $neri ; $i++) {
 
-		if ($x == 10 ) { $BlackSuccess++; $BlackTens++; print "S "; }
+		$x = mt_rand (1, 10);
+		if ($x < 6 ) {
+			$BlackFailure++;
+			$visualblack .= '.';
+		} elseif ($x > 5 && $x < 10 ) {
+			$BlackSuccess++;
+			$visualblack .= 'x';
+		} else {
+			$BlackSuccess++; $BlackTens++;
+			$visualblack .= 'S';
+		}
 	}
 
 
@@ -22,12 +30,23 @@ function dado ( $neri , $rossi, $difficolta ) {
 	$RedSuccess=0;
 	$RedTens=0;
 
-	for ( $i = 1 ; $i < $rossi ; $i++) {
+	$visualred='';
+
+	for ( $i = 0 ; $i < $rossi ; $i++) {
 		$x = mt_rand ( 1, 10);
-		if ($x == 1 ) { $RedCritFailure++; print "<span style='color:#ff0000;'>1 </span>";}
-		if ($x < 6 ) { $RedFailure++; print "<span style='color:#ff0000'>. </span>";}
-		if ($x > 5 && $x != 10 ) { $RedSuccess++; print "<span style='color:#ff0000'>x </span>"; }
-		if ($x == 10 ) { $RedSuccess++; $RedTens++; print "<span style='color:#ff0000'>S </span>";}
+		if ($x == 1 ) {
+			$RedCritFailure++;
+			$visualred .= '1';
+		} elseif ($x < 6 ) {
+			$RedFailure++;
+			$visualred .= '.';
+		} elseif ($x > 5 && $x < 10 ) {
+			$RedSuccess++;
+			$visualred .= 'x';
+		} else {
+			$RedSuccess++; $RedTens++;
+			$visualred .= 'S';
+		}
 	}
 
 	$doppidieci= floor ( ($BlackTens + $RedTens) / 2);
@@ -41,25 +60,27 @@ function dado ( $neri , $rossi, $difficolta ) {
 		}
 	} else {
 		$esito='Successo';
-
-		if ($doppidieci > 0) {
-			$esito = "Successo critico";
-			if ($RedTens > 0 ) {
-				$esito = "Successo critico caotico";
-			}
+		if ($doppidieci > 0 && $RedTens > 0 ) {
+			$esito = "Successo caotico";
 		}
-
 	}
 
 	$out = [
 		'successi' => $successi,
-		'esito' => $esito
+		'esito' => $esito,
+		'vb'  => $visualblack,
+		'vr'  => $visualred
 	];
 
 	return $out;
 
 }
 
-$xx= dado (8 , 2 , 4);
+
+
+
+$xx = dado (6 , 2 , 5);
+echo "<p>";
+echo $xx['vb'] .  "<span style='color:#ff0000;'>" . $xx['vr'] . "</span>" ;
 echo "<p>";
 echo "successi = " . $xx['successi'] ."<p> esito = " . $xx['esito'];
