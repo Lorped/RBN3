@@ -1,6 +1,6 @@
 <?php
 
-function dado ( $neri , $rossi, $difficolta ) {
+function dado ( $neri , $rossi, $difficolta, $fdv ) {
 
 
 	$BlackFailure=0;
@@ -14,14 +14,38 @@ function dado ( $neri , $rossi, $difficolta ) {
 		$x = mt_rand (1, 10);
 		if ($x < 6 ) {
 			$BlackFailure++;
-			$visualblack .= '.';
 		} elseif ($x > 5 && $x < 10 ) {
 			$BlackSuccess++;
-			$visualblack .= 'x';
 		} else {
-			$BlackSuccess++; $BlackTens++;
-			$visualblack .= 'S';
+			$BlackSuccess++;
+			$BlackTens++;
 		}
+	}
+
+	if ( $fdv == 1 ) {   // uso Fdv e ritiro gli insuccessi
+		for ( $i = 0 ; $i < $BlackFailure ; $i++) {
+			$x = mt_rand (1, 10);
+			if ($x < 6 ) {
+				// non cambia nulla
+			} elseif ($x > 5 && $x < 10 ) {
+				$BlackSuccess++;
+				$BlackFailure--;
+			} else {
+				$BlackSuccess++;
+				$BlackTens++;
+				$BlackFailure--;
+			}
+		}
+	}
+
+	for ( $i= 0; $i < $BlackFailure ; $i++) {
+		$visualblack=$visualblack.'a';
+	}
+	for ( $i= 0; $i < $BlackSuccess-$BlackTens ; $i++) {
+		$visualblack=$visualblack.'d';
+	}
+	for ( $i= 0; $i < $BlackTens ; $i++) {
+		$visualblack=$visualblack.'e';
 	}
 
 
@@ -36,22 +60,24 @@ function dado ( $neri , $rossi, $difficolta ) {
 		$x = mt_rand ( 1, 10);
 		if ($x == 1 ) {
 			$RedCritFailure++;
-			$visualred .= '1';
+			$visualred .= 'b';
 		} elseif ($x < 6 ) {
 			$RedFailure++;
-			$visualred .= '.';
+			$visualred .= 'a';
 		} elseif ($x > 5 && $x < 10 ) {
 			$RedSuccess++;
-			$visualred .= 'x';
+			$visualred .= 'd';
 		} else {
 			$RedSuccess++; $RedTens++;
-			$visualred .= 'S';
+			$visualred .= 'c';
 		}
 	}
 
 	$doppidieci= floor ( ($BlackTens + $RedTens) / 2);
 
 	$successi = $BlackSuccess + $RedSuccess + 2* $doppidieci;
+
+
 
 	if ( $successi < $difficolta ) {
 		$esito='Fallimento';
@@ -77,10 +103,4 @@ function dado ( $neri , $rossi, $difficolta ) {
 }
 
 
-
-
-$xx = dado (6 , 2 , 5);
-echo "<p>";
-echo $xx['vb'] .  "<span style='color:#ff0000;'>" . $xx['vr'] . "</span>" ;
-echo "<p>";
-echo "successi = " . $xx['successi'] ."<p> esito = " . $xx['esito'];
+?>
