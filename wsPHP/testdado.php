@@ -28,14 +28,14 @@
   </head>
   <body>
 
-		Dice pool 7
+		Dice pool 10
 		<p>
 		Sete 2
 		<p>
 		Difficoltà 5
 		<p>
 		<?
-		$xx = dado (5 , 2 , 5, 0);
+		$xx = dado (8 , 2 , 5, 0);
 		?>
 		<span style="font-family:v5dice;"> <?= $xx['vb'] ?>  <span style='color:#ff0000;'> <?= $xx['vr'] ?> </span> </span>
 
