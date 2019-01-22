@@ -125,6 +125,7 @@ export class Status {
   pxon = false;
   bioon = false;
   anagon = false;
+  poterion = false;
   schedaothon = false;
   otherID = 0;
 }

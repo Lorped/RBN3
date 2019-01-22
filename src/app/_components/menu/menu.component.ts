@@ -46,6 +46,9 @@ export class MenuComponent implements OnInit {
     if ( id === 'modalanagrafe') {
       this.status.anagon = true ;
     }
+    if ( id === 'modalpoteri') {
+      this.status.poterion = true ;
+    }
     this.status.menuState = 'out';
     this.modalService.show(id) ;
   }

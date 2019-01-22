@@ -70,6 +70,19 @@
 </app-modal>
 
 <!-- ----->
+<app-modal #modalpoteri modalId="modalpoteri">
+  <div class="app-modal-header">
+    <i>Poteri</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.poterion=false; modalpoteri.hide()">&times;</button>
+  </div>
+  <div class="app-modal-body">
+    <app-poteri *ngIf="this.status.poterion"></app-poteri>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.poterion=false; modalpoteri.hide()">Chiudi</button>
+  </div>
+</app-modal>
+
+<!-- ----->
 
 
 <button (click)="toggleMenu()" class="menubutton">

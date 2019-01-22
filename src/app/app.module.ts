@@ -30,10 +30,12 @@ import { QuestpxComponent } from './_components/questpx/questpx.component';
 import { BioComponent } from './_components/bio/bio.component';
 import { AnagrafeComponent } from './_components/anagrafe/anagrafe.component';
 import { SchedaotherComponent } from './_components/schedaother/schedaother.component';
+import { PoteriComponent } from './_components/poteri/poteri.component';
 
 import { Status } from './globals';
 
 import { UtilityModule } from './_modules/utility/utility.module';
+
 
 
 
@@ -51,7 +53,8 @@ import { UtilityModule } from './_modules/utility/utility.module';
     QuestpxComponent,
     BioComponent,
     AnagrafeComponent,
-    SchedaotherComponent
+    SchedaotherComponent,
+    PoteriComponent
   ],
   imports: [
     BrowserModule,
