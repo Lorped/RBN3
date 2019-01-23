@@ -1,3 +1,16 @@
-<p>
-  <span style="color:000000;"> poteri works!</span>
-</p>
+<div class="container">
+
+<div class="full" *ngFor="let disc of myListaPot">
+  <div class="row" >
+    <div class="col"><hr></div>
+    <div class="col-2 alc bigf">{{disc.NomeDisc}}</div>
+    <div class="col"><hr></div>
+  </div>
+  <div class="row" *ngFor="let pot of disc.pot">
+    <div class="col-3">{{pot.LivelloPotere}} {{pot.NomePotere}}</div>
+    <div class="col-3">{{pot.DPvariabili}}</div>
+    <div class="col-1">{{pot.DicePool}}</div>
+  </div>
+
+</div>
+</div>

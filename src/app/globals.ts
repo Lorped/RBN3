@@ -129,3 +129,27 @@ export class Status {
   schedaothon = false;
   otherID = 0;
 }
+
+@Injectable()
+export class Potere {
+  IDpotere = 0;
+  NomePotere = '';
+  NomeDisc = '';
+  LivelloPotere = 0;
+  DPvariabili = '';
+  Costo = 0;
+  Target = '';
+  DicePool = 0;
+}
+
+@Injectable()
+export class ListaPoteri {
+  public NomeDisc: String;
+  public pot: Array<Potere>;
+
+  constructor () {
+    this.NomeDisc = '';
+    this.pot = [];
+  }
+
+}

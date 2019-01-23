@@ -107,6 +107,7 @@ function dicepool ( $Userid, $potere) {
 		'LivelloPotere' => $LivelloPotere,
 		'DPvariabili' => $DPvariabili,
 		'Costo' => $Costo,
+		'Target' => $Target,
 		'DicePool' => $DicePool
 	];
 

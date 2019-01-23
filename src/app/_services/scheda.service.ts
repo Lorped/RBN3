@@ -99,4 +99,16 @@ export class SchedaService {
 
   }
 
+  getsete (id: number) {
+    return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/getsete.php?id=' + id );
+  }
+
+  getpoteri() {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/listapoteri.php', {
+      token: user
+    });
+
+  }
+
 }

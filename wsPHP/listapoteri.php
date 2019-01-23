@@ -35,7 +35,7 @@ $token=$_GET['token'];
 $MasterAdmin=0;
 $Userid=-1;
 
-/*** DEBUG
+
 if ( CheckJWT ($token) ) {
 	$xx=GetJWT($token);
 	$payload=json_decode($xx);
@@ -49,9 +49,9 @@ if ( CheckJWT ($token) ) {
 	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
 	die ();
 }
-******/
 
-$Userid= 1;
+
+//$Userid= 1;
 
 $out=[];
 
