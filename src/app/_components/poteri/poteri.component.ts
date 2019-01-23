@@ -22,13 +22,11 @@ export class PoteriComponent implements OnInit {
     this.schedaService.getsete(this.status.Userid)
     .subscribe( (data) => {
       this.mysete = Number(data.Sete);
-      console.log(this.mysete);
     });
 
     this.schedaService.getpoteri()
     .subscribe( (data) => {
-      this.myListaPot = data;
-      console.log(this.myListaPot);
+      this.myLista = data;
     });
 
   }
