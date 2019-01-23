@@ -16,9 +16,18 @@ function dicepool ( $Userid, $potere) {
 		return $out;
 	}
 
+	$IDpotere=$res['IDpotere'];
 	$NomePotere=$res['NomePotere'];
 	$NomeDisc=$res['NomeDisc'];
 	$LivelloPotere=$res['LivPotere'];
+	$Costo=$res['Costo'];
+
+	$Difficolta = $res['Difficolta'];
+
+	$Target = "N";
+	if ( $res['VSdisc'] != "" || $res['VSattr'] != "" ||  $res['VSattr2'] != "" || $res['VSskill'] != "") {
+		$Target = 'T';
+	}
 
 	$DPvariabili="";
 
@@ -27,7 +36,7 @@ function dicepool ( $Userid, $potere) {
 
 	if ( $res['Auto'] == 1 ) {
 		// AUTO == 1   -> Dichiaro il potere e basta
-
+		$DicePool = -1 ;
 	} else {
 
 
@@ -92,10 +101,12 @@ function dicepool ( $Userid, $potere) {
 	}
 
 	$out = [
+		'IDpotere' => $IDpotere,
 		'NomePotere' => $NomePotere,
 		'NomeDisc' => $NomeDisc,
 		'LivelloPotere' => $LivelloPotere,
 		'DPvariabili' => $DPvariabili,
+		'Costo' => $Costo,
 		'DicePool' => $DicePool
 	];
 
