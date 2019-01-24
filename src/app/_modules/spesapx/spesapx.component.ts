@@ -74,8 +74,12 @@ export class SpesapxComponent implements OnInit {
       this.taum = data.taum;
       this.Tprincipale = data.Tprincipale;
       this.Nprincipale = data.Nprincipale;
-      this.Tmaxlev = data.Tmaxlev;
-      this.Nmaxlev = data.Nmaxlev;
+      this.Tmaxlev = Number(data.Tmaxlev);
+      this.Nmaxlev = Number(data.Nmaxlev);
+
+      for ( let i = 0 ; i< this.necro.length ; i++) { this.necro[i].Livello = Number (this.necro[i].Livello) ; }
+      for ( let i = 0 ; i< this.taum.length ; i++) { this.taum[i].Livello = Number (this.taum[i].Livello) ; }
+
 
     });
 

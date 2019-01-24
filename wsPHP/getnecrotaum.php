@@ -64,7 +64,7 @@ $Result=mysql_query($MySql);
 while ($res=mysql_fetch_array($Result,MYSQL_ASSOC) ) {
 	$necro [] =$res;
 	if ($res['Principale'] == "S") {
-		$Nprincipale=$res['IDtaum'];
+		$Nprincipale=$res['IDnecro'];
 		$Nmaxlev=$res['Livello'];
 	}
 }
