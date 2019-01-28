@@ -27,6 +27,8 @@ export class PoteriComponent implements OnInit {
     this.schedaService.getpoteri()
     .subscribe( (data) => {
       this.myLista = data;
+
+      console.log(this.myLista);
     });
 
   }

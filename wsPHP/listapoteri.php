@@ -64,6 +64,7 @@ while ( $res=mysql_fetch_array($Result) ) {
 
 	$NomeDisc = $res['NomeDisc'];
 	$IDdisciplina=$res['IDdisciplina'];
+	$LivelloDisc=$res['LivelloDisc'];
 	$pot=[];
 
 	$MySql2= "SELECT * FROM Poteri
@@ -80,6 +81,7 @@ while ( $res=mysql_fetch_array($Result) ) {
 
 	$outx = [
 		'NomeDisc' => $NomeDisc,
+		'LivelloDisc' => $LivelloDisc,
 		'pot' => $pot
 	];
 

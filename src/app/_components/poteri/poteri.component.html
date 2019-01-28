@@ -1,16 +1,36 @@
 <div class="container">
 
+  <div class="row" >
+    <div class="col-3">Potere</div>
+    <div class="col-4">Dice Pool</div>
+    <div class="col-1">Uso Sangue</div>
+    <div class="col-1" >Uso Fdv</div>
+    <div class="col-1">Costo</div>
+    <div class="col-2">Target</div>
+  </div>
 <div class="full" *ngFor="let disc of myLista">
   <div class="row" >
-    <div class="col"><hr></div>
+    <div class="col-1"><hr></div>
     <div class="col-2 alc bigf">{{disc.NomeDisc}}</div>
-    <div class="col"><hr></div>
+    <div class="col-1"><hr></div>
+    <div class="col">&nbsp;</div>
   </div>
+
   <div class="row" *ngFor="let pot of disc.pot">
     <div class="col-3">{{pot.LivelloPotere}} {{pot.NomePotere}}</div>
-    <div class="col-3">{{pot.DPvariabili}}</div>
-    <div class="col-1">{{pot.DicePool}}</div>
+    <div class="col-3" *ngIf="pot.DicePool != -1 ">{{pot.DPvariabili}}</div>
+    <div class="col-1" *ngIf="pot.DicePool != -1 " >{{pot.DicePool}}</div>
+    <div class="col-1" *ngIf="pot.DicePool != -1 " ><input id="Rouse" type="checkbox" ></div>
+    <div class="col-1" *ngIf="pot.DicePool != -1 " ><input id="UsoFdV" type="checkbox" ></div>
+    <div class="col-6" *ngIf="pot.DicePool == -1 "> - Automatico - </div>
+    <div class="col-1">{{pot.Costo}}</div>
+    <div class="col-2" *ngIf="pot.Target == 'T'">[Target]</div>
+    <div class="col-2" *ngIf="pot.Target != 'T'" >[ n/a ]</div>
   </div>
+  <div class="row" *ngIf="disc.pot.length < disc.LivelloDisc">
+    <div class="col alc"> - Aggiungi potere di {{disc.NomeDisc}} - </div>
+  </div>
+
 
 </div>
 </div>
