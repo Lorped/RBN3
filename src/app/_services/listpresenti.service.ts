@@ -2,6 +2,7 @@
 import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Status } from '../globals';
 
 
 export class Presenti {
@@ -26,13 +27,13 @@ export class Presenti {
 @Injectable()
 export class ListpresentiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private status: Status) { }
 
   getpresenti() {
 
     const mialista = [];
 
-    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapresenti.php').pipe(
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapresenti.php?id='+this.status.Userid).pipe(
     map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         const item = res[i];

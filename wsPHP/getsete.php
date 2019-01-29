@@ -30,9 +30,13 @@ $Result=mysql_query($MySql);
 $res=mysql_fetch_array($Result);
 
 $Sete = $res['Sete'];
+$FdV = $res['FdV'];
+$FdVmax = $res['FdVmax'];
 
 $out = [
-	'Sete' => $Sete
+	'Sete' => $Sete,
+	'FdV' => $FdV,
+	'FdVmax' => $FdVmax
 ];
 
 

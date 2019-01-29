@@ -12,6 +12,8 @@ import { Potere, ListaPoteri, Status } from '../../globals';
 export class PoteriComponent implements OnInit {
 
   mysete = 0 ;
+  myFdV = 0 ;
+  myFdVmax = 0 ;
 
   myLista: Array<ListaPoteri> = [];
 
@@ -19,16 +21,20 @@ export class PoteriComponent implements OnInit {
 
   ngOnInit() {
 
-    this.schedaService.getsete(this.status.Userid)
+    this.schedaService.getsetefdv(this.status.Userid)
     .subscribe( (data) => {
+      //console.log (data);
       this.mysete = Number(data.Sete);
+      this.myFdV = Number(data.FdV);
+      this.myFdVmax = Number(data.FdVmax);
+
     });
 
     this.schedaService.getpoteri()
     .subscribe( (data) => {
       this.myLista = data;
 
-      console.log(this.myLista);
+      //console.log(this.myLista);
     });
 
   }

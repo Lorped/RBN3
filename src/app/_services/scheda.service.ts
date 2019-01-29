@@ -99,7 +99,7 @@ export class SchedaService {
 
   }
 
-  getsete (id: number) {
+  getsetefdv (id: number) {
     return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/getsete.php?id=' + id );
   }
 
