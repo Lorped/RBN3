@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SchedaService } from '../../_services/index';
+import { ModalService } from '../../_services/index';
 
 import { Potere, ListaPoteri, Status } from '../../globals';
+
+
 
 @Component({
   selector: 'app-poteri',
@@ -17,7 +20,7 @@ export class PoteriComponent implements OnInit {
 
   myLista: Array<ListaPoteri> = [];
 
-  constructor( private schedaService: SchedaService, private status: Status ) { }
+  constructor( private schedaService: SchedaService, private status: Status, private modalService: ModalService ) { }
 
   ngOnInit() {
 
@@ -36,6 +39,14 @@ export class PoteriComponent implements OnInit {
 
       //console.log(this.myLista);
     });
+
+  }
+
+  gosceltapoteri  () {
+    this.status.poterion = false ;
+    this.status.sceltapoterion = true ;
+    this.modalService.hide('modalpoteri') ;
+    this.modalService.show('modalsceltapoteri') ;
 
   }
 

@@ -83,6 +83,20 @@
 </app-modal>
 
 <!-- ----->
+<!-- ----->
+<app-modal #modalsceltapoteri modalId="modalsceltapoteri">
+  <div class="app-modal-header">
+    <i>Scelta Poteri</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.sceltapoterion=false; modalsceltapoteri.hide()">&times;</button>
+  </div>
+  <div class="app-modal-body">
+    <app-sceltapoteri *ngIf="this.status.sceltapoterion"></app-sceltapoteri>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.sceltapoterion=false; modalsceltapoteri.hide()">Chiudi</button>
+  </div>
+</app-modal>
+
+<!-- ----->
 
 
 <button (click)="toggleMenu()" class="menubutton">

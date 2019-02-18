@@ -40,7 +40,7 @@
     <div class="col-2" *ngIf="pot.Target != 'T'" >[ n/a ]</div>
   </div>
   <div class="row" *ngIf="disc.pot.length < disc.LivelloDisc">
-    <div class="col alc"> - Aggiungi potere di {{disc.NomeDisc}} - </div>
+    <div class="col alc"><a href="javascript:void(0)" (click)="gosceltapoteri()"> - Aggiungi potere di {{disc.NomeDisc}} - </a></div>
   </div>
 
 

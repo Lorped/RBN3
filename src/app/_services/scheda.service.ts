@@ -111,4 +111,12 @@ export class SchedaService {
 
   }
 
+  getsceltapoteri() {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/sceltapoteri.php', {
+      token: user
+    });
+
+  }
+
 }

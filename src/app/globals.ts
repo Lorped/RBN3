@@ -126,6 +126,7 @@ export class Status {
   bioon = false;
   anagon = false;
   poterion = false;
+  sceltapoterion = false;
   schedaothon = false;
   otherID = 0;
 }
@@ -151,5 +152,23 @@ export class ListaPoteri {
     this.NomeDisc = '';
     this.pot = [];
   }
+}
 
+
+@Injectable()
+export class SceltaPotere {
+  IDpotere = 0;
+  LivPotere = 0;
+  NomePotere = '';
+  accessibile = 0;
+  bloccato = 0;
+  preso = 0;
+}
+
+@Injectable()
+export class SceltaPotereDisc {
+  LivelloDisc = 0;
+  NomeDisc = '';
+  numpresi = 0;
+  pot: Array<Potere> = [];
 }

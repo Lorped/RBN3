@@ -49,6 +49,9 @@ export class MenuComponent implements OnInit {
     if ( id === 'modalpoteri') {
       this.status.poterion = true ;
     }
+    if ( id === 'modalsceltapoteri') {
+      this.status.sceltapoterion = true ;
+    }
     this.status.menuState = 'out';
     this.modalService.show(id) ;
   }

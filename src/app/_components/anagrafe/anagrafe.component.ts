@@ -37,16 +37,16 @@ export class AnagrafeComponent implements OnInit {
   }
 
 
-    showoth  (id: number) {
-      if ( id === this.status.Userid ) {
-        this.status.schedaon = true ;
-        this.modalService.show('modalscheda') ;
-      } else {
-        this.status.schedaothon = true ;
-        this.status.otherID = id ;
-        this.modalService.show('modalschedaoth') ;
-      }
+  showoth  (id: number) {
+    if ( id === this.status.Userid ) {
+      this.status.schedaon = true ;
+      this.modalService.show('modalscheda') ;
+    } else {
+      this.status.schedaothon = true ;
+      this.status.otherID = id ;
+      this.modalService.show('modalschedaoth') ;
     }
+  }
 
 
 }

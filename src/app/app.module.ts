@@ -31,10 +31,12 @@ import { BioComponent } from './_components/bio/bio.component';
 import { AnagrafeComponent } from './_components/anagrafe/anagrafe.component';
 import { SchedaotherComponent } from './_components/schedaother/schedaother.component';
 import { PoteriComponent } from './_components/poteri/poteri.component';
+import { SceltapoteriComponent } from './_components/sceltapoteri/sceltapoteri.component';
 
 import { Status } from './globals';
 
 import { UtilityModule } from './_modules/utility/utility.module';
+
 
 
 
@@ -54,7 +56,8 @@ import { UtilityModule } from './_modules/utility/utility.module';
     BioComponent,
     AnagrafeComponent,
     SchedaotherComponent,
-    PoteriComponent
+    PoteriComponent,
+    SceltapoteriComponent
   ],
   imports: [
     BrowserModule,
