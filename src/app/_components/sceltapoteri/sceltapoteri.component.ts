@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { SchedaService } from '../../_services/index';
 
+import { SceltaPotere, SceltaPotereDisc } from '../../globals';
+
 @Component({
   selector: 'app-sceltapoteri',
   templateUrl: './sceltapoteri.component.html',
@@ -17,9 +19,9 @@ export class SceltapoteriComponent implements OnInit {
 
     this.schedaService.getsceltapoteri()
     .subscribe( (data) => {
-      console.log (data);
+      //console.log (data);
       this.myListaSceltaPotere = data;
-      console.log (this.myListaSceltaPotere);
+      //console.log (this.myListaSceltaPotere);
 
     });
 

@@ -48,8 +48,8 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-
-$Userid= 1;
+//die (print_r($payload));
+//$Userid= 1;
 
 $out=[];
 

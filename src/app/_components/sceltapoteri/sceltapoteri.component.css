@@ -1,0 +1,28 @@
+.btn.btn-primary:disabled{
+    background-color: #a0a0a0;
+}
+
+.btn{
+  margin-bottom: 1px;
+}
+
+.bred {
+  border-color: red !important;
+  background-color: #a00000;
+}
+
+.bgreen {
+  border-color: green !important;
+  background-color: #00a000;
+
+}
+
+hr {
+  color: #ff0000;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #f00;
+  margin: 1em 0;
+  padding: 0;
+}
