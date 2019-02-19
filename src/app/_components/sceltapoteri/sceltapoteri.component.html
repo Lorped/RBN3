@@ -1,4 +1,4 @@
-<div class="full" *ngFor="let disc of myListaSceltaPotere">
+<div class="full" *ngFor="let disc of myListaSceltaPotere; let i = index">
   <div class="row" >
     <div class="col-1"><hr></div>
     <div class="col-2 alc bigf">{{disc.NomeDisc}}</div>
@@ -7,37 +7,37 @@
   </div>
 
   <div class="row" >
-    <div class="col">  <!-- liv 1 -->
+    <div class="col colx">  <!-- liv 1 -->
       <div *ngFor="let pot of disc.pot">
-        <button type="button" class="btn btn-block btn-sm" *ngIf="pot.LivPotere == 1" [disabled]="pot.bloccato==1 || pot.accessibile==0" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
+        <button type="button" (click)="selezionapot(pot.IDpotere, i)" class="btn btn-block btn-sm" *ngIf="pot.LivPotere == 1" [disabled]="pot.bloccato==1 || pot.accessibile==0 || disc.numpresi==disc.LivelloDisc" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
           {{pot.NomePotere}}
         </button>
       </div>
     </div>
-    <div class="col">  <!-- liv 2 -->
+    <div class="col colx">  <!-- liv 2 -->
       <div *ngFor="let pot of disc.pot">
-        <button type="button" class="btn btn-block btn-sm" *ngIf="pot.LivPotere == 2" [disabled]="pot.bloccato==1 || pot.accessibile==0" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
+        <button type="button" (click)="selezionapot(pot.IDpotere, i)" class="btn btn-block btn-sm" *ngIf="pot.LivPotere == 2" [disabled]="pot.bloccato==1 || pot.accessibile==0 || disc.numpresi<1 || disc.numpresi==disc.LivelloDisc" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
           {{pot.NomePotere}}
         </button>
       </div>
     </div>
-    <div class="col">  <!-- liv 3 -->
+    <div class="col colx">  <!-- liv 3 -->
       <div *ngFor="let pot of disc.pot">
-        <button type="button" class="btn btn-block btn-sm" *ngIf="pot.LivPotere == 3" [disabled]="pot.bloccato==1 || pot.accessibile==0" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
+        <button type="button" (click)="selezionapot(pot.IDpotere, i)" class="btn btn-block btn-sm" *ngIf="pot.LivPotere == 3" [disabled]="pot.bloccato==1 || pot.accessibile==0 || disc.numpresi<2 || disc.numpresi==disc.LivelloDisc" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
           {{pot.NomePotere}}
         </button>
       </div>
     </div>
-    <div class="col">  <!-- liv 4 -->
+    <div class="col colx">  <!-- liv 4 -->
       <div *ngFor="let pot of disc.pot">
-        <button type="button"  class="btn btn-block btn-sm" *ngIf="pot.LivPotere == 4" [disabled]="pot.bloccato==1 || pot.accessibile==0" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
+        <button type="button"  class="btn btn-block btn-sm" *ngIf="pot.LivPotere == 4" [disabled]="pot.bloccato==1 || pot.accessibile==0 || disc.numpresi<3" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
           {{pot.NomePotere}}
         </button>
       </div>
     </div>
-    <div class="col">  <!-- liv 5 -->
+    <div class="col colx">  <!-- liv 5 -->
       <div *ngFor="let pot of disc.pot">
-        <button type="button" class=" btn btn-block btn-sm" *ngIf="pot.LivPotere == 5" [disabled]="pot.bloccato==1 || pot.accessibile==0" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
+        <button type="button" class=" btn btn-block btn-sm" *ngIf="pot.LivPotere == 5" [disabled]="pot.bloccato==1 || pot.accessibile==0 || disc.numpresi<4" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
           {{pot.NomePotere}}
         </button>
       </div>

@@ -12,6 +12,7 @@ import { SceltaPotere, SceltaPotereDisc } from '../../globals';
 export class SceltapoteriComponent implements OnInit {
 
   myListaSceltaPotere: Array<SceltaPotereDisc> = [];
+  i = 0 ;
 
   constructor( private schedaService: SchedaService ) { }
 
@@ -24,6 +25,31 @@ export class SceltapoteriComponent implements OnInit {
       //console.log (this.myListaSceltaPotere);
 
     });
+
+  }
+
+  selezionapot( potx, ix ) {
+    console.log("disciplina " + ix);
+    console.log("potere " + potx);
+
+    console.log( this.myListaSceltaPotere[ix].NomeDisc );
+    for (let i = 0 ; i < this.myListaSceltaPotere[ix].pot.length ; i++ ) {
+      if (this.myListaSceltaPotere[ix].pot[i].IDpotere == potx) {
+        console.log( this.myListaSceltaPotere[ix].pot[i].NomePotere );
+
+        if (this.myListaSceltaPotere[ix].pot[i].preso == 1 ) {
+          this.myListaSceltaPotere[ix].pot[i].preso = 0;
+          this.myListaSceltaPotere[ix].numpresi -- ;
+        } else {
+          this.myListaSceltaPotere[ix].pot[i].preso = 1;
+          this.myListaSceltaPotere[ix].numpresi ++ ;
+        }
+
+        
+
+
+      }
+    }
 
   }
 
