@@ -30,18 +30,33 @@
     </div>
     <div class="col colx">  <!-- liv 4 -->
       <div *ngFor="let pot of disc.pot">
-        <button type="button"  class="btn btn-block btn-sm" *ngIf="pot.LivPotere == 4" [disabled]="pot.bloccato==1 || pot.accessibile==0 || disc.numpresi<3" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
+        <button type="button"  (click)="selezionapot(pot.IDpotere, i)" class="btn btn-block btn-sm" *ngIf="pot.LivPotere == 4" [disabled]="pot.bloccato==1 || pot.accessibile==0 || disc.numpresi<3 || disc.numpresi==disc.LivelloDisc" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
           {{pot.NomePotere}}
         </button>
       </div>
     </div>
     <div class="col colx">  <!-- liv 5 -->
       <div *ngFor="let pot of disc.pot">
-        <button type="button" class=" btn btn-block btn-sm" *ngIf="pot.LivPotere == 5" [disabled]="pot.bloccato==1 || pot.accessibile==0 || disc.numpresi<4" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
+        <button type="button" (click)="selezionapot(pot.IDpotere, i)" class=" btn btn-block btn-sm" *ngIf="pot.LivPotere == 5" [disabled]="pot.bloccato==1 || pot.accessibile==0 || disc.numpresi<4 || disc.numpresi==disc.LivelloDisc" [ngClass]="{'bred': pot.bloccato==1 , 'bgreen': pot.preso==1}">
           {{pot.NomePotere}}
         </button>
       </div>
     </div>
   </div>
 
+</div>
+
+<div class="row" >
+  <div class="col">&nbsp;</div>
+</div>
+
+<div class="row" >
+  <div class="col-1">&nbsp;</div>
+  <div class="col">
+    <button type="button" class=" btn btn-block btn-sm btn-danger"  >Conferma</button>
+  </div>
+  <div class="col">
+    <button type="button" class=" btn btn-block btn-sm btn-danger" (click)="doreset()" >Annulla/Reset</button>
+  </div>
+  <div class="col-1">&nbsp;</div>
 </div>

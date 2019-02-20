@@ -28,6 +28,16 @@ export class SceltapoteriComponent implements OnInit {
 
   }
 
+  doreset(){
+    this.schedaService.getsceltapoteri()
+    .subscribe( (data) => {
+      //console.log (data);
+      this.myListaSceltaPotere = data;
+      //console.log (this.myListaSceltaPotere);
+
+    });
+  }
+
   selezionapot( potx, ix ) {
     console.log("disciplina " + ix);
     console.log("potere " + potx);
@@ -45,7 +55,7 @@ export class SceltapoteriComponent implements OnInit {
           this.myListaSceltaPotere[ix].numpresi ++ ;
         }
 
-        
+
 
 
       }

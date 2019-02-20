@@ -170,5 +170,5 @@ export class SceltaPotereDisc {
   LivelloDisc = 0;
   NomeDisc = '';
   numpresi = 0;
-  pot: Array<Potere> = [];
+  pot: Array<SceltaPotere> = [];
 }
