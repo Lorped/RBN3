@@ -118,5 +118,12 @@ export class SchedaService {
     });
 
   }
+  addpoteri(lista) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/addpoteri.php', {
+      token: user,
+      lista: lista
+    });
+  }
 
 }
