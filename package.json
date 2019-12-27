@@ -27,7 +27,7 @@
     "core-js": "^2.4.1",
     "extend": "^3.0.2",
     "font-awesome": "^4.7.0",
-    "handlebars": "^4.0.14",
+    "handlebars": "^4.3.0",
     "hoek": "^5.0.4",
     "https-proxy-agent": "^2.2.1",
     "jquery": "^3.4.1",
