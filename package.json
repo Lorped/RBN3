@@ -29,7 +29,7 @@
     "font-awesome": "^4.7.0",
     "handlebars": "^4.0.14",
     "hoek": "^5.0.4",
-    "https-proxy-agent": "^2.2.1",
+    "https-proxy-agent": "^2.2.3",
     "jquery": "^3.4.1",
     "popper.js": "^1.14.7",
     "randomatic": "^3.1.1",
