@@ -36,6 +36,9 @@ export class Registra3Component implements OnInit {
   fdv = 0;
   salute = 0;
 
+  coscienza = 2 ;
+  selfcontrol = 3 ;
+
   constructor( private signupservice: SignupService, private router: Router ) { }
 
   ngOnInit() {
