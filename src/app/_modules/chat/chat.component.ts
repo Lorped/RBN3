@@ -20,9 +20,9 @@ import { Status } from '../../globals';
 })
 
 export class ChatComponent implements OnInit, AfterViewChecked {
-@ViewChild('chatdiv') private myScrollContainer: ElementRef;
-@ViewChild('ca') private mycheckadmin: ElementRef;
-@ViewChild('cm') private mycheckmaster: ElementRef;
+@ViewChild('chatdiv', { static: true }) private myScrollContainer: ElementRef;
+@ViewChild('ca', { static: true }) private mycheckadmin: ElementRef;
+@ViewChild('cm', { static: true }) private mycheckmaster: ElementRef;
 
   statuschat = 0;
   listachat: Array<Chatrow>;

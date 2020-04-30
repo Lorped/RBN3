@@ -21,7 +21,7 @@ export class SchedaotherComponent implements OnInit {
 
   today: number = (new Date()).getFullYear();
 
-  constructor( private schedaService: SchedaService, private status: Status) { }
+  constructor( private schedaService: SchedaService, public status: Status) { }
 
   ngOnInit() {
     this.schedaService.getpg(this.status.otherID)

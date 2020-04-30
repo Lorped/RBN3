@@ -27,7 +27,7 @@ import { Status } from '../../globals';
 export class MainComponent implements OnInit {
 
 
-  constructor( private status: Status ) { }
+  constructor( public status: Status ) { }
 
   ngOnInit() {}
 

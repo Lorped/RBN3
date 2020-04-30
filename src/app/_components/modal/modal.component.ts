@@ -12,7 +12,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() modalId: string;
 
   public visible = false;
-  private visibleAnimate = false;
+  public visibleAnimate = false;
 
   constructor ( private modalService: ModalService ) { }
 

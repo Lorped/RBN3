@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./bio.component.css']
 })
 export class BioComponent implements OnInit {
-  @ViewChild('bioForm') bioForm: NgForm;
+  @ViewChild('bioForm', { static: true }) bioForm: NgForm;
 
   bio: string;
   descrizione: string;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalComponent } from '../_components/modal/modal.component';
 
+@Injectable()
 export class ModalService {
   private modals: Array<ModalComponent>;
 
