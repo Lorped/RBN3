@@ -48,7 +48,7 @@ while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
 $taum=[];
 $necro=[];
 
-/***
+
 if ( $IDclan == 7 ) { // Tremere
 	$MySql="SELECT *, '0' as Livello FROM Taumaturgie_main  ";
 	$Result=mysql_query($MySql);
@@ -56,7 +56,7 @@ if ( $IDclan == 7 ) { // Tremere
 		$taum[] = $res;
 	}
 }
-***/
+
 if ( $IDclan == 11 ) { // Giovanni
 	$MySql="SELECT *, '0' as Livello FROM Necromanzie_main  ";
 	$Result=mysql_query($MySql);

@@ -41,8 +41,8 @@ export class Basicpg {
   public Pass = '';
   public DataIscrizione = '';
   public Esperienza  = 0;
-  // public Concetto = '';  // from LEFT Join
-  // public Predatore = '';  // from LEFT Join
+  public Natura = '';  // from LEFT Join
+  public Carattere = ''; // from LEFT Join
   // public IDrazza = 0;
   // public IDclan = 0;
   public Clan = ''; // from LEFT Join
@@ -50,21 +50,25 @@ export class Basicpg {
   public Eta = 0;
   public EtaA = 0;
   public Generazione = 0;
-  // public PS = 0;  // inutile, andrà eliminato
-  // public PSmax = 0; // inutile, andrà eliminato
+  public PS = 0;  // inutile, andrà eliminato
+  public PSmax = 0; // inutile, andrà eliminato
   public FdV = 0;
   public FdVmax = 0;
   public Valsentiero = 0;
   public DescSentiero = ''; // from LEFT Join
+  public Coscienza = 0;
+  public Coraggio = 0;
+  public SelfControl = 0;
   public IDsalute = 0;
   public daurto = 0;
   public aggravati = 0;
   public URLImg = '';
   public Soldi = 0;
   public MaxStat = 5;
-  // public UsoPS = 1;
-  // public DescSalute = ''; // from LEFT Join
-  // public ModSalute = 0; // from LEFT Join
+  public UsoPS = 1;
+  public DescSalute = ''; // from LEFT Join
+  public ModSalute = 0; // from LEFT Join
+  // V5 da Eliminare
   public Sete;
   public BloodP = 0;  // from LEFT JOIN da BloodPotency
   public Surge = 0 ;
@@ -103,9 +107,9 @@ export class Personaggio {
 }
 
 @Injectable()
-export class Concetto {
-  IDconcetto = 0;
-  Concetto = '';
+export class Archetipo {
+  IDarchetipo = 0;
+  Archetipo = '';
 }
 
 @Injectable()

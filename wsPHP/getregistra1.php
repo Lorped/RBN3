@@ -29,18 +29,17 @@ while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
 	$clan[] = $res;
 }
 
-/*
-$concetti=[];
-$MySql="SELECT * FROM Concetto   ";
+$archetipi=[];
+
+$MySql="SELECT * FROM Archetipi   ";
 $Result=mysql_query($MySql);
 while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
-	$concetti[] = $res;
+	$archetipi[] = $res;
 }
-*/
 
 $attributi=[];
 
-$MySql="SELECT * , '0' as Livello FROM Attributi_main   ";
+$MySql="SELECT * , '1' as Livello FROM Attributi_main   ";
 $Result=mysql_query($MySql);
 while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
 	$attributi[] = $res;
@@ -48,7 +47,7 @@ while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
 
 $out = [
 "clan" => $clan ,
-// "concetti" => $concetti ,
+"archetipi" => $archetipi ,
 "attributi" => $attributi
 ];
 

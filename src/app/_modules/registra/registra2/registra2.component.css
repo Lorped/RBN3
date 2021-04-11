@@ -18,8 +18,16 @@ hr {
     /*font-size: 20px; */
     border-radius: 3px;
     font-size: 0.7em;
+    background-color: #f0f0f0;
 }
 
 .btn.btn-primary:disabled{
     background-color: #a0a0a0;
+}
+
+.btn-xs:disabled{
+    background-color: #a0a0a0;
+}
+.btn-xs:enabled:hover{
+    background-color: #f02618;
 }

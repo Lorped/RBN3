@@ -21,19 +21,19 @@ include ('token.php');
 
 
 $postdata = file_get_contents("php://input");
-$request = json_decode($postdata)->myobj;
+$request = json_decode($postdata) -> myobj;
 
 
-$newPG = $request->newPG;
+$newPG = $request -> newPG;
 
 
-$listaBackground = $request->listaBackground;
-$listaDiscipline = $request->listaDiscipline;
-$listaAttributi = $request->listaAttributi;
-$listaSkill = $request->listaSkill;
-$necroPG = $request->necroPG;
-$taumPG = $request->taumPG;
-$px = $request->px;
+$listaBackground = $request -> listaBackground;
+$listaDiscipline = $request -> listaDiscipline;
+$listaAttributi = $request -> listaAttributi;
+$listaSkill = $request -> listaSkill;
+$necroPG = $request -> necroPG;
+$taumPG = $request -> taumPG;
+$px = $request -> px;
 
 $generazionebg=0;
 
@@ -43,17 +43,20 @@ $generazionebg=0;
 forEach ($listaBackground as $bg ) {
 
 	if ( $bg->IDbackground == 5) { // Generazione
-		$generazionebg=$bg->LivelloBG;
+		$generazionebg = $bg -> LivelloBG;
 	}
 }
 
 $gen=0;
 $gen=13-(int)$generazionebg;
+$ps=10+(int)$generazionebg;
 
+/*
 $taumaturgo = 0;
 if ( IDclan == 7 ) {
 	$taumaturgo = 1;
 }
+*/
 
 
 
@@ -63,21 +66,19 @@ $email=mysql_real_escape_string($newPG->Email);
 $pass=mysql_real_escape_string($newPG->Pass);
 
 $MySql="INSERT INTO Personaggio ( Nome, Cognome, Email, Pass, DataIscrizione,
-	IDclan, Sesso, Eta, EtaA,
- Generazione, BloodP,
+	IDNatura, IDCarattere,  IDclan, Sesso, Eta, EtaA,
+ Generazione, PS, PSmax,
  FdV, FdVmax,
- IDsentiero, Valsentiero
- IDsalute,
- Taumaturgo
+ IDsentiero, Valsentiero,
+ Coscienza, Coraggio, SelfControl
  )
 VALUES (
 	'$nome' , '$cognome' ,'$email' , '$pass' , NOW() ,
-	$newPG->Clan, '$newPG->Sesso', $newPG->Eta, $newPG->EtaA,
-	$gen, 1 ,
+	$newPG->Natura , $newPG->Carattere, $newPG->Clan, '$newPG->Sesso', $newPG->Eta, $newPG->EtaA,
+	$gen, $ps, $ps,
 	$newPG->FdVmax, $newPG->FdVmax,
-	$newPG->DescSentiero, 7 ,
-	$newPG->IDsalute ,
-	$taumaturgo
+	$newPG->DescSentiero, $newPG->Valsentiero,
+	$newPG->Coscienza, $newPG->Coraggio, $newPG->SelfControl
 )";
 
 mysql_query($MySql);

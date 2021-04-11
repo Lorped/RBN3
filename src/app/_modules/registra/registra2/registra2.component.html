@@ -20,24 +20,24 @@
       </div>
       <div class="row">
         <div class="col alc">
-          Fisiche
+          Attitudini ({{sommaA}})
         </div>
         <div class="col alc">
-          Sociali
+          Capacità ({{sommaC}})
         </div>
         <div class="col alc">
-          Mentali
+          Conoscenze ({{sommaK}})
         </div>
-      </div>      
+      </div>
       <div class="row">
         <div class="col">
           <table class="full">
             <tr *ngFor="let a of skills">
             <td *ngIf="a.Tipologia == '1'">{{a.NomeSkill}}</td>
             <td *ngIf="a.Tipologia == '1'" class="alr">
-              <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
+              <button  class="btn btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
               <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
-              <button class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>3"><i class="fa fa-plus"></i></button>
+              <button class="btn btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button>
             </td>
           </tr>
           </table>
@@ -47,9 +47,9 @@
             <tr *ngFor="let a of skills">
               <td *ngIf="a.Tipologia == '2'">{{a.NomeSkill}}</td>
               <td *ngIf="a.Tipologia == '2'" class="alr">
-                <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
+                <button  class="btn btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
                 <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
-                <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>3"><i class="fa fa-plus"></i></button>
+                <button  class="btn btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button>
               </td>
           </tr>
           </table>
@@ -59,9 +59,9 @@
             <tr *ngFor="let a of skills">
               <td *ngIf="a.Tipologia == '3'">{{a.NomeSkill}}</td>
               <td *ngIf="a.Tipologia == '3'" class="alr">
-                <button  class="btn btn-primary btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
+                <button  class="btn btn-xs" (click)="minattr(a.IDskill)" [disabled]="a.Livello<1"><i class="fa fa-minus"></i></button>
                 <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > a.Livello , 'dred': ix < a.Livello }"></i>
-                <button  class="btn btn-primary btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>3"><i class="fa fa-plus"></i></button>
+                <button  class="btn btn-xs" (click)="addattr(a.IDskill)" [disabled]="a.Livello>2"><i class="fa fa-plus"></i></button>
               </td>
             </tr>
           </table>
@@ -71,40 +71,7 @@
         <div class="col">&nbsp;</div>
       </div>
       <div class="row">
-        <div class="col">Segliere le abilità secondo una delle configurazioni seguenti :</div>
-      </div>
-      <div class="row">
-        <div class="col-3">
-          <table>
-            <tr><td>Generalista</td></tr>
-            <tr><td>
-              - dieci abilità a livello <span class="red">1</span> <span *ngIf="num1==max1a" class="fa fa-check dgreen"></span> <br>
-              - otto abilità a livello <span class="red">2</span> <span *ngIf="num2==max2a" class="fa fa-check dgreen"></span> <br>
-              - una abilità a livello <span class="red">3</span> <span *ngIf="num3==max3a" class="fa fa-check dgreen"></span>
-            </td></tr>
-          </table>
-        </div>
-        <div class="col-3">
-          <table>
-            <tr><td>Bilanciato</td></tr>
-            <tr><td>
-              - sette abilità a livello <span class="red">1</span> <span *ngIf="num1==max1b" class="fa fa-check dgreen"></span> <br>
-              - cinque abilità a livello <span class="red">2</span> <span *ngIf="num2==max2b" class="fa fa-check dgreen"></span> <br>
-              - tre abilità a livello <span class="red">3</span> <span *ngIf="num3==max3b" class="fa fa-check dgreen"></span>
-            </td></tr>
-          </table>
-        </div>
-        <div class="col-3">
-          <table>
-            <tr><td>Specialista</td></tr>
-            <tr><td>
-              - tre abilità a livello <span class="red">1</span> <span *ngIf="num1==max1c" class="fa fa-check dgreen"></span> <br>
-              - tre abilità a livello <span class="red">2</span> <span *ngIf="num2==max2c" class="fa fa-check dgreen"></span> <br>
-              - tre abilità a livello <span class="red">3</span> <span *ngIf="num3==max3c" class="fa fa-check dgreen"></span> <br>
-              - una abilità a livello <span class="red">4</span> <span *ngIf="num4==max4c" class="fa fa-check dgreen"></span>
-            </td></tr>
-          </table>
-        </div>
+        <div class="col"><span *ngIf="formOK" class="fa fa-check dgreen"></span> Distribuire <span class="red">13</span> pallini in una categoria di Abilità (attitudini, capacità o conoscenze), <span class="red">9</span> in una categoria secondaria e <span class="red">5</span> nella rimanente terziaria.<br> Al momento nessuna abilità può superare il livello 3.</div>
       </div>
       <div class="row">
         <div class="col">&nbsp;</div>

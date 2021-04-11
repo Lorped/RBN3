@@ -14,12 +14,18 @@ export class Registra3Component implements OnInit {
   bg: Array<Background> = [];
   discipline: Array<Disciplina> = [];
 
+  coscienza = 1;
+  selfcontrol = 1;
+  coraggio = 1;
 
+  sommavirtu = 3 ;
+  virtuOK = false ;
 
   necro = [];
   taum = [];
   necroPG = { IDnecro: 0 , NomeNecro: '', Acquisibile: 0 , Livello: 0 };
   taumPG = { IDtaum: 0 , NomeTaum: '', Acquisibile: 0 , Livello: 0 };
+
 
 
   sommadisc = 0;
@@ -33,21 +39,11 @@ export class Registra3Component implements OnInit {
 
   z = 0;
 
-  fdv = 0;
-  salute = 0;
-
-  coscienza = 2 ;
-  selfcontrol = 3 ;
-
   constructor( private signupservice: SignupService, private router: Router ) { }
 
   ngOnInit() {
     let prevdatastring = sessionStorage.getItem('RBN3registration1') ;
     let prevdata = JSON.parse(prevdatastring);
-
-    this.fdv = prevdata.attributi[5].Livello + prevdata.attributi[8].Livello;
-    this.salute = prevdata.attributi[2].Livello + 3;
-    // console.log(prevdata);
 
     this.signupservice.getregistra3(prevdata.clanPG)
     .subscribe(
@@ -70,8 +66,12 @@ export class Registra3Component implements OnInit {
         if ( prevdatastring = sessionStorage.getItem('RBN3registration3') ) {
           prevdata = JSON.parse(prevdatastring);
 
+
+          this.coscienza = prevdata.coscienza;
+          this.coraggio = prevdata.coraggio;
+          this.selfcontrol = prevdata.selfcontrol;
           this.bg = prevdata.bg;
-          this.sentieroPG = this.sent[prevdata.sentieroPG.IDsentiero - 1];
+          this.sentieroPG = this.sent[prevdata.sentieroPG.IDsentiero-1];
 
           if ( this.necro.length > 0) {
             this.necroPG = this.necro[prevdata.necroPG.IDnecro - 1];
@@ -83,8 +83,10 @@ export class Registra3Component implements OnInit {
           for (let k = 0; k < prevdata.discipline.length; k++) {
             this.discipline[k].LivelloDisc = prevdata.discipline[k].LivelloDisc;
           }
-          this.sommadisc = 3;
+          this.sommadisc=3;
           this.discOK = true;
+          this.sommavirtu = 10;
+          this.virtuOK = true ;
           this.sommabg = 5;
           this.bgOK = true ;
         }
@@ -105,6 +107,11 @@ export class Registra3Component implements OnInit {
       this.discOK = true ;
     }
 
+    if (this.discipline[this.z].LivelloDisc==1 && disc == this.z ) {
+      this.necroPG = '';
+      this.taumPG = '';
+    }
+    console.log(this.taumPG);
   }
 
   minattr (disc: number) {
@@ -119,14 +126,19 @@ export class Registra3Component implements OnInit {
       this.discOK = true ;
     }
 
+    if (this.discipline[this.z].LivelloDisc==0) {
+      this.necroPG = '';
+      this.taumPG = '';
+    }
+    console.log(this.taumPG);
   }
 
-/* *** *********
+
   mincoscienza () {
     this.coscienza--;
     this.sommavirtu--;
     this.virtuOK = false ;
-    if (this.sommavirtu === 8) {
+    if (this.sommavirtu === 10) {
       this.virtuOK = true ;
     }
     if (this.selfcontrol + this.coscienza  < 6) {
@@ -137,7 +149,7 @@ export class Registra3Component implements OnInit {
     this.coscienza++;
     this.sommavirtu++;
     this.virtuOK = false ;
-    if (this.sommavirtu === 8) {
+    if (this.sommavirtu === 10) {
       this.virtuOK = true ;
     }
   }
@@ -145,7 +157,7 @@ export class Registra3Component implements OnInit {
     this.coraggio--;
     this.sommavirtu--;
     this.virtuOK = false ;
-    if (this.sommavirtu === 8) {
+    if (this.sommavirtu === 10) {
       this.virtuOK = true ;
     }
   }
@@ -153,7 +165,7 @@ export class Registra3Component implements OnInit {
     this.coraggio++;
     this.sommavirtu++;
     this.virtuOK = false ;
-    if (this.sommavirtu === 8) {
+    if (this.sommavirtu === 10) {
       this.virtuOK = true ;
     }
   }
@@ -161,7 +173,7 @@ export class Registra3Component implements OnInit {
     this.selfcontrol--;
     this.sommavirtu--;
     this.virtuOK = false ;
-    if (this.sommavirtu === 8) {
+    if (this.sommavirtu === 10) {
       this.virtuOK = true ;
     }
     if (this.selfcontrol + this.coscienza  < 6) {
@@ -172,12 +184,12 @@ export class Registra3Component implements OnInit {
     this.selfcontrol++;
     this.sommavirtu++;
     this.virtuOK = false ;
-    if (this.sommavirtu === 8) {
+    if (this.sommavirtu === 10) {
       this.virtuOK = true ;
     }
   }
 
-  ****** */
+
 
   addbg (bg: number) {
     this.bgOK = false ;
@@ -214,11 +226,13 @@ export class Registra3Component implements OnInit {
 
     const myobj = {
       'sentieroPG': this.sentieroPG,
+      'coscienza': this.coscienza,
+      'selfcontrol': this.selfcontrol,
+      'coraggio': this.coraggio,
       'bg': this.bg,
       'discipline': this.discipline,
       'necroPG': this.necroPG,
-      'taumPG': this.taumPG,
-      'salute': this.salute
+      'taumPG': this.taumPG
     };
     sessionStorage.setItem('RBN3registration3', JSON.stringify(myobj) );
     this.router.navigate(['/registra/4']);
