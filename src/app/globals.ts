@@ -82,7 +82,7 @@ export class Basicpg {
 
   public coscienza = 0 ;  //da verificare
   public selfcontrol = 0 ; //da verificare
-  public ModSalute = 0; // da verificare from LEFT Join
+
 }
 
 @Injectable()

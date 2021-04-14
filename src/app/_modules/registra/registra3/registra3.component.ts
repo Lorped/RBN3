@@ -108,10 +108,9 @@ export class Registra3Component implements OnInit {
     }
 
     if (this.discipline[this.z].LivelloDisc==1 && disc == this.z ) {
-      this.necroPG = '';
-      this.taumPG = '';
+      this.necroPG = { IDnecro: 0 , NomeNecro: '', Acquisibile: 0 , Livello: 0 };
+      this.taumPG = { IDtaum: 0 , NomeTaum: '', Acquisibile: 0 , Livello: 0 };
     }
-    console.log(this.taumPG);
   }
 
   minattr (disc: number) {
@@ -127,10 +126,13 @@ export class Registra3Component implements OnInit {
     }
 
     if (this.discipline[this.z].LivelloDisc==0) {
-      this.necroPG = '';
-      this.taumPG = '';
+      if (this.necro.length > 0) {
+        this.necroPG = this.necro[0];
+      } else {
+        this.taumPG = this.taum[0];
+      }
     }
-    console.log(this.taumPG);
+    //console.log(this.taumPG);
   }
 
 

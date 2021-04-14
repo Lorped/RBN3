@@ -72,21 +72,24 @@ if ( ! $full ) {
 if ( $full ) {
 	$MySql = "SELECT
 	Userid , Nome , Cognome , Email , Pass ,
-    DataIscrizione ,
- 		Clan ,
-    Sesso , Eta , EtaA , Personaggio.Generazione  , FdV , FdVmax ,
-    Valsentiero , DescSentiero ,
-    Personaggio.IDsalute  ,
-    daurto , aggravati , URLImg , Soldi ,
-		MaxStat ,
-		Personaggio.BloodP, Surge, Danni, BonusD, Bane, MinSete, MinBP, MaxBP, Sete , Taumaturgo
-	FROM Personaggio
-		LEFT JOIN Sentieri ON Personaggio.IDsentiero = Sentieri.IDsentiero
-		LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan
-		LEFT JOIN Concetto ON Personaggio.IDconcetto = Concetto.IDconcetto
-		LEFT JOIN Generazioni ON Personaggio.Generazione = Generazioni.Generazione
-		LEFT JOIN BloodPotency ON Personaggio.BloodP = BloodPotency.BloodP
-		WHERE Userid='$id'";
+	    DataIscrizione ,
+			a1.Archetipo as Natura ,
+			a2.Archetipo as Carattere ,
+	 		Clan ,
+	    Sesso , Eta , EtaA , Personaggio.Generazione , PS , PSmax , FdV , FdVmax ,
+	    Valsentiero , DescSentiero ,
+	    Coscienza , Coraggio , SelfControl , Personaggio.IDsalute  ,
+	    daurto , aggravati , URLImg , Soldi ,
+			MaxStat ,	UsoPS,
+			DescSalute , ModSalute
+		FROM Personaggio
+			LEFT JOIN Sentieri ON Personaggio.IDsentiero = Sentieri.IDsentiero
+			LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan
+			LEFT JOIN Archetipi AS a1 ON Personaggio.IDnatura = a1.IDarchetipo
+			LEFT JOIN Archetipi AS a2 ON Personaggio.IDcarattere = a2.IDarchetipo
+			LEFT JOIN Generazioni ON Personaggio.Generazione = Generazioni.Generazione
+			LEFT JOIN Livelli_salute ON Personaggio.IDsalute = Livelli_salute.IDsalute
+			WHERE Userid='$id'";
 	$Result=mysql_query($MySql);
 	$pg = mysql_fetch_array($Result,MYSQL_ASSOC);
 

@@ -16,7 +16,7 @@ export class Registra1Component implements OnInit {
 
   registrationForm: FormGroup;
 
-  // concetti: Array<Concetto> = [];
+  archetipi: Array<Archetipo> = [];
   clan: Array<Clan> = [];
   attributi: Array<Attributo> = [];
 

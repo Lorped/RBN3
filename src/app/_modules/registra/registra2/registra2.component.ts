@@ -29,14 +29,12 @@ export class Registra2Component implements OnInit {
       this.skills = olddata.skill;
 
       for ( let j = 0; j < this.skills.length; j++ ) {
-        if (this.skills[j].Livello === 1 ) {
-          this.num1++ ;
-        } else if (this.skills[j].Livello === 2 ) {
-          this.num2++ ;
-        } else if (this.skills[j].Livello === 3 ) {
-          this.num3++ ;
-        } else if (this.skills[j].Livello === 4 ) {
-          this.num4++ ;
+        if (this.skills[j].Tipologia === '1' ) {
+          this.sommaA = this.sommaA + this.skills[j].Livello;
+        } else if (this.skills[j].Tipologia === '2' ) {
+          this.sommaC = this.sommaC + this.skills[j].Livello;
+        } else if (this.skills[j].Tipologia === '3' ) {
+          this.sommaK = this.sommaK + this.skills[j].Livello;
         }
       }
       this.formOK = true ;
