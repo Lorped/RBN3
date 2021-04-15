@@ -26,8 +26,11 @@ export class SchedaotherComponent implements OnInit {
   ngOnInit() {
     this.schedaService.getpg(this.status.otherID)
     .subscribe( (data: Personaggio) => {
+
+console.log(data)      ;
       this.myPG = data;
       this.myaPG = this.myPG.aPG;
+console.log(this.myPG)      ;
 
     });
 

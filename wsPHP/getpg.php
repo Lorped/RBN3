@@ -61,12 +61,13 @@ if ( ! $full ) {
 	$MySql = "SELECT Nome, Cognome, DataIscrizione, URLImg, EtaA, Clan FROM Personaggio
 	LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan WHERE Userid='$id'";
 	$Result=mysql_query($MySql);
-	$res = mysql_fetch_array($Result,MYSQL_ASSOC);
+	$pg = mysql_fetch_array($Result,MYSQL_ASSOC);
 
-	$out = [
-		'full' => $full,
-		'pg' => $res
-	];
+	$background=[];
+	$attr=[];
+	$discipline=[];
+	$skill=[];
+
 }
 
 if ( $full ) {
@@ -145,6 +146,9 @@ if ( $full ) {
 
 
 
+}
+
+
 
 	$out = [
 		'full' => $full,
@@ -154,7 +158,6 @@ if ( $full ) {
 		'discipline' => $discipline,
 		'skill' => $skill
 	];
-}
 
 
 header("HTTP/1.1 200 OK");

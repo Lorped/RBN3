@@ -80,8 +80,7 @@ export class Basicpg {
   public MaxBP = 0 ;
   public Taumaturgo = 0;
 
-  public coscienza = 0 ;  //da verificare
-  public selfcontrol = 0 ; //da verificare
+
 
 }
 
@@ -103,6 +102,7 @@ export class Personaggio {
     this.listaBackground = [];
     this.listaDiscipline = [];
   }
+
 
 }
 
