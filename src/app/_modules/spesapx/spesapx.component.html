@@ -18,7 +18,7 @@
             <div class="container">
               <div class="row">
                 <div class="col">FdV</div>
-                <div class="col"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < myPG.aPG.FdVmax , 'white': ix+1 > myPG.aPG.FdVmax }"></i></div>
+                <div class="col"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < myPG.aPG.FdVmax , 'white': ix+1 > myPG.aPG.FdVmax }"></i><button  *ngIf="myPG.aPG.FdVmax < 10" class="btn btn-primary btn-xs" (click)="addfdv()" [disabled]="px < myPG.aPG.FdVmax"><i class="fa fa-plus"></i></button></div>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
             <div class="container">
               <div class="row" *ngFor="let attr of myPG.listaAttributi">
               <div class="col" *ngIf="attr.Tipologia == 'F'">{{attr.NomeAttributo}}</div>
-              <div class="col" *ngIf="attr.Tipologia == 'F'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 5 * (attr.Livello+1)"><i class="fa fa-plus"></i></button></div>
+              <div class="col" *ngIf="attr.Tipologia == 'F'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 4 * attr.Livello"><i class="fa fa-plus"></i></button></div>
             </div>
           </div>
           </div>
@@ -92,7 +92,7 @@
             <div class="container">
               <div class="row" *ngFor="let attr of myPG.listaAttributi">
               <div class="col" *ngIf="attr.Tipologia == 'S'">{{attr.NomeAttributo}}</div>
-              <div class="col" *ngIf="attr.Tipologia == 'S'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 5 * (attr.Livello+1)"><i class="fa fa-plus"></i></button></div>
+              <div class="col" *ngIf="attr.Tipologia == 'S'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 4 * attr.Livello"><i class="fa fa-plus"></i></button></div>
             </div>
           </div>
           </div>
@@ -100,7 +100,7 @@
             <div class="container">
               <div class="row" *ngFor="let attr of myPG.listaAttributi">
                 <div class="col" *ngIf="attr.Tipologia == 'M'">{{attr.NomeAttributo}}</div>
-                <div class="col" *ngIf="attr.Tipologia == 'M'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 5 * (attr.Livello+1)"><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="attr.Tipologia == 'M'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i><button  *ngIf="attr.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addattr(attr.IDattributo)" [disabled]="px < 4 * attr.Livello"><i class="fa fa-plus"></i></button></div>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@
             <div class="container">
               <div class="row" *ngFor="let skill of myPG.listaSkill">
                 <div class="col" *ngIf="skill.Tipologia == '1'">{{skill.NomeSkill}}</div>
-                <div class="col" *ngIf="skill.Tipologia == '1'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 3 * (skill.Livello+1) || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="skill.Tipologia == '1'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello==0 && px<3)"><i class="fa fa-plus"></i></button></div>
               </div>
             </div>
           </div>
@@ -129,7 +129,7 @@
             <div class="container">
               <div class="row" *ngFor="let skill of myPG.listaSkill">
                 <div class="col" *ngIf="skill.Tipologia == '2'">{{skill.NomeSkill}}</div>
-                <div class="col" *ngIf="skill.Tipologia == '2'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 3 * (skill.Livello+1) || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="skill.Tipologia == '2'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello==0 && px<3)"><i class="fa fa-plus"></i></button></div>
               </div>
             </div>
           </div>
@@ -137,7 +137,7 @@
             <div class="container">
               <div class="row" *ngFor="let skill of myPG.listaSkill">
                 <div class="col" *ngIf="skill.Tipologia == '3'">{{skill.NomeSkill}}</div>
-                <div class="col" *ngIf="skill.Tipologia == '3'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 3 * (skill.Livello+1) || (skill.Livello===null && px<3)"><i class="fa fa-plus"></i></button></div>
+                <div class="col" *ngIf="skill.Tipologia == '3'"><i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > skill.Livello , 'dred': ix < skill.Livello }"></i><button  *ngIf="skill.Livello < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="addskill(skill.IDskill)" [disabled]="px < 2 * skill.Livello || (skill.Livello==0 && px<3)"><i class="fa fa-plus"></i></button></div>
               </div>
             </div>
           </div>
@@ -156,7 +156,7 @@
             <div class="container">
               <div class="row" *ngFor="let disc of myPG.listaDiscipline">
                 <div class="col">{{disc.NomeDisc}}</div>
-                <div class="col"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i><button  *ngIf="disc.LivelloDisc < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="plusdisc(disc.IDdisciplina)" [disabled]="px < (disc.LivelloDisc+1) * (disc.DiClan=='S'?5:7)"><i class="fa fa-plus"></i></button></div>
+                <div class="col"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i><button  *ngIf="disc.LivelloDisc < myaPG.MaxStat" class="btn btn-primary btn-xs" (click)="plusdisc(disc.IDdisciplina)" [disabled]="px < disc.LivelloDisc * (disc.DiClan=='S'?5:7)"><i class="fa fa-plus"></i></button></div>
               </div>
             </div>
           </div>
@@ -171,7 +171,7 @@
                     <!-- <option value="0">- Disciplina -</option> -->
                     <option *ngFor="let i of newdiscipline" [ngValue]="i">{{i.NomeDisc}}</option>
                   </select>
-                  <button  *ngIf="newdiscipline.length > 0" class="btn btn-primary btn-xs" (click)="adddisc()" [disabled]="px <  (nuovadisciplina.DiClan=='S'?5:7) || nuovadisciplina.IDdisciplina == 0"><i class="fa fa-plus"></i></button>
+                  <button  *ngIf="newdiscipline.length > 0" class="btn btn-primary btn-xs" (click)="adddisc()" [disabled]="px <  10 || nuovadisciplina.IDdisciplina == 0"><i class="fa fa-plus"></i></button>
                 </div>
               </div>
               <div class="row" *ngIf="necro.length > 0">
@@ -183,7 +183,7 @@
                     <!-- <option value="0">- Disciplina -</option> -->
                     <option *ngFor="let i of newnecro" [ngValue]="i">{{i.NomeNecro}}</option>
                   </select>
-                  <button  *ngIf="newnecro.length > 0" class="btn btn-primary btn-xs" (click)="addnecro()" [disabled]="px < 5 || nuovanecro.IDnecro == 0 || Nmaxlev == 1" ><i class="fa fa-plus"></i></button>
+                  <button  *ngIf="newnecro.length > 0" class="btn btn-primary btn-xs" (click)="addnecro()" [disabled]="px < 7 || nuovanecro.IDnecro == 0 || Nmaxlev == 1" ><i class="fa fa-plus"></i></button>
                 </div>
               </div>
               <div class="row" *ngIf="taum.length > 0 || myaPG.Taumaturgo == 1 ">
@@ -195,7 +195,7 @@
                     <!-- <option value="0">- Disciplina -</option> -->
                     <option *ngFor="let i of newtaum" [ngValue]="i">{{i.NomeTaum}}</option>
                   </select>
-                  <button  *ngIf="newtaum.length > 0 " class="btn btn-primary btn-xs" (click)="addtaum()" [disabled]="px < 5 || nuovataum.IDtaum == 0 || Tmaxlev == 1 "><i class="fa fa-plus"></i></button>
+                  <button  *ngIf="newtaum.length > 0 " class="btn btn-primary btn-xs" (click)="addtaum()" [disabled]="px < 7 || nuovataum.IDtaum == 0 || Tmaxlev == 1 "><i class="fa fa-plus"></i></button>
                 </div>
               </div>
             </div>
@@ -209,14 +209,14 @@
                   </div>
                   <div class="row" *ngFor="let t of taum">
                     <div class="col">{{t.NomeTaum}}</div>
-                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < t.Livello , 'white': ix+1 > t.Livello }"></i><button  *ngIf=" t.Livello<5" class="btn btn-primary btn-xs" (click)="plustaum(t.IDtaum)" [disabled]="px < (t.Livello+1)*5 || ( t.Livello == Tmaxlev-1 && Tmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
+                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < t.Livello , 'white': ix+1 > t.Livello }"></i><button  *ngIf=" t.Livello<5" class="btn btn-primary btn-xs" (click)="plustaum(t.IDtaum)" [disabled]="px < t.Livello*4 || ( t.Livello == Tmaxlev-1 && Tmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
                   </div>
                   <div class="row" *ngIf="necro.length > 0">
                     <div class="col alc"> Necromanzie </div>
                   </div>
                   <div class="row" *ngFor="let n of necro">
                     <div class="col">{{n.NomeNecro}}</div>
-                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < n.Livello , 'white': ix+1 > n.Livello }"></i><button  *ngIf="n.Principale != 'S' && n.Livello<5" class="btn btn-primary btn-xs" (click)="plusnecro(n.IDnecro)" [disabled]="px < (n.Livello+1)*5 || (n.Livello == Nmaxlev-1 && Nmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
+                    <div class="col"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < n.Livello , 'white': ix+1 > n.Livello }"></i><button  *ngIf="n.Principale != 'S' && n.Livello<5" class="btn btn-primary btn-xs" (click)="plusnecro(n.IDnecro)" [disabled]="px < n.Livello*5 || (n.Livello == Nmaxlev-1 && Nmaxlev <5 )"><i class="fa fa-plus"></i></button></div>
                   </div>
                 </div>
               </div>
@@ -264,13 +264,20 @@
       </div>
       <div class="modal-body" style="overflow-y: auto;">
         <div class="container">
-          <div class="row"><div class="col">Disciplina di Clan</div><div class="col">Nuovo valore x 5</div></div>
-          <div class="row"><div class="col">Disciplina non di Clan</div><div class="col">Nuovo valore x 7</div></div>
+          <div class="row"><div class="col">Nuova abilità</div><div class="col">3</div></div>
           <div class="row"><div class="col">Nuova Via (Taumaturgica o Necromantica)</div><div class="col">7</div></div>
-          <div class="row"><div class="col">Via (Taumaturgica o Necromantica)</div><div class="col">Nuovo valore x 5</div></div>
-          <div class="row"><div class="col">Attributo</div><div class="col">Nuovo valore x 5</div></div>
-          <div class="row"><div class="col">Abilità</div><div class="col">Nuovo valore x 3</div></div>
-          <div class="row"><div class="col">Blood Potency</div><div class="col">Nuovo valore x 10</div></div>
+          <div class="row"><div class="col">Nuova Disciplina</div><div class="col">10</div></div>
+          <div class="row"><div class="col">Attributo</div><div class="col">Punteggio attuale x 4</div></div>
+          <div class="row"><div class="col">Abilità</div><div class="col">Punteggio attuale x 2</div></div>
+          <div class="row"><div class="col">Disciplina di Clan</div><div class="col">Punteggio attuale x 5</div></div>
+          <div class="row"><div class="col">Disciplina non di Clan</div><div class="col">Punteggio attuale x 7</div></div>
+
+          <div class="row"><div class="col">Via secondaria (Taumaturgica o Necromantica)</div><div class="col">Punteggio attuale x 4</div></div>
+
+
+          <div class="row"><div class="col">Virtù</div><div class="col">Punteggio attuale x 2</div></div>
+          <div class="row"><div class="col">Umanità / Sentiero</div><div class="col">Punteggio attuale x 2</div></div>
+          <div class="row"><div class="col">Forza di Volontà</div><div class="col">Punteggio attuale </div></div>
         </div>
       </div>
       <div class="modal-footer">

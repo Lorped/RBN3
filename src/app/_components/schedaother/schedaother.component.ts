@@ -24,13 +24,12 @@ export class SchedaotherComponent implements OnInit {
   constructor( private schedaService: SchedaService, public status: Status) { }
 
   ngOnInit() {
+    this.myaPG.URLImg="nopicture.gif";
     this.schedaService.getpg(this.status.otherID)
     .subscribe( (data: Personaggio) => {
 
-console.log(data)      ;
       this.myPG = data;
       this.myaPG = this.myPG.aPG;
-console.log(this.myPG)      ;
 
     });
 

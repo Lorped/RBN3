@@ -24,6 +24,7 @@ export class SchedaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.myaPG.URLImg="nopicture.gif";
     this.schedaService.getpg(this.status.Userid)
     .subscribe( (data: Personaggio) => {
       this.myPG = data;
