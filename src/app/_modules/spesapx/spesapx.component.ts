@@ -72,6 +72,8 @@ console.log(this.myPG);
 
     this.schedaService.getnecrotaum(this.status.Userid)
     .subscribe ( data => {
+
+console.log(data);
       this.necro = data.necro;
       this.taum = data.taum;
       this.Tprincipale = data.Tprincipale;
@@ -284,18 +286,25 @@ console.log(this.myPG);
 
         if (disc === 15 ) {  // Taumaturgia
           this.Tmaxlev++ ;
-        }
-
-        if (disc === 7 ) {  // Taumaturgia
           if ( this.myPG.listaDiscipline[i].LivelloDisc < 6 ) {
-            for (let j = 0; j < this.necro.length ; j++) {
-              if (this.necro[j].Principale === 'S') {
-                this.necro[j].Livello++;
-                this.Nmaxlev = this.necro[j].Livello;
+            for (let j = 0; j < this.taum.length ; j++) {
+              if (this.taum[j].Principale === 'S') {
+                this.taum[j].Livello++;
               }
             }
           }
         }
+        if (disc === 7 ) {  // Necromanzia
+          this.Nmaxlev++ ;
+          if ( this.myPG.listaDiscipline[i].LivelloDisc < 6 ) {
+            for (let j = 0; j < this.necro.length ; j++) {
+              if (this.necro[j].Principale === 'S') {
+                this.necro[j].Livello++;
+              }
+            }
+          }
+        }
+
 
       }
     }
