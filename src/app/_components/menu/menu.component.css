@@ -2,9 +2,9 @@
   background: #282c34;
   color: #fff;
   position: fixed;
-  left: auto;
+  left : 0 ;   /*   0 menù a sx   -  auto menù a dx */
+  right: -100%; /* -100% menù a sx - 0 menù a dx */
   top: 0;
-  right: 0;
   bottom: 0;
   width: 20%;
   min-width: 200px;

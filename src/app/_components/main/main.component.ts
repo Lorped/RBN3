@@ -15,7 +15,7 @@ import { Status } from '../../globals';
         transform: 'translate3d(0, 0, 0)'
       })),
       state('out', style({
-        transform: 'translate3d(100%, 0, 0)'
+        transform: 'translate3d(-100%, 0, 0)'    // Mettere a 100% per il menù a dx , -100% per menù a sx
       })),
       transition('in => out', animate('400ms ease-in-out')),
       transition('out => in', animate('400ms ease-in-out'))
