@@ -136,7 +136,31 @@ export class Status {
   sceltapoterion = false;
   schedaothon = false;
   otherID = 0;
+  messaggion = false;
 }
+
+
+export class UnContatto {
+  IDX = 0;
+  NomeCognome = '';
+  Nuovi = 0;
+  Url = '';
+}
+
+export class Messaggi {
+  IDMessaggio = 0;
+  IDMittente = 0;
+  IDDestinatario = 0;
+  Testo = '';
+  Ora = '';
+  Cancellato = 0;
+  Nuovo = '';
+
+}
+
+
+// QUESTO ANDREBBE CANCELLATO
+
 
 @Injectable()
 export class Potere {
@@ -179,3 +203,5 @@ export class SceltaPotereDisc {
   numpresi = 0;
   pot: Array<SceltaPotere> = [];
 }
+
+

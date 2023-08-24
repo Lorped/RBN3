@@ -1,0 +1,11 @@
+<div class="container">
+
+    <table class="full">
+        <tr *ngFor="let cont of myContatti">
+          <td >{{cont.UrlImg}}</td>
+          <td>{{cont.NomeCognome}}</td>
+          <td *ngIf="cont.Nuovi != 0">{{cont.Nuovi}}</td>
+          <td *ngIf="cont.Nuovi == 0">&nbsp;</td>
+        </tr>
+      </table>
+</div>

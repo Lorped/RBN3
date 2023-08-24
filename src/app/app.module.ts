@@ -14,6 +14,7 @@ import { SchedaService } from './_services/index';
 import { QuestpxService } from './_services/index';
 import { SignupService } from './_services/index';
 import { AnagrafeService } from './_services/index';
+import { MessaggiService } from './_services/index';
 
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -36,6 +37,7 @@ import { SceltapoteriComponent } from './_components/sceltapoteri/sceltapoteri.c
 import { Status } from './globals';
 
 import { UtilityModule } from './_modules/utility/utility.module';
+import { MessaggiComponent } from './_components/messaggi/messaggi.component';
 
 
 
@@ -57,7 +59,8 @@ import { UtilityModule } from './_modules/utility/utility.module';
     AnagrafeComponent,
     SchedaotherComponent,
     PoteriComponent,
-    SceltapoteriComponent
+    SceltapoteriComponent,
+    MessaggiComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,7 @@ import { UtilityModule } from './_modules/utility/utility.module';
     QuestpxService,
     SignupService,
     AnagrafeService,
+    MessaggiService,
     AuthGuard,
     Status
   ],

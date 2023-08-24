@@ -98,6 +98,21 @@
 
 <!-- ----->
 
+<!-- ----->
+<app-modal #modalmessaggi modalId="modalmessaggi">
+  <div class="app-modal-header">
+    <i>Messaggi</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.messaggion=false; modalmessaggi.hide()">&times;</button>
+  </div>
+  <div class="app-modal-body">
+    <app-messaggi *ngIf="this.status.messaggion"></app-messaggi>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.messaggion=false; modalmessaggi.hide()">Chiudi</button>
+  </div>
+</app-modal>
+
+<!-- ----->
+
 
 <button (click)="toggleMenu()" class="menubutton">
   <span>toggle menu</span>
