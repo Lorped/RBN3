@@ -1,10 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
-
 import { AuthenticationService } from '../../_services/index';
 import { ModalService } from '../../_services/index';
-
 import { Router } from '@angular/router';
-
 import { Status } from '../../globals';
 
 

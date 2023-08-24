@@ -144,7 +144,8 @@ export class UnContatto {
   IDX = 0;
   NomeCognome = '';
   Nuovi = 0;
-  Url = '';
+  UrlImg = '';
+  Ultimo = '';
 }
 
 export class Messaggi {

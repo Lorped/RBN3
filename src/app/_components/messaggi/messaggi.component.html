@@ -1,11 +1,39 @@
 <div class="container">
 
-    <table class="full">
-        <tr *ngFor="let cont of myContatti">
-          <td >{{cont.UrlImg}}</td>
-          <td>{{cont.NomeCognome}}</td>
-          <td *ngIf="cont.Nuovi != 0">{{cont.Nuovi}}</td>
-          <td *ngIf="cont.Nuovi == 0">&nbsp;</td>
-        </tr>
-      </table>
+  <table class="full">
+    <tr>
+      <td style="width: 20%; text-align: right;">Contatto</td>
+      <td colspan="2">&nbsp;</td>
+      <td>Ora ultimo messaggio</td>
+      <td>Nuovi</td>
+      <td>Canc</td>
+    </tr>
+    <tr>
+      <td colspan="6" ><hr></td>
+    </tr>
+    <tr *ngFor="let cont of myContatti" >
+      <td *ngIf="cont.Nuovi != 0" style="width: 20%;">
+        <div>
+        <div class="bordorosso">
+          <img src="assets/{{cont.UrlImg}}" height="80px" width="80px" > 
+        </div>
+        </div>
+      </td>
+      <td *ngIf="cont.Nuovi == 0" style="width: 20%;">
+        <div >
+        <div class="bordobianco">
+          <img src="assets/{{cont.UrlImg}}" height="80px" width="80px" > 
+        </div>
+        </div>
+      </td>
+      <td colspan="2">{{cont.NomeCognome}}</td>
+      <td>{{cont.Ultimo}}</td>
+      <td *ngIf="cont.Nuovi != 0"><span class="red">{{cont.Nuovi}}</span></td>
+      <td *ngIf="cont.Nuovi == 0">&nbsp;</td>
+      <td><i class="fa fa-trash"></i></td>
+    </tr>
+  </table>
+
+
+
 </div>

@@ -41,12 +41,17 @@ while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
 	$MySql2 = "SELECT COUNT(*) as Nuovi FROM `Sms` WHERE IDMittente = $idx AND IDDestinatario = $Userid AND Nuovo = 'S' ";
 	$Result2 = mysql_query($MySql2);
 	$res2 = mysql_fetch_array($Result2);
+
+	$MySql3 = "SELECT MAX(Ora) as Ultimo FROM `Sms` WHERE (IDMittente = $idx AND IDDestinatario = $Userid) OR (IDDestinatario = $idx AND IDMittente = $Userid) ";
+	$Result3 = mysql_query($MySql3);
+	$res3 = mysql_fetch_array($Result3);
 	
 	$out [] = [ 
 		'IDX' => $res['IDX'],
 		'NomeCognome' => $res['NomeCognome'],
 		'UrlImg' => $res['UrlImg'],
-		'Nuovi' => $res2['Nuovi']
+		'Nuovi' => $res2['Nuovi'],
+		'Ultimo' => $res3['Ultimo']
 		
 	];
 }
