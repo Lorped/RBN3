@@ -25,3 +25,5 @@ npm install font-awesome --save
 Insert into your style.css
 
 @import '~font-awesome/css/font-awesome.css';
+
+export  NODE_OPTIONS=--openssl-legacy-provider
