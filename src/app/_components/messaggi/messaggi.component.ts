@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../../_services/index';
 import { MessaggiService } from '../../_services/index';
-import { UnContatto, Status } from '../../globals';
+import { UnContatto,  Status } from '../../globals';
 
 @Component({
   selector: 'app-messaggi',
@@ -10,16 +10,17 @@ import { UnContatto, Status } from '../../globals';
 })
 export class MessaggiComponent implements OnInit {
 
-  myContatti: Array<UnContatto> = [];
+  listacont: Array<UnContatto>;
 
-  constructor( private messaggiService: MessaggiService, private status: Status, private modalService: ModalService ) { }
+  constructor( private messaggiService: MessaggiService, public status: Status, private modalService: ModalService ) { }
 
   ngOnInit(): void {
 
     this.messaggiService.getcontatti(this.status.Userid)
     .subscribe( (data) => {
       //console.log (data);
-      this.myContatti = data;
+      this.status.myContatti = data;
+
 
     });
 
@@ -30,6 +31,13 @@ export class MessaggiComponent implements OnInit {
     this.status.contattonome = nome ;
     this.status.contattourl = url ;
     this.status.listamsgon = true ;
+
+    for ( var j = 0 ; j< this.status.myContatti.length ; j++) {
+      if ( this.status.myContatti[j].IDX == this.status.contattoID ) {
+        this.status.myContatti[j].Nuovi = 0 ;
+      }
+    }
+
     this.modalService.show('modallistamsg') ;
 
   }

@@ -141,6 +141,7 @@ export class Status {
   contattonome = '';
   listamsgon = false;
   contattourl = '';
+  myContatti: Array<UnContatto> = [];
 }
 
 
@@ -152,8 +153,10 @@ export class UnContatto {
   Ultimo = '';
 }
 
+
+
 export class Messaggi {
-  IDMessaggio = 0;
+  ID = 0;
   IDMittente = 0;
   IDDestinatario = 0;
   Testo = '';

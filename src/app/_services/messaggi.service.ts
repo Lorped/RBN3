@@ -21,5 +21,26 @@ export class MessaggiService {
     } );
   }
 
+  sendmessaggio(contatto: number, testo: string) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    //console.log(testo);
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/putmessaggi.php', {
+      token: user,
+      contatto: contatto,
+      testo: testo
+    } );
+  }
+
+  cancmsg(id: number) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    console.log(id);
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/cancmsg.php', {
+      token: user,
+      id: id
+    } );
+  }
+
 }
 

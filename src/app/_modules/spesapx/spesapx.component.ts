@@ -56,7 +56,7 @@ export class SpesapxComponent implements OnInit {
       this.myPG = data;
       this.myaPG = this.myPG.aPG;
 
-console.log(this.myPG);
+//console.log(this.myPG);
     });
 
 
@@ -73,7 +73,7 @@ console.log(this.myPG);
     this.schedaService.getnecrotaum(this.status.Userid)
     .subscribe ( data => {
 
-console.log(data);
+//console.log(data);
       this.necro = data.necro;
       this.taum = data.taum;
       this.Tprincipale = data.Tprincipale;

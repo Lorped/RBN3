@@ -5,13 +5,13 @@
       <td style="width: 20%; text-align: right;">Contatto</td>
       <td colspan="2">&nbsp;</td>
       <td>Ora ultimo messaggio</td>
-      <td>Nuovi</td>
-      <td>Canc</td>
+      <td class="cent">Nuovi</td>
+      <td class="cent">Canc</td>
     </tr>
     <tr>
       <td colspan="6" ><hr></td>
     </tr>
-    <tr *ngFor="let cont of myContatti" >
+    <tr *ngFor="let cont of status.myContatti" >
       <td *ngIf="cont.Nuovi != 0" style="width: 20%;">
         <div>
         <div class="bordorosso">
@@ -28,9 +28,9 @@
       </td>
       <td colspan="2"><a href="javascript:void(0)" (click)="showmsg(cont.IDX,cont.NomeCognome,cont.UrlImg)">{{cont.NomeCognome}}</a></td>
       <td>{{cont.Ultimo}}</td>
-      <td *ngIf="cont.Nuovi != 0"><span class="red">{{cont.Nuovi}}</span></td>
-      <td *ngIf="cont.Nuovi == 0">&nbsp;</td>
-      <td><i class="fa fa-trash"></i></td>
+      <td *ngIf="cont.Nuovi != 0" class="cent"><span class="red">{{cont.Nuovi}}</span></td>
+      <td *ngIf="cont.Nuovi == 0" class="cent">&nbsp;</td>
+      <td  class="cent"><i class="fa fa-trash"></i></td>
     </tr>
   </table>
 

@@ -42,7 +42,10 @@ while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
 	$Result2 = mysql_query($MySql2);
 	$res2 = mysql_fetch_array($Result2);
 
-	$MySql3 = "SELECT MAX(Ora) as UU , DATE_FORMAT( Ora , '%d %b - %H:%i' ) AS Ultimo FROM `Sms` WHERE (IDMittente = $idx AND IDDestinatario = $Userid) OR (IDDestinatario = $idx AND IDMittente = $Userid) ";
+	$MySql3 = "SELECT DATE_FORMAT( MAX(Ora) , '%d %b - %H:%i' ) AS Ultimo  FROM `Sms` WHERE 
+		(  (IDMittente = $idx AND IDDestinatario = $Userid) AND (Cancellato = 0 OR Cancellato = 1) )
+		OR 
+		(  (IDDestinatario = $idx AND IDMittente = $Userid) AND (Cancellato = 0 OR Cancellato = 2) ) ";
 	$Result3 = mysql_query($MySql3);
 	$res3 = mysql_fetch_array($Result3);
 	

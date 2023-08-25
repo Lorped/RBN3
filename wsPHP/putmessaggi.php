@@ -25,6 +25,7 @@ $request = json_decode($postdata);
 
 $token=$request->token;
 $contatto=$request->contatto;
+$testo=$request->testo;
 
 
 if ( CheckJWT ($token) ) {
@@ -41,27 +42,14 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-$out=[];
+$testo=mysql_real_escape_string($testo);
 
-// 1 = cancellato dal Mittente
-// 2 = cancellato dal Destinatario
-// 3 = cancellato da entrambi
-
-$MySql= "SELECT ID, IDMittente, IDDestinatario,  Testo, DATE_FORMAT( Ora , '%d %b - %H:%i'  ) AS Ora  FROM `Sms` WHERE ( ( IDMittente = $Userid AND IDDestinatario = $contatto ) AND ( Cancellato = 0 OR Cancellato = 2 ) ) OR
-									( ( IDMittente = $contatto AND IDDestinatario = $Userid ) AND ( Cancellato = 0 OR Cancellato = 1  ) )
-			order by Ora ASC , ID ASC ";
-
+$MySql="INSERT INTO `Sms` (IDMittente, IDDestinatario, Testo) VALUES ($Userid, $contatto, '$testo')";
 $Result=mysql_query($MySql);
-while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
-		
-	$out [] = $res;
-}
 
+if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
+$out = [];
 
-/* NON SONO PIU' NUONI */
-
-$MySql= "UPDATE `Sms` SET Nuovo = 'N' WHERE IDMittente = $contatto AND IDDestinatario = $Userid  ";
-$Result=mysql_query($MySql);
 
 
 header("HTTP/1.1 200 OK");
