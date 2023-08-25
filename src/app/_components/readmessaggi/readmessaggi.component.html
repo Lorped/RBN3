@@ -1,0 +1,27 @@
+<div class="container">
+
+    <div class="row full" *ngFor="let item of listaMsg">
+
+        <div class="row full" *ngIf="item.IDMittente == status.Userid">
+
+            <div class="col-2">&nbsp;</div>
+            <div class="col-9">{{item.Ora}}<br>{{item.Testo}}</div>
+            <div class="col-1">X</div>
+
+        </div>
+
+        <div class="row full" *ngIf="item.IDDestinatario == status.Userid">
+
+            <div class="col-1"><img src="assets/{{status.contattourl}}" height="40px" width="40px" > </div>
+            <div class="col-10">{{item.Ora}}<br>{{item.Testo}}</div>
+            <div class="col-1">X</div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+</div>

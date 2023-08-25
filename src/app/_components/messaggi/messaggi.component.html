@@ -26,7 +26,7 @@
         </div>
         </div>
       </td>
-      <td colspan="2">{{cont.NomeCognome}}</td>
+      <td colspan="2"><a href="javascript:void(0)" (click)="showmsg(cont.IDX,cont.NomeCognome,cont.UrlImg)">{{cont.NomeCognome}}</a></td>
       <td>{{cont.Ultimo}}</td>
       <td *ngIf="cont.Nuovi != 0"><span class="red">{{cont.Nuovi}}</span></td>
       <td *ngIf="cont.Nuovi == 0">&nbsp;</td>

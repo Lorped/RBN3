@@ -25,4 +25,13 @@ export class MessaggiComponent implements OnInit {
 
   }
 
+  showmsg(IDX: number, nome: string, url: string){
+    this.status.contattoID = IDX ;
+    this.status.contattonome = nome ;
+    this.status.contattourl = url ;
+    this.status.listamsgon = true ;
+    this.modalService.show('modallistamsg') ;
+
+  }
+
 }

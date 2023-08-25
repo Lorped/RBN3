@@ -29,9 +29,9 @@ $out=[];
 // 3 = cancellato da entrambi
 
 $MySql= "SELECT DISTINCT  (IDX) , CONCAT(Nome,' ', Cognome) as NomeCognome , UrlImg FROM 
-		(	SELECT IDDestinatario IDX , Ora FROM `Sms` WHERE IDMittente = $Userid AND Cancellato = 0
+		(	SELECT IDDestinatario IDX , Ora FROM `Sms` WHERE IDMittente = $Userid AND (Cancellato = 0 OR Cancellato = 2)
 			UNION ALL
-			SELECT IDMittente IDX , Ora FROM `Sms` WHERE IDDestinatario = $Userid AND Cancellato NOT IN ( 2, 3 )
+			SELECT IDMittente IDX , Ora FROM `Sms` WHERE IDDestinatario = $Userid AND (Cancellato = 0 OR Cancellato = 1)
 			order by Ora DESC ) AS T
 		LEFT JOIN Personaggio ON IDX = Userid ";
 
@@ -42,7 +42,7 @@ while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
 	$Result2 = mysql_query($MySql2);
 	$res2 = mysql_fetch_array($Result2);
 
-	$MySql3 = "SELECT MAX(Ora) as Ultimo FROM `Sms` WHERE (IDMittente = $idx AND IDDestinatario = $Userid) OR (IDDestinatario = $idx AND IDMittente = $Userid) ";
+	$MySql3 = "SELECT MAX(Ora) as UU , DATE_FORMAT( Ora , '%d %b - %H:%i' ) AS Ultimo FROM `Sms` WHERE (IDMittente = $idx AND IDDestinatario = $Userid) OR (IDDestinatario = $idx AND IDMittente = $Userid) ";
 	$Result3 = mysql_query($MySql3);
 	$res3 = mysql_fetch_array($Result3);
 	

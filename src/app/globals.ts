@@ -137,6 +137,10 @@ export class Status {
   schedaothon = false;
   otherID = 0;
   messaggion = false;
+  contattoID = 0;
+  contattonome = '';
+  listamsgon = false;
+  contattourl = '';
 }
 
 

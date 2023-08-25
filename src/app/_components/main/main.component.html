@@ -113,6 +113,21 @@
 
 <!-- ----->
 
+<!-- ----->
+<app-modal #modallistamsg modalId="modallistamsg">
+  <div class="app-modal-header">
+    <i>Messaggi con {{status.contattonome}}</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.listamsgon=false; modallistamsg.hide()">&times;</button>
+  </div>
+  <div class="app-modal-body">
+    <app-readmessaggi *ngIf="this.status.listamsgon"></app-readmessaggi>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.listamsgon=false; modallistamsg.hide()">Chiudi</button>
+  </div>
+</app-modal>
+
+<!-- ----->
+
 
 <button (click)="toggleMenu()" class="menubutton">
   <span>toggle menu</span>

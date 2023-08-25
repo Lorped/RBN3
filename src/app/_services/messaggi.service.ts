@@ -12,5 +12,14 @@ export class MessaggiService {
   
   }
 
+  getmessaggi(contatto: Number) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getmessaggi2.php', {
+      token: user,
+      contatto: contatto
+    } );
+  }
+
 }
 

@@ -14,7 +14,9 @@ hr {
 
 
 .bordorosso , .bordobianco {
+  font-size: 0.8em;
 }
+
 .bordorosso::after {
   content: url('assets/bordorosso.png');
   position: absolute;
