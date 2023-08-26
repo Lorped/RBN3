@@ -34,12 +34,12 @@
     </tr>
   </table>
 
-  <mat-card>
+
   
     <mat-form-field class="full">
       <mat-label>Nuovo Contatto</mat-label>
     
-<!-- 
+
 
 
       <input type="text"
@@ -49,29 +49,20 @@
             [matAutocomplete]="auto"
             [formControl]="myControl"  > 
 
--->
 
-<mat-select name="cars" id="cars">
-  <!-- <mat-option *ngFor="let cont of anagrafe" [value]="cont.Nome">{{cont.Nome}}</mat-option>  -->
-  <mat-option [value]="xx">{{xx}}</mat-option>
-
-</mat-select>
-      <!-- 
 
       <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
-        <mat-option *ngFor="let cont of anagrafe " [value]="cont" [displayWith]="displayFn">
+        <mat-option *ngFor="let cont of filteredOptions | async"  [value]="cont" [displayWith]="displayFn">
           <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
-          <span>{{ cont.Nome }}</span> 
-          <small>{{cont.Cognome}}</small>
+          {{ cont.Nome }} {{cont.Cognome}} 
+          <!-- <img src="assets/{{cont.ClanImg}}" height="25px" > -->
         </mat-option>
       </mat-autocomplete>
 
 
-
-      -->      
+   
     </mat-form-field>
 
 
-  </mat-card>
 
 </div>

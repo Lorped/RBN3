@@ -3,6 +3,9 @@ import { ModalService } from '../../_services/index';
 import { MessaggiService } from '../../_services/index';
 import { UnContatto,  Status } from '../../globals';
 import { AnagrafeRow, AnagrafeService } from '../../_services/index';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+
 
 
 
@@ -21,7 +24,7 @@ export class MessaggiComponent implements OnInit {
   anagrafe: Array<AnagrafeRow> = [];
   myControl: FormControl;
 
-  xx="ciao";
+  filteredOptions: Observable<AnagrafeRow[]>;
 
 
   constructor( private messaggiService: MessaggiService, public status: Status, private modalService: ModalService, private anagrafeservice: AnagrafeService ) { }
@@ -30,6 +33,7 @@ export class MessaggiComponent implements OnInit {
 
 
     this.myControl = new FormControl('');
+    
    
 
     this.messaggiService.getcontatti(this.status.Userid)
@@ -58,6 +62,10 @@ export class MessaggiComponent implements OnInit {
           }
         }
 
+        this.filteredOptions = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this.myfilter(value || '')),
+        );
 
         console.log(this.anagrafe);
 
@@ -86,12 +94,15 @@ export class MessaggiComponent implements OnInit {
   }
 
 
-  displayFn(user: AnagrafeRow): string {
-    return user && user.Nome ? user.Nome : '';
+  displayFn  (user: AnagrafeRow) :string {
+    console.log("display ", user);
+    return user ? user.Nome : '';
   }
 
-  private _filter(name: string): AnagrafeRow[] {
-    const filterValue = name.toLowerCase();
+  myfilter(obj: string): AnagrafeRow[] {
+    console.log("in myfilter :" , obj);
+
+    const filterValue = obj.toLowerCase();
 
     return this.anagrafe.filter(option => option.Nome.toLowerCase().includes(filterValue));
   }
