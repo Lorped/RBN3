@@ -23,7 +23,7 @@ include ('token.php');
 
 $out = [];
 
-$MySql = "SELECT Userid, Nome, Cognome,  Sesso, Clan.Clan , ClanImg FROM Personaggio
+$MySql = "SELECT Userid, Nome, Cognome,  Sesso, Clan.Clan , ClanImg , URLImg FROM Personaggio
 	LEFT JOIN Clan ON Clan.IDclan=Personaggio.IDclan";
 $Result=mysql_query($MySql);
 while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {

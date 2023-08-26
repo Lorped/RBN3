@@ -5,6 +5,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
+
 import { APP_ROUTES } from './app.routing' ;
 
 import { AuthenticationService } from './_services/index';
@@ -73,7 +80,13 @@ import { ReadmessaggiComponent } from './_components/readmessaggi/readmessaggi.c
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(APP_ROUTES, {useHash: true}),
-    UtilityModule
+    UtilityModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatSelectModule
   ],
   providers: [
     AuthenticationService,
