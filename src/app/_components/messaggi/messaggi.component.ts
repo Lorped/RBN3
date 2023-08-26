@@ -26,6 +26,8 @@ export class MessaggiComponent implements OnInit {
 
   filteredOptions: Observable<AnagrafeRow[]>;
 
+  formOk: boolean;
+
 
   constructor( private messaggiService: MessaggiService, public status: Status, private modalService: ModalService, private anagrafeservice: AnagrafeService ) { }
 
@@ -33,6 +35,7 @@ export class MessaggiComponent implements OnInit {
 
 
     this.myControl = new FormControl('');
+    this.formOk = false;
     
    
 
@@ -60,6 +63,11 @@ export class MessaggiComponent implements OnInit {
               this.anagrafe.splice(i--, 1);
             }
           }
+        }
+
+        // forzo nomee = nome + cognome
+        for (let i = 0; i < this.anagrafe.length; i++) {
+          this.anagrafe[i].Nome = this.anagrafe[i].Nome + ' ' + this.anagrafe[i].Cognome;
         }
 
         this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -95,11 +103,19 @@ export class MessaggiComponent implements OnInit {
 
 
   displayFn  (user: AnagrafeRow) :string {
-    console.log("display ", user);
-    return user ? user.Nome : '';
+    console.log("in display ");
+    this.formOk = true;
+    // this.showmsg(user.Userid, user.Nome, user.URLImg);
+
+    return user && user ? user.Nome : '';
   }
 
   myfilter(obj: string): AnagrafeRow[] {
+
+    console.log(this.myControl);
+    this.formOk = false;
+
+    if ( typeof obj != "string" ) return;
     console.log("in myfilter :" , obj);
 
     const filterValue = obj.toLowerCase();
