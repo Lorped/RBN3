@@ -16,7 +16,7 @@
           [formControl]="myControl"  > 
 
 
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" requireSelection> 
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" requireSelection (optionSelected)="onSelectionChanged($event)"> 
       <mat-option *ngFor="let cont of filteredOptions | async"  [value]="cont">
         <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
         {{ cont.Nome }} 
@@ -27,11 +27,11 @@
 
  
   </mat-form-field>
-  <!-- 
+  
   <mat-card-actions align="end">
-    <button mat-button color="primary">Manda Msg</button>
+    <button mat-raised-button color="primary" [disabled]="!formOk" (click)="goshowmsg()">Manda Msg</button>
   </mat-card-actions>
- -->
+
 </mat-card>
 
 
@@ -46,18 +46,42 @@
     <tr>
       <td colspan="6" ><hr></td>
     </tr>
+
+    <tr *ngIf="myMsgClan.IDclan != 0">
+      <td *ngIf="myMsgClan.numero != 0" style="width: 20%;">
+        <div>
+        <div class="bordorosso">
+          <img src="assets/{{myMsgClan.ClanImg}}" height="60px" width="60px" >
+        </div>
+        </div>
+      </td>
+      <td *ngIf="myMsgClan.numero == 0" style="width: 20%;">
+        <div >
+        <div class="bordobianco">
+          <img src="assets/{{myMsgClan.ClanImg}}" height="60px" width="60px" > 
+        </div>
+        </div>
+      </td>
+      <td colspan="2"><a href="javascript:void(0)" (click)="showmsgclan(myMsgClan.IDclan,myMsgClan.NomeClan,myMsgClan.ClanImg)"> Clan {{myMsgClan.NomeClan}}</a></td>
+      <td>{{myMsgClan.ultimo}}</td>
+      <td *ngIf="myMsgClan.numero != 0" class="cent"><span class="red">{{myMsgClan.numero}}</span></td>
+      <td *ngIf="myMsgClan.numero == 0" class="cent">&nbsp;</td>
+      <td  class="cent">&nbsp;</td>
+    </tr>
+
+
     <tr *ngFor="let cont of status.myContatti" >
       <td *ngIf="cont.Nuovi != 0" style="width: 20%;">
         <div>
         <div class="bordorosso">
-          <img src="assets/{{cont.UrlImg}}" height="80px" width="80px" > 
+          <img src="assets/{{cont.UrlImg}}" height="60px" width="60px" > 
         </div>
         </div>
       </td>
       <td *ngIf="cont.Nuovi == 0" style="width: 20%;">
         <div >
         <div class="bordobianco">
-          <img src="assets/{{cont.UrlImg}}" height="80px" width="80px" > 
+          <img src="assets/{{cont.UrlImg}}" height="60px" width="60px" > 
         </div>
         </div>
       </td>

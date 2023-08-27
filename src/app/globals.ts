@@ -127,21 +127,28 @@ export class Status {
   Alive = true;
   Sesso = 'M';
   MasterAdmin = 0;
-  menuState = 'out';
+  // menuState = 'out';
   schedaon = false ;
   pxon = false;
   bioon = false;
   anagon = false;
-  poterion = false;
-  sceltapoterion = false;
+  poterion = false;         // DA CANCELLARE
+  sceltapoterion = false;  // DA CANCELLARE
   schedaothon = false;
   otherID = 0;
+  // per i messaggi normali
   messaggion = false;
   contattoID = 0;
   contattonome = '';
   listamsgon = false;
   contattourl = '';
   myContatti: Array<UnContatto> = [];
+  // per i meggaggi di clan 
+  listamsgclanon = false;
+  clancontattoID = 0;
+  clancontattonome = '';
+  clancontattourl = 'xx';
+
 }
 
 

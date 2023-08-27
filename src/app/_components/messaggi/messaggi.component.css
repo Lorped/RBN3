@@ -18,7 +18,7 @@ hr {
 }
 
 .bordorosso::after {
-  content: url('assets/bordorosso.png');
+  content: url('assets/bordorosso60.png');
   position: absolute;
   width: 80px;
   height: 80px;
@@ -26,7 +26,7 @@ hr {
 
 }
 .bordobianco::after {
-  content: url('assets/bordobianco.png');
+  content: url('assets/bordobianco60.png');
   position: absolute;
   width: 80px;
   height: 80px;

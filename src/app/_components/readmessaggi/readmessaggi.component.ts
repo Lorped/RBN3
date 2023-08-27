@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { MessaggiService } from '../../_services/index';
 import { Messaggi, Status } from '../../globals';
 
@@ -23,7 +23,7 @@ export class ReadmessaggiComponent implements OnInit {
     this.messaggiService.getmessaggi(this.status.contattoID)
     .subscribe( data => {
        this.listaMsg = data;
-       console.log(this.listaMsg);
+       // console.log(this.listaMsg);
     });
   }
 
@@ -41,7 +41,16 @@ export class ReadmessaggiComponent implements OnInit {
     .subscribe( (data) => {
       this.testo='';
       this.mymulti.nativeElement.innerHTML = '';
-      this.caricamessaggi();
+
+      this.messaggiService.getcontatti(this.status.Userid)
+      .subscribe( (data) => {
+        //casomai mandasssi un messaggio per primo;
+        this.status.myContatti = data;
+
+        this.caricamessaggi();
+      });
+
+      
     });
   }
 
@@ -50,12 +59,14 @@ export class ReadmessaggiComponent implements OnInit {
     this.messaggiService.cancmsg(id)
     .subscribe( (data) => {
 
+      /*
       this.messaggiService.getcontatti(this.status.Userid)
       .subscribe( (data) => {
         //console.log (data);
         this.status.myContatti = data;
       });
-  
+      */
+     
       this.caricamessaggi();
     });
   }

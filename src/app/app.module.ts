@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -11,7 +11,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
-// import {MatButtonModule} from '@angular/material/button';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav'; 
 
 import { APP_ROUTES } from './app.routing' ;
 
@@ -52,6 +55,7 @@ import { SceltapoteriComponent } from './_components/sceltapoteri/sceltapoteri.c
 
 import { MessaggiComponent } from './_components/messaggi/messaggi.component';
 import { ReadmessaggiComponent } from './_components/readmessaggi/readmessaggi.component';
+import { ReadmessaggiclanComponent } from './_components/readmessaggiclan/readmessaggiclan.component';
 
 
 
@@ -74,6 +78,7 @@ import { ReadmessaggiComponent } from './_components/readmessaggi/readmessaggi.c
     PoteriComponent,
     SceltapoteriComponent,
     ReadmessaggiComponent,
+    ReadmessaggiclanComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +93,10 @@ import { ReadmessaggiComponent } from './_components/readmessaggi/readmessaggi.c
     ReactiveFormsModule,
     MatCardModule,
     MatSelectModule,
-    // MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule
   ],
   providers: [
     AuthenticationService,
