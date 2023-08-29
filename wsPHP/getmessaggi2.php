@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 include ('db.inc.php');
 include ('token.php');
+include ('newmesg.inc.php');
 
 
 $postdata = file_get_contents("php://input");
@@ -60,8 +61,13 @@ while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
 
 /* NON SONO PIU' NUONI */
 
+
 $MySql= "UPDATE `Sms` SET Nuovo = 'N' WHERE IDMittente = $contatto AND IDDestinatario = $Userid  ";
 $Result=mysql_query($MySql);
+
+/* Aggiorna numero messaggi */
+aggiornanumeromessaggi ( $Userid ) ;
+
 
 
 header("HTTP/1.1 200 OK");

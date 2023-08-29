@@ -97,5 +97,10 @@ export class MessaggiService {
 
   }
 
+  contanuovimessaggi(id: Number)  {
+      return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/numnewmsg.php?id=' + id );  
+  }
+
+
 }
 

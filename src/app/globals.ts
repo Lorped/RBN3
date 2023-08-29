@@ -143,11 +143,13 @@ export class Status {
   listamsgon = false;
   contattourl = '';
   myContatti: Array<UnContatto> = [];
-  // per i meggaggi di clan 
+  // per i messaggi di clan 
   listamsgclanon = false;
   clancontattoID = 0;
   clancontattonome = '';
   clancontattourl = 'xx';
+  //Nuovimessaggi
+  nuovimessaggi = 0 ;
 
 }
 

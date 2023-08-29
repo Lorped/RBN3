@@ -72,7 +72,21 @@ $MySql="UPDATE  Checkmessaggiclan SET UltimaData = NOW() WHERE Userid = $Userid 
 $Result=mysql_query($MySql);
 
 
-
+/* AGGIORNO NUM MESSAGGI */
+$MySql="SELECT Userid from Personaggio WHERE IDclan = $clanid AND Userid != $Userid";
+$Result=mysql_query($MySql);
+while ( $res=mysql_fetch_array($Result)) {
+	$contatto = $res['Userid'];
+	$MySql2="SELECT COUNT(*) as c from Newmsg where Userid = $contatto";
+	$Result2=mysql_query($MySql2);
+	$res2=mysql_fetch_array($Result2);
+	if ($res2['c']==0) {
+	$MySql2 = "INSERT INTO Newmsg (Userid, Newmsg) VALUES ($contatto, 1)";
+	}else {
+		$MySql2 = "UPDATE Newmsg SET Newmsg = Newmsg +1 WHERE Userid = $contatto";
+	}
+	$Result2=mysql_query($MySql2);
+}
 
 
 

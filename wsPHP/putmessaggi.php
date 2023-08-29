@@ -51,6 +51,17 @@ if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
 $out = [];
 
 
+/* AGGIORNO NUM MESSAGGI */
+$MySql="SELECT COUNT(*) as c from Newmsg where Userid = $contatto";
+$Result=mysql_query($MySql);
+$res=mysql_fetch_array($Result);
+if ($res['c']==0) {
+	$MySql = "INSERT INTO Newmsg (Userid, Newmsg) VALUES ($contatto, 1)";
+}else {
+	$MySql = "UPDATE Newmsg SET Newmsg = Newmsg +1 WHERE Userid = $contatto";
+}
+$Result=mysql_query($MySql);
+
 
 header("HTTP/1.1 200 OK");
 
