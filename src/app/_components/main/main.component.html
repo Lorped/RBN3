@@ -1,3 +1,18 @@
+<mat-toolbar>
+  <button mat-icon-button class="menu-icon" color="warn" aria-label="menu" (click)="sidenav.toggle()"  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Roma by Night </span>
+</mat-toolbar>
+
+
+<mat-sidenav-container style="background-color: transparent;">
+  <mat-sidenav class="sidenav" #sidenav mode="side"  (click)="sidenav.toggle()">
+    <app-menu></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content >
+
+
 
 
 <!-- <app-modal id="modal-scheda"> -->
@@ -175,4 +190,8 @@
 
 
 
+
+
+</mat-sidenav-content>
+</mat-sidenav-container>
 

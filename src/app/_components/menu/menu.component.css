@@ -1,3 +1,14 @@
+
+
+
+mat-card:hover {
+  color: #ef5350;
+}
+
+
+/*********+ DA CANCELLARE *******/
+
+
 :hostx {
   background: #282c34;
   color: #fff;
@@ -23,12 +34,13 @@ ul {
 .btn-std {
     color: #fff;
     background-color: transparent;
-    border-color: transparent; /*set the color you want here*/
+    border-color: transparent; 
     text-align: left;
 
 }
 .btn-std:hover, .btn-std:focus, .btn-std:active, .btn-std.active, .open>.dropdown-toggle.btn-std {
 
     background-color: #3d3d3d;
-    border-color: #285e8e; /*set the color you want here*/
+    border-color: #285e8e;
+
 }
