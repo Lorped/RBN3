@@ -56,6 +56,7 @@ import { SceltapoteriComponent } from './_components/sceltapoteri/sceltapoteri.c
 import { MessaggiComponent } from './_components/messaggi/messaggi.component';
 import { ReadmessaggiComponent } from './_components/readmessaggi/readmessaggi.component';
 import { ReadmessaggiclanComponent } from './_components/readmessaggiclan/readmessaggiclan.component';
+import { ToolvariComponent } from './_components/toolvari/toolvari.component';
 
 
 
@@ -79,6 +80,7 @@ import { ReadmessaggiclanComponent } from './_components/readmessaggiclan/readme
     SceltapoteriComponent,
     ReadmessaggiComponent,
     ReadmessaggiclanComponent,
+    ToolvariComponent,
   ],
   imports: [
     BrowserModule,
