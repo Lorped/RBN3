@@ -41,7 +41,7 @@ if ( mysqli_num_rows($Result) == 0 ) {
 			$main2 = "Temporale";
 			break;
 		case 'Drizzle' :
-			$main2 = "Pioggerella";
+			$main2 = "Pioggia";
 			break;
 		case 'Rain' :
 			$main2 = "Pioggia";
@@ -52,14 +52,14 @@ if ( mysqli_num_rows($Result) == 0 ) {
 		case 'Clear' :
 			$main2 = "Sereno";
 			break;
-		case 'Cloud' :
+		case 'Clouds' :
 			$main2 = "Nuvolo";
 			break;
 		default:
 			$main2 = $main;
 	}
 
-	$description = $out->weather[0]->description;
+	$description = ucfirst($out->weather[0]->description);
 	$icon = $out->weather[0]->icon;
 	$temp = intval ( $out->main->temp );
 	$sunrise = $out -> sys -> sunrise;
@@ -79,6 +79,7 @@ if ( mysqli_num_rows($Result) == 0 ) {
 		"main2" => $main2,
 		"description" => $description,
 		"icon" => $icon,
+		"temp" => $temp,
 		"sunrise" => date('H:i', $sunrise),
 		"sunset" => date('H:i', $sunset)
 	];

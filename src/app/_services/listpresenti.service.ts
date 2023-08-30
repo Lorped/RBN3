@@ -10,16 +10,19 @@ export class Presenti {
   Sesso: string;
   offgame: number;
   Userid: number;
+  ongame: number;
   constructor(
     aNomeCognome: string,
     aSesso: string,
     aoffgame: number,
-    aUserid: number
+    aUserid: number,
+    aongame: number
   ) {
     this.NomeCognome = aNomeCognome;
     this.Sesso = aSesso;
     this.offgame = aoffgame;
     this.Userid = aUserid;
+    this.ongame = aongame;
   }
 }
 
@@ -37,7 +40,7 @@ export class ListpresentiService {
     map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         const item = res[i];
-        const newpresente = new Presenti(item.NomeCognome, item.Sesso, item.offgame, item.Userid);
+        const newpresente = new Presenti(item.NomeCognome, item.Sesso, item.offgame, Number(item.Userid), item.ongame);
         mialista.push(newpresente);
       }
       return mialista;
@@ -53,12 +56,21 @@ export class ListpresentiService {
     map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         const item = res[i];
-        const newpresente = new Presenti(item.NomeCognome, item.Sesso, item.offgame, item.Userid);
+        const newpresente = new Presenti(item.NomeCognome, item.Sesso, item.offgame, Number(item.Userid), item.ongame);
         mialista.push(newpresente);
       }
       return mialista;
     }));
 
+  }
+
+  changeonoffgame() {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    // console.log(id);
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/changeonoffgame.php', {
+      token: user
+    } );
   }
 
 

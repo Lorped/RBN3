@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 include ('token.php');
 
 
@@ -44,12 +44,12 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-$bio=mysql_real_escape_string($bio);
-$descr=mysql_real_escape_string($descr);
+$bio=mysqli_real_escape_string($db, $bio);
+$descr=mysqli_real_escape_string($db, $descr);
 
 
 $MySql="UPDATE Personaggio SET Background='$bio' , Descrizione='$descr' WHERE Userid='$Userid' ";
-$Result=mysql_query($MySql);
+$Result=mysqli_query($db, $MySql);
 
 
 $out = [];

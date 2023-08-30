@@ -15,7 +15,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav'; 
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
+import {MatBadgeModule} from '@angular/material/badge'; 
 import { APP_ROUTES } from './app.routing' ;
 
 import { AuthenticationService } from './_services/index';
@@ -98,7 +99,9 @@ import { ToolvariComponent } from './_components/toolvari/toolvari.component';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatBadgeModule
   ],
   providers: [
     AuthenticationService,

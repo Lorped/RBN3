@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db2.inc.php'); // MYSQLI //
+include ('db2.inc.php');
 include ('token.php');
 
 
@@ -24,6 +24,7 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
 $token=$request->token;
+$attr=$request->y;
 
 $Userid=-1;
 
@@ -42,43 +43,22 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-$pxin=0;
-$pxout=0;
-$px=0;
+$MySql = "SELECT ongame FROM Presenti WHERE Userid = $Userid";
+$Result = mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result);
 
-$MySql="SELECT sum(px) as somma FROM Quest  WHERE Userid='$Userid' AND Status='OK' ";
-$Result=mysqli_query($db, $MySql);
-$res=mysqli_fetch_array($Result);
-$pxin=$res['somma'];
-
-$MySql="SELECT sum(px) as somma FROM Logpx  WHERE Userid='$Userid' ";
-$Result=mysqli_query($db, $MySql);
-$res=mysqli_fetch_array($Result);
-$pxout=$res['somma'];
-
-$px=$pxin-$pxout;
-
-$MySql="SELECT Coraggio FROM Personaggio  WHERE Userid='$Userid' ";
-$Result=mysqli_query($db, $MySql);
-$res=mysqli_fetch_array($Result);
-$Coraggio=$res['Coraggio'];
-
-
-if ( $Coraggio < 5 && $px >= 2*$Coraggio ) {
-
-	$MySql="UPDATE Personaggio SET Coraggio=Coraggio+1 WHERE Userid='$Userid'";
-	$Result=mysqli_query($db, $MySql);
-
-	$pxspesi=2*$Coraggio;
-	$Dati="[Coraggio] Coraggio ".$Coraggio." => ".($Coraggio+1);
-	$MySql="INSERT INTO Logpx (Data, Userid, Px, Dati ) VALUES ( NOW() , '$Userid', '$pxspesi', '$Dati') ";
-	$Result=mysqli_query($db, $MySql);
-
+if ( $res['ongame'] == 'S' ) {
+    $newongame = 'N';
+    $MySql = "UPDATE Presenti SET startoff = NOW() , ongame = '$newongame' WHERE Userid = $Userid ";
+    mysqli_query($db, $MySql);
+   
+} else {
+    $newongame = 'S';
+    $MySql = "UPDATE Presenti SET startoff = '1970-01-01 00:00:00' , ongame = '$newongame' WHERE Userid = $Userid ";
+    mysqli_query($db, $MySql);
 }
 
 $out = [];
-
-header("HTTP/1.1 200 OK");
-
 echo json_encode ($out, JSON_UNESCAPED_UNICODE);
+
 ?>

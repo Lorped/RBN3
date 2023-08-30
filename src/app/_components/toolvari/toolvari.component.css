@@ -1,0 +1,14 @@
+.small {
+    font-size: 0.8em;
+}
+p.near {
+    line-height: 1;
+}
+mat-card {
+    background: #020202;
+}
+.centralbox {
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}

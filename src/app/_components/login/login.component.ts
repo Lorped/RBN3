@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
           this.status.Userid = data.Userid;
           this.status.MasterAdmin = data.MasterAdmin;
           this.router.navigate(['']);
+          this.status.Ongame = 'S';
         },
         error => {
           this.errmsg = error.statusText;

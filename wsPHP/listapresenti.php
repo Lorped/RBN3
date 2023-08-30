@@ -16,17 +16,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 include ('token.php');
 
 $Userid=$_GET['id'];
 $MySql = "UPDATE Presenti SET UltimoRefresh = NOW() WHERE Userid = $Userid ";
-$Result = mysql_query($MySql);
+$Result = mysqli_query($db, $MySql);
 
 $out = [];
 $Mysql= "SELECT * , (DATE_ADD(Presenti.startoff, INTERVAL 1200 MINUTE) > NOW()) as offgame FROM Presenti WHERE DATE_ADD(UltimoRefresh, INTERVAL 10 MINUTE) > NOW() AND Inv IS NULL ORDER BY OraEntrata DESC ";
-$Result = mysql_query($Mysql);
-while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
+$Result = mysqli_query($db, $Mysql);
+while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC)   ) {
 	$out [] =$res;
 }
 

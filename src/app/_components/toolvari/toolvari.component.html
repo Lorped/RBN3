@@ -1,9 +1,17 @@
 <mat-card>
     <mat-card-content>
-        <p>Ora: 09:00</p>
-        <p>Alba: {{sunrise}}</p>
-        <p>Tramonto: {{sunset}}</p>
-        <p><img src="assets/meteo/{{icon}}@2x.png" height="60"> {{temperatura}}&deg; {{meteo}}</p>
-      </mat-card-content>
+      <table class="full">
+        <tr>
+          <td><img src="assets/sunrise.png" height="25px;"><br><span class="small">{{sunrise}}</span></td>
+          <td class="centralbox"><p class="near"><img src="assets/meteo/{{icon}}@2x.png" height="40"><br>{{temperatura}}&deg; - {{meteo}}<br><span class="small">{{description}}</span></p></td>
+          <td><img src="assets/sunset.png" height="25px;"><br><span class="small">{{sunset}}</span></td>
+        </tr>
+        <tr>      
+          <td colspan="2"><mat-slide-toggle color="warn" (change)="onChange($event)" [checked]="checked"> {{ingame}} </mat-slide-toggle></td>
+          <td><mat-icon matBadge="{{nummsg}}" matBadgeColor="warn" [matBadgeHidden]="hidden">forum</mat-icon></td>
+        </tr>
+      </table>
+    </mat-card-content>
+
 </mat-card>
 

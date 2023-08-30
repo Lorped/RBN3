@@ -16,19 +16,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 
 $Userid=$_GET['id'];
 
 //$Userid= 1;
 
-$out=[];
 
-$MySql="SELECT COUNT(*) as Nuovimessaggi from Newmsg where Userid = $Userid";
-$Result=mysql_query($MySql);
-$res = mysql_fetch_array($Result,MYSQL_ASSOC);
 
-$out [] = $res;
+$MySql="SELECT  Newmsg from Newmsg where Userid = $Userid";
+$Result=mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
+
+
+$out = $res;
 
 
 

@@ -122,7 +122,7 @@ export class Clan {
 export class Status {
   Userid = 0;
   Stanza = 0;
-  Offgame = 0;
+  Ongame = 'S';
   Last = 0;
   Alive = true;
   Sesso = 'M';
@@ -148,8 +148,7 @@ export class Status {
   clancontattoID = 0;
   clancontattonome = '';
   clancontattourl = 'xx';
-  //Nuovimessaggi
-  nuovimessaggi = 0 ;
+
 
 }
 

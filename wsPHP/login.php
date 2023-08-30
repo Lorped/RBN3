@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php'); // MYSQLI //
 include ('token.php');
 
 
@@ -29,16 +29,16 @@ $password = $request->password;
 // $email = "julien@home.com";
 // $password = "kli0loth";
 
-$email=mysql_real_escape_string($email);
-$password=mysql_real_escape_string($password);
+$email=mysqli_real_escape_string($db, $email);
+$password=mysqli_real_escape_string($db, $password);
 
 
 if (isset($postdata) && $email != "" && $password !="" ) {
 
 	$MySql = "SELECT * FROM Personaggio WHERE Email='$email' AND Pass='$password' ";
-	$Result = mysql_query($MySql);
+	$Result = mysqli_query($db, $MySql);
 
-	if ( $res = mysql_fetch_array($Result)   ) {
+	if ( $res = mysqli_fetch_array($Result)   ) {
 		$Userid=$res['Userid'];
 		$Nome=$res['Nome'];
 		$Cognome=$res['Cognome'];
@@ -71,18 +71,18 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		//	Do a lot of other stuff !!
 		//
 		// Inserisco/Aggiorno in presenti
-		$NomeCognome=mysql_real_escape_string($NomeCognome);
+		$NomeCognome=mysqli_real_escape_string($db, $NomeCognome);
 
 		$MySql = "SELECT * FROM Presenti WHERE Userid = $Userid";
-		$Results = mysql_query($MySql);
-		if (mysql_num_rows($Results) == 0) {
-			$MySql = "INSERT INTO Presenti (Userid, NomeCognome, Stanza, OraEntrata, UltimoRefresh, Sesso, startoff,  Inv) VALUES ( $Userid, '$NomeCognome', 0,  NOW(), NOW(),'$Sesso' , '1970-01-01 00:00:00',  NULL)";
+		$Results = mysqli_query($db, $MySql);
+		if (mysqli_num_rows($Results) == 0) {
+			$MySql = "INSERT INTO Presenti (Userid, NomeCognome, Stanza, OraEntrata, UltimoRefresh, Sesso, startoff,  Inv, ongame) VALUES ( $Userid, '$NomeCognome', 0,  NOW(), NOW(),'$Sesso' , '1970-01-01 00:00:00',  NULL, 'S')";
 		} else {
-			$MySql = "UPDATE Presenti SET Stanza = 0, OraEntrata=NOW(), UltimoRefresh = NOW(), startoff='1970-01-01 00:00:00', NomeCognome='$NomeCognome' , Sesso='$Sesso', Inv=NULL WHERE Userid = $Userid ";
+			$MySql = "UPDATE Presenti SET Stanza = 0, OraEntrata=NOW(), UltimoRefresh = NOW(), startoff='1970-01-01 00:00:00', NomeCognome='$NomeCognome' , Sesso='$Sesso', Inv=NULL , ongame='S' WHERE Userid = $Userid ";
 
 		}
-		mysql_query($MySql);
-		if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
+		mysqli_query($db, $MySql);
+		if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }
 
 		// FINE OPERAZIONI LOGIN
 

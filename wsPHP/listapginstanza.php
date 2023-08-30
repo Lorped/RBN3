@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');   // MYSQLI //
 include ('token.php');
 
 $Dove=$_GET['dove'];
@@ -26,8 +26,8 @@ if ($but=="") { $but=0; }
 
 $out = [];
 $Mysql= "SELECT * , (DATE_ADD(Presenti.startoff, INTERVAL 1200 MINUTE) > NOW()) as offgame  FROM Presenti WHERE DATE_ADD(UltimoRefresh, INTERVAL 10 MINUTE) > NOW() AND Inv IS NULL AND Stanza=$Dove AND Userid <> $but ORDER BY NomeCognome DESC ";
-$Result = mysql_query($Mysql);
-while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
+$Result = mysqli_query($db, $Mysql);
+while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC)   ) {
 	$out [] =$res;
 }
 
