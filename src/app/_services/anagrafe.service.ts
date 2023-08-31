@@ -10,6 +10,7 @@ export class  AnagrafeRow {
   Clan: string;
   ClanImg: string;
   URLImg: string;
+  OraEntrata: string;
 }
 
 @Injectable()

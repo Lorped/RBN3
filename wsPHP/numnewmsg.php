@@ -32,7 +32,19 @@ if ($res['Newmsg'] == null ) {
 	$res['Newmsg'] = 0;
 }
 
+
 $out = $res;
+
+// aggiungo quelli normali //
+
+$MySql= "SELECT COUNT(*) as c FROM  `Sms` WHERE  Nuovo = 'S' AND  IDDestinatario = $Userid  ";
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
+$n1=$res['c'];
+
+
+$out['Newmsg'] +=  $n1 ;
+
 
 
 

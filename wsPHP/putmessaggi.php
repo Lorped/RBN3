@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');    // MYSQLI //
 include ('token.php');
 
 
@@ -42,26 +42,28 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-$testo=mysql_real_escape_string($testo);
+$testo=mysqli_real_escape_string($db, $testo);
 
 $MySql="INSERT INTO `Sms` (IDMittente, IDDestinatario, Testo) VALUES ($Userid, $contatto, '$testo')";
-$Result=mysql_query($MySql);
+$Result=mysqli_query($db, $MySql);
 
-if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
+if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }
+
 $out = [];
 
 
 /* AGGIORNO NUM MESSAGGI */
+/*
 $MySql="SELECT COUNT(*) as c from Newmsg where Userid = $contatto";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 if ($res['c']==0) {
 	$MySql = "INSERT INTO Newmsg (Userid, Newmsg) VALUES ($contatto, 1)";
 }else {
 	$MySql = "UPDATE Newmsg SET Newmsg = Newmsg +1 WHERE Userid = $contatto";
 }
-$Result=mysql_query($MySql);
-
+$Result=mysqli_query($db, $MySql);
+*/
 
 header("HTTP/1.1 200 OK");
 

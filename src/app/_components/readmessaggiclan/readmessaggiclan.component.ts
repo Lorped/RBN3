@@ -25,6 +25,10 @@ export class ReadmessaggiclanComponent implements OnInit {
     .subscribe( data => {
        this.listaMsgClan = data;
        // console.log(this.listaMsg);
+       this.messaggiService.contanuovimessaggi(this.status.Userid)
+       .subscribe((data) => {
+        this.status.Newmsg = data.Newmsg;
+       });
     });
   }
 

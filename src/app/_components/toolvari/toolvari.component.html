@@ -8,7 +8,7 @@
         </tr>
         <tr>      
           <td colspan="2"><mat-slide-toggle color="warn" (change)="onChange($event)" [checked]="checked"> {{ingame}} </mat-slide-toggle></td>
-          <td><mat-icon matBadge="{{nummsg}}" matBadgeColor="warn" [matBadgeHidden]="hidden" (click)="openmsg()" class="clickable">forum</mat-icon></td>
+          <td><mat-icon [matBadge]="status.Newmsg" matBadgeColor="warn" [matBadgeHidden]="!status.Newmsg" (click)="openmsg()" class="clickable">forum</mat-icon></td>
         </tr>
       </table>
     </mat-card-content>

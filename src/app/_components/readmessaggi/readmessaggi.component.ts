@@ -33,6 +33,10 @@ export class ReadmessaggiComponent implements OnInit {
        .subscribe( data => {
           this.listaMsg = data;
           // console.log(this.listaMsg);
+          this.messaggiService.contanuovimessaggi(this.status.Userid)
+          .subscribe((data) => {
+           this.status.Newmsg = data.Newmsg;
+          });
        });
   }
 

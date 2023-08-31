@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 
 $Userid=$_GET['id'];
 
@@ -35,19 +35,19 @@ $MySql= "SELECT DISTINCT  (IDX) , CONCAT(Nome,' ', Cognome) as NomeCognome , Url
 			order by Ora DESC ) AS T
 		LEFT JOIN Personaggio ON IDX = Userid ";
 
-$Result=mysql_query($MySql);
-while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
+$Result=mysqli_query($db, $MySql);
+while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC)   ) {
 	$idx = $res['IDX'];
 	$MySql2 = "SELECT COUNT(*) as Nuovi FROM `Sms` WHERE IDMittente = $idx AND IDDestinatario = $Userid AND Nuovo = 'S' ";
-	$Result2 = mysql_query($MySql2);
-	$res2 = mysql_fetch_array($Result2);
+	$Result2 = mysqli_query($db, $MySql2);
+	$res2 = mysqli_fetch_array($Result2);
 
 	$MySql3 = "SELECT DATE_FORMAT( MAX(Ora) , '%d %b - %H:%i' ) AS Ultimo  FROM `Sms` WHERE 
 		(  (IDMittente = $idx AND IDDestinatario = $Userid) AND (Cancellato = 0 OR Cancellato = 1) )
 		OR 
 		(  (IDDestinatario = $idx AND IDMittente = $Userid) AND (Cancellato = 0 OR Cancellato = 2) ) ";
-	$Result3 = mysql_query($MySql3);
-	$res3 = mysql_fetch_array($Result3);
+	$Result3 = mysqli_query($db, $MySql3);
+	$res3 = mysqli_fetch_array($Result3);
 	
 	$out [] = [ 
 		'IDX' => $res['IDX'],

@@ -16,17 +16,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');   // MYSQLI //
 include ('token.php');
 
 
 
 $out = [];
 
-$MySql = "SELECT Userid, Nome, Cognome,  Sesso, Clan.Clan , ClanImg , URLImg FROM Personaggio
-	LEFT JOIN Clan ON Clan.IDclan=Personaggio.IDclan";
-$Result=mysql_query($MySql);
-while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+$MySql = "SELECT Personaggio.Userid, Nome, Cognome,  Personaggio.Sesso, Clan.Clan , ClanImg , URLImg , DATE_FORMAT(OraEntrata,'%d %b - %H:%i') as Oraentrata FROM Personaggio
+	LEFT JOIN Clan ON Clan.IDclan=Personaggio.IDclan 
+	LEFT JOIN Presenti ON Personaggio.Userid=Presenti.Userid";
+$Result=mysqli_query($db, $MySql);
+while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 	$out[] = $res;
 }
 

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');     // MYSQLI //
 include ('token.php');
 include ('newmesg.inc.php');
 
@@ -47,8 +47,8 @@ if ( CheckJWT ($token) ) {
 
 
 $MySql = "SELECT IDclan FROM Personaggio WHERE Userid = $Userid";
-$Result=mysql_query($MySql);
-$res = mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result);
 $myclanid = $res['IDclan'];
 
 if ( $clanid != $myclanid && ($MasterAdmin !=3 && $MasterAdmin !=2) ) {
@@ -64,36 +64,38 @@ $out = [];
 $MySql="SELECT ID, Messaggiclan.IDclan, IDMittente, Ora , Testo , CONCAT(Nome,' ',Cognome) as Nomemittente , URLImg FROM Messaggiclan 
 LEFT JOIN Personaggio on IDMittente = Userid 
 WHERE Messaggiclan.IDclan = $clanid";
-$Result=mysql_query($MySql);
-while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ){
+$Result=mysqli_query($db, $MySql);
+while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ){
 	$out [] =$res;
 };
 
 
-mysql_query($MySql);
-if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
-
-
 
 $MySql="SELECT COUNT(*) as n FROM Checkmessaggiclan WHERE Userid = $Userid and IDclan = $clanid";
-$Result=mysql_query($MySql);
-$res = mysql_fetch_array($Result);
-
-
+$Result=mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result);
 
 if ( $res['n'] != 0 ) {
 	$MySql="UPDATE  Checkmessaggiclan SET UltimaData = NOW() WHERE Userid = $Userid and IDclan = $clanid";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 } else {
 	$MySql="INSERT INTO  Checkmessaggiclan (Userid, IDclan) VALUES ( $Userid, $clanid )";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 }
 
+$MySql="SELECT COUNT(*) as c from Newmsg where Userid = $Userid";
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
+if ($res['c']==0) {
+	$MySql = "INSERT INTO Newmsg (Userid, Newmsg) VALUES ($Userid, $ntot)";
+}else {
+	$MySql = "UPDATE Newmsg SET Newmsg = 0 WHERE Userid = $Userid";
+}
+$Result=mysqli_query($db, $MySql);
 
 
 
-/* Aggiorna numero messaggi */
-aggiornanumeromessaggi ( $Userid ) ;	
+
 
 
 

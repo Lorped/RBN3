@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php'); // MYSQLI //
 include ('token.php');
 
 
@@ -70,7 +70,7 @@ $newfile=$target_path.$Userid.'.'.$ext;
 
 
 $MySql="UPDATE Personaggio SET URLImg = '$newfile' WHERE Userid = '$Userid' ";
-$Result=mysql_query($MySql);
+$Result=mysqli_query($db, $MySql);
 
 header("HTTP/1.1 200 OK");
 $out=[];

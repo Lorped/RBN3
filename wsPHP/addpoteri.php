@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php'); // MYSQLI //
 include ('token.php');
 
 
@@ -47,7 +47,7 @@ foreach ($lista as $key ) {
 	$newpotere=$key->IDpotere;
 
 	$MySql="INSERT INTO Poteri (IDpotere, Userid) VALUES ($newpotere,$Userid)";
-	mysql_query($MySql);
+	mysqli_query($db, $MySql);
 }
 
 $out = [];

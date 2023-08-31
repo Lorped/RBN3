@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 include ('token.php');
-include ('newmesg.inc.php');
+// include ('newmesg.inc.php');
 
 
 $postdata = file_get_contents("php://input");
@@ -48,12 +48,12 @@ $out=[];
 // 2 = cancellato dal Destinatario
 // 3 = cancellato da entrambi
 
-$MySql= "SELECT ID, IDMittente, IDDestinatario,  Testo, DATE_FORMAT( Ora , '%d %b - %H:%i'  ) AS Ora  FROM `Sms` WHERE ( ( IDMittente = $Userid AND IDDestinatario = $contatto ) AND ( Cancellato = 0 OR Cancellato = 2 ) ) OR
+$MySql= "SELECT ID, IDMittente, IDDestinatario,  Testo, DATE_FORMAT( Ora , '%d %b - %H:%i'  ) AS Ora , Ora as Oraraw FROM `Sms` WHERE ( ( IDMittente = $Userid AND IDDestinatario = $contatto ) AND ( Cancellato = 0 OR Cancellato = 2 ) ) OR
 									( ( IDMittente = $contatto AND IDDestinatario = $Userid ) AND ( Cancellato = 0 OR Cancellato = 1  ) )
-			order by Ora ASC , ID ASC ";
+			order by Oraraw ASC , ID ASC ";
 
-$Result=mysql_query($MySql);
-while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
+$Result=mysqli_query($db, $MySql);
+while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC)   ) {
 		
 	$out [] = $res;
 }
@@ -63,10 +63,8 @@ while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
 
 
 $MySql= "UPDATE `Sms` SET Nuovo = 'N' WHERE IDMittente = $contatto AND IDDestinatario = $Userid  ";
-$Result=mysql_query($MySql);
+$Result=mysqli_query($db, $MySql);
 
-/* Aggiorna numero messaggi */
-aggiornanumeromessaggi ( $Userid ) ;
 
 
 

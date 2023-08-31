@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');   // MYSQLI //
 include ('token.php');
 
 
@@ -47,8 +47,8 @@ if ( CheckJWT ($token) ) {
 
 
 $MySql = "SELECT IDclan FROM Personaggio WHERE Userid = $Userid";
-$Result=mysql_query($MySql);
-$res = mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result);
 $myclanid = $res['IDclan'];
 
 if ( $clanid != $myclanid && ($MasterAdmin !=3 && $MasterAdmin !=2) ) {
@@ -61,31 +61,31 @@ if ( $clanid != $myclanid && ($MasterAdmin !=3 && $MasterAdmin !=2) ) {
 
 $out = [];
 
-$testo=mysql_real_escape_string($testo);
+$testo=mysqli_real_escape_string($db, $testo);
 
 $MySql="INSERT INTO Messaggiclan ( IDMittente,  Testo , IDclan ) VALUES ( $Userid , '$testo' , $clanid) ";
-$Result=mysql_query($MySql);
+$Result=mysqli_query($db, $MySql);
 
-if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
+if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }
 
 $MySql="UPDATE  Checkmessaggiclan SET UltimaData = NOW() WHERE Userid = $Userid and IDclan = $clanid";
-$Result=mysql_query($MySql);
+$Result=mysqli_query($db, $MySql);
 
 
 /* AGGIORNO NUM MESSAGGI */
 $MySql="SELECT Userid from Personaggio WHERE IDclan = $clanid AND Userid != $Userid";
-$Result=mysql_query($MySql);
-while ( $res=mysql_fetch_array($Result)) {
+$Result=mysqli_query($db,$MySql);
+while ( $res=mysqli_fetch_array($Result)) {
 	$contatto = $res['Userid'];
 	$MySql2="SELECT COUNT(*) as c from Newmsg where Userid = $contatto";
-	$Result2=mysql_query($MySql2);
-	$res2=mysql_fetch_array($Result2);
+	$Result2=mysqli_query($db, $MySql2);
+	$res2=mysqli_fetch_array($Result2);
 	if ($res2['c']==0) {
-	$MySql2 = "INSERT INTO Newmsg (Userid, Newmsg) VALUES ($contatto, 1)";
+		$MySql2 = "INSERT INTO Newmsg (Userid, Newmsg) VALUES ($contatto, 1)";
 	}else {
 		$MySql2 = "UPDATE Newmsg SET Newmsg = Newmsg +1 WHERE Userid = $contatto";
 	}
-	$Result2=mysql_query($MySql2);
+	$Result2=mysqli_query($db,$MySql2);
 }
 
 

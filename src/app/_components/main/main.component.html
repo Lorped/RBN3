@@ -10,191 +10,203 @@
   <mat-sidenav class="sidenav" #sidenav mode="side"  (click)="sidenav.toggle()">
     <app-menu></app-menu>
   </mat-sidenav>
+
   <mat-sidenav-content >
 
 
 
 
-<!-- <app-modal id="modal-scheda"> -->
-<app-modal #modalpx modalId="modalpx">
-  <div class="app-modal-header">
-    <i>Quest e Log Spesa PX</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.pxon=false; modalpx.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-questpx *ngIf="this.status.pxon"></app-questpx>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.pxon=false; modalpx.hide()">Chiudi</button>
-  </div>
-</app-modal>
+    <!-- <app-modal id="modal-modalpx"> -->
+      
+    <app-modal #modalpx modalId="modalpx">
+      <div class="app-modal-header my-modal-header">
+        Quest e Log Spesa PX<button type="button" class="btn close" style="color: red !important;" (click)="this.status.pxon=false; modalpx.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <app-questpx *ngIf="this.status.pxon"></app-questpx>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.pxon=false; modalpx.hide()">Chiudi</button>
+      </div>
+    </app-modal>
 
-<!-- <app-modal id="modal-scheda"> -->
+    <!-- ----->
 
-<app-modal #modalbio modalId="modalbio">
-  <div class="app-modal-header">
-    <i>Biografia e Profilo Personaggio</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.bioon=false; modalbio.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-bio *ngIf="this.status.bioon"></app-bio>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.bioon=false; modalbio.hide()">Chiudi</button>
-  </div>
-</app-modal>
+    <!-- <app-modal id="modal-modalbio"> -->
 
-<!-- ----->
+    <app-modal #modalbio modalId="modalbio">
+      <div class="app-modal-header my-modal-header">
+        Biografia e Profilo Personaggio<button type="button" class="btn close" style="color: red !important;" (click)="this.status.bioon=false; modalbio.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <app-bio *ngIf="this.status.bioon"></app-bio>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.bioon=false; modalbio.hide()">Chiudi</button>
+      </div>
+    </app-modal>
 
-<!-- <app-modal id="modal-scheda"> -->
+    <!-- ----->
 
-<app-modal #modalanagrafe modalId="modalanagrafe">
-  <div class="app-modal-header">
-    <i>Anagrafe Personaggi</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.anagon=false; modalanagrafe.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-anagrafe *ngIf="this.status.anagon"></app-anagrafe>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.anagon=false; modalanagrafe.hide()">Chiudi</button>
-  </div>
-</app-modal>
+    <!-- <app-modal id="modal-modalanagrafe"> -->
 
-<!-- ----->
-<app-modal #modalscheda modalId="modalscheda" >
-  <div class="app-modal-header">
-    <i>Scheda Personaggio</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.schedaon=false; modalscheda.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-scheda *ngIf="this.status.schedaon"></app-scheda>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.schedaon=false; modalscheda.hide()">Chiudi</button>
-  </div>
-</app-modal>
-<!-- <app-modal id="modal-scheda"> -->
+    <app-modal #modalanagrafe modalId="modalanagrafe">
+      <div class="app-modal-header my-modal-header">
+        Anagrafe Personaggi<button type="button" class="btn close" style="color: red !important;" (click)="this.status.anagon=false; modalanagrafe.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <app-anagrafe *ngIf="this.status.anagon"></app-anagrafe>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.anagon=false; modalanagrafe.hide()">Chiudi</button>
+      </div>
+    </app-modal>
 
-<app-modal #modalschedaoth modalId="modalschedaoth">
-  <div class="app-modal-header">
-    <i>Scheda Personaggio</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.schedaothon=false; modalschedaoth.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-schedaother *ngIf="this.status.schedaothon"></app-schedaother>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.schedaothon=false; modalschedaoth.hide()">Chiudi</button>
-  </div>
-</app-modal>
+    <!-- ----->
 
-<!-- ----->
-<app-modal #modalpoteri modalId="modalpoteri">
-  <div class="app-modal-header">
-    <i>Poteri</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.poterion=false; modalpoteri.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-poteri *ngIf="this.status.poterion"></app-poteri>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.poterion=false; modalpoteri.hide()">Chiudi</button>
-  </div>
-</app-modal>
+    <!-- <app-modal id="modal-modalscheda"> -->
 
-<!-- ----->
-<!-- ----->
-<app-modal #modalsceltapoteri modalId="modalsceltapoteri">
-  <div class="app-modal-header">
-    <i>Scelta Poteri</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.sceltapoterion=false; modalsceltapoteri.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-sceltapoteri *ngIf="this.status.sceltapoterion"></app-sceltapoteri>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.sceltapoterion=false; modalsceltapoteri.hide()">Chiudi</button>
-  </div>
-</app-modal>
+    <app-modal #modalscheda modalId="modalscheda" >
+      <div class="app-modal-header my-modal-header">
+        Scheda Personaggio<button type="button" class="btn close" style="color: red !important;" (click)="this.status.schedaon=false; modalscheda.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <app-scheda *ngIf="this.status.schedaon"></app-scheda>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.schedaon=false; modalscheda.hide()">Chiudi</button>
+      </div>
+    </app-modal>
 
-<!-- ----->
+    <!-- ----->
 
-<!-- ----->
-<app-modal #modalmessaggi modalId="modalmessaggi">
-  <div class="app-modal-header">
-    <i>Messaggi</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.messaggion=false; modalmessaggi.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-messaggi *ngIf="this.status.messaggion"></app-messaggi>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.messaggion=false; modalmessaggi.hide()">Chiudi</button>
-  </div>
-</app-modal>
+    <!-- <app-modal id="modal-modalschedaoth"> -->
 
-<!-- ----->
+    <app-modal #modalschedaoth modalId="modalschedaoth">
+      <div class="app-modal-header  my-modal-header">
+        Scheda Personaggio<button type="button" class="btn close" style="color: red !important;" (click)="this.status.schedaothon=false; modalschedaoth.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <app-schedaother *ngIf="this.status.schedaothon"></app-schedaother>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.schedaothon=false; modalschedaoth.hide()">Chiudi</button>
+      </div>
+    </app-modal>
 
-<!-- ----->
-<app-modal #modallistamsg modalId="modallistamsg">
-  <div class="app-modal-header">
-    <i>Messaggi con {{status.contattonome}}</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.listamsgon=false; modallistamsg.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-readmessaggi *ngIf="this.status.listamsgon"></app-readmessaggi>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.listamsgon=false; modallistamsg.hide()">Chiudi</button>
-  </div>
-</app-modal>
+    <!-- ----->
 
-<!-- ----->
-<!-- ----->
-<app-modal #modallistamsgclan modalId="modallistamsgclan">
-  <div class="app-modal-header">
-    <i>Messaggi con {{status.clancontattonome}}</i><button type="button" class="btn close" style="color: red !important;" (click)="this.status.listamsgclanon=false; modallistamsgclan.hide()">&times;</button>
-  </div>
-  <div class="app-modal-body">
-    <app-readmessaggiclan *ngIf="this.status.listamsgclanon"></app-readmessaggiclan>
-  </div>
-  <div class="app-modal-footer">
-    <button type="button" class="btn btn-danger btn-sm" (click)="this.status.listamsgclanon=false; modallistamsgclan.hide()">Chiudi</button>
-  </div>
-</app-modal>
+    <!-- <app-modal id="modal-modalpoteri"> -->
 
-<!-- ----->
+    <app-modal #modalpoteri modalId="modalpoteri">
+      <div class="app-modal-header my-modal-header">
+        Poteri<button type="button" class="btn close" style="color: red !important;" (click)="this.status.poterion=false; modalpoteri.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <app-poteri *ngIf="this.status.poterion"></app-poteri>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.poterion=false; modalpoteri.hide()">Chiudi</button>
+      </div>
+    </app-modal>
 
-<!--- 
-<button (click)="toggleMenu()" class="menubutton">
-  <span>toggle menu</span>
-</button>
--->
+    <!-- ----->
+
+    <!-- <app-modal id="modal-modalsceltapoteri"> -->
+
+    <app-modal #modalsceltapoteri modalId="modalsceltapoteri">
+      <div class="app-modal-header my-modal-header">
+        Scelta Poteri<button type="button" class="btn close" style="color: red !important;" (click)="this.status.sceltapoterion=false; modalsceltapoteri.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <app-sceltapoteri *ngIf="this.status.sceltapoterion"></app-sceltapoteri>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.sceltapoterion=false; modalsceltapoteri.hide()">Chiudi</button>
+      </div>
+    </app-modal>
+
+    <!-- ----->
+
+    <!-- <app-modal id="modal-modalmessaggi"> -->
+
+    <app-modal #modalmessaggi modalId="modalmessaggi">
+      <div class="app-modal-header my-modal-header">
+        Messaggi<button type="button" class="btn close" style="color: red !important;" (click)="this.status.messaggion=false; modalmessaggi.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <app-messaggi *ngIf="this.status.messaggion"></app-messaggi>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.messaggion=false; modalmessaggi.hide()">Chiudi</button>
+      </div>
+    </app-modal>
+
+    <!-- ----->
+
+    <!-- <app-modal id="modal-modallistamsg"> -->
+
+    <app-modal #modallistamsg modalId="modallistamsg">
+      <div class="app-modal-header my-modal-header">
+        Messaggi con {{status.contattonome}}<button type="button" class="btn close" style="color: red !important;" (click)="this.status.listamsgon=false; modallistamsg.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <app-readmessaggi *ngIf="this.status.listamsgon"></app-readmessaggi>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.listamsgon=false; modallistamsg.hide()">Chiudi</button>
+      </div>
+    </app-modal>
+
+    <!-- ----->
+
+    <!-- <app-modal id="modal-modallistamsgclan"> -->
+
+    <app-modal #modallistamsgclan modalId="modallistamsgclan">
+      <div class="app-modal-header my-modal-header">
+        Messaggi con {{status.clancontattonome}}<button type="button" class="btn close" style="color: red !important;" (click)="this.status.listamsgclanon=false; modallistamsgclan.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <app-readmessaggiclan *ngIf="this.status.listamsgclanon"></app-readmessaggiclan>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.listamsgclanon=false; modallistamsgclan.hide()">Chiudi</button>
+      </div>
+    </app-modal>
+
+    <!-- ----->
+
+    <!-- ----->
 
 
 
-  <div style="height: calc(100vh - 64px);">
 
 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-7" style="height: 370px; background-color:black; background:rgba(0,0,0,0.5); color: white;">
-          <router-outlet></router-outlet>
-        </div>
-        <div style="min-width: 230px; height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
-          <app-presenti></app-presenti>
-        </div>
-        <div style="min-width: 230px; height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
-          <app-luoghi></app-luoghi>
-        </div>
-        <div >
-          <app-toolvari></app-toolvari>
+    <div style="height: calc(100vh - 64px);">
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7" style="height: 370px; background-color:black; background:rgba(0,0,0,0.5); color: white;">
+            <router-outlet></router-outlet>
+          </div>
+          <div style="min-width: 230px; height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
+            <app-presenti></app-presenti>
+          </div>
+          <div style="min-width: 230px; height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
+            <app-luoghi></app-luoghi>
+          </div>
+          <div >
+            <app-toolvari></app-toolvari>
+          </div>
         </div>
       </div>
+      
+
+
     </div>
-    
 
 
-  </div>
-
-
-
-
-
-
-
-</mat-sidenav-content>
+  </mat-sidenav-content>
 </mat-sidenav-container>
 

@@ -148,7 +148,8 @@ export class Status {
   clancontattoID = 0;
   clancontattonome = '';
   clancontattourl = 'xx';
-
+  //
+  Newmsg = 0 ;
 
 }
 

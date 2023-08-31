@@ -26,7 +26,7 @@ export class ToolvariComponent implements OnInit {
   ingame = "In Game";
   checked: boolean;
 
-  constructor(private http: HttpClient, private status: Status, private messaggiService: MessaggiService, private listpresentiService: ListpresentiService, private modalService: ModalService) { }
+  constructor(private http: HttpClient, public status: Status, private messaggiService: MessaggiService, private listpresentiService: ListpresentiService, private modalService: ModalService) { }
 
   ngOnInit(): void {
 
@@ -42,9 +42,10 @@ export class ToolvariComponent implements OnInit {
     .subscribe( (data) => {
   
       //console.log(data);
-      this.nummsg = data.Nuovimessaggi;
+      this.status.Newmsg = data.Newmsg;
+      //console.log(this.nummsg);
 
-      this.nummsg == 0 ? this.hidden = true : this.hidden = false;
+      this.status.Newmsg == 0 ? this.hidden = true : this.hidden = false;
     });
 
 
@@ -52,7 +53,7 @@ export class ToolvariComponent implements OnInit {
     .subscribe( () => {
       this.messaggiService.contanuovimessaggi(this.status.Userid)
       .subscribe( (data) => {
-        this.nummsg = data.Nuovimessaggi;
+        this.status.Newmsg = data.Newmsg;
 
         this.nummsg == 0 ? this.hidden = true : this.hidden = false;
       });
