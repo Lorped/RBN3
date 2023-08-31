@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 include ('token.php');
 
 
@@ -47,32 +47,32 @@ $pxout=0;
 $px=0;
 
 $MySql="SELECT sum(px) as somma FROM Quest  WHERE Userid='$Userid' AND Status='OK' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxin=$res['somma'];
 
 $MySql="SELECT sum(px) as somma FROM Logpx  WHERE Userid='$Userid' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxout=$res['somma'];
 
 $px=$pxin-$pxout;
 
 $MySql="SELECT FdVmax FROM Personaggio  WHERE Userid='$Userid' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $FdVmax=$res['FdVmax'];
 
 
 if ( $FdVmax < 10 && $px >= $FdVmax ) {
 
 	$MySql="UPDATE Personaggio SET FdVmax=FdVmax+1 , FdV=FdV+1 WHERE Userid='$Userid'";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 
 	$pxspesi=$FdVmax;
 	$Dati="[FdV] FdV ".$FdVmax." => ".($FdVmax+1);
 	$MySql="INSERT INTO Logpx (Data, Userid, Px, Dati ) VALUES ( NOW() , '$Userid', '$pxspesi', '$Dati') ";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 
 }
 

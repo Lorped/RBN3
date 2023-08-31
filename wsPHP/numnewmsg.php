@@ -28,6 +28,9 @@ $MySql="SELECT  Newmsg from Newmsg where Userid = $Userid";
 $Result=mysqli_query($db, $MySql);
 $res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
 
+if ($res['Newmsg'] == null ) {
+	$res['Newmsg'] = 0;
+}
 
 $out = $res;
 

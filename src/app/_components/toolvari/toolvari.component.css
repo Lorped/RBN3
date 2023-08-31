@@ -12,3 +12,20 @@ mat-card {
     padding-right: 5px;
     text-align: center;
 }
+
+
+.clickable {
+    transition: all 0.2s ease-in-out;
+}
+  
+.clickable:hover {
+    /* 
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(255, 0, 0, 0.45);
+    */
+
+    color: #f44336 !important ;
+    /*color: #fa5788; */
+    /*color: warn !important;*/
+}
+  

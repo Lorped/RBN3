@@ -26,8 +26,6 @@ $request = json_decode($postdata);
 $email = $request->email;
 $password = $request->password;
 
-// $email = "julien@home.com";
-// $password = "kli0loth";
 
 $email=mysqli_real_escape_string($db, $email);
 $password=mysqli_real_escape_string($db, $password);

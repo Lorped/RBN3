@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  //MYSQLI //
 include ('token.php');
 
 
@@ -49,13 +49,13 @@ $pxout=0;
 $px=0;
 
 $MySql="SELECT sum(px) as somma FROM Quest  WHERE Userid='$Userid' AND Status='OK' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxin=$res['somma'];
 
 $MySql="SELECT sum(px) as somma FROM Logpx  WHERE Userid='$Userid' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxout=$res['somma'];
 
 $px=$pxin-$pxout;
@@ -64,8 +64,8 @@ $px=$pxin-$pxout;
 
 $MySql="SELECT * FROM Personaggio LEFT JOIN Clan ON Personaggio.IDclan=Clan.IDclan
 	WHERE Userid='$Userid' AND ( Disc1 = '$attr' OR Disc2 = '$attr' OR Disc3 = '$attr' ) ";
-$Result=mysql_query($MySql);
-if ( $res=mysql_fetch_array($Result) ) {
+$Result=mysqli_query($db, $MySql);
+if ( $res=mysqli_fetch_array($Result) ) {
 	$DiClan = 'S';
 } else {
 	$DiClan = 'N';
@@ -75,12 +75,12 @@ if ( $res=mysql_fetch_array($Result) ) {
 if ( $px >= 10 ) {
 
 	$MySql="INSERT INTO Discipline (IDdisciplina, Userid, LivelloDisc, DiClan) VALUES ('$attr', '$Userid', 1, '$DiClan') ";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 
 	$pxspesi=10;
 	$Dati="[Disciplina] Acquisita ".$nomeattr;
 	$MySql="INSERT INTO Logpx (Data, Userid, Px, Dati ) VALUES ( NOW() , '$Userid', '$pxspesi', '$Dati') ";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 
 }
 

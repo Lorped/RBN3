@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
 import { Status } from '../../globals';
 import { MessaggiService, ListpresentiService } from '../../_services/index';
+import { ModalService } from '../../_services/index';
 
 @Component({
   selector: 'app-toolvari',
@@ -25,7 +26,7 @@ export class ToolvariComponent implements OnInit {
   ingame = "In Game";
   checked: boolean;
 
-  constructor(private http: HttpClient, private status: Status, private messaggiService: MessaggiService, private listpresentiService: ListpresentiService) { }
+  constructor(private http: HttpClient, private status: Status, private messaggiService: MessaggiService, private listpresentiService: ListpresentiService, private modalService: ModalService) { }
 
   ngOnInit(): void {
 
@@ -81,5 +82,12 @@ export class ToolvariComponent implements OnInit {
     this.listpresentiService.changeonoffgame().subscribe( );
 
   }
+
+  openmsg(){
+    console.log("here");
+    this.status.messaggion = true ;
+    this.modalService.show('modalmessaggi') ;
+  }
+
 
 }
