@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php'); // MYSQLI //
 include ('token.php');
 
 
@@ -47,32 +47,32 @@ $pxout=0;
 $px=0;
 
 $MySql="SELECT sum(px) as somma FROM Quest  WHERE Userid='$Userid' AND Status='OK' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxin=$res['somma'];
 
 $MySql="SELECT sum(px) as somma FROM Logpx  WHERE Userid='$Userid' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxout=$res['somma'];
 
 $px=$pxin-$pxout;
 
 $MySql="SELECT Valsentiero FROM Personaggio  WHERE Userid='$Userid' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $Valsentiero=$res['Valsentiero'];
 
 
 if ( $Valsentiero < 10 && $px >= 2*$Valsentiero ) {
 
 	$MySql="UPDATE Personaggio SET Valsentiero=Valsentiero+1 WHERE Userid='$Userid'";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 
 	$pxspesi=2*$Valsentiero;
 	$Dati="[Sentiero] Sentiero ".$Valsentiero." => ".($Valsentiero+1);
 	$MySql="INSERT INTO Logpx (Data, Userid, Px, Dati ) VALUES ( NOW() , '$Userid', '$pxspesi', '$Dati') ";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 
 }
 

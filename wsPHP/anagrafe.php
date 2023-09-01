@@ -23,9 +23,10 @@ include ('token.php');
 
 $out = [];
 
-$MySql = "SELECT Personaggio.Userid, Nome, Cognome,  Personaggio.Sesso, Clan.Clan , ClanImg , URLImg , DATE_FORMAT(OraEntrata,'%d %b - %H:%i') as Oraentrata FROM Personaggio
+$MySql = "SELECT Personaggio.Userid, Nome, Cognome,  Personaggio.Sesso, Clan.Clan , ClanImg , URLImg , DATE_FORMAT(OraEntrata,'%d %b - %H:%i') as Oraentrata , Setta, SettaImg FROM Personaggio
 	LEFT JOIN Clan ON Clan.IDclan=Personaggio.IDclan 
-	LEFT JOIN Presenti ON Personaggio.Userid=Presenti.Userid";
+	LEFT JOIN Presenti ON Personaggio.Userid=Presenti.Userid
+	LEFT JOIN Sette ON Personaggio.IDSetta=Sette.IDSetta";
 $Result=mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 	$out[] = $res;

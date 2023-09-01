@@ -8,7 +8,9 @@ export class  AnagrafeRow {
   Cognome: string;
   Sesso: string;
   Clan: string;
+  Setta: string;
   ClanImg: string;
+  SettaImg: string;
   URLImg: string;
   OraEntrata: string;
 }
