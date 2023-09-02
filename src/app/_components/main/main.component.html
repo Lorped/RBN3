@@ -175,10 +175,7 @@
     </app-modal>
 
     <!-- ----->
-
     <!-- ----->
-
-
 
 
 
@@ -186,38 +183,66 @@
 
 
       <div class="container-xxl ">
-        <div class="row nogutter">
+        <div class="row full">
+
           <div class="col-1">
             &nbsp;
           </div>
-          <div class="col-7" style="height: 75vh; background-color:black; background:rgba(0,0,0,0.5); color: white;">
-
-            <router-outlet></router-outlet>
           
+          <div class="col-8" style="height: 80vh;">
+            <router-outlet></router-outlet>
           </div>
 
-          <!-- <div style="min-width: 230px; height: 370px; background-color:black; background:rgba(0,0,0,0.5);"> -->
-          <div class="col-2" style="height: 75vh; background-color:black; background:rgba(0,0,0,0.5); color: white;">
+          <div class="col-2" style="height: 80vh;">
 
-            &nbsp;
-            <!--
-            <div style=" height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
-              <app-presenti></app-presenti>
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <app-toolvari></app-toolvari>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <app-presenti></app-presenti>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <app-luoghi></app-luoghi>
+                </div>
+              </div>
             </div>
-            <div style=" height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
-              <app-luoghi></app-luoghi>
-            </div>
-            -->
 
-          </div>        
+          </div>
+
           <div class="col-1" >
-            <app-toolvari></app-toolvari>
+            &nbsp;
           </div>
-
+        
         </div>
       </div>
-      
     </div>
+
+            <!--
+              <div style="min-width: 230px; height: 370px; background-color:black; background:rgba(0,0,0,0.5);"> 
+              <div class="col-2" style="height: 75vh; background-color:black; background:rgba(0,0,0,0.5); color: white;">
+
+                &nbsp;
+          
+                <div style=" height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
+                  <app-presenti></app-presenti>
+                </div>
+                <div style=" height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
+                  <app-luoghi></app-luoghi>
+                </div>
+                
+
+              </div>        
+              <div class="col-2" >
+                <app-toolvari></app-toolvari>
+              </div>
+            -->
+
 
 
   </mat-sidenav-content>

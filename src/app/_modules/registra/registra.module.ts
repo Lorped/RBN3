@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
 import { REGISTRA_ROUTES } from './registra.routing';
 
 import { UtilityModule } from '../utility/utility.module';
@@ -20,7 +24,10 @@ import { Registra5Component } from './registra5/registra5.component';
     FormsModule,
     RouterModule.forChild(REGISTRA_ROUTES) ,
     UtilityModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule
   ],
   declarations: [
     Registra0Component,

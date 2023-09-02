@@ -4,6 +4,7 @@ import { MAPPA_ROUTES } from './mappa.routing';
 import { MappaComponent } from './mappa.component';
 import { Mappa0Component } from './mappa0/mappa0.component';
 import { Mappa1Component } from './mappa1/mappa1.component';
+import { MapService } from '../../_services/map.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,9 @@ import { Mappa1Component } from './mappa1/mappa1.component';
   imports: [
     RouterModule.forChild(MAPPA_ROUTES)
   ],
-  providers: []
+  providers: [
+    MapService
+  ]
 })
 export class MappaModule {
 }
