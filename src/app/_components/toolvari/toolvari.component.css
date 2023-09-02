@@ -5,7 +5,8 @@ p.near {
     line-height: 1;
 }
 mat-card {
-    background: #020202;
+   /* background: #020202; */
+   background: transparent;
 }
 .centralbox {
     padding-left: 5px;

@@ -185,25 +185,38 @@
     <div style="height: calc(100vh - 64px);">
 
 
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-7" style="height: 370px; background-color:black; background:rgba(0,0,0,0.5); color: white;">
+      <div class="container-xxl ">
+        <div class="row nogutter">
+          <div class="col-1">
+            &nbsp;
+          </div>
+          <div class="col-7" style="height: 75vh; background-color:black; background:rgba(0,0,0,0.5); color: white;">
+
             <router-outlet></router-outlet>
+          
           </div>
-          <div style="min-width: 230px; height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
-            <app-presenti></app-presenti>
-          </div>
-          <div style="min-width: 230px; height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
-            <app-luoghi></app-luoghi>
-          </div>
-          <div >
+
+          <!-- <div style="min-width: 230px; height: 370px; background-color:black; background:rgba(0,0,0,0.5);"> -->
+          <div class="col-2" style="height: 75vh; background-color:black; background:rgba(0,0,0,0.5); color: white;">
+
+            &nbsp;
+            <!--
+            <div style=" height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
+              <app-presenti></app-presenti>
+            </div>
+            <div style=" height: 370px; background-color:black; background:rgba(0,0,0,0.5);">
+              <app-luoghi></app-luoghi>
+            </div>
+            -->
+
+          </div>        
+          <div class="col-1" >
             <app-toolvari></app-toolvari>
           </div>
+
         </div>
       </div>
       
-
-
     </div>
 
 

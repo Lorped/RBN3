@@ -26,7 +26,7 @@ Insert into your style.css
 
 @import '~font-awesome/css/font-awesome.css';
 
-export  NODE_OPTIONS=--openssl-legacy-provider
+export  NODE_OPTIONS=--openssl-legacy-provider NO
 
 
 
