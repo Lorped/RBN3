@@ -138,7 +138,6 @@
       }
     }
   },
-  "defaultProject": "rbn3",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

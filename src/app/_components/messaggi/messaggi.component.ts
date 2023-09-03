@@ -9,7 +9,7 @@ import {map, startWith} from 'rxjs/operators';
 
 
 
-import { FormControl,  Validators, AbstractControl } from '@angular/forms';
+import { UntypedFormControl,  Validators, AbstractControl } from '@angular/forms';
 
 
 
@@ -22,7 +22,7 @@ export class MessaggiComponent implements OnInit {
 
   listacont: Array<UnContatto>;
   anagrafe: Array<AnagrafeRow> = [];
-  myControl: FormControl;
+  myControl: UntypedFormControl;
 
   filteredOptions: Observable<AnagrafeRow[]>;
 
@@ -35,7 +35,7 @@ export class MessaggiComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.myControl = new FormControl('');
+    this.myControl = new UntypedFormControl('');
     this.formOk = false;
 
     

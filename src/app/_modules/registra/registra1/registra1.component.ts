@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Attributo, Clan, Archetipo } from '../../../globals';
 import { SignupService } from '../../../_services/signup.service';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 
 export class Registra1Component implements OnInit {
 
-  registrationForm: FormGroup;
+  registrationForm: UntypedFormGroup;
 
   archetipi: Array<Archetipo> = [];
   clan: Array<Clan> = [];
@@ -45,41 +45,41 @@ export class Registra1Component implements OnInit {
     let olddatastring: string;
 
 
-    this.registrationForm = new FormGroup ({
-      nomePG: new FormControl('', [
+    this.registrationForm = new UntypedFormGroup ({
+      nomePG: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('^[A-Za-zàèìòù]+$')
       ]),
 
-      cognomePG: new FormControl('', [
+      cognomePG: new UntypedFormControl('', [
         Validators.pattern('^[A-Za-zàèìòù \']+$')
       ]),
 
-      etaPG: new FormControl('1980', [
+      etaPG: new UntypedFormControl('1980', [
         Validators.required,
         Validators.min(1900),
         Validators.max(this.today - 16)
       ]),
 
-      etaAPG: new FormControl('', [
+      etaAPG: new UntypedFormControl('', [
         Validators.required,
         Validators.min(16),
         Validators.max(80)
       ]),
 
-      naturaPG: new FormControl('', [
+      naturaPG: new UntypedFormControl('', [
         Validators.required,
       ]),
 
-      clanPG: new FormControl('', [
+      clanPG: new UntypedFormControl('', [
         Validators.required,
       ]),
 
-      caratterePG: new FormControl('', [
+      caratterePG: new UntypedFormControl('', [
         Validators.required,
       ]),
 
-      Sesso: new FormControl('', [
+      Sesso: new UntypedFormControl('', [
         Validators.required
       ])
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ export class Registra0Component implements OnInit {
 
   accetta = '';
 
-  registrationForm: FormGroup;
+  registrationForm: UntypedFormGroup;
 
 
   constructor( private signupService: SignupService , private router: Router  ) { }
@@ -22,25 +22,25 @@ export class Registra0Component implements OnInit {
   ngOnInit() {
 
 
-    this.registrationForm = new FormGroup ({
-      regemail: new FormControl('', [
+    this.registrationForm = new UntypedFormGroup ({
+      regemail: new UntypedFormControl('', [
         Validators.required,
         Validators.email
       ], [
         this.validateEmailNotTaken.bind(this)
       ]),
 
-      password: new FormControl('', [
+      password: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(8),
         Validators.pattern('^.*((\\d.*[a-zA-Z])|([a-zA-Z].*\\d)).*$')
       ]),
 
-      password2: new FormControl('', [
+      password2: new UntypedFormControl('', [
         Validators.required
       ]),
 
-      check: new FormControl('', [
+      check: new UntypedFormControl('', [
         Validators.required
       ])
     });
