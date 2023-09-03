@@ -2,6 +2,25 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import { MapService, TabMunicipi } from '../../../_services/map.service';
 
+
+
+/**   FIX ICONE */
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+const iconUrl = 'assets/marker-icon.png';
+const shadowUrl = 'assets/marker-shadow.png';
+const iconDefault = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+L.Marker.prototype.options.icon = iconDefault;
+/**   FIX ICONE */
+
 @Component({
   selector: 'app-mappa0',
   templateUrl: './mappa0.component.html',
@@ -20,7 +39,6 @@ export class Mappa0Component implements OnInit {
   info; // infobox //
 
   static tabMunicipi: Array<TabMunicipi> = [];
-
 
   constructor( private mapService: MapService) { }
 
@@ -47,7 +65,9 @@ export class Mappa0Component implements OnInit {
       .subscribe( (data) => {
         this.municipi = data;      
         this.caricamunicipi();
-       
+        this.caricamarker();
+
+
       });
 
     });
@@ -85,10 +105,8 @@ export class Mappa0Component implements OnInit {
       return this._div;
     };
     this.info.update = function (props) {
-      const ff: TabMunicipi = new(TabMunicipi);
-      
+      const ff: TabMunicipi = new(TabMunicipi);    
       if ( props != null) {
-
         for ( var i = 0 ; i < Mappa0Component.tabMunicipi.length ; i++) {
           if (Mappa0Component.tabMunicipi[i].IDzona == props.ID) {
             ff.Nome =  Mappa0Component.tabMunicipi[i].Nome;
@@ -99,10 +117,7 @@ export class Mappa0Component implements OnInit {
           }
         }
       }
-      
-      //console.log(props);
-      
-
+           
       if (ff.Setta != null ) {
         ff.SettaImg = '<img src="/assets/sette/' + ff.SettaImg + '" height=30 >';
         if (ff.IDcontrollo == 'P') {
@@ -120,6 +135,8 @@ export class Mappa0Component implements OnInit {
     };
   
     this.info.addTo(this.map);
+
+
   }
 
 
@@ -127,17 +144,16 @@ export class Mappa0Component implements OnInit {
     const baseLayer = L.geoJson (this.base, {
       style: (feature) => ({
         weight: 2,
-        opacity: 0.5,
+        opacity: 0.3,
         color: '#000000' ,
-        fillOpacity: 0.6 ,
+        fillOpacity: 0.5 ,
         fillColor: '#3d3d3d' 
       })
     });
     this.map.addLayer(baseLayer);
   }
 
-  caricamunicipi(){
-
+  caricamunicipi() {
     const municipiLayer = L.geoJson (this.municipi,  {style: this.mystyle, onEachFeature: 
       (feature, layer) => (
         layer.on({
@@ -146,25 +162,35 @@ export class Mappa0Component implements OnInit {
           click: (e) => (this.zoomToFeature(e))
         })
       )
-      }).addTo(this.map);
+      });
 
     this.map.addLayer(municipiLayer);
-
-
   }
 
+  caricamarker() {
+    const marker1 = L.marker([41.9144, 12.4868]);
+    const marker2 = L.marker([41.9162, 12.4901]);
+    const allmarkers = L.layerGroup([marker1, marker2]);
+
+    allmarkers.addTo(this.map);
+    /*
+    this.map.on('zoomend', function() {
+      if ( this.map.getZoom() <3){
+        this.map.removeLayer(allmarkers);
+      }
+      else {
+        this.map.addLayer(allmarkers);
+      }
+    });
+    */
+  }
 
 
 
   mystyle(feature) {
 
     var newcolor = '';
-/*
-    console.log(feature);
-    console.log(feature.properties.ID);
-    console.log ("tab");
-    console.log(Mappa0Component.tabMunicipi);
-*/    
+ 
     for (var i  = 0 ; i < Mappa0Component.tabMunicipi.length ; i++) {
       if (Mappa0Component.tabMunicipi[i].IDzona == feature.properties.ID) {
         newcolor = Mappa0Component.tabMunicipi[i].color ;
@@ -177,7 +203,7 @@ export class Mappa0Component implements OnInit {
         weight: 1,
         opacity: 1,
         color: 'black',
-        fillOpacity: 0.7
+        fillOpacity: 0.3
     };
 
   }
@@ -188,7 +214,7 @@ export class Mappa0Component implements OnInit {
     layer.setStyle({
         weight: 5,
         color: '#600',
-        fillOpacity: 0.7
+        fillOpacity: 0.5
     });
 
     this.info.update(layer.feature.properties);
@@ -197,9 +223,9 @@ export class Mappa0Component implements OnInit {
   resetHighlight(e) {
     var layer = e.target;
       layer.setStyle({
-        weight: 2,
-        opacity: 0.5,
-        color: '#000000' 
+        weight: 1,
+        opacity: 1,
+        color: 'black' 
     });
     this.info.update();
     layer.bringToFront();
