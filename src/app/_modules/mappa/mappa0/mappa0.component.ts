@@ -1,14 +1,15 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import * as L from 'leaflet';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Map, Control, DomUtil, ZoomAnimEvent , geoJson, Layer, MapOptions, tileLayer, latLng, icon, marker, layerGroup  } from 'leaflet';
 import { MapService, TabMunicipi } from '../../../_services/map.service';
-
+import { Router } from '@angular/router';
+import { Status } from '../../../globals';
 
 
 /**   FIX ICONE */
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
-const iconDefault = L.icon({
+const iconDefault = icon({
   iconRetinaUrl,
   iconUrl,
   shadowUrl,
@@ -18,7 +19,7 @@ const iconDefault = L.icon({
   tooltipAnchor: [16, -28],
   shadowSize: [41, 41]
 });
-L.Marker.prototype.options.icon = iconDefault;
+
 /**   FIX ICONE */
 
 @Component({
@@ -30,213 +31,261 @@ L.Marker.prototype.options.icon = iconDefault;
 
 
 export class Mappa0Component implements OnInit {
-
+  @Output() map$: EventEmitter<Map> = new EventEmitter;
+  @Output() zoom$: EventEmitter<number> = new EventEmitter;
+  @Input() options: MapOptions= {
+    layers:[tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      opacity: 0.7,
+      maxZoom: 14,
+      minZoom:11,
+      detectRetina: true
+    })],
+    zoom:1,
+    center: latLng( 41.9046, 12.4858 ),
+    attributionControl: false
+  };
   
 
-  map;  // mappa //
-  base;  //sfondo di base //
-  municipi; // poly //
-  info; // infobox //
 
+  map: Map;  // mappa //
+  zoom: number;
   static tabMunicipi: Array<TabMunicipi> = [];
+  myLayers: Array<Layer> = [];
 
-  constructor( private mapService: MapService) { }
+  datibase = '';
+  datimunicipi = '';
 
-  ngOnInit() {}
-  
+  allMarkers: Array<any> = [];
 
-  ngAfterViewInit(): void {
 
-    this.initMap();
+  locationON = false;
+
+  constructor( private mapService: MapService, private router: Router, private status: Status) { }
+
+  ngOnInit() {
+
     
-    this.mapService.getbase()
-    .subscribe( (data) => {
-      this.base = data;
-      this.caricabase();
-    });
+
+  }
+
+
+  onMapReady(map: Map) {
+
+
+    // Carico dati sulle zone + base + municipi //
 
     this.mapService.getcolor().subscribe( (data: any) => {
-
       Mappa0Component.tabMunicipi = data ;
+      this.mapService.getbase().subscribe( (data: any) => {
+        this.datibase = data ;
+        this.mapService.getmunicipi()
+        .subscribe( (data: any ) => {
+          this.datimunicipi = data;      
 
-      // console.log (Mappa0Component.tabMunicipi);
-
-      this.mapService.getmunicipi()
-      .subscribe( (data) => {
-        this.municipi = data;      
-        this.caricamunicipi();
-        this.caricamarker();
-
-
-      });
-
-    });
-
-  }
-
-  initMap() {
-    this.map = L.map('map' , {
-      center: [ 41.9046, 12.4858 ] ,
-      zoom: 11,
-      attributionControl: false
-    });
-
-    // this.map.setMaxBounds(this.map.getBounds());
-    
-    this.map.setMaxBounds([
-      [ 42.1767, 12.9879 ],
-      [ 41.5594, 11.9513 ]
-    ]);
-    
-
-    //const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-      maxZoom: 14,
-      minZoom:11 
-    });
-
-    tiles.addTo(this.map);   
-
-    this.info = L.control();
-
-    this.info.onAdd = function (map) {
-      this._div = L.DomUtil.create('div', 'infobox'); // create a div with a class "infobox"
-      this.update();
-      return this._div;
-    };
-    this.info.update = function (props) {
-      const ff: TabMunicipi = new(TabMunicipi);    
-      if ( props != null) {
-        for ( var i = 0 ; i < Mappa0Component.tabMunicipi.length ; i++) {
-          if (Mappa0Component.tabMunicipi[i].IDzona == props.ID) {
-            ff.Nome =  Mappa0Component.tabMunicipi[i].Nome;
-            ff.Setta = Mappa0Component.tabMunicipi[i].Setta;
-            ff.SettaImg = Mappa0Component.tabMunicipi[i].SettaImg;
-            ff.IDcontrollo = Mappa0Component.tabMunicipi[i].IDcontrollo;
-            ff.Descrizione = Mappa0Component.tabMunicipi[i].Descrizione;
-          }
-        }
-      }
-           
-      if (ff.Setta != null ) {
-        ff.SettaImg = '<img src="/assets/sette/' + ff.SettaImg + '" height=30 >';
-        if (ff.IDcontrollo == 'P') {
-          ff.Setta = ff.Setta + ' - Controllo parziale'
-        }
-      } else {
-        ff.SettaImg = '';
-        ff.Setta = 'Zona non reclamata';
-      }
+          this.map = map;
+          this.map$.emit(map);
+          this.zoom = map.getZoom();
+          this.zoom$.emit(this.zoom);
       
-      this._div.style.cssText = "width: 25vw ;  word-wrap: break-word; color: #ffffff; background-color: #292929; ";
+          this.map.setMaxBounds([
+            [ 42.1767, 12.9879 ],
+            [ 41.5594, 11.9513 ]
+          ]);
 
-      this._div.innerHTML = '<div style="padding:8px;"><h4>' + (props? ff.Nome : 'Mappa di Roma') + '</h4>' +  (props ?
-          ff.SettaImg + ff.Setta + '<br>' + ff.Descrizione + '</div>' : 'Individua una zona di interesse</div>' );
-    };
-  
-    this.info.addTo(this.map);
+          /* CREAZIONE BOX CONTROLLO */
+
+          let info = new Control();
+
+          info.onAdd = function (map) {
+            this._div = DomUtil.create('div', 'infobox'); // create a div with a class "infobox"
+            this.update();
+            return this._div;
+          };
+          info.update = function (props) {
+
+            const ff: TabMunicipi = new(TabMunicipi);    
+            if ( props != null) {
+              for ( var i = 0 ; i < Mappa0Component.tabMunicipi.length ; i++) {
+                if (Mappa0Component.tabMunicipi[i].IDzona == props.ID) {
+                  ff.Nome =  Mappa0Component.tabMunicipi[i].Nome;
+                  ff.Setta = Mappa0Component.tabMunicipi[i].Setta;
+                  ff.SettaImg = Mappa0Component.tabMunicipi[i].SettaImg;
+                  ff.IDcontrollo = Mappa0Component.tabMunicipi[i].IDcontrollo;
+                  ff.Descrizione = Mappa0Component.tabMunicipi[i].Descrizione;
+                }
+              }
+            }         
+            if (ff.Setta != null ) {
+              ff.SettaImg = '<img src="/assets/sette/' + ff.SettaImg + '" height=30 >';
+              if (ff.IDcontrollo == 'P') {
+                ff.Setta = ff.Setta + ' - Controllo parziale'
+              }
+            } else {
+              ff.SettaImg = '';
+              ff.Setta = 'Zona non reclamata';
+            }
+            this._div.style.cssText = "width: 25vw ;  word-wrap: break-word; color: #ffffff; background-color: #292929; ";
+            this._div.innerHTML = '<div style="padding:8px;"><h4>' + (props? ff.Nome : 'Mappa di Roma') + '</h4>' +  (props ?
+                ff.SettaImg + ff.Setta + '<br>' + ff.Descrizione + '</div>' : 'Individua una zona di interesse</div>' );
+          };
+          info.addTo(this.map);
+
+          /* CREAZIONE LAYER base */
 
 
-  }
+          let baseLayer =  geoJson (this.datibase, {
+            style: (feature) => ({
+              weight: 2,
+              opacity: 0.3,
+              color: '#000000' ,
+              fillOpacity: 0.5 ,
+              fillColor: '#3d3d3d' 
+            })
+          });
+          map.addLayer(baseLayer);
+          this.myLayers.push(baseLayer);
+
+          // CREAZIONE LAYER ZONE 
+
+          const mystyle = feature => {
+            var newcolor = '';
+            for (var i  = 0 ; i < Mappa0Component.tabMunicipi.length ; i++) {
+              if (Mappa0Component.tabMunicipi[i].IDzona == feature.properties.ID) {
+                newcolor = Mappa0Component.tabMunicipi[i].color ;
+              }
+            }
+            return {
+              fillColor: newcolor,
+              weight: 1,
+              opacity: 1,
+              color: 'black',
+              fillOpacity: 0.3
+            };
+          }
+
+          const highlightFeature = e => {
+            const layer = e.target;
+            layer.setStyle({
+              weight: 4,
+              color: "#600",
+            });
+            info.update(layer.feature.properties);
+            layer.bringToFront();
+          }
+          const resetHighligh = e => {
+            var layer = e.target;
+              layer.setStyle({
+                weight: 1,
+                opacity: 1,
+                color: 'black' 
+            });
+            info.update();
+            layer.bringToFront();
+          }
+          const zoomToFeature = e => {
+            //alert("You clicked the map at " + e.latlng)
+            this.map.fitBounds(e.target.getBounds());
+          }
+
+          const onEachFeature = (feature, layer) => {
+            layer.on({
+              mouseover: highlightFeature,
+              mouseout: resetHighligh,
+              click: zoomToFeature
+            });
+          }
+
+          let municipiLayer = geoJson ( this.datimunicipi , {
+            style: mystyle,
+            onEachFeature: onEachFeature
+          });
+          map.addLayer(municipiLayer);
+          this.myLayers.push(municipiLayer);
+
+          // MARKERS 
+          const clickOnMarker = e => {
+            console.log("onclick");
+            console.log(e);
+            console.log ( "chat = ", e.target.properties.location);
+            let newloc = e.target.properties.location;
+            this.status.Stanza = newloc;
+            this.status.Last = 0;
+            this.status.Alive = false;
+            this.router.navigate(['/chat/' + newloc]);
+          }
+
+          const mouseInPopup = e => {
+            e.target.openPopup();
+          }
+          const mouseOutPopup = e => {
+            e.target.closePopup();
+          }
+
+          
+          const marker1 = marker([41.9144, 12.4868] , {icon: iconDefault}).bindPopup("location1");
+          marker1.properties = {};
+          marker1.properties.location = "1";
+          marker1.on('click', clickOnMarker);
+          marker1.on('mouseover', mouseInPopup);
+          marker1.on('mouseout', mouseOutPopup);
+
+          const marker2 = marker([41.9162, 12.4901] , {icon: iconDefault}).bindPopup("location2");
+          marker2.properties = {};
+          marker2.properties.location = "3";
+          marker2.on('click', clickOnMarker);
+          marker2.on('mouseover', mouseInPopup);
+          marker2.on('mouseout', mouseOutPopup);
+
+          this.allMarkers = layerGroup([marker1, marker2]);
+
+          //this.myLayers.push(this.allMarkers);
+          //this.myLayers.pop();
 
 
-  caricabase(){
-    const baseLayer = L.geoJson (this.base, {
-      style: (feature) => ({
-        weight: 2,
-        opacity: 0.3,
-        color: '#000000' ,
-        fillOpacity: 0.5 ,
-        fillColor: '#3d3d3d' 
-      })
-    });
-    this.map.addLayer(baseLayer);
-  }
-
-  caricamunicipi() {
-    const municipiLayer = L.geoJson (this.municipi,  {style: this.mystyle, onEachFeature: 
-      (feature, layer) => (
-        layer.on({
-          mouseover: (e) => (this.highlightFeature(e)),
-          mouseout: (e) => (this.resetHighlight(e)),
-          click: (e) => (this.zoomToFeature(e))
-        })
-      )
+        });
       });
-
-    this.map.addLayer(municipiLayer);
-  }
-
-  caricamarker() {
-    const marker1 = L.marker([41.9144, 12.4868]);
-    const marker2 = L.marker([41.9162, 12.4901]);
-    const allmarkers = L.layerGroup([marker1, marker2]);
-
-    allmarkers.addTo(this.map);
-    /*
-    this.map.on('zoomend', function() {
-      if ( this.map.getZoom() <3){
-        this.map.removeLayer(allmarkers);
-      }
-      else {
-        this.map.addLayer(allmarkers);
-      }
     });
-    */
+
+
+  
   }
 
 
 
-  mystyle(feature) {
 
-    var newcolor = '';
- 
-    for (var i  = 0 ; i < Mappa0Component.tabMunicipi.length ; i++) {
-      if (Mappa0Component.tabMunicipi[i].IDzona == feature.properties.ID) {
-        newcolor = Mappa0Component.tabMunicipi[i].color ;
+  onMapZoomEnd(e: ZoomAnimEvent) {
+    this.zoom = e.target.getZoom();
+    //this.zoom$.emit(this.zoom);
+    //console.log("zoom", e.target._zoom);
+    //console.log("zoom2", this.zoom);
+
+    if ( this.zoom > 12){
+      this.myLayers.push(this.allMarkers);
+      this.locationON = true;
+    }
+    else {
+      if (this.locationON) {
+        this.myLayers.pop();
+        this.locationON = false;
       }
     }
 
+  }
+  
 
-    return {
-        fillColor: newcolor,
-        weight: 1,
-        opacity: 1,
-        color: 'black',
-        fillOpacity: 0.3
-    };
-
+  ngAfterViewInit(): void {
   }
 
-  highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 5,
-        color: '#600',
-        fillOpacity: 0.5
-    });
-
-    this.info.update(layer.feature.properties);
-    layer.bringToFront();
-  }
-  resetHighlight(e) {
-    var layer = e.target;
-      layer.setStyle({
-        weight: 1,
-        opacity: 1,
-        color: 'black' 
-    });
-    this.info.update();
-    layer.bringToFront();
-  }
-  zoomToFeature(e) {
-    //console.log(e);
-    //alert("You clicked the map at " + e.latlng)
-    this.map.fitBounds(e.target.getBounds());
+  
 
 
-  }
+
+
+
+
+
+
+
 
   
 

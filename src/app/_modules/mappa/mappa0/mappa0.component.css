@@ -5,6 +5,8 @@
     right: 0;
     bottom: 0;
     margin: 30px;
+    height: 100%;
+    width: 100%;
 }
 
 .map-frame {

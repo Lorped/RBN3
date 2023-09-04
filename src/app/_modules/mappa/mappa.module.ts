@@ -5,6 +5,9 @@ import { MappaComponent } from './mappa.component';
 import { Mappa0Component } from './mappa0/mappa0.component';
 import { Mappa1Component } from './mappa1/mappa1.component';
 import { MapService } from '../../_services/map.service';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
+
 
 @NgModule({
   declarations: [
@@ -13,6 +16,7 @@ import { MapService } from '../../_services/map.service';
     Mappa1Component
   ],
   imports: [
+    LeafletModule,
     RouterModule.forChild(MAPPA_ROUTES)
   ],
   providers: [
