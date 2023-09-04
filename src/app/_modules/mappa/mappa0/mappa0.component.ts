@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Map, Control, DomUtil, ZoomAnimEvent , geoJson, Layer, MapOptions, tileLayer, latLng, icon, marker, layerGroup  } from 'leaflet';
-import { MapService, TabMunicipi } from '../../../_services/map.service';
+import { MapService, TabMunicipi, aMarker } from '../../../_services/map.service';
 import { Router } from '@angular/router';
 import { Status } from '../../../globals';
 
@@ -55,8 +55,10 @@ export class Mappa0Component implements OnInit {
   datibase = '';
   datimunicipi = '';
 
-  allMarkers: Array<any> = [];
-
+  
+  myMarkers: Array<aMarker> = [];
+  allMarkers: Array<any> = []; 
+  allMarkerLayer: Array<any> = []; 
 
   locationON = false;
 
@@ -138,7 +140,7 @@ export class Mappa0Component implements OnInit {
               weight: 2,
               opacity: 0.3,
               color: '#000000' ,
-              fillOpacity: 0.5 ,
+              fillOpacity: 0.3 ,
               fillColor: '#3d3d3d' 
             })
           });
@@ -221,7 +223,27 @@ export class Mappa0Component implements OnInit {
             e.target.closePopup();
           }
 
+          this.mapService.getmarker().subscribe( (data: any) => {
+            this.myMarkers = data;
+
+            for ( let i = 0; i<this.myMarkers.length ; i++) {
+              const markerX = marker([this.myMarkers[i].latit, this.myMarkers[i].longit ] , {icon: iconDefault}).bindPopup(this.myMarkers[i].Breve);
+              markerX.properties = {};
+              markerX.properties.location = this.myMarkers[i].ID;
+              markerX.on('click', clickOnMarker);
+              markerX.on('mouseover', mouseInPopup);
+              markerX.on('mouseout', mouseOutPopup);
+
+              this.allMarkers.push(markerX);
+
+            }
+            this.allMarkerLayer = layerGroup(this.allMarkers);
+
+          });
+
           
+
+          /*
           const marker1 = marker([41.9144, 12.4868] , {icon: iconDefault}).bindPopup("location1");
           marker1.properties = {};
           marker1.properties.location = "1";
@@ -241,6 +263,7 @@ export class Mappa0Component implements OnInit {
           //this.myLayers.push(this.allMarkers);
           //this.myLayers.pop();
 
+          */
 
         });
       });
@@ -260,7 +283,7 @@ export class Mappa0Component implements OnInit {
     //console.log("zoom2", this.zoom);
 
     if ( this.zoom > 12){
-      this.myLayers.push(this.allMarkers);
+      this.myLayers.push(this.allMarkerLayer);
       this.locationON = true;
     }
     else {

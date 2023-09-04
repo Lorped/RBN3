@@ -164,7 +164,7 @@
 
     <app-modal #modallistamsgclan modalId="modallistamsgclan">
       <div class="app-modal-header my-modal-header">
-        Messaggi con {{status.clancontattonome}}<button type="button" class="btn close" style="color: red !important;" (click)="this.status.listamsgclanon=false; modallistamsgclan.hide()">&times;</button>
+        Messaggi con il clan {{status.clancontattonome}}<button type="button" class="btn close" style="color: red !important;" (click)="this.status.listamsgclanon=false; modallistamsgclan.hide()">&times;</button>
       </div>
       <div class="app-modal-body">
         <app-readmessaggiclan *ngIf="this.status.listamsgclanon"></app-readmessaggiclan>

@@ -12,6 +12,14 @@ export class TabMunicipi {
   IDcontrollo = '';
 }
 
+export class aMarker {
+  ID = 0;
+  Breve = '';
+  Descrizione = '';
+  latit = 0;
+  longit = 0;
+}
+
 @Injectable()
 export class MapService {
 
@@ -27,5 +35,9 @@ export class MapService {
 
   getcolor()  {
     return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/getcolor.php');
+  }
+
+  getmarker()  {
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/getmarker.php');
   }
 }

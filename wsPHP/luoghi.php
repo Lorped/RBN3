@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php'); // MYSQLI //
 include ('token.php');
 
 // $Dove=$_GET['dove'];
@@ -43,24 +43,24 @@ if ( CheckJWT($token)  ) {
 $out="";
 
 $Mysql="SELECT Padre, Entra FROM Mappa WHERE ID = $Dove";
-$Results=mysql_query($Mysql);
-$res=mysql_fetch_array($Results);
+$Results=mysqli_query($db, $Mysql);
+$res=mysqli_fetch_array($Results);
 
 $Padre=$res['Padre'];
 $Entra=$res['Entra'];
 
 
 $Mysql="SELECT 'Padre' as Tipo , Breve , ID, NomeMappa FROM Mappa WHERE  ID = $Padre ";
-$Results=mysql_query($Mysql);
-while ( $res = mysql_fetch_array($Results,MYSQL_ASSOC)   ) {
+$Results=mysqli_query($db, $Mysql);
+while ( $res = mysqli_fetch_array($Results,MYSQLI_ASSOC)   ) {
 
 	$out [] =$res;
 }
 
 
 $Mysql="SELECT 'Entra' as Tipo , Breve , ID, NomeMappa FROM Mappa WHERE  Entra = $Dove ";
-$Results=mysql_query($Mysql);
-while ( $res=mysql_fetch_row($Results,MYSQL_ASSOC) ) {
+$Results=mysqli_query($db, $Mysql);
+while ( $res=mysqli_fetch_array($Results,MYSQLI_ASSOC) ) {
 
 	$out [] =$res;
 
@@ -73,8 +73,9 @@ if ( $MasterAdmin == 0 ) {
 } else {
 	$Mysql="SELECT 'Std' as Tipo  , Breve, ID, NomeMappa FROM Mappa WHERE  Padre=$Dove and ID !=$Dove  ";
 }
-$Results=mysql_query($Mysql);
-while ( $res=mysql_fetch_row($Results,MYSQL_ASSOC) ) {
+$Results=mysqli_query($db, $Mysql);
+
+while ( $res=mysqli_fetch_array($Results,MYSQLI_ASSOC) ) {
 
 	$out [] =$res;
 
@@ -84,8 +85,8 @@ while ( $res=mysql_fetch_row($Results,MYSQL_ASSOC) ) {
 
 if ( $Entra != 0 ) {
 	$Mysql="SELECT 'Entra' as Tipo , Breve, ID, NomeMappa FROM Mappa WHERE  ID = $Entra";
-	$Results=mysql_query($Mysql);
-	while ( $res=mysql_fetch_row($Results,MYSQL_ASSOC) ) {
+	$Results=mysqli_query($db, $Mysql);
+	while ( $res=mysqli_fetch_array($Results,MYSQLI_ASSOC) ) {
 
 		$out [] =$res;
 
