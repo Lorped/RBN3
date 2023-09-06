@@ -1,4 +1,4 @@
-<div style="background-image:url('assets/index.png'); background-position: center top; background-repeat: no-repeat;background-size:230px 365px; height:370px;" >
+<div style="background-image:url('assets/index.png'); background-position: center top; background-repeat: no-repeat;background-size:230px 365px; height:35vh;" >
 <p>&nbsp;</p>
 <table class="tabellaluoghi">
   <tr *ngFor="let ll of listaluoghi" >
@@ -7,9 +7,14 @@
       <button type="button" class="btn btn-sm btn-block btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-up blue"></span>{{ll.Breve}}</button>
       </div>
     </td>
-    <td *ngIf="ll.Tipo == 'Std'">
+    <td *ngIf="ll.Tipo == 'Std' && ll.NomeMappa != null ">
       <div style="width:190px;">
-      <button type="button" class="btn btn-sm btn-block btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right red"></span>{{ll.Breve}}</button>
+      <button type="button" class="btn btn-sm btn-block btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right red "></span>{{ll.Breve}}</button>
+    </div>
+    </td>
+    <td *ngIf="ll.Tipo == 'Std' && ll.NomeMappa == null ">
+      <div style="width:190px;">
+      <button type="button" class="btn btn-sm btn-block btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right gold"></span>{{ll.Breve}}</button>
     </div>
     </td>
   </tr>

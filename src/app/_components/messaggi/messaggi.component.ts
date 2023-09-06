@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { FormGroup , FormControl } from '@angular/forms';
 import { ModalService } from '../../_services/index';
 import { MessaggiService, Messaggiclan } from '../../_services/index';
 import { UnContatto,  Status } from '../../globals';
@@ -6,10 +7,6 @@ import { AnagrafeRow, AnagrafeService } from '../../_services/index';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
-
-
-
-import { UntypedFormControl,  Validators, AbstractControl } from '@angular/forms';
 
 
 
@@ -22,29 +19,32 @@ export class MessaggiComponent implements OnInit {
 
   listacont: Array<UnContatto>;
   anagrafe: Array<AnagrafeRow> = [];
-  myControl: UntypedFormControl;
 
   filteredOptions: Observable<AnagrafeRow[]>;
+  
 
-  formOk: boolean;
 
   myMsgClan = new  Messaggiclan();
+
+  myFormGroup: FormGroup;
+
 
   constructor( private messaggiService: MessaggiService, public status: Status, private modalService: ModalService, private anagrafeservice: AnagrafeService ) { }
 
   ngOnInit(): void {
 
 
-    this.myControl = new UntypedFormControl('');
-    this.formOk = false;
+    this.myFormGroup = new FormGroup({
+      myFormControl: new FormControl('')
+    });
 
-    
+
+
 
     this.messaggiService.getcontatti(this.status.Userid)
     .subscribe( (data) => {
       //console.log (data);
       this.status.myContatti = data;
-
       this.caricaanagrafica();
 
     });
@@ -84,12 +84,10 @@ export class MessaggiComponent implements OnInit {
         this.anagrafe[i].Nome = this.anagrafe[i].Nome + ' ' + this.anagrafe[i].Cognome;
       }
 
-      this.filteredOptions = this.myControl.valueChanges.pipe(
+      this.filteredOptions = this.myFormGroup.get('myFormControl').valueChanges.pipe(
         startWith(''),
-        map(value => this.myfilter(value || '')),
+        map(value => this.myfilter(value || '' )),
       );
-
-
 
     });
 
@@ -107,7 +105,7 @@ export class MessaggiComponent implements OnInit {
       }
     }
 
-    this.myControl.reset();
+    this.myFormGroup.reset();
     this.modalService.show('modallistamsg') ;
 
   }
@@ -131,7 +129,7 @@ export class MessaggiComponent implements OnInit {
   }
 
   myfilter(obj: string): AnagrafeRow[] {
-    this.formOk = false;
+
 
     if ( typeof obj != "string" ) return;
     // console.log("in myfilter :" , obj);
@@ -142,13 +140,13 @@ export class MessaggiComponent implements OnInit {
   }
 
   onSelectionChanged(event: any) {
-    this.formOk = true;
+
+    const selected = this.myFormGroup.value.myFormControl;
+    // console.log(selected.Userid, selected.Nome, selected.URLImg);
+    this.showmsg(selected.Userid, selected.Nome, selected.URLImg);
   }
 
-  goshowmsg(){
-    // console.log("selezionato!");
-    this.showmsg(this.myControl.value.Userid, this.myControl.value.Nome, this.myControl.value.URLImg);
-  }
+
 
 
 

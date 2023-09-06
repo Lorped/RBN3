@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 
 
 export class  AnagrafeRow {
-  Userid: number;
-  Nome: string;
-  Cognome: string;
-  Sesso: string;
-  Clan: string;
-  Setta: string;
-  ClanImg: string;
-  SettaImg: string;
-  URLImg: string;
-  OraEntrata: string;
+  Userid = 0;
+  Nome = '';
+  Cognome = '';
+  Sesso = '';
+  Clan = '';
+  Setta = '';
+  ClanImg = '';
+  SettaImg = '';
+  URLImg = '';
+  OraEntrata = '';
 }
 
 @Injectable()

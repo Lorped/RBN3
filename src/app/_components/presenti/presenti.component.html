@@ -1,24 +1,34 @@
-<div style="background-image:url('assets/index.png'); background-position: center top; background-repeat: no-repeat;background-size:230px 365px; height:370px;" >
-<p>&nbsp;</p>
-
-<table class="tabellapresenti">
-  <tr><th colspan="3">{{numeropresenti}}</th></tr>
-  <tr *ngFor="let pres of listapresenti" >
-    
-    <td *ngIf="pres.Sesso == 'M'"><span class="fa fa-caret-right blue"></span></td>
-    <td *ngIf="pres.Sesso == 'F'"><span class="fa fa-caret-right pink"></span></td>
-    <td style="width:150px;">{{pres.NomeCognome}}</td>
-
-
-    <td *ngIf="pres.Userid == status.Userid"><span class="fa fa-circle" [style.color]="(status.Ongame == 'S' ? 'green' : 'red') "></span></td>
-
-    
-    <td *ngIf="pres.ongame == 'S' && (pres.Userid != status.Userid)"><span class="fa fa-circle green"></span></td>
-    <td *ngIf="pres.ongame == 'N' && (pres.Userid != status.Userid)"><span class="fa fa-circle red"></span></td>
-
-
-    
-  </tr>
-</table>
-
+<div style="background-image:url('assets/index.png'); background-position: center top; background-repeat: no-repeat;background-size:230px 365px; height:35vh;" >
+      
+      <p>&nbsp;</p>
+      
+      <table class="tabellapresenti">
+        <tr><th colspan="3">{{numeropresenti}}</th></tr>
+        <tr *ngFor="let pres of listapresenti" >
+          
+          <td *ngIf="pres.Sesso == 'M'"><span class="fa fa-caret-right blue"></span></td>
+          <td *ngIf="pres.Sesso == 'F'"><span class="fa fa-caret-right pink"></span></td>
+          <td style="width:150px;">{{pres.NomeCognome}}</td>
+      
+      
+          <td *ngIf="pres.Userid == status.Userid"><span class="fa fa-circle" [style.color]="(status.Ongame == 'S' ? 'green' : 'red') "></span></td>
+      
+          
+          <td *ngIf="pres.ongame == 'S' && (pres.Userid != status.Userid)"><span class="fa fa-circle green"></span></td>
+          <td *ngIf="pres.ongame == 'N' && (pres.Userid != status.Userid)"><span class="fa fa-circle red"></span></td>
+      
+      
+          
+        </tr>
+      </table>
+      
 </div>
+
+<!---
+      <mat-card>
+        <mat-card-content style="height:32vh; width: 100%;">
+     
+   </mat-card-content>
+</mat-card>
+
+-->

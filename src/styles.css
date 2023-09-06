@@ -50,7 +50,13 @@ html, body {
   color: #228B22;
 }
 
+.gold {
+  color: #ffb300;
+}
 
+.warning {
+  color: #f44336;
+}
 
 .alr {
   text-align: right;

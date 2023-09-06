@@ -1,6 +1,6 @@
 
 .tabellapresenti td, th {
-  font-size: 12px;
+  font-size: 0.8em;
   color: #ffffff;
 }
 .tabellapresenti {
@@ -8,4 +8,9 @@
 }
 .tabellapresenti th {
     text-align: center;
+}
+
+mat-card {
+  /* background: #020202; */
+  background: transparent;
 }

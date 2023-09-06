@@ -6,8 +6,8 @@ import { Status } from '../../../globals';
 
 
 /**   FIX ICONE */
-const iconRetinaUrl = 'assets/marker-icon-2x.png';
-const iconUrl = 'assets/marker-icon.png';
+const iconRetinaUrl = 'assets/marker-icon-red-2x.png';
+const iconUrl = 'assets/marker-icon-red.png';
 const shadowUrl = 'assets/marker-shadow.png';
 const iconDefault = icon({
   iconRetinaUrl,

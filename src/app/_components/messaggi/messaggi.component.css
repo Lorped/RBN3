@@ -38,3 +38,19 @@ hr {
   text-align: center;
 }
 
+.avatar1 {
+  background-size: cover;
+}
+
+mat-card {
+  padding-bottom: 0.5em;
+  margin-bottom: 0.1em;
+}
+
+mat-card-title {
+  font-size: 1.2em !important;
+}
+
+mat-card-subtitle {
+  font-size: 1em;
+}

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import 'rxjs/add/operator/map' ;
+import {  Router, NavigationEnd } from '@angular/router';
 
+
+
+// import 'rxjs/add/operator/map' ;
 import {Status} from '../../globals';
 
 export class Luogo {
@@ -27,9 +29,21 @@ export class LuoghiComponent implements OnInit {
 
   listaluoghi: Array<Luogo>;
 
-  constructor( private status: Status , private http: HttpClient , private router: Router ) { }
+  constructor( private status: Status , private http: HttpClient , private router: Router) {
+    this.router.events.subscribe((val) => {
+      // see also 
+      if (val instanceof NavigationEnd == true ) {
+        console.log("IN = ", this.status.Stanza);
+        this.getLuoghi();
+      }
+
+    });
+
+   }
 
   ngOnInit() {
+     
+
     this.getLuoghi();
   }
 
@@ -37,6 +51,7 @@ export class LuoghiComponent implements OnInit {
     const mialista = [];
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
+    /**
     this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/luoghi.php', {Dove: this.status.Stanza, token: user} )
     .map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
@@ -49,6 +64,20 @@ export class LuoghiComponent implements OnInit {
     .subscribe( data => {
       this.listaluoghi = data;
     });
+    */
+    this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/luoghi.php', {Dove: this.status.Stanza, token: user} )
+    .subscribe ((data: Array<any>)=> {
+      for (let i = 0; i < data.length; i++) {
+        const item = data[i];
+        const newluogo = new Luogo(item.Tipo, item.ID, item.Breve, item.NomeMappa);
+        mialista.push(newluogo);
+      }
+      this.listaluoghi = mialista;
+
+    });
+
+ 
+
   }
 
   cambialoc(newloc: number , newmap: number ) {

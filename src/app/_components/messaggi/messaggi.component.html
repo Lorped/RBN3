@@ -1,97 +1,53 @@
 <div class="container">
 
-<mat-card>
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="myFormGroup">
+      <mat-form-field class=" full">
+        <mat-label>Nuovo Contatto</mat-label>
 
-  <mat-form-field class=" full">
-    <mat-label>Nuovo Contatto</mat-label>
-  
-
-
-
-    <input type="text"
-          placeholder="Contatto"
+        <input type="text"
+          placeholder="Nuovo Contatto"
           aria-label="Nuovo Contatto" 
           matInput
-          [matAutocomplete]="auto"
-          [formControl]="myControl"  > 
-
-
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" requireSelection (optionSelected)="onSelectionChanged($event)"> 
-      <mat-option *ngFor="let cont of filteredOptions | async"  [value]="cont">
-        <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
-        {{ cont.Nome }} 
-        <!-- <img src="assets/{{cont.ClanImg}}" height="25px" > -->
-      </mat-option>
-    </mat-autocomplete>
-
-
- 
-  </mat-form-field>
+          formControlName="myFormControl"
+          [matAutocomplete]="auto" > 
+          <!--<mat-autocomplete #auto="matAutocomplete"  requireSelection (optionSelected)="onSelectionChanged($event)"> -->
+          <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn" (optionSelected)="onSelectionChanged($event)"> 
+            <mat-option *ngFor="let cont of filteredOptions | async"  [value]="cont">
+              <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+              {{ cont.Nome }} 
+              <!-- <img src="assets/{{cont.ClanImg}}" height="25px" > -->
+          </mat-option>
+        </mat-autocomplete>
   
-  <mat-card-actions align="end">
-    <button mat-raised-button color="primary" [disabled]="!formOk" (click)="goshowmsg()">Manda Msg</button>
-  </mat-card-actions>
+      </mat-form-field>
 
-</mat-card>
-
-
-  <table class="full">
-    <tr>
-      <td style="width: 20%; text-align: right;">Contatto</td>
-      <td colspan="2">&nbsp;</td>
-      <td>Ora ultimo messaggio</td>
-      <td class="cent">Nuovi</td>
-      <td class="cent">Canc</td>
-    </tr>
-    <tr>
-      <td colspan="6" ><hr></td>
-    </tr>
-
-    <tr *ngIf="myMsgClan.IDclan != 0">
-      <td *ngIf="myMsgClan.numero != 0" style="width: 20%;">
-        <div>
-        <div class="bordorosso">
-          <img src="assets/clan/round/{{myMsgClan.ClanImg}}" height="60px" width="60px" >
-        </div>
-        </div>
-      </td>
-      <td *ngIf="myMsgClan.numero == 0" style="width: 20%;">
-        <div >
-        <div class="bordobianco">
-          <img src="assets/clan/round/{{myMsgClan.ClanImg}}" height="60px" width="60px" > 
-        </div>
-        </div>
-      </td>
-      <td colspan="2"><a href="javascript:void(0)" (click)="showmsgclan(myMsgClan.IDclan,myMsgClan.NomeClan,myMsgClan.ClanImg)"> Clan {{myMsgClan.NomeClan}}</a></td>
-      <td>{{myMsgClan.ultimo}}</td>
-      <td *ngIf="myMsgClan.numero != 0" class="cent"><span class="red">{{myMsgClan.numero}}</span></td>
-      <td *ngIf="myMsgClan.numero == 0" class="cent">&nbsp;</td>
-      <td  class="cent">&nbsp;</td>
-    </tr>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
 
-    <tr *ngFor="let cont of status.myContatti" >
-      <td *ngIf="cont.Nuovi != 0" style="width: 20%;">
-        <div>
-        <div class="bordorosso">
-          <img src="assets/{{cont.UrlImg}}" height="60px" width="60px" > 
-        </div>
-        </div>
-      </td>
-      <td *ngIf="cont.Nuovi == 0" style="width: 20%;">
-        <div >
-        <div class="bordobianco">
-          <img src="assets/{{cont.UrlImg}}" height="60px" width="60px" > 
-        </div>
-        </div>
-      </td>
-      <td colspan="2"><a href="javascript:void(0)" (click)="showmsg(cont.IDX,cont.NomeCognome,cont.UrlImg)">{{cont.NomeCognome}}</a></td>
-      <td>{{cont.Ultimo}}</td>
-      <td *ngIf="cont.Nuovi != 0" class="cent"><span class="red">{{cont.Nuovi}}</span></td>
-      <td *ngIf="cont.Nuovi == 0" class="cent">&nbsp;</td>
-      <td  class="cent"><i class="fa fa-trash"></i></td>
-    </tr>
-  </table>
+
+  
+
+  <mat-card  (click)="showmsgclan(myMsgClan.IDclan,myMsgClan.NomeClan,myMsgClan.ClanImg)">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar1 " style="background-image: url('/assets/clan/round/{{myMsgClan.ClanImg}}');"></div>
+      <mat-card-title><span [class.warning]="myMsgClan.numero != 0">Clan {{myMsgClan.NomeClan}}</span></mat-card-title>
+      <mat-card-subtitle>Ultimo messaggio: {{myMsgClan.ultimo}} | <span *ngIf="myMsgClan.numero != 0">Nuovi <span class="warning">{{myMsgClan.numero}}</span></span></mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+
+  <mat-card *ngFor="let cont of status.myContatti"  (click)="showmsg(cont.IDX,cont.NomeCognome,cont.UrlImg)">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar1 " style="background-image: url('/assets/{{cont.UrlImg}}');"></div>
+      <mat-card-title><span [class.warning]="cont.Nuovi != 0">{{cont.NomeCognome}}</span></mat-card-title>
+      <mat-card-subtitle>Ultimo messaggio: {{cont.Ultimo}} | <span *ngIf="cont.Nuovi != 0">Nuovi <span class="warning">{{cont.Nuovi}}</span></span></mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
 
 
   
