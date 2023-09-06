@@ -1,5 +1,8 @@
 .small {
-    font-size: 0.8em;
+    font-size: 0.8rem;
+}
+.med {
+    font-size: 1rem;
 }
 p.near {
     line-height: 1;
