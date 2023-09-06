@@ -33,3 +33,7 @@ mat-card {
     /*color: warn !important;*/
 }
   
+.fit {
+    width: 0;
+    min-width: fit-content;
+}

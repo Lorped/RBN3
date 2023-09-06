@@ -2,9 +2,9 @@
     <mat-card-content>
       <table class="full med">
         <tr>
-          <td><img src="assets/sunrise.png" height="25px;"><br><span class="small">{{sunrise}}</span></td>
+          <td class="fit"><img src="assets/sunrise.png" height="25px;"><br><span class="small">{{sunrise}}</span></td>
           <td class="centralbox"><p class="near"><img src="assets/meteo/{{icon}}@2x.png" height="40"><br>{{temperatura}}&deg; - {{meteo}}<br><span class="small">{{description}}</span></p></td>
-          <td><img src="assets/sunset.png" height="25px;"><br><span class="small">{{sunset}}</span></td>
+          <td class="fit"><img src="assets/sunset.png" height="25px;"><br><span class="small">{{sunset}}</span></td>
         </tr>
         <tr>      
           <td ><mat-slide-toggle color="warn" (change)="onChange($event)" [checked]="checked"> </mat-slide-toggle></td>
