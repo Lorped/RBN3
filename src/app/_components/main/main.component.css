@@ -4,5 +4,12 @@
 
 .my-modal-header {
 	font-size: 1.2em !important;
+
 	
+}
+
+.mymain {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }

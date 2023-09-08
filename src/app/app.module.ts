@@ -60,6 +60,9 @@ import { ReadmessaggiComponent } from './_components/readmessaggi/readmessaggi.c
 import { ReadmessaggiclanComponent } from './_components/readmessaggiclan/readmessaggiclan.component';
 import { ToolvariComponent } from './_components/toolvari/toolvari.component';
 
+import { SubforumComponent } from './_components/subforum/subforum.component';
+import { ThreadComponent } from './_components/thread/thread.component';
+
 
 
 
@@ -83,13 +86,16 @@ import { ToolvariComponent } from './_components/toolvari/toolvari.component';
     ReadmessaggiComponent,
     ReadmessaggiclanComponent,
     ToolvariComponent,
+
+    SubforumComponent,
+    ThreadComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(APP_ROUTES, {useHash: true}),
+    RouterModule.forRoot(APP_ROUTES, { enableTracing: true } ),
     UtilityModule,
     MatAutocompleteModule,
     MatInputModule,

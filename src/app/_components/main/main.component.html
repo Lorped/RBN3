@@ -175,8 +175,23 @@
     </app-modal>
 
     <!-- ----->
-    <!-- ----->
 
+    <!-- <app-modal id="modal-modalforum"> -->
+
+    <app-modal #modalforum modalId="modalforum">
+      <div class="app-modal-header my-modal-header">
+        Forum<button type="button" class="btn close" style="color: red !important;" (click)="this.status.forumon=false; modalforum.hide()">&times;</button>
+      </div>
+      <div class="app-modal-body">
+        <router-outlet *ngIf="this.status.forumon" name="forum"></router-outlet>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.forumon=false; modalforum.hide()">Chiudi</button>
+      </div>
+    </app-modal>
+
+  <!-- ----->
+  <!-- ----->
 
 
     <div style="height: calc(100vh - 64px);">

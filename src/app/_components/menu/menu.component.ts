@@ -1,7 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import { AuthenticationService } from '../../_services/index';
 import { ModalService } from '../../_services/index';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Status } from '../../globals';
 
 
@@ -13,7 +13,7 @@ import { Status } from '../../globals';
 export class MenuComponent implements OnInit {
 
   constructor( private authenticationService: AuthenticationService, private router: Router,
-    private status: Status, private modalService: ModalService  ) { }
+    private status: Status, private modalService: ModalService, private route: ActivatedRoute ) { }
 
   ngOnInit() {
   }
@@ -49,6 +49,12 @@ export class MenuComponent implements OnInit {
     }
     if ( id === 'modalmessaggi') {
       this.status.messaggion = true ;
+    }
+    if ( id === 'modalforum') {
+      this.status.forumon = true ;
+      this.router.navigate(
+        [ {outlets: {forum: ['forum']}}], {relativeTo: this.route}
+      );
     }
     
     this.modalService.show(id) ;

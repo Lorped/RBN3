@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 include ('token.php');
 
 /*
@@ -30,8 +30,8 @@ $id=$request->id;
 $email=$_GET['email'];
 
 $MySql = "SELECT * FROM Personaggio WHERE Email='$email'";
-$Result=mysql_query($MySql);
-if ( $res = mysql_fetch_array($Result) )  {
+$Result=mysqli_query($db, $MySql);
+if ( $res = mysqli_fetch_array($Result) )  {
 	$out =["res" => 'KO'];
 } else {
 	$out =["res" => 'OK'];

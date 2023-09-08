@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 include ('token.php');
 
 
@@ -44,8 +44,8 @@ $out=[];
 
 
 $MySql = "SELECT count(*) FROM Chat WHERE Stanza = '$loc' ";
-$Result = mysql_query($MySql);
-$rs=mysql_fetch_row($Result);
+$Result = mysqli_query($db, $MySql);
+$rs=mysqli_fetch_row($Result);
 
 $status = $rs['0'];
 
@@ -58,8 +58,8 @@ if ( $status != 0 ) {
 
 	$MySql .= " AND ID > '$last' ORDER BY ID ASC";
 
-	$Result = mysql_query($MySql);
-	while ($res=mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+	$Result = mysqli_query($db, $MySql);
+	while ($res=mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 		if ($res['ID'] > $last) {
 			$last = $res['ID'];
 		}

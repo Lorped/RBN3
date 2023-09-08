@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
+import { interval, Subscription } from 'rxjs';
 import { Status } from '../../globals';
 import { MessaggiService, ListpresentiService } from '../../_services/index';
 import { ModalService } from '../../_services/index';
@@ -22,9 +22,12 @@ export class ToolvariComponent implements OnInit {
 
   nummsg = 0 ;
   hidden = true;
-
+ 
   ingame = "In Game";
   checked: boolean;
+
+  subscription: Subscription; //meteo//
+  subscription2: Subscription; //messaggi//
 
   constructor(private http: HttpClient, public status: Status, private messaggiService: MessaggiService, private listpresentiService: ListpresentiService, private modalService: ModalService) { }
 
@@ -32,10 +35,15 @@ export class ToolvariComponent implements OnInit {
 
     this.reloadmeteo();
 
+    const source = interval( 3600000);
+    this.subscription = source.subscribe ( val => { this.reloadmeteo(); });
+
+    /*
     IntervalObservable.create(3600000)
     .subscribe( () => {
       this.reloadmeteo();
     });
+    */
 
 
     this.messaggiService.contanuovimessaggi(this.status.Userid)
@@ -49,12 +57,12 @@ export class ToolvariComponent implements OnInit {
     });
 
 
-    IntervalObservable.create(90000)
-    .subscribe( () => {
+    const source2 = interval( 90000);
+    this.subscription2 = source.subscribe( () => {
+
       this.messaggiService.contanuovimessaggi(this.status.Userid)
       .subscribe( (data) => {
         this.status.Newmsg = data.Newmsg;
-
         this.nummsg == 0 ? this.hidden = true : this.hidden = false;
       });
   
@@ -85,10 +93,16 @@ export class ToolvariComponent implements OnInit {
   }
 
   openmsg(){
-    console.log("here");
+    //console.log("here");
     this.status.messaggion = true ;
     this.modalService.show('modalmessaggi') ;
   }
 
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+    this.subscription2.unsubscribe();
+  }
+  
 
 }

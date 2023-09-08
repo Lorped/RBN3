@@ -150,7 +150,8 @@ export class Status {
   clancontattourl = 'xx';
   //
   Newmsg = 0 ;
-
+  // FORUM
+  forumon = false;
 }
 
 

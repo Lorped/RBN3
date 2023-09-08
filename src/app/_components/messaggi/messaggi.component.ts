@@ -131,7 +131,7 @@ export class MessaggiComponent implements OnInit {
   myfilter(obj: string): AnagrafeRow[] {
 
 
-    if ( typeof obj != "string" ) return;
+    if ( typeof obj != "string" ) return null;
     // console.log("in myfilter :" , obj);
 
     const filterValue = obj.toLowerCase();

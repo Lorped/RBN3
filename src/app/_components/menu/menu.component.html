@@ -41,9 +41,9 @@
       <i class="fa fa-fire"></i> Azioni
     </mat-card-content>
   </mat-card>
-  <mat-card  >
+  <mat-card  (click)="openmodal('modalforum')">
     <mat-card-content class="all">
-      &nbsp;
+      <i class="fa fa-newspaper-o"></i> Forum
     </mat-card-content>
   </mat-card>
   <mat-card  (click)="dologout()" matCardColor="accent">
@@ -52,21 +52,3 @@
     </mat-card-content>
   </mat-card>
 
-<!---
-
-<ul>
-  <li><button type="button" class="btn btn-md btn-std btn-block" (click)="openmodal('modalscheda')">Scheda Personaggio</button></li>
-  <li><button type="button" class="btn btn-md btn-std btn-block" (click)="openmodal('modalpx')">Quest e Log PX</button></li>
-  <li><button type="button" class="btn btn-md btn-std btn-block" (click)="gotomodule('/spesapx')">Spesa PX</button></li>
-  <li><button type="button" class="btn btn-md btn-std btn-block" (click)="openmodal('modalbio')">Bio e Profilo Personaggio</button></li>
-  <li><button type="button" class="btn btn-md btn-std btn-block" (click)="openmodal('modalanagrafe')">Anagrafica Personaggi</button></li>
-  <li><button type="button" class="btn btn-md btn-std btn-block" (click)="openmodal('modalpoteri')">Poteri</button></li>
-  <li>Azioni</li>
-  <li><button type="button" class="btn btn-md btn-std btn-block" (click)="openmodal('modalmessaggi')">Messaggi</button></li>
-  <li>Menu Item</li>
-  <li>Menu Item</li>
-  <li><button type="button" class="btn btn-md btn-primary btn-block" (click)="dologout()">Logout</button></li>
-</ul>
-
-
---->

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php'); //MYSQLI //
 include ('token.php');
 
 
@@ -47,20 +47,20 @@ if ( CheckJWT ($token) ) {
 
 
 $MySql="SELECT * FROM `Sms` WHERE ID = $id";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 
 if ( $res['IDMittente'] == $Userid ) {
 	$MySql2 = "UPDATE `Sms` SET Cancellato = Cancellato + 1 WHERE ID = $id";
-	$Result2=mysql_query($MySql2);
+	$Result2=mysqli_query($db, $MySql2);
 
 } elseif ( $res['IDDestinatario'] == $Userid ) {
 	$MySql2 = "UPDATE `Sms` SET Cancellato = Cancellato + 2 WHERE ID = $id";
-	$Result2=mysql_query($MySql2);
+	$Result2=mysqli_query($db, $MySql2);
 }
 
 
-if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
+if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }
 $out = [];
 
 

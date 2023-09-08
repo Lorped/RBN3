@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db2.inc.php'); //MYSQLI //
+include ('db2.inc.php');   //MYSQLI//
 include ('token.php');
 
 
@@ -24,10 +24,13 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
 $token=$request->token;
-$attr=$request->y;
-$nomeattr=$request->z;
 
+
+
+
+$MasterAdmin=0;
 $Userid=-1;
+
 
 
 if ( CheckJWT ($token) ) {
@@ -44,44 +47,38 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-$pxin=0;
-$pxout=0;
-$px=0;
-
-$MySql="SELECT sum(px) as somma FROM Quest  WHERE Userid='$Userid' AND Status='OK' ";
-$Result=mysqli_query($db, $MySql);
-$res=mysqli_fetch_array($Result);
-$pxin=$res['somma'];
-
-$MySql="SELECT sum(px) as somma FROM Logpx  WHERE Userid='$Userid' ";
-$Result=mysqli_query($db, $MySql);
-$res=mysqli_fetch_array($Result);
-$pxout=$res['somma'];
-
-$px=$pxin-$pxout;
 
 
+$MySql = "SELECT * from Bacheche WHERE LivAccesso <= $MasterAdmin";
 
-$MySql="SELECT Livello FROM Taumaturgie	WHERE Userid='$Userid' AND Principale = 'S' ";
-$Result=mysqli_query($db, $MySql);
-$res=mysqli_fetch_array($Result);
-$Tmaxlev=$res['Livello'];
+$Result = mysqli_query($db, $MySql);
 
+while ( $res = mysqli_fetch_array($Result) ) {
 
+	$IDbacheca = $res['IDbacheca'];
 
-if ( $px >= 7 && $Tmaxlev > 1 ) {
+	$sottob = [];
 
-	$MySql="INSERT INTO Taumaturgie (IDtaum, Userid, Livello, Principale) VALUES ('$attr', '$Userid', 1, 'N') ";
-	$Result=mysqli_query($db, $MySql);
+	$MySql2 = "SELECT * from Sottobacheche WHERE IDbacheca = $IDbacheca";
+	$Result2 = mysqli_query($db, $MySql2);
+	while ($res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC)) {
+		$sottob[] = $res2;
+	}
 
-	$pxspesi=7;
-	$Dati="[Taumaturgia] Acquisita ".$nomeattr;
-	$MySql="INSERT INTO Logpx (Data, Userid, Px, Dati ) VALUES ( NOW() , '$Userid', '$pxspesi', '$Dati') ";
-	$Result=mysqli_query($db, $MySql);
+	$newb = [
+		'IDbacheca' => $res['IDbacheca'],
+		'Nome' => $res['Nome'],
+		'LivAccesso' => $res['LivAccesso'],
+		'Sottob' => $sottob
+	];
+
+	$out [] = $newb;
+
 
 }
 
-$out = [];
+
+
 
 header("HTTP/1.1 200 OK");
 
