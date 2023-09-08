@@ -1,6 +1,4 @@
-.msgto {
-    background-color: #242223;
-}
+
 .msgfrom {
     background-color: #474d5b;
 }
@@ -33,6 +31,8 @@ hr {
     padding: 0;
   }
 
+
+
 .newl { 
     white-space:pre-wrap; 
     word-wrap: break-word;
@@ -40,4 +40,22 @@ hr {
 
 .ico:hover {
     color: #ff0000;
+}
+
+
+mat-card {
+    padding-bottom: 0.5em;
+    margin-bottom: 0.1em;
+  }
+mat-card-title {
+    font-size: 1.2em !important;
+    font-weight: normal !important;
+}
+.avatar1 {
+    background-size: cover;
+}
+.mdc-card__actions {
+    min-height: 15px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }

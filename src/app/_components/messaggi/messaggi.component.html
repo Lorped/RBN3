@@ -44,7 +44,7 @@
     <mat-card-header>
       <div mat-card-avatar class="avatar1 " style="background-image: url('/assets/{{cont.UrlImg}}');"></div>
       <mat-card-title><span [class.warning]="cont.Nuovi != 0">{{cont.NomeCognome}}</span></mat-card-title>
-      <mat-card-subtitle>Ultimo messaggio: {{cont.Ultimo}} | <span *ngIf="cont.Nuovi != 0">Nuovi <span class="warning">{{cont.Nuovi}}</span></span></mat-card-subtitle>
+      <mat-card-subtitle>Ultimo messaggio: {{cont.Ultimo}} | <span *ngIf="cont.Nuovi != 0"><span class="warning">Nuovi {{cont.Nuovi}}</span></span></mat-card-subtitle>
     </mat-card-header>
   </mat-card>
 
