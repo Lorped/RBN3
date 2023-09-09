@@ -60,7 +60,7 @@ import { ReadmessaggiComponent } from './_components/readmessaggi/readmessaggi.c
 import { ReadmessaggiclanComponent } from './_components/readmessaggiclan/readmessaggiclan.component';
 import { ToolvariComponent } from './_components/toolvari/toolvari.component';
 
-import { SubforumComponent } from './_components/subforum/subforum.component';
+
 import { ThreadComponent } from './_components/thread/thread.component';
 
 
@@ -87,7 +87,7 @@ import { ThreadComponent } from './_components/thread/thread.component';
     ReadmessaggiclanComponent,
     ToolvariComponent,
 
-    SubforumComponent,
+
     ThreadComponent,
   ],
   imports: [

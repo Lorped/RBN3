@@ -55,8 +55,12 @@ html, body {
 }
 
 .warning {
-  color: #f44336;
+  color: #E91E63;
 }
+.accent {
+  color: #607D8B;
+}
+
 
 .alr {
   text-align: right;

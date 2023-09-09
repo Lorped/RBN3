@@ -1,31 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+
 export class Sottobacheca {
   IDsottob = 0;
   IDbacheca  = 0 ;
   Nome = '';
   LivelloPost = 0 ;
   UltimoInserimento = 0;
+  NumThread = 0;
+  Nuovi = 0;
+
 }
 
 export class Bacheca {
   IDbacheca  = 0 ;
   Nome = '';
   LivAccesso = 0;
+  icon = '';
   Sottobacheche: Array<Sottobacheca> = [];
 }
 
 export class Forumthread {
-  IDmessaggio = 0;
-  IDsottobacheca = 0;
-  Data = '';
-  Utente = '';
-  Nome = '';
-  Testo = '';
-  OP = 0;
-  Chiuso = 0;
-  Pinned = 0;
+  IDmessaggio: number = 0;
+  IDsottobacheca: number = 0;
+  Data: string = '';
+  Utente: string = '';
+  Nome: string = '';
+  Testo: string = '';
+  OP: number = 0;
+  Chiuso: number = 0;
+  Pinned: number = 0;
 }
 
 @Injectable({

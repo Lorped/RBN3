@@ -59,16 +59,39 @@ while ( $res = mysqli_fetch_array($Result) ) {
 
 	$sottob = [];
 
-	$MySql2 = "SELECT * from Sottobacheche WHERE IDbacheca = $IDbacheca";
+	$MySql2 = "SELECT * , DATE_FORMAT(UltimoInserimento,'%d %b - %H:%i') as UI from Sottobacheche WHERE IDbacheca = $IDbacheca";
 	$Result2 = mysqli_query($db, $MySql2);
 	while ($res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC)) {
-		$sottob[] = $res2;
+		
+		$sottobx=$res2['IDsottob'];
+
+		$MySql3 = "SELECT count(*) as c FROM Thread WHERE IDsottobacheca = $sottobx AND OP = 0";
+		$Result3 = mysqli_query($db, $MySql3);
+		$res3 = mysqli_fetch_array($Result3);
+		$numth = $res3['c'];
+
+		// CALCOLO NUOVI
+		$nuoviThreadPost = 0 ;
+		//
+
+		$newsottob = [
+			'IDsottob' => $res2['IDsottob'],
+			'IDbacheca' => $res2['IDbacheca'],
+			'Nome' => $res2['Nome'],
+			'LivelloPost' => $res2['LivelloPost'],
+			'UltimoInserimento' => $res2['UI'],
+			'NumThread' => $numth,
+			'Nuovi' => $nuoviThreadPost
+		];
+
+		$sottob[] = $newsottob;
 	}
 
 	$newb = [
 		'IDbacheca' => $res['IDbacheca'],
 		'Nome' => $res['Nome'],
 		'LivAccesso' => $res['LivAccesso'],
+		'icon' => $res['icon'],
 		'Sottob' => $sottob
 	];
 

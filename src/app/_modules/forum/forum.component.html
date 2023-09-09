@@ -1,2 +1,21 @@
-<p>forum works!</p>
+<div class="container">
+<mat-expansion-panel *ngFor="let item of forum" >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>{{item.icon}}</mat-icon> 
+      </mat-panel-title>
+      <mat-panel-description>{{item.Nome}}</mat-panel-description>
+    </mat-expansion-panel-header>
 
+    
+    <mat-card *ngFor="let sub of item.Sottob" class="movable" >
+      <a [routerLink]="['subforum', sub.IDsottob]">
+        <mat-card-title>{{sub.Nome}}</mat-card-title>
+        <mat-card-subtitle>Thread: {{sub.NumThread}} | Nuovi: {{sub.Nuovi}} | Ultimo: {{sub.UltimoInserimento}} </mat-card-subtitle> 
+      </a>
+    </mat-card>
+
+
+  </mat-expansion-panel>
+
+</div>
