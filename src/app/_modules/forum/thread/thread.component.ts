@@ -14,7 +14,8 @@ export class ThreadComponent {
 
   displayedColumns: string[] = ['IDmessaggio'];
   dataSource: MatTableDataSource<Forumthread> ;
-
+  Nomebacheca = '';
+  Nomemessaggio = '';
  
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -29,7 +30,9 @@ export class ThreadComponent {
     .subscribe( (data) => {
       console.log(data);
      
-      this.dataSource = new MatTableDataSource(data);
+      this.Nomebacheca = data.NomeB;
+      this.Nomemessaggio = data.NomeM;
+      this.dataSource = new MatTableDataSource(data.content);
       console.log(this.dataSource);
       this.dataSource.paginator = this.paginator;
     });

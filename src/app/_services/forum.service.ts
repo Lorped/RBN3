@@ -25,6 +25,7 @@ export class Forumthread {
   IDmessaggio: number = 0;
   IDsottobacheca: number = 0;
   Data: string = '';
+  DT: string = '';
   Utente: string = '';
   Nome: string = '';
   Testo: string = '';

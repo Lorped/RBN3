@@ -14,12 +14,17 @@ import { ForumService } from '../../_services/index';
 import { ForumComponent } from './forum.component';
 import { SubforumComponent } from './subforum/subforum.component';
 import { ThreadComponent } from './thread/thread.component';
+import { EditComponent } from './edit/edit.component';
 
 
 const routes: Routes = [
   { path: '', component: ForumComponent},
+  { path: '/', component: ForumComponent},
   { path: 'subforum/:id', component: SubforumComponent},
-  { path: 'subforum/:id/thread/:idx', component: ThreadComponent} 
+  { path: 'subforum/:id/thread/:idx', component: ThreadComponent},
+  { path: 'subforum/:id/edit', component: EditComponent},
+  { path: 'subforum/:id/thread/:idx/edit', component: ThreadComponent},
+  { path: '*' , redirectTo: ''}
 ]
 
 @NgModule({

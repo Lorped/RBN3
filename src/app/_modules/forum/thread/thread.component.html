@@ -1,11 +1,22 @@
 <div class=container>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z9">
     <ng-container matColumnDef="IDmessaggio" >
-        <th mat-header-cell *matHeaderCellDef>THREAD</th>
+        <th mat-header-cell *matHeaderCellDef>
+            <a [routerLink]="['../../../..']">Forum Generale</a> > 
+            <a [routerLink]="['../..']">{{Nomebacheca}}</a> >
+            {{Nomemessaggio}}
+        </th>
         <td mat-cell *matCellDef="let ft">
             <mat-card>
-                <mat-card-title>{{ft.Nome}}</mat-card-title>
-                <mat-card-subtitle>{{ft.Testo}} <br> Utente: {{ft.Utente}} | Data {{ft.Data}}</mat-card-subtitle>
+                <mat-card-header>
+                    <mat-card-title>{{ft.Nome}}</mat-card-title>
+                    <mat-card-subtitle><span class="spacer"></span> {{ft.Utente}} | {{ft.DT}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <span class="newl">{{ft.Testo}}</span>
+                </mat-card-content>
+
+
             </mat-card>
 
         </td>

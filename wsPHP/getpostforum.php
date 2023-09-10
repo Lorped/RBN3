@@ -53,11 +53,16 @@ if ( CheckJWT ($token) ) {
 
 
 
+
 $MySql = "SELECT * from Sottobacheche WHERE IDsottob = $id";
 $Result = mysqli_query($db, $MySql);
-$res = mysqli_fetch_row($Result);
+$res = mysqli_fetch_array($Result);
 
 $IDbacheca = $res ['IDbacheca'];
+
+$Nomebacheca = $res ['Nome'];
+$LivelloPost = $res ['LivelloPost'];
+
 
 $MySql = "SELECT * from Bacheche WHERE IDbacheca = $IDbacheca";
 $Result = mysqli_query($db, $MySql);
@@ -69,55 +74,69 @@ if ($res['LivAccesso']>$MasterAdmin) {
 	die ();
 }
 
-$out = [];
+
+
+$out_content = [];
 
 //prima i pinned//
-$MySql = "SELECT * from Thread WHERE IDsottobacheca = $id and Pinned = 1 and OP = 0 ORDER BY Data DESC";
+$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT from Thread WHERE IDsottobacheca = '$id' and Pinned = 1 and OP = 0 ORDER BY Data DESC";
 $Result = mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
+	$IDmessaggio = $res["IDmessaggio"];
 
 
-	$IDmessagio = $res['IDmessagio'];
-
-	$Thread = [];
-	$Thread[] = $res;
-
-	$MySql2 = "SELECT * from Thread WHERE OP = $IDmessaggio ORDER BY Data DESC";
+	$MySql2 = "SELECT  MAX(Data) as Data, DATE_FORMAT(MAX(Data),'%d %b - %H:%i') as DT  from Thread WHERE (OP = $IDmessaggio OR IDmessaggio = $IDmessaggio)";
 	$Result2 = mysqli_query($db, $MySql2);
-	while ($res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC)) {
-		$Thread[] = $res2;
-	}
+	$res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC);
 
-	$out [] = $Thread;
 
+
+
+	$res["Data"]=$res2["Data"];
+	$res["DT"]=$res2["DT"];
+
+
+
+
+	$out_content [] = $res;
 
 }
 
 //poi gli altri//
-$MySql = "SELECT * from Thread WHERE IDsottobacheca = $id and Pinned = 0 and OP = 0 ORDER BY Data DESC";
+$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT  from Thread WHERE IDsottobacheca = '$id' and Pinned = 0 and OP = 0 ORDER BY Data DESC";
 $Result = mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
+	$IDmessaggio = $res["IDmessaggio"];
 
-	
-	$IDmessagio = $res['IDmessagio'];
 
-	$Thread = [];
-	$Thread[] = $res;
 
-	$MySql2 = "SELECT * from Thread WHERE OP = $IDmessaggio ORDER BY Data DESC";
+	$MySql2 = "SELECT  MAX(Data) as Data, DATE_FORMAT(MAX(Data),'%d %b - %H:%i') as DT  from Thread WHERE (OP = $IDmessaggio OR IDmessaggio = $IDmessaggio)";
 	$Result2 = mysqli_query($db, $MySql2);
-	while ($res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC)) {
-		$Thread[] = $res2;
-	}
+	$res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC);
 
-	$out [] = $Thread;
+
+
+	$res["Data"]=$res2["Data"];
+	$res["DT"]=$res2["DT"];
+
+
+
+	$out_content [] = $res;
 
 
 }
 
 
+
+
+
+$out = [
+	"LivelloPost" => $LivelloPost,
+	"Nome" => $Nomebacheca ,
+	"content" => $out_content
+];
 
 
 header("HTTP/1.1 200 OK");

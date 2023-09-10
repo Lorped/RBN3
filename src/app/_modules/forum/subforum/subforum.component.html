@@ -1,12 +1,26 @@
 <div class=container>
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z9">
     <ng-container matColumnDef="IDmessaggio" >
-        <th mat-header-cell *matHeaderCellDef>IDmessaggio</th>
+        <th mat-header-cell *matHeaderCellDef>
+            <mat-card >
+                <mat-card-header>
+            <a [routerLink]="['../../']"><span class="lnkvis">Forum Generale</span></a> > {{Nomebacheca}}
+            <span class="spacer"></span>
+            <span *ngIf="status.MasterAdmin >= LivelloPost"><mat-icon class="clickable" (click)="nuovo()">edit</mat-icon></span>
+            </mat-card-header>
+            </mat-card>
+        </th>
         <td mat-cell *matCellDef="let ft">
-            <mat-card>
-                <a [routerLink]="['thread', ft[0].IDmessaggio]">
-                <mat-card-title>{{ft[0].Nome}}</mat-card-title>
-                <mat-card-subtitle>{{ft[0].Testo}} <br> Utente: {{ft[0].Utente}} | Data {{ft[0].Data}}</mat-card-subtitle>
+            <mat-card class="movable">
+                <a [routerLink]="['thread', ft.IDmessaggio]">
+                <mat-card-header>
+                <mat-card-title>{{ft.Nome}}</mat-card-title>
+                <mat-card-subtitle>Autore: {{ft.Utente}} | Ultimo agg.to: {{ft.DT}}</mat-card-subtitle>
+                <span class="spacer"></span>
+                <span *ngIf="ft.Pinned==1" class="fa fa-bell accent"></span>
+                <span *ngIf="ft.Chiuso==1" class="fa fa-lock warning"></span>
+                </mat-card-header>
                 </a>
             </mat-card>
 

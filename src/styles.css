@@ -61,6 +61,13 @@ html, body {
   color: #607D8B;
 }
 
+.clickable {
+  transition: all 0.2s ease-in-out;
+}
+
+.clickable:hover {
+  color: #E91E63 !important ;
+}
 
 .alr {
   text-align: right;
@@ -87,4 +94,13 @@ html, body {
 
 .cdk-global-overlay-wrapper  {
   z-index: 9999 !important;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.newl { 
+  white-space:pre-wrap; 
+  word-wrap: break-word;
 }

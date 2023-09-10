@@ -53,15 +53,18 @@ if ( CheckJWT ($token) ) {
 
 $MySql = "SELECT * from Thread WHERE IDmessaggio = $id";
 $Result = mysqli_query($db, $MySql);
-$res = mysqli_fetch_row($Result);
+$res = mysqli_fetch_array($Result);
 
 $IDsottob = $res['IDsottobacheca'];
+$Nomemessaggio = $res['Nome'];
+
 
 $MySql = "SELECT * from Sottobacheche WHERE IDsottob = $IDsottob";
 $Result = mysqli_query($db, $MySql);
-$res = mysqli_fetch_row($Result);
+$res = mysqli_fetch_array($Result);
 
 $IDbacheca = $res ['IDbacheca'];
+$Nomebacheca = $res ['Nome'];
 
 $MySql = "SELECT * from Bacheche WHERE IDbacheca = $IDbacheca";
 $Result = mysqli_query($db, $MySql);
@@ -73,16 +76,22 @@ if ($res['LivAccesso']>$MasterAdmin) {
 	die ();
 }
 
-$out = [];
+$out_content = [];
 
 
-$MySql = "SELECT * from Thread WHERE IDmessaggio = $id OR OP = $id ORDER BY Data ASC";
+$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT  from Thread WHERE IDmessaggio = $id OR OP = $id ORDER BY Data ASC";
 $Result = mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
-	$out [] = $res;
+	$out_content [] = $res;
 
 }
+
+$out = [
+	"NomeM" => $Nomemessaggio ,
+	"NomeB" => $Nomebacheca ,
+	"content" => $out_content
+];
 
 
 

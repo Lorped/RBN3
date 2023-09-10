@@ -1,0 +1,19 @@
+a , a:visited {
+    color: white;
+    text-decoration: none;
+  }
+a:hover {
+    color: #E91E63;
+}
+
+td {
+    padding-top: 0.5em;    
+    padding-bottom: 0.5em;    
+}
+mat-card {
+    margin-top: 0.5em;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
