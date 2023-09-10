@@ -44,6 +44,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
 
   ngOnInit() {
+    this.listpresentiservice.moveto(this.status.Stanza).subscribe();
 
     // console.log("dentro chat component");
 

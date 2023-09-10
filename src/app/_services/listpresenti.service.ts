@@ -10,13 +10,13 @@ export class Presenti {
   Sesso: string;
   offgame: number;
   Userid: number;
-  ongame: number;
+  ongame: string;
   constructor(
     aNomeCognome: string,
     aSesso: string,
     aoffgame: number,
     aUserid: number,
-    aongame: number
+    aongame: string
   ) {
     this.NomeCognome = aNomeCognome;
     this.Sesso = aSesso;
@@ -70,6 +70,16 @@ export class ListpresentiService {
     // console.log(id);
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/changeonoffgame.php', {
       token: user
+    } );
+  }
+
+  moveto(stanza: number) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    // console.log(id);
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/moveto.php', {
+      token: user,
+      stanza: stanza
     } );
   }
 

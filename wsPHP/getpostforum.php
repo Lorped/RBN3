@@ -94,7 +94,7 @@ while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
 }
 
-//poi gli pinned//
+//poi gli altri//
 $MySql = "SELECT * from Thread WHERE IDsottobacheca = $id and Pinned = 0 and OP = 0 ORDER BY Data DESC";
 $Result = mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {

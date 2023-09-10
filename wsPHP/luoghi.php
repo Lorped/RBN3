@@ -44,7 +44,7 @@ $out="";
 
 $Mysql="SELECT Padre, Entra FROM Mappa WHERE ID = $Dove";
 $Results=mysqli_query($db, $Mysql);
-$res=mysqli_fetch_array($Results);
+$res=mysqli_fetch_row($Results);
 
 $Padre=$res['Padre'];
 $Entra=$res['Entra'];

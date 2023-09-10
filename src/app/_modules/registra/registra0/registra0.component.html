@@ -15,18 +15,18 @@
           <label for="regEmail">Indirizzo Email (login)</label>
           <input id="regEmail" class="form-control" type="email" formControlName="regemail" placeholder="Inserire email">
           <div *ngIf="regemail.invalid && (regemail.dirty || regemail.touched)" class="alert alert-danger" color="red">
-            <div *ngIf="regemail.errors.required">Inserire una email</div>
-            <div *ngIf="regemail.errors.email">Inserire una email valida</div>
-            <div *ngIf="regemail.errors.emailTaken">Email già presente</div>
+            <div *ngIf="regemail.errors['required']">Inserire una email</div>
+            <div *ngIf="regemail.errors['email']">Inserire una email valida</div>
+            <div *ngIf="regemail.errors['emailTaken']">Email già presente</div>
           </div>
         </div>
         <div class="form-group">
           <label for="password1">Password</label>
           <input id="password1" class="form-control" type="password" formControlName="password" placeholder="Password">
           <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger" color="red">
-            <div *ngIf="password.errors.required">Inserire la password</div>
-            <div *ngIf="password.errors.pattern">Solo caratteri alfanumerici, almeno una lettera e un numero</div>
-            <div *ngIf="password.errors.minlength">La lunghezza minima è 8 caratteri</div>
+            <div *ngIf="password.errors['required']">Inserire la password</div>
+            <div *ngIf="password.errors['pattern']">Solo caratteri alfanumerici, almeno una lettera e un numero</div>
+            <div *ngIf="password.errors['minlength']">La lunghezza minima è 8 caratteri</div>
           </div>
         </div>
         <div class="form-group">

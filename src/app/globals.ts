@@ -6,6 +6,8 @@ export class Background {
   public IDbackground = 0;
   public NomeBackground = '';
   public LivelloBG = 0;
+  public iniziale = 0;
+  public MaxIniziale = 0;
 }
 
 @Injectable()
@@ -177,7 +179,7 @@ export class Messaggi {
 }
 
 
-// QUESTO ANDREBBE CANCELLATO
+//  *********** QUESTO ANDREBBE CANCELLATO
 
 
 @Injectable()
@@ -196,10 +198,12 @@ export class Potere {
 export class ListaPoteri {
   public NomeDisc: String;
   public pot: Array<Potere>;
+  public LivelloDisc: number;
 
   constructor () {
     this.NomeDisc = '';
     this.pot = [];
+    this.LivelloDisc = 0;
   }
 }
 

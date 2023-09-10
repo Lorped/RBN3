@@ -16,25 +16,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db2.inc.php');   // MYSQLI //
+include ('db2.inc.php');
 include ('token.php');
 
 
+$postdata = file_get_contents("php://input");
+$request = json_decode($postdata);
 
-$out = [];
+$token=$request->token;
+$stanza=$request->stanza;
 
-$MySql = "SELECT Personaggio.Userid, Nome, Cognome,  Personaggio.Sesso, Clan.Clan , ClanImg , URLImg , DATE_FORMAT(OraEntrata,'%d %b - %H:%i') as OraEntrataF , Setta, SettaImg FROM Personaggio
-	LEFT JOIN Clan ON Clan.IDclan=Personaggio.IDclan 
-	LEFT JOIN Presenti ON Personaggio.Userid=Presenti.Userid
-	LEFT JOIN Sette ON Personaggio.IDSetta=Sette.IDSetta";
-$Result=mysqli_query($db, $MySql);
-while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
-	$out[] = $res;
+$Userid=-1;
+
+
+if ( CheckJWT ($token) ) {
+	$xx=GetJWT($token);
+	$payload=json_decode($xx);
+	$Userid= $payload->Userid;
+	$MasterAdmin= $payload->MasterAdmin;
+	$NomeCognome= $payload->NomeCognome;
+	$Sesso= $payload->Sesso;
+} else {
+	header("HTTP/1.1 401 Unauthorized");
+	$out=[];
+	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
+	die ();
 }
 
+$MySql = "UPDATE Presenti SET Stanza = $stanza , UltimoRefresh = NOW()  WHERE Userid = $Userid ";
+mysqli_query($db, $MySql);
 
-
-header("HTTP/1.1 200 OK");
-
+$out = [];
 echo json_encode ($out, JSON_UNESCAPED_UNICODE);
+
 ?>

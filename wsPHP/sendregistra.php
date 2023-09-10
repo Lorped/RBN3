@@ -166,6 +166,18 @@ if ($px > 0) {
 	mysqli_query($db, $MySql);
 }
 
+
+// Messaggio iniziale //
+if ( $newPG->Sesso = 'S' ) {
+	$msg= "Benvenuta "+$nome+"!\n";
+} else {
+	$msg= "Benvenuto "+$nome+"!\n";
+}
+$msg = "Per iniziare ti consigliamo di sbirciare i Messaggi di Clan, almeno gli ultimi, e le notizie sul Forum.\nNon esitare a contattarmi per qualsiasi dubbio o chiarimento o curiosità.\nJ.";
+$MySql = "INSERT INTO Sms ( IDMittente, IDDestinatario, Testo ) VALUES ( 1 , '$Userid' ,  '$msg') ";
+mysqli_query($db, $MySql);
+//
+
 $out = [];
 
 header("HTTP/1.1 200 OK");

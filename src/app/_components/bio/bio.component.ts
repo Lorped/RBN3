@@ -3,6 +3,7 @@ import { SchedaService } from '../../_services/index';
 import { Status } from '../../globals';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-bio',
   templateUrl: './bio.component.html',
@@ -29,7 +30,9 @@ export class BioComponent implements OnInit {
     });
 
   }
-  fileChange(files: FileList) {
+  //fileChange(files: FileList) {
+  fileChange(event: any) {
+    let files: FileList = event.target.files;
     if (files.length > 0) {
       const fileToUpload = files[0];
 

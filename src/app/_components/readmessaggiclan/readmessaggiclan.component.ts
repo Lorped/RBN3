@@ -13,7 +13,7 @@ export class ReadmessaggiclanComponent implements OnInit {
   listaMsgClan: Array<UnMessaggioclan>;
   testo = '';
 
-  constructor(private status: Status, private messaggiService: MessaggiService) { }
+  constructor(public status: Status, private messaggiService: MessaggiService) { }
 
   ngOnInit(): void {
     

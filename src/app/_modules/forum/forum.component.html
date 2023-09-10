@@ -8,7 +8,7 @@
     </mat-expansion-panel-header>
 
     
-    <mat-card *ngFor="let sub of item.Sottob" class="movable" >
+    <mat-card *ngFor="let sub of item.Sottobacheche" class="movable" >
       <a [routerLink]="['subforum', sub.IDsottob]">
         <mat-card-title>{{sub.Nome}}</mat-card-title>
         <mat-card-subtitle>Thread: {{sub.NumThread}} | Nuovi: {{sub.Nuovi}} | Ultimo: {{sub.UltimoInserimento}} </mat-card-subtitle> 

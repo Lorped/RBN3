@@ -61,8 +61,6 @@ import { ReadmessaggiclanComponent } from './_components/readmessaggiclan/readme
 import { ToolvariComponent } from './_components/toolvari/toolvari.component';
 
 
-import { ThreadComponent } from './_components/thread/thread.component';
-
 
 
 
@@ -88,7 +86,6 @@ import { ThreadComponent } from './_components/thread/thread.component';
     ToolvariComponent,
 
 
-    ThreadComponent,
   ],
   imports: [
     BrowserModule,

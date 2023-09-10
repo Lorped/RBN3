@@ -12,7 +12,7 @@ export class  AnagrafeRow {
   ClanImg = '';
   SettaImg = '';
   URLImg = '';
-  OraEntrata = '';
+  OraEntrataF = '';
 }
 
 @Injectable()

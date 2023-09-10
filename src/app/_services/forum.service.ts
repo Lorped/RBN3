@@ -56,4 +56,13 @@ export class ForumService {
       id: id
     } );
   }
+
+  getforumthread(id: number){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getforumthread.php', {
+      token: user,
+      id: id
+    } );
+  }
 }

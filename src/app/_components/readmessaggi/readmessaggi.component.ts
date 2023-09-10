@@ -13,7 +13,7 @@ export class ReadmessaggiComponent implements OnInit {
   listaMsg: Array<Messaggi>;
   testo = '';
 
-  constructor( private status: Status, private messaggiService: MessaggiService) { }
+  constructor( public status: Status, private messaggiService: MessaggiService) { }
 
   ngOnInit(): void {
     //console.log("contatto id ", this.status.contattoID);
@@ -23,16 +23,21 @@ export class ReadmessaggiComponent implements OnInit {
     this.messaggiService.getmessaggi(this.status.contattoID)
     .subscribe( data => {
        this.listaMsg = data;
-       // console.log(this.listaMsg);
+       console.log("qui e riconto2");
+       this.messaggiService.contanuovimessaggi(this.status.Userid)
+       .subscribe((data) => {
+        this.status.Newmsg = data.Newmsg;
+       });
     });
   }
 
 
   caricamessaggi(){
+    console.log("qui prima");
        this.messaggiService.getmessaggi(this.status.contattoID)
        .subscribe( data => {
           this.listaMsg = data;
-          // console.log(this.listaMsg);
+          console.log("qui e riconto");
           this.messaggiService.contanuovimessaggi(this.status.Userid)
           .subscribe((data) => {
            this.status.Newmsg = data.Newmsg;

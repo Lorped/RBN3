@@ -48,17 +48,16 @@ export class ToolvariComponent implements OnInit {
 
     this.messaggiService.contanuovimessaggi(this.status.Userid)
     .subscribe( (data) => {
-  
+
       //console.log(data);
       this.status.Newmsg = data.Newmsg;
       //console.log(this.nummsg);
-
       this.status.Newmsg == 0 ? this.hidden = true : this.hidden = false;
     });
 
 
     const source2 = interval( 90000);
-    this.subscription2 = source.subscribe( () => {
+    this.subscription2 = source2.subscribe( () => {
 
       this.messaggiService.contanuovimessaggi(this.status.Userid)
       .subscribe( (data) => {

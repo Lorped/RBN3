@@ -24,12 +24,16 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
 $token=$request->token;
+$id=$request->id;
 
-
-
+/*
+$id=$_GET['id'];
+$token=$_GET['token'];
+*/
 
 $MasterAdmin=0;
 $Userid=-1;
+
 
 
 
@@ -47,56 +51,36 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-
-
-$MySql = "SELECT * from Bacheche WHERE LivAccesso <= $MasterAdmin";
-
+$MySql = "SELECT * from Thread WHERE IDmessaggio = $id";
 $Result = mysqli_query($db, $MySql);
+$res = mysqli_fetch_row($Result);
 
-while ( $res = mysqli_fetch_array($Result) ) {
+$IDsottob = $res['IDsottobacheca'];
 
-	$IDbacheca = $res['IDbacheca'];
+$MySql = "SELECT * from Sottobacheche WHERE IDsottob = $IDsottob";
+$Result = mysqli_query($db, $MySql);
+$res = mysqli_fetch_row($Result);
 
-	$sottob = [];
+$IDbacheca = $res ['IDbacheca'];
 
-	$MySql2 = "SELECT * , DATE_FORMAT(UltimoInserimento,'%d %b - %H:%i') as UI from Sottobacheche WHERE IDbacheca = $IDbacheca";
-	$Result2 = mysqli_query($db, $MySql2);
-	while ($res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC)) {
-		
-		$sottobx=$res2['IDsottob'];
+$MySql = "SELECT * from Bacheche WHERE IDbacheca = $IDbacheca";
+$Result = mysqli_query($db, $MySql);
+$res = mysqli_fetch_row($Result);
+if ($res['LivAccesso']>$MasterAdmin) {
+	header("HTTP/1.1 401 Unauthorized");
+	$out=[];
+	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
+	die ();
+}
 
-		$MySql3 = "SELECT count(*) as c FROM Thread WHERE IDsottobacheca = $sottobx AND OP = 0";
-		$Result3 = mysqli_query($db, $MySql3);
-		$res3 = mysqli_fetch_array($Result3);
-		$numth = $res3['c'];
+$out = [];
 
-		// CALCOLO NUOVI
-		$nuoviThreadPost = 0 ;
-		//
 
-		$newsottob = [
-			'IDsottob' => $res2['IDsottob'],
-			'IDbacheca' => $res2['IDbacheca'],
-			'Nome' => $res2['Nome'],
-			'LivelloPost' => $res2['LivelloPost'],
-			'UltimoInserimento' => $res2['UI'],
-			'NumThread' => $numth,
-			'Nuovi' => $nuoviThreadPost
-		];
+$MySql = "SELECT * from Thread WHERE IDmessaggio = $id OR OP = $id ORDER BY Data ASC";
+$Result = mysqli_query($db, $MySql);
+while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
-		$sottob[] = $newsottob;
-	}
-
-	$newb = [
-		'IDbacheca' => $res['IDbacheca'],
-		'Nome' => $res['Nome'],
-		'LivAccesso' => $res['LivAccesso'],
-		'icon' => $res['icon'],
-		'Sottobacheche' => $sottob
-	];
-
-	$out [] = $newb;
-
+	$out [] = $res;
 
 }
 

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-2">Livello di Sete</div>
     <div class="col-1">{{mysete}}</div>
-    <div class="col-2"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > myasete , 'dred': ix < mysete }"></i></div>
+    <div class="col-2"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > mysete , 'dred': ix < mysete }"></i></div>
     <div class="col-3">Forza di Volontà</div>
     <div class="col-1">{{myFdV}}/{{myFdVmax}}</div>
     <div class="col-3"><i *ngFor="let i of myFdVmax | times ; let ix = index" class="fa " [ngClass]="{'fa-circle dred': (ix < myFdV) , 'fa-times-circle white': ((ix+1 > myFdV) && (ix < myFdVmax)) }"></i><i *ngFor="let i of 10-myFdVmax | times " class="fa fa-circle white" ></i></div>

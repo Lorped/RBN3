@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild , AfterViewInit} from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ForumService, Forumthread } from '../../../_services/index';
 import { MatPaginator  } from '@angular/material/paginator';
 import { MatTableDataSource  } from '@angular/material/table';
@@ -19,7 +19,7 @@ export class SubforumComponent implements OnInit{
  
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private forumService: ForumService){}
+  constructor(private route: ActivatedRoute, private forumService: ForumService, private router: Router){}
 
   ngOnInit(): void {}
 
@@ -28,17 +28,15 @@ export class SubforumComponent implements OnInit{
 
     this.forumService.getpostforum(id)
     .subscribe( (data) => {
-      console.log(data);
+      //console.log(data);
      
       this.dataSource = new MatTableDataSource(data);
-      console.log(this.dataSource);
+      //console.log(this.dataSource);
       this.dataSource.paginator = this.paginator;
     });
     
   }
 
-  showx(ft: any){
-    console.log(ft);
-  }
+
 
 }
