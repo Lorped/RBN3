@@ -1,24 +1,35 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-10 offset-md-1 col-xs-12">
-  
-            <form [formGroup]="articleForm">
+    <mat-card>
+        <mat-card-title>
+            inser form
+        </mat-card-title>
+        <mat-card-subtitle>
+            xxx
+        </mat-card-subtitle>
+
+        <mat-card-content>
+
+
+   
+            <form [formGroup]="forumForm" (ngSubmit)="inserisci()" #formDir="ngForm" >
 
   
-                <fieldset class="form-group">
-                    <input class="form-control form-control-lg"
-                    formControlName="title"
-                    type="text"
-                    placeholder="Titolo Post" />
-                </fieldset>
+                <mat-form-field class="full" [formControl]="titoloFC">
+                    <mat-label>Titolo</mat-label>
+                    <input matInput >
+                    <mat-error *ngIf="titoloFC.hasError('required')">Campo Obbligatorio</mat-error>
+                </mat-form-field>
   
-                <fieldset class="form-group">
-                    <textarea class="form-control"
-                    formControlName="body"
-                    rows="8"
-                    placeholder="Testo (in markdown)">
-                    </textarea>
-                </fieldset>
+                <mat-form-field class="full" [formControl]="testpFC">
+                    <mat-label>Testo</mat-label>
+                    <textarea matInput placeholder="Testo"></textarea>
+                    <mat-error *ngIf="titoloFC.hasError('required')">Campo Obbligatorio</mat-error>
+                </mat-form-field>
+
+                <button mat-raised-button type="submit" class="btn btn-sm btn-danger btn-block" >Modifica</button>
+            </form>
+
+        </mat-card-content>
   
 <!---
         <fieldset class="form-group">
@@ -36,13 +47,8 @@
             </span>
             </div>
         </fieldset>
-    -->        
+-->        
   
-                <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
-                Pubblica
-                </button>
-  
-            </form>
         </div>
     </div>
 </div>

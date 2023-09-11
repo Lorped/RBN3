@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @Component({
   selector: 'app-edit',
@@ -8,19 +11,23 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class EditComponent {
 
-  articleForm: FormGroup;
+  forumForm: FormGroup;
 
-  constructor (private fb: FormBuilder) {
+  constructor () {
 
-    // use the FormBuilder to create a form group
-    this.articleForm = this.fb.group({
-      title: '',
-      body: ''
+    this.forumForm = new FormGroup ({
+      titoloFC: new FormControl('', [
+        Validators.required
+      ]),
+
+      testoFC: new FormControl('', [
+        Validators.required
+      ]),
+
+
+
+
+
     });
-
-
-
-    // Optional: subscribe to value changes on the form
-    // this.articleForm.valueChanges.subscribe(value => this.updateArticle(value));
   }
 }
