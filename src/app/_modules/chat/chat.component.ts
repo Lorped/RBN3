@@ -4,6 +4,7 @@ import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@ang
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
+import { timer } from 'rxjs';
 
 
 // import { takeWhile } from 'rxjs/operators';

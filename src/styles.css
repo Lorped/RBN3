@@ -104,3 +104,26 @@ html, body {
   white-space:pre-wrap; 
   word-wrap: break-word;
 }
+
+.closing-button {
+  float: right;
+  opacity: 75%;
+  /* padding: 1rem;
+  margin: -1rem -1rem -1rem auto; */
+}
+.closing-button:hover {
+  opacity: 100%;
+}
+
+/*
+.movable {
+  transition: all 0.2s ease-in-out;
+  justify-content: left;
+}
+*/
+
+.movable:hover {
+  /*transform: translateY(-3px); */
+  box-shadow: 0 4px 17px rgba(255, 0, 0, 0.45);
+
+}

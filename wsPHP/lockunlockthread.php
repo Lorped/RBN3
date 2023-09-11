@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db2.inc.php');    //MYSQLI //
+include ('db2.inc.php');
 include ('token.php');
 
 
@@ -24,8 +24,9 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
 $token=$request->token;
-$clanid=$request->clanid;
+$id=$request->id;
 
+$Userid=-1;
 
 
 if ( CheckJWT ($token) ) {
@@ -45,67 +46,34 @@ if ( CheckJWT ($token) ) {
 
 
 
-$MySql = "SELECT IDclan FROM Personaggio WHERE Userid = $Userid";
-$Result=mysqli_query($db, $MySql);
-$res = mysqli_fetch_array($Result);
-$myclanid = $res['IDclan'];
-
-
-if ( $clanid == '') {
-	$clanid = $myclanid;
-}
-
-if ( $clanid != $myclanid && ($MasterAdmin !=3 && $MasterAdmin !=2) ) {
+if (  $MasterAdmin < 2 ) {
 	header("HTTP/1.1 401 Unauthorized");
 	$out=[];
 	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
 	die ();
 } 
 
-$MySql="SELECT * FROM Checkmessaggiclan WHERE Userid = $Userid and IDclan = $clanid";
-$Result=mysqli_query($db, $MySql);
+$MySql = "SELECT Chiuso, OP from Thread WHERE IDmessaggio = '$id'";
+$Result = mysqli_query($db, $MySql);
 $res = mysqli_fetch_array($Result);
 
-
-
-$Ora=$res['UltimaData'];
-
-if ( $Ora=='') {
-	$Ora='1999-01-01';
+if ( $res['OP']!= 0 ) {
+	die("errore");
 }
 
+$lock=$res['Chiuso'];
 
-$MySql="SELECT COUNT(*) as n FROM Messaggiclan WHERE IDclan = $clanid AND Ora > '$Ora' ";
-$Result=mysqli_query($db, $MySql);
-$res = mysqli_fetch_array($Result) ;
-$num = $res['n'];
+$lock == "1" ? $lock = "0" : $lock = "1" ;
+$MySql="UPDATE Thread SET Chiuso = '$lock' WHERE IDmessaggio = '$id'";
+mysqli_query($db, $MySql);
 
-
-
-$MySql= "SELECT DATE_FORMAT( MAX(Ora) , '%d %b - %H:%i' ) AS Ultimo FROM Messaggiclan WHERE IDclan = $clanid";
-$Result=mysqli_query($db, $MySql);
-$res = mysqli_fetch_array($Result) ;
-$ultimo = $res['Ultimo'];
-
-$MySql= "SELECT * FROM Clan WHERE IDclan = $clanid";
-$Result=mysqli_query($db, $MySql);
-$res = mysqli_fetch_array($Result) ;
-$NomeClan = $res['NomeClan'];
-$ClanImg = $res['ClanImg'];
+if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db). "  >>".$MySql ); }
 
 
-$out = [
-	"IDclan" => $myclanid,
-	"numero" => $num,
-	"ultimo" => $ultimo,
-	'NomeClan' => $NomeClan,
-	'ClanImg' => $ClanImg
-];
-	
-
-
+$out=[];
 
 header("HTTP/1.1 200 OK");
-
 echo json_encode ($out, JSON_UNESCAPED_UNICODE);
+
+
 ?>

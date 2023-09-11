@@ -1,9 +1,11 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component,  ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ForumService, Forumthread } from  '../../../_services/index';
 
 import { MatPaginator  } from '@angular/material/paginator';
 import { MatTableDataSource  } from '@angular/material/table';
+import { Status } from '../../../globals';
+
 
 @Component({
   selector: 'app-thread',
@@ -16,27 +18,48 @@ export class ThreadComponent {
   dataSource: MatTableDataSource<Forumthread> ;
   Nomebacheca = '';
   Nomemessaggio = '';
+  Chiuso = 0;
+  Pinned = 0 ;
+
+  id = 0;
  
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private forumService: ForumService){}
+  constructor(private route: ActivatedRoute, private forumService: ForumService, public status:Status){}
 
   ngAfterViewInit() {
-    const id = Number(this.route.snapshot.paramMap.get('idx')! );
+    this.id = Number(this.route.snapshot.paramMap.get('idx')! );
 
-    console.log(id);
+    console.log(this.id);
 
-    this.forumService.getforumthread(id)
+    this.forumService.getforumthread(this.id)
     .subscribe( (data) => {
       console.log(data);
      
       this.Nomebacheca = data.NomeB;
       this.Nomemessaggio = data.NomeM;
+      this.Chiuso=data.content[0].Chiuso;
+      this.Pinned=data.content[0].Pinned;
       this.dataSource = new MatTableDataSource(data.content);
       console.log(this.dataSource);
       this.dataSource.paginator = this.paginator;
     });
     
   }
+
+  onofflock(){
+   
+    this.forumService.lockunlockthread(this.id).subscribe((data)=>{
+      this.Chiuso == 1 ? this.Chiuso=0 : this.Chiuso = 1;
+    });
+  }
+  onoffpin(){
+   
+    this.forumService.pinunpinthread(this.id).subscribe((data)=>{
+      this.Pinned == 1 ? this.Pinned=0 : this.Pinned = 1;
+    });
+  }
+
+
 
 }

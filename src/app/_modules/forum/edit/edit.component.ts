@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Status } from '../../../globals';
+import { ForumService } from '../../../_services/index';
+import { Location } from "@angular/common";
+
 
 
 @Component({
@@ -9,25 +12,35 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent {
+export class EditComponent implements OnInit {
 
-  forumForm: FormGroup;
+  forumForm = this.fb.group ({
+    titoloFC: ['' , Validators.required],
+    testoFC: ['', Validators.required]
+  });
+ 
+  idsottob: number;
 
-  constructor () {
+  constructor (private fb: FormBuilder, private route: ActivatedRoute, public status: Status, private forumService: ForumService,  private location: Location) { }
 
-    this.forumForm = new FormGroup ({
-      titoloFC: new FormControl('', [
-        Validators.required
-      ]),
-
-      testoFC: new FormControl('', [
-        Validators.required
-      ]),
-
-
-
-
-
-    });
+  ngOnInit (){
+    this.idsottob = Number(this.route.snapshot.paramMap.get('id')! );
+    //console.log(this.route.snapshot)
   }
+
+
+
+  onSubmit() {
+    console.warn(this.forumForm.value);
+
+    this.forumService.putnewthread(this.idsottob, this.forumForm.value.titoloFC, this.forumForm.value.testoFC).subscribe( (data)=>{
+      this.location.back();
+    });
+  
+  }
+
+  goback(){
+    this.location.back();
+  }
+
 }

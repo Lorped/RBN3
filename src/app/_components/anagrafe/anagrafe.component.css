@@ -31,9 +31,7 @@ hr {
     border-color: #285e8e; 
 }
 
-.spacer {
-  flex: 1 1 auto;
-}
+
 
 .avatar1 {
   background-size: cover;
@@ -52,16 +50,6 @@ mat-card-subtitle {
   font-size: 1em;
 }
 
-.movable {
-  transition: all 0.2s ease-in-out;
-  justify-content: left;
-}
-
-.movable:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 17px rgba(255, 0, 0, 0.45);
-
-}
 
 .size9 {
   font-size: .9rem;

@@ -1,54 +1,37 @@
 <div class="container">
-    <mat-card>
-        <mat-card-title>
-            inser form
-        </mat-card-title>
-        <mat-card-subtitle>
-            xxx
-        </mat-card-subtitle>
-
+    <mat-card >
+        <mat-card-header>
+            <mat-card-title>
+                Nuovo thread
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{status.Nomebacheca}}
+            </mat-card-subtitle>
+            <span class="spacer"></span>
+            <mat-icon class="clickable" (click)="goback()">arrow_back</mat-icon>
+            
+        </mat-card-header>
         <mat-card-content>
 
-
-   
-            <form [formGroup]="forumForm" (ngSubmit)="inserisci()" #formDir="ngForm" >
-
+            <form [formGroup]="forumForm" (ngSubmit)="onSubmit()"  >
   
-                <mat-form-field class="full" [formControl]="titoloFC">
+                <mat-form-field class="full" >
                     <mat-label>Titolo</mat-label>
-                    <input matInput >
-                    <mat-error *ngIf="titoloFC.hasError('required')">Campo Obbligatorio</mat-error>
+                    <input matInput placeholder="Titolo thread" formControlName="titoloFC">
+                    
                 </mat-form-field>
   
-                <mat-form-field class="full" [formControl]="testpFC">
+                <mat-form-field class="full" >
                     <mat-label>Testo</mat-label>
-                    <textarea matInput placeholder="Testo"></textarea>
-                    <mat-error *ngIf="titoloFC.hasError('required')">Campo Obbligatorio</mat-error>
+                    <textarea matInput placeholder="Testo" formControlName="testoFC" rows="10" maxlength="2000"></textarea>
+                    
                 </mat-form-field>
 
-                <button mat-raised-button type="submit" class="btn btn-sm btn-danger btn-block" >Modifica</button>
+                <button mat-raised-button type="submit" color="warn" class="full "[disabled]="!forumForm.valid" >Invia</button>
             </form>
 
         </mat-card-content>
+        </mat-card>
   
-<!---
-        <fieldset class="form-group">
-            <input class="form-control"
-                type="text"
-                placeholder="Enter tags"
-                [formControl]="tagField"
-                (keyup.enter)="addTag()" />
-  
-            <div class="tag-list">
-            <span *ngFor="let tag of article.tagList"
-                class="tag-default tag-pill">
-                <i class="ion-close-round" (click)="removeTag(tag)"></i>
-                {{ tag }}
-            </span>
-            </div>
-        </fieldset>
--->        
-  
-        </div>
-    </div>
+
 </div>

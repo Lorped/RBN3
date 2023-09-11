@@ -51,20 +51,7 @@ export class LuoghiComponent implements OnInit {
     const mialista = [];
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
-    /**
-    this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/luoghi.php', {Dove: this.status.Stanza, token: user} )
-    .map((res: Array<any>) => {
-      for (let i = 0; i < res.length; i++) {
-        const item = res[i];
-        const newluogo = new Luogo(item.Tipo, item.ID, item.Breve, item.NomeMappa);
-        mialista.push(newluogo);
-      }
-      return mialista;
-    })
-    .subscribe( data => {
-      this.listaluoghi = data;
-    });
-    */
+
     this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/luoghi.php', {Dove: this.status.Stanza, token: user} )
     .subscribe ((data: Array<any>)=> {
       for (let i = 0; i < data.length; i++) {

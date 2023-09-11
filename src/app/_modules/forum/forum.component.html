@@ -9,7 +9,7 @@
 
     
     <mat-card *ngFor="let sub of item.Sottobacheche" class="movable" >
-      <a [routerLink]="['subforum', sub.IDsottob]">
+      <a [routerLink]="['subforum', sub.IDsottob  ]">
         <mat-card-header>
         <mat-card-title>{{sub.Nome}}</mat-card-title>
         <mat-card-subtitle>Thread: {{sub.NumThread}} | Nuovi: {{sub.Nuovi}} | Ultimo: {{sub.UltimoInserimento}} </mat-card-subtitle> 

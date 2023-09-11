@@ -11,6 +11,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider'; 
 
 
 import { ForumService } from '../../_services/index';
@@ -26,15 +28,16 @@ const routes: Routes = [
   { path: 'subforum/:id', component: SubforumComponent},
   { path: 'subforum/:id/thread/:idx', component: ThreadComponent},
   { path: 'subforum/:id/edit', component: EditComponent},
-  { path: 'subforum/:id/thread/:idx/edit', component: ThreadComponent},
-  { path: '*' , redirectTo: ''}
+  { path: 'subforum/:id/thread/:idx/edit', component: EditComponent},
+      { path: '*' , redirectTo: ''}
 ]
 
 @NgModule({
   declarations: [
     ForumComponent,
     SubforumComponent,
-    ThreadComponent
+    ThreadComponent,
+    EditComponent
   ],
   imports: [
     CommonModule,
@@ -47,8 +50,11 @@ const routes: Routes = [
     MatSortModule,
     MatInputModule,
     MatFormFieldModule,
+    MatButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatDividerModule
     
   ],
   providers: [

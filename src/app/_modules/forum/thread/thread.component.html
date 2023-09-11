@@ -10,9 +10,25 @@
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>{{ft.Nome}}</mat-card-title>
-                    <mat-card-subtitle><span class="spacer"></span> {{ft.Utente}} | {{ft.DT}}</mat-card-subtitle>
+                    <mat-card-subtitle><span class="spacer"></span> {{ft.Utente}} | {{ft.DT}}
+                        <mat-divider></mat-divider>  
+                    </mat-card-subtitle>
+
+                    <span class="spacer"></span>
+                    <span *ngIf="status.MasterAdmin > 1 && ft.OP == 0">
+                    <span *ngIf="Chiuso==1"><mat-icon class="clickable" (click)="onofflock()">lock</mat-icon></span>
+                    <span *ngIf="Chiuso==0"><mat-icon class="clickable" (click)="onofflock()">lock_open</mat-icon></span>
+                    <span *ngIf="Pinned==1"><mat-icon class="clickable" color="warn"(click)="onoffpin()">pin_drop</mat-icon></span>
+                    <span *ngIf="Pinned==0"><mat-icon class="clickable" (click)="onoffpin()">pin_drop</mat-icon></span>
+                    </span>
+                    <span *ngIf="(status.MasterAdmin > 1 || ft.IDutente == status.Userid) && Chiuso==0">
+                        <a [routerLink]="['edit']"><mat-icon class="clickable" >edit</mat-icon></a>
+                        </span>
+                      
                 </mat-card-header>
+
                 <mat-card-content>
+                    
                     <span class="newl">{{ft.Testo}}</span>
                 </mat-card-content>
 

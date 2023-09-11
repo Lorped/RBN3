@@ -13,7 +13,7 @@ td {
 mat-card {
     margin-top: 0.5em;
   }
+mat-card-header {
+    margin-bottom: 1em;
+}
 
-  .spacer {
-    flex: 1 1 auto;
-  }

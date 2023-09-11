@@ -70,6 +70,7 @@ export class Basicpg {
   public UsoPS = 1;
   public DescSalute = ''; // from LEFT Join
   public ModSalute = 0; // from LEFT Join
+  public Taumaturgo = 0;
   // V5 da Eliminare
   public Sete;
   public BloodP = 0;  // from LEFT JOIN da BloodPotency
@@ -80,8 +81,7 @@ export class Basicpg {
   public MinSete = 0;
   public MinBP = 0 ; // from LEFT JOIN da Generazioni
   public MaxBP = 0 ;
-  public Taumaturgo = 0;
-
+  
 
 
 }
@@ -154,6 +154,7 @@ export class Status {
   Newmsg = 0 ;
   // FORUM
   forumon = false;
+  Nomebacheca = '';
 }
 
 

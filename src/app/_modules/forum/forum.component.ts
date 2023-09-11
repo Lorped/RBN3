@@ -1,5 +1,5 @@
 import { Component , OnInit } from '@angular/core';
-import { Router  } from '@angular/router';
+
 import { ForumService, Bacheca } from '../../_services/index';
 
 @Component({
@@ -11,13 +11,29 @@ export class ForumComponent implements OnInit {
 
   forum: Array<Bacheca> = [];
 
-  constructor (private router: Router, private forumService: ForumService) {}
+  constructor ( private forumService: ForumService) {}
 
   ngOnInit(): void {
     this.forumService.getforum().subscribe ( (data) => {
       this.forum = data;
     });
+
+    //this.printpath('', this.router.config);
   }
 
+
+ 
+  /*
+  printpath(parent: string, config: Route[]) {
+    for (let i = 0; i < config.length; i++) {
+      const route = config[i];
+      console.log(parent + '/' + route.path);
+      if (route.children) {
+        const currentPath = route.path ? `${parent}/${route.path}` : parent;
+        this.printpath(currentPath, route.children);
+      }
+    }
+  }
+  */
   
 }

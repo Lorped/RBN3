@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild , AfterViewInit} from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute,  Router } from '@angular/router';
 import { ForumService, Forumthread } from '../../../_services/index';
 import { MatPaginator  } from '@angular/material/paginator';
 import { MatTableDataSource  } from '@angular/material/table';
@@ -16,7 +16,7 @@ export class SubforumComponent implements OnInit{
   
   displayedColumns: string[] = ['IDmessaggio'];
   dataSource: MatTableDataSource<Forumthread> ;
-  Nomebacheca = '';
+
   LivelloPost = 0;
  
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -30,18 +30,18 @@ export class SubforumComponent implements OnInit{
 
     this.forumService.getpostforum(id)
     .subscribe( (data) => {
-      console.log(data);
-      this.Nomebacheca = data.Nome;
+      //console.log(data);
+      this.status.Nomebacheca = data.Nome;
+      
       this.LivelloPost = Number(data.LivelloPost);
       this.dataSource = new MatTableDataSource(data.content);
       //console.log(this.dataSource);
-      console.log(this.LivelloPost);
+      //console.log(this.LivelloPost);
       this.dataSource.paginator = this.paginator;
     });
     
   }
 
-  nuovo(){}
 
 
 }
