@@ -9,7 +9,7 @@
         <td mat-cell *matCellDef="let ft">
             <mat-card>
                 <mat-card-header>
-                    <mat-card-title>{{ft.Nome}}</mat-card-title>
+                    <mat-card-title text-color="accent" >{{ft.Nome}}</mat-card-title>
                     <mat-card-subtitle><span class="spacer"></span> {{ft.Utente}} | {{ft.DT}}
                         <mat-divider></mat-divider>  
                     </mat-card-subtitle>
@@ -22,7 +22,7 @@
                     <span *ngIf="Pinned==0"><mat-icon class="clickable" (click)="onoffpin()">pin_drop</mat-icon></span>
                     </span>
                     <span *ngIf="(status.MasterAdmin > 1 || ft.IDutente == status.Userid) && Chiuso==0">
-                        <a [routerLink]="['edit']"><mat-icon class="clickable" >edit</mat-icon></a>
+                        <a [routerLink]="['edit', ft.IDmessaggio]"><mat-icon class="clickable" >edit</mat-icon></a>
                         </span>
                       
                 </mat-card-header>

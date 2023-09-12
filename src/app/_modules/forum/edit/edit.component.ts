@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Status } from '../../../globals';
-import { ForumService } from '../../../_services/index';
+import { ForumService, Forumthread } from '../../../_services/index';
 import { Location } from "@angular/common";
 
 
@@ -19,23 +19,43 @@ export class EditComponent implements OnInit {
     testoFC: ['', Validators.required]
   });
  
-  idsottob: number;
+  idy: number;
+
 
   constructor (private fb: FormBuilder, private route: ActivatedRoute, public status: Status, private forumService: ForumService,  private location: Location) { }
 
   ngOnInit (){
-    this.idsottob = Number(this.route.snapshot.paramMap.get('id')! );
+    this.idy = Number(this.route.snapshot.paramMap.get('idy')! );
     //console.log(this.route.snapshot)
+
+    this.forumService.getsinglethread(this.idy).subscribe( (data: Forumthread) => { 
+      
+      console.log(data);
+      this.forumForm.patchValue({titoloFC: data.Nome, testoFC: data.Testo});
+
+      console.log(this.forumForm);
+
+      if (data.OP != 0 ) {
+        console.log(data.OP);
+
+        this.forumForm.get('titoloFC').clearValidators(); 
+        this.forumForm.get('titoloFC').updateValueAndValidity(); 
+        this.forumForm.get('titoloFC').disable(); 
+      }
+      console.log(this.forumForm);
+    });
   }
 
 
 
   onSubmit() {
-    console.warn(this.forumForm.value);
+    //console.log(this.forumForm.value);
 
-    this.forumService.putnewthread(this.idsottob, this.forumForm.value.titoloFC, this.forumForm.value.testoFC).subscribe( (data)=>{
+    
+    this.forumService.updatethread(this.idy, this.forumForm.value.titoloFC, this.forumForm.value.testoFC).subscribe( (data)=>{
       this.location.back();
     });
+    
   
   }
 

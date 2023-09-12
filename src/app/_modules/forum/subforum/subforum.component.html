@@ -7,7 +7,7 @@
                 <mat-card-header class="bigger">
             <a [routerLink]="['../../']"><span class="lnkvis">Forum Generale</span></a> > {{status.Nomebacheca}}
             <span class="spacer"></span>
-            <span *ngIf="status.MasterAdmin >= LivelloPost"><a [routerLink]="['edit']"><mat-icon class="clickable" aria-label="Inserisci nuovo post">add_comment</mat-icon></a></span>
+            <span *ngIf="status.MasterAdmin >= LivelloPost"><a [routerLink]="['add']"><mat-icon class="clickable" >add_comment</mat-icon></a></span>
             </mat-card-header>
             </mat-card>
         </th>
@@ -15,7 +15,7 @@
             <mat-card class="movable">
                 <a [routerLink]="['thread', ft.IDmessaggio]">
                 <mat-card-header>
-                <mat-card-title>{{ft.Nome}}</mat-card-title>
+                <mat-card-title >{{ft.Nome}}</mat-card-title>
                 <mat-card-subtitle>Autore: {{ft.Utente}} | Ultimo agg.to: {{ft.DT}}</mat-card-subtitle>
                 <span class="spacer"></span>
                 <span *ngIf="ft.Pinned==1" ><mat-icon color="warn">pin_drop</mat-icon> </span>

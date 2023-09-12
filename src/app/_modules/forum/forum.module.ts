@@ -20,6 +20,8 @@ import { ForumComponent } from './forum.component';
 import { SubforumComponent } from './subforum/subforum.component';
 import { ThreadComponent } from './thread/thread.component';
 import { EditComponent } from './edit/edit.component';
+import { AddthreadComponent } from './addthread/addthread.component';
+import { ReplyComponent } from './reply/reply.component';
 
 
 const routes: Routes = [
@@ -27,8 +29,9 @@ const routes: Routes = [
   { path: '/', component: ForumComponent},
   { path: 'subforum/:id', component: SubforumComponent},
   { path: 'subforum/:id/thread/:idx', component: ThreadComponent},
-  { path: 'subforum/:id/edit', component: EditComponent},
-  { path: 'subforum/:id/thread/:idx/edit', component: EditComponent},
+  { path: 'subforum/:id/add', component: AddthreadComponent},
+  { path: 'subforum/:id/thread/:idx/edit/:idy', component: EditComponent},
+  { path: 'subforum/:id/thread/:idx/reply', component: ReplyComponent},
       { path: '*' , redirectTo: ''}
 ]
 
@@ -37,7 +40,9 @@ const routes: Routes = [
     ForumComponent,
     SubforumComponent,
     ThreadComponent,
-    EditComponent
+    EditComponent,
+    AddthreadComponent,
+    ReplyComponent
   ],
   imports: [
     CommonModule,

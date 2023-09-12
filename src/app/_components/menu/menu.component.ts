@@ -1,8 +1,10 @@
 import { Component, OnInit  } from '@angular/core';
 import { AuthenticationService } from '../../_services/index';
 import { ModalService } from '../../_services/index';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Status } from '../../globals';
+import { first } from 'rxjs/operators';
+
 
 
 @Component({
@@ -20,9 +22,17 @@ export class MenuComponent implements OnInit {
 
   dologout() {
     
+    
+    this.router.navigate( [ '', {outlets: { forum: null } } ] );
     this.status.Alive = false ;
     this.authenticationService.logout();
-    this.router.navigate(['/login']);
+    this.router.events.pipe(
+      first(evt => evt instanceof NavigationEnd)
+    ).subscribe(() => {
+      //console.log("nav end");
+      this.router.navigate( [ '/login' ] );   
+    });
+    
 
   }
 

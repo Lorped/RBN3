@@ -64,6 +64,8 @@ import { ToolvariComponent } from './_components/toolvari/toolvari.component';
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +86,7 @@ import { ToolvariComponent } from './_components/toolvari/toolvari.component';
     ReadmessaggiComponent,
     ReadmessaggiclanComponent,
     ToolvariComponent,
+
 
 
   ],

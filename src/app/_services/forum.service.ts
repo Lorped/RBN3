@@ -68,11 +68,30 @@ export class ForumService {
     } );
   }
 
+  getsinglethread(id: number){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getsinglethread.php', {
+      token: user,
+      id: id
+    } );
+  }
+
   putnewthread(idsottob: number , nome: string, testo: string) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/putthread.php', {
       token: user,
       idsottob: idsottob,
+      nome: nome,
+      testo: testo
+    } );
+  }
+
+  updatethread(id: number , nome: string, testo: string) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/updatethread.php', {
+      token: user,
+      id: id,
       nome: nome,
       testo: testo
     } );
