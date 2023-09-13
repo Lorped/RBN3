@@ -1,1 +1,32 @@
-<p>reply works!</p>
+<div class="container">
+    <mat-card >
+        <mat-card-header>
+            <mat-card-title>
+                Rispondi al Thread
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{status.Nomebacheca}}
+            </mat-card-subtitle>
+            <span class="spacer"></span>
+            <mat-icon class="clickable" (click)="goback()">arrow_back</mat-icon>
+            
+        </mat-card-header>
+        <mat-card-content>
+
+            <form [formGroup]="forumForm" (ngSubmit)="onSubmit()"  >
+  
+  
+                <mat-form-field class="full" >
+                    <mat-label>Testo</mat-label>
+                    <textarea matInput placeholder="Testo" formControlName="testoFC" rows="10" maxlength="3000"></textarea>
+                    
+                </mat-form-field>
+
+                <button mat-raised-button type="submit" color="warn" class="full "[disabled]="!forumForm.valid" >Invia</button>
+            </form>
+
+        </mat-card-content>
+        </mat-card>
+  
+
+</div>

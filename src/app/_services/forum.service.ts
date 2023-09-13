@@ -97,6 +97,15 @@ export class ForumService {
     } );
   }
 
+  putreply(id: number ,  testo: string) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/putreply.php', {
+      token: user,
+      id: id,
+      testo: testo
+    } );
+  }
+
   lockunlockthread(id:number){
     const user = sessionStorage.getItem('RBN3currentUser') ;
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/lockunlockthread.php', {

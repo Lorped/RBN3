@@ -1,27 +1,28 @@
 td {
-    padding-top: 0.5em;    
-    padding-bottom: 0.5em;    
+    padding-top: 0.2em;    
+    padding-bottom: 0.2em;    
 }
+/*
 mat-card {
-    margin-top: 0.5em;
+    margin-top: 0.2em;
   }
- 
+*/
 
   mat-card-header {
-    padding-top: 0.5em !important;
-    padding-bottom: 0.5em !important;
+    padding-top: 0.25em !important;
+    padding-bottom: 0.25em !important;
   }
   
   mat-card-title {
-    font-size: 1em !important; 
+    font-size: 0.9em !important; 
   }
   
   mat-card-subtitle {
-    font-size: 1em;
+    font-size: 0.8em;
   }  
 
   .bigger {
-    font-size: 1.3em;
+    font-size: 1.1em;
 }
 
   
@@ -33,3 +34,7 @@ mat-card {
   .lnkvis:hover {
     color: #E91E63;
   }
+
+.icon-08x {
+    transform: scale(0.8);
+}
