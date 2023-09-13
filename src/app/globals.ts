@@ -154,6 +154,7 @@ export class Status {
   Newmsg = 0 ;
   // FORUM
   forumon = false;
+  forumactivated = false;
   Nomebacheca = '';
 }
 

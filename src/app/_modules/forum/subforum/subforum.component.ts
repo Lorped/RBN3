@@ -1,13 +1,44 @@
-import { Component, OnInit, ViewChild , AfterViewInit} from '@angular/core';
+import { Component, OnInit, ViewChild , Injectable} from '@angular/core';
 import { ActivatedRoute,  Router } from '@angular/router';
 import { ForumService, Forumthread } from '../../../_services/index';
-import { MatPaginator  } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl  } from '@angular/material/paginator';
 import { MatTableDataSource  } from '@angular/material/table';
 import { Status } from '../../../globals';
+import { Subject } from 'rxjs';
+
+
+
+@Injectable()
+export class MyCustomPaginatorIntl implements MatPaginatorIntl {
+  changes = new Subject<void>();
+
+  // For internationalization, the `$localize` function from
+  // the `@angular/localize` package can be used.
+  // You can set labels to an arbitrary string too, or dynamically compute
+  // it through other third-party internationalization libraries.
+  firstPageLabel = 'Prima pagina';
+  itemsPerPageLabel = 'Post per pagina';
+  lastPageLabel = 'Ultima pagina';
+
+
+  nextPageLabel = 'Pag. successiva';
+  previousPageLabel = 'Pag. precedente';
+
+  getRangeLabel(page: number, pageSize: number, length: number): string {
+    if (length === 0) {
+      return 'Pagina 1 di 1';
+    }
+    const amountPages = Math.ceil(length / pageSize);
+    return 'Pagina '+ (page + 1) + " di "+amountPages;
+  }
+}
+
+
 
 @Component({
   selector: 'app-subforum',
   templateUrl: './subforum.component.html',
+  providers: [{provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl}],
   styleUrls: ['./subforum.component.css']
 })
 export class SubforumComponent implements OnInit{

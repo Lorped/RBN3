@@ -22,17 +22,24 @@ export class MenuComponent implements OnInit {
 
   dologout() {
     
-    
-    this.router.navigate( [ '', {outlets: { forum: null } } ] );
+
     this.status.Alive = false ;
     this.authenticationService.logout();
-    this.router.events.pipe(
-      first(evt => evt instanceof NavigationEnd)
-    ).subscribe(() => {
-      //console.log("nav end");
-      this.router.navigate( [ '/login' ] );   
-    });
     
+    if (this.status.forumactivated == true) {
+      this.router.navigate( [ '', {outlets: { forum: null } } ] );
+      this.router.events.pipe(first(evt => evt instanceof NavigationEnd)).
+      subscribe(() => {
+        console.log("nav end");
+        this.router.navigate( [ '/login' ] );
+      });
+    } else {
+      console.log("no nav need");
+      this.router.navigate( [ '/login' ] );     
+    }
+
+      
+
 
   }
 
@@ -65,6 +72,7 @@ export class MenuComponent implements OnInit {
       this.router.navigate(
         [ {outlets: {forum: ['forum']}}], {relativeTo: this.route}
       );
+      this.status.forumactivated = true;
     }
     
     this.modalService.show(id) ;
