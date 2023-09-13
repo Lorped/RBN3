@@ -24,7 +24,7 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
 $token=$request->token;
-$nome=$request->nome;
+$testo=$request->testo;
 $id=$request->id;
 
 $Userid=-1;
@@ -51,7 +51,7 @@ $MySql="SELECT * FROM Thread  WHERE IDmessaggio='$id' ";
 $Result=mysqli_query($db,$MySql);
 $res=mysqli_fetch_array($Result);
 
-$chiuso=$res['Chiuso']
+$chiuso=$res['Chiuso'];
 $idsottob=$res['IDsottob'];
 
 $MySql="SELECT * FROM Sottobacheche  WHERE IDsottob='$idsottob' ";
