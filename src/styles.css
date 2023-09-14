@@ -25,6 +25,25 @@ html, body {
 
 }
 
+.accent-text{
+  color: #f48fb1;
+}
+.accent {
+  color: #607D8B;
+}
+.warning {
+  color: #E91E63;
+}
+
+.clickable {
+  transition: all 0.2s ease-in-out;
+}
+
+.clickable:hover {
+  color: #E91E63 !important ;
+}
+
+
 
 .red {
   color: #ff0000;
@@ -45,29 +64,17 @@ html, body {
 .dred {
   color: #b00000;
 }
-
 .dgreen {
   color: #228B22;
 }
-
 .gold {
   color: #ffb300;
 }
 
-.warning {
-  color: #E91E63;
-}
-.accent {
-  color: #607D8B;
-}
 
-.clickable {
-  transition: all 0.2s ease-in-out;
-}
 
-.clickable:hover {
-  color: #E91E63 !important ;
-}
+
+
 
 .alr {
   text-align: right;
@@ -115,12 +122,7 @@ html, body {
   opacity: 100%;
 }
 
-/*
-.movable {
-  transition: all 0.2s ease-in-out;
-  justify-content: left;
-}
-*/
+
 
 .movable:hover {
   /*transform: translateY(-3px); */

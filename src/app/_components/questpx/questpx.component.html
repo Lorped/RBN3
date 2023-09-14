@@ -1,3 +1,27 @@
+<mat-tab-group>
+  <mat-tab label="Quest"> 
+
+    <!----   QUESTA E' LA PARTE CON IL LOG DELLE QUEST -->
+    <mat-card *ngFor="let q of quests" >
+      <mat-card-header [ngClass]="{'accent-text': q.Status=='Open' , 'warning': q.Status=='KO'}">
+        <mat-card-title>{{q.Quest}}</mat-card-title>
+        <mat-card-subtitle >
+          <span [ngClass]="{'accent-text': q.Status=='Open' }" >
+            PX : {{q.Px}} | Data: {{q.DataOpen | date:'dd.MM.yyyy'}} | Status: {{q.Status}}
+            <span *ngIf="q.Status != 'Open' ">
+              | Data chiusura: {{q.DataClose | date:'dd.MM.yyyy'}}
+            </span>
+          </span>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  
+  </mat-tab>
+  <mat-tab label="Log PX"> Content 2 </mat-tab>
+  <mat-tab label="Third"> Content 3 </mat-tab>
+</mat-tab-group>
+
+<!--
 <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="quest-tab" data-toggle="tab" href="#quest" role="tab">Quest</a>
@@ -56,3 +80,5 @@
     </div>
   </div>
 </div>
+
+-->

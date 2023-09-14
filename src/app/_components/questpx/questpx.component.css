@@ -1,3 +1,34 @@
+mat-card {
+  padding-bottom: 0.5em;
+  margin-bottom: 0.1em;
+}
+
+mat-card-header {
+  padding-top: 0.5em !important;
+}
+
+mat-card-title {
+  font-size: 1.2em !important;
+}
+
+mat-card-subtitle {
+  font-size: 1em;
+}
+
+
+
+hr {
+  color: #f44336;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #f44336;
+  margin: 1em 0;
+  padding: 0;
+}
+
+
+
 .nav-tabs{
   color: #fff;
 

@@ -27,6 +27,7 @@ import { QuestpxService } from './_services/index';
 import { SignupService } from './_services/index';
 import { AnagrafeService } from './_services/index';
 import { MessaggiService } from './_services/index';
+import { MatTabsModule } from '@angular/material/tabs'; 
 
 
 import { AuthGuard } from './_guards/auth.guard';
@@ -108,7 +109,8 @@ import { ToolvariComponent } from './_components/toolvari/toolvari.component';
     MatIconModule,
     MatSidenavModule,
     MatSlideToggleModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTabsModule
   ],
   providers: [
     AuthenticationService,
