@@ -52,7 +52,7 @@ $Result=mysqli_query($db,$MySql);
 $res=mysqli_fetch_array($Result);
 
 $chiuso=$res['Chiuso'];
-$idsottob=$res['IDsottob'];
+$idsottob=$res['IDsottobacheca'];
 
 $MySql="SELECT * FROM Sottobacheche  WHERE IDsottob='$idsottob' ";
 $Result=mysqli_query($db,$MySql);
@@ -75,6 +75,9 @@ if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db). "  >>".
 $MySql = "UPDATE Sottobacheche SET UltimoInserimento = NOW() WHERE IDsottob='$idsottob' ";
 mysqli_query($db, $MySql);
 if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db). "  >>".$MySql ); }
+
+$MySql = "UPDATE Thread SET DataReplyEdit  = NOW() WHERE IDmessaggio='$id' ";
+mysqli_query($db, $MySql);
 
 header("HTTP/1.1 200 OK");
 echo json_encode ($out, JSON_UNESCAPED_UNICODE);

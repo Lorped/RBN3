@@ -71,7 +71,19 @@ while ( $res = mysqli_fetch_array($Result) ) {
 		$numth = $res3['c'];
 
 		// CALCOLO NUOVI
-		$nuoviThreadPost = 0 ;
+		$MySql4= "SELECT * from Checkmessaggiforum WHERE IDsottob = '$sottobx' AND IDutente = '$Userid' ";
+		$Result4 = mysqli_query($db, $MySql4);
+		$res4 = mysqli_fetch_array($Result4);
+		$DataUltima = $res4['DataUltima'];
+		if ( $DataUltima == '') {
+			$DataUltima = "1970-01-01 00:00:00";
+		}
+
+		$MySql5 = "SELECT count(*) as c from Thread WHERE IDsottobacheca = '$sottobx' AND OP = 0 AND Data > '$DataUltima' ";
+		$Result5 = mysqli_query($db, $MySql5);
+		$res5 = mysqli_fetch_array($Result5);
+
+		$nuoviThreadPost = $res5['c'] ;
 		//
 
 		$newsottob = [

@@ -93,7 +93,19 @@ $out = [
 	"content" => $out_content
 ];
 
-
+$MySql= "SELECT * from Checkmessaggithread WHERE IDmessaggio = '$id' AND IDutente = '$Userid' ";
+$Result = mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result);
+$DataUltima = $res['DataUltima'];
+if ( $DataUltima == '') {
+	$MySql2 = "INSERT INTO Checkmessaggithread (IDmessaggio , IDutente) VALUES ( '$id' , '$Userid' ) ";
+	mysqli_query($db, $MySql2);
+	if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }
+} else {
+	$MySql2 = "UPDATE Checkmessaggithread SET DataUltima = NOW() WHERE IDmessaggio = '$id' AND IDutente = '$Userid'  ";
+	mysqli_query($db, $MySql2);
+	if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }
+}
 
 
 header("HTTP/1.1 200 OK");

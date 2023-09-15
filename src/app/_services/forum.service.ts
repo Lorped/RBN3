@@ -33,6 +33,7 @@ export class Forumthread {
   OP: number = 0;
   Chiuso: number = 0;
   Pinned: number = 0;
+  status = '';
 }
 
 @Injectable({

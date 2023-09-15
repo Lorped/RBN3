@@ -26,7 +26,8 @@ html, body {
 }
 
 .accent-text{
-  color: #FF4081
+  color: #FF4081;
+  /*color: #F44336;*/
 }
 .accent {
   color: #607D8B;

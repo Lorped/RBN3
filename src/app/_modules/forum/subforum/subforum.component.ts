@@ -21,6 +21,7 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   lastPageLabel = 'Ultima pagina';
 
 
+
   nextPageLabel = 'Pag. successiva';
   previousPageLabel = 'Pag. precedente';
 
@@ -44,6 +45,8 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
 export class SubforumComponent implements OnInit{
 
 
+  pageSize = 5;
+
   
   displayedColumns: string[] = ['IDmessaggio'];
   dataSource: MatTableDataSource<Forumthread> ;
@@ -54,7 +57,11 @@ export class SubforumComponent implements OnInit{
 
   constructor(private route: ActivatedRoute, private forumService: ForumService, private router: Router, public status: Status){}
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+    if ( localStorage.getItem('RBN3page') !== undefined && localStorage.getItem('RBN3page') !== '' ) {
+      this.pageSize = Number(localStorage.getItem('RBN3page') );
+    }
+   }
 
   ngAfterViewInit() {
     const id = Number(this.route.snapshot.paramMap.get('id')! );
@@ -73,6 +80,14 @@ export class SubforumComponent implements OnInit{
     
   }
 
+  pagevent( event: any){
+    console.log(event);
+    if ( this.pageSize != event.PageSize ) {
 
+      localStorage.setItem("RBN3page", event.pageSize.toString());
+
+    }
+    
+  }
 
 }

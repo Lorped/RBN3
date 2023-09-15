@@ -79,48 +79,75 @@ if ($res['LivAccesso']>$MasterAdmin) {
 $out_content = [];
 
 //prima i pinned//
-$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT from Thread WHERE IDsottobacheca = '$id' and Pinned = 1 and OP = 0 ORDER BY Data DESC";
+$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT , '' as status from Thread WHERE IDsottobacheca = '$id' and Pinned = 1 and OP = 0 ORDER BY Data DESC";
 $Result = mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
 	$IDmessaggio = $res["IDmessaggio"];
 
+	$status = '';
+	$MySql3="SELECT * FROM Checkmessaggithread WHERE IDmessaggio = '$IDmessaggio' and IDutente = $Userid";
+	$Result3=mysqli_query($db, $MySql3);
+	$res3=mysqli_fetch_array($Result3);
+	$dataute=$res3['DataUltima'];
+	if ($dataute=='') {
+		$dataute = '1970-01-01 00:00:00'; 
+	}
+	if ($dataute < $res['Data']) {
+		$status='Nuovo';
+	}
 
 	$MySql2 = "SELECT  MAX(Data) as Data, DATE_FORMAT(MAX(Data),'%d %b - %H:%i') as DT  from Thread WHERE (OP = $IDmessaggio OR IDmessaggio = $IDmessaggio)";
 	$Result2 = mysqli_query($db, $MySql2);
 	$res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC);
 
-
-
-
 	$res["Data"]=$res2["Data"];
 	$res["DT"]=$res2["DT"];
 
-
-
+	if ( $status == '' && $dataute < $res['Data'] ) {
+		$status = 'Aggiornato';
+	}
+	
+	$res['status']=$status;
 
 	$out_content [] = $res;
 
 }
 
 //poi gli altri//
-$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT  from Thread WHERE IDsottobacheca = '$id' and Pinned = 0 and OP = 0 ORDER BY Data DESC";
+$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT , '' as status from Thread WHERE IDsottobacheca = '$id' and Pinned = 0 and OP = 0 ORDER BY DataReplyEdit DESC";
 $Result = mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
 	$IDmessaggio = $res["IDmessaggio"];
 
 
+	$status = '';
+	$MySql3="SELECT * FROM Checkmessaggithread WHERE IDmessaggio = '$IDmessaggio' and IDutente = $Userid";
+	$Result3=mysqli_query($db, $MySql3);
+	$res3=mysqli_fetch_array($Result3);
+	$dataute=$res3['DataUltima'];
+	if ($dataute=='') {
+		$dataute = '1970-01-01 00:00:00'; 
+	}
+	if ($dataute < $res['Data']) {
+		$status='Nuovo';
+	}
 
-	$MySql2 = "SELECT  MAX(Data) as Data, DATE_FORMAT(MAX(Data),'%d %b - %H:%i') as DT  from Thread WHERE (OP = $IDmessaggio OR IDmessaggio = $IDmessaggio)";
+
+	$MySql2 = "SELECT  MAX(Data) as Data, DATE_FORMAT(MAX(Data),'%d %b - %H:%i') as DT , '' as status from Thread WHERE (OP = $IDmessaggio OR IDmessaggio = $IDmessaggio)";
 	$Result2 = mysqli_query($db, $MySql2);
 	$res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC);
-
 
 
 	$res["Data"]=$res2["Data"];
 	$res["DT"]=$res2["DT"];
 
+	if ( $status == '' && $dataute < $res['Data'] ) {
+		$status = 'Aggiornato';
+	}
+	
+	$res['status']=$status;
 
 
 	$out_content [] = $res;
