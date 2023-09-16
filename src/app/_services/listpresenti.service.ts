@@ -36,7 +36,7 @@ export class ListpresentiService {
 
     const mialista = [];
 
-    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapresenti.php?id='+this.status.Userid).pipe(
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapresenti.php?id=' + this.status.Userid.toString() ).pipe(
     map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         const item = res[i];
@@ -52,7 +52,7 @@ export class ListpresentiService {
 
     const mialista = [];
 
-    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapginstanza.php?dove=' + stanza + '&but=' + but).pipe(
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapginstanza.php?dove=' + stanza.toString() + '&but=' + but.toString() ).pipe(
     map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         const item = res[i];

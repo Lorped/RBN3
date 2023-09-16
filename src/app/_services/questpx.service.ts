@@ -80,7 +80,7 @@ export class QuestpxService {
 
     const mialista = [];
 
-    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/quest.php?id=' + this.status.Userid).pipe(
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/quest.php?id=' + this.status.Userid.toString() ).pipe(
     map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         const item = res[i];
@@ -98,7 +98,7 @@ export class QuestpxService {
 
     const miologpx = new Logpx;
 
-    return this.http.get ('https://www.roma-by-night.it/RBN3/wsPHP/getlogpx.php?id=' + this.status.Userid).pipe(
+    return this.http.get ('https://www.roma-by-night.it/RBN3/wsPHP/getlogpx.php?id=' + this.status.Userid.toString() ).pipe(
     map((res: Logpx) => {
       miologpx.pxin = Number( res.pxin );
       miologpx.pxout = Number( res.pxout );
@@ -112,7 +112,7 @@ export class QuestpxService {
     interface Apx {
       px: number;
     }
-    return this.http.get ('https://www.roma-by-night.it/RBN3/wsPHP/getpx.php?id=' + this.status.Userid).pipe(
+    return this.http.get ('https://www.roma-by-night.it/RBN3/wsPHP/getpx.php?id=' + this.status.Userid.toString() ).pipe(
     map((res: Apx) => res.px));
   }
 

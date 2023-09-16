@@ -76,10 +76,18 @@ if ($res['LivAccesso']>$MasterAdmin) {
 
 
 
+$MySql4= "SELECT * from Checkmessaggiforum WHERE IDsottob = '$id' AND IDutente = '$Userid' ";
+$Result4 = mysqli_query($db, $MySql4);
+$res4 = mysqli_fetch_array($Result4);
+$DataInSottobacheca = $res4['DataUltima'];
+if ( $DataInSottobacheca == '') {
+	$DataInSottobacheca = "1970-01-01 00:00:00";
+}
+
 $out_content = [];
 
 //prima i pinned//
-$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT , '' as status from Thread WHERE IDsottobacheca = '$id' and Pinned = 1 and OP = 0 ORDER BY Data DESC";
+$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT , DATE_FORMAT(DataReplyEdit ,'%d %b - %H:%i') as DRT , '' as status , 0 as reply from Thread WHERE IDsottobacheca = '$id' and Pinned = 1 and OP = 0 ORDER BY Data DESC";
 $Result = mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
@@ -89,33 +97,40 @@ while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$MySql3="SELECT * FROM Checkmessaggithread WHERE IDmessaggio = '$IDmessaggio' and IDutente = $Userid";
 	$Result3=mysqli_query($db, $MySql3);
 	$res3=mysqli_fetch_array($Result3);
-	$dataute=$res3['DataUltima'];
-	if ($dataute=='') {
-		$dataute = '1970-01-01 00:00:00'; 
+	$dataInPost=$res3['DataUltima'];
+	if ($dataInPost=='') {
+		$dataInPost = '1970-01-01 00:00:00'; 
 	}
-	if ($dataute < $res['Data']) {
+	if ($DataInSottobacheca < $res['Data']) {
 		$status='Nuovo';
 	}
+	if ($DataInSottobacheca > $res['Data']  && $dataInPost < $res['Data'] ) {
+		$status='Non letto';
+	}
+	if ($dataInPost > $res['Data']  && $dataInPost < $res['DataReplyEdit'] ) {
+		$status='Aggiornato';
+	}
+	$res['status']=$status;
 
-	$MySql2 = "SELECT  MAX(Data) as Data, DATE_FORMAT(MAX(Data),'%d %b - %H:%i') as DT  from Thread WHERE (OP = $IDmessaggio OR IDmessaggio = $IDmessaggio)";
+	if ( $res['DataReplyEdit'] > $res['Data']){
+		$res["Data"]=$res["DataReplyEdit"];
+		$res["DT"]=$res["DRT"];
+	}
+
+
+	$MySql2 = "SELECT  count(*) as reply from Thread WHERE OP = $IDmessaggio ";
 	$Result2 = mysqli_query($db, $MySql2);
 	$res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC);
 
-	$res["Data"]=$res2["Data"];
-	$res["DT"]=$res2["DT"];
-
-	if ( $status == '' && $dataute < $res['Data'] ) {
-		$status = 'Aggiornato';
-	}
 	
-	$res['status']=$status;
+	$res['reply']=$res2['reply'];
 
 	$out_content [] = $res;
 
 }
 
 //poi gli altri//
-$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT , '' as status from Thread WHERE IDsottobacheca = '$id' and Pinned = 0 and OP = 0 ORDER BY DataReplyEdit DESC";
+$MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT , DATE_FORMAT(DataReplyEdit ,'%d %b - %H:%i') as DRT , '' as status , 0 as reply from Thread WHERE IDsottobacheca = '$id' and Pinned = 0 and OP = 0 ORDER BY DataReplyEdit DESC";
 $Result = mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
@@ -126,28 +141,36 @@ while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$MySql3="SELECT * FROM Checkmessaggithread WHERE IDmessaggio = '$IDmessaggio' and IDutente = $Userid";
 	$Result3=mysqli_query($db, $MySql3);
 	$res3=mysqli_fetch_array($Result3);
-	$dataute=$res3['DataUltima'];
-	if ($dataute=='') {
-		$dataute = '1970-01-01 00:00:00'; 
+	$dataInPost=$res3['DataUltima'];
+
+	// die ( "datainsottob " . $DataInSottobacheca . " creazione post " . $res['Data'] . " data in post " . $dataInPost . " ultimo reply " . $res['DataReplyEdit'] );
+
+	if ($dataInPost=='') {
+		$dataInPost = '1970-01-01 00:00:00'; 
 	}
-	if ($dataute < $res['Data']) {
+	if ($DataInSottobacheca < $res['Data']) {
 		$status='Nuovo';
 	}
+	if ($DataInSottobacheca > $res['Data']  && $dataInPost < $res['Data'] ) {
+		$status='Non letto';
+	}
+	if ($dataInPost > $res['Data']  && $dataInPost < $res['DataReplyEdit'] ) {
+		$status='Aggiornato';
+	}
+	$res['status']=$status;
+
+	if ( $res['DataReplyEdit'] > $res['Data']){
+		$res["Data"]=$res["DataReplyEdit"];
+		$res["DT"]=$res["DRT"];
+	}
 
 
-	$MySql2 = "SELECT  MAX(Data) as Data, DATE_FORMAT(MAX(Data),'%d %b - %H:%i') as DT , '' as status from Thread WHERE (OP = $IDmessaggio OR IDmessaggio = $IDmessaggio)";
+	$MySql2 = "SELECT  count(*) as reply from Thread WHERE OP = $IDmessaggio ";
 	$Result2 = mysqli_query($db, $MySql2);
 	$res2 = mysqli_fetch_array($Result2, MYSQLI_ASSOC);
 
-
-	$res["Data"]=$res2["Data"];
-	$res["DT"]=$res2["DT"];
-
-	if ( $status == '' && $dataute < $res['Data'] ) {
-		$status = 'Aggiornato';
-	}
 	
-	$res['status']=$status;
+	$res['reply']=$res2['reply'];
 
 
 	$out_content [] = $res;
@@ -155,6 +178,16 @@ while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
 }
 
+$MySql= "SELECT * from Checkmessaggiforum WHERE IDsottob = '$id' AND IDutente = '$Userid' ";
+$Result = mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
+if ( $res['DataUltima'] == '') {
+	$MySql= "INSERT INTO Checkmessaggiforum ( IDsottob, IDutente) VALUES ( '$id' , '$Userid' ) ";
+	mysqli_query($db, $MySql);
+} else {
+	$MySql= "UPDATE Checkmessaggiforum SET DataUltima = NOW() WHERE IDsottob = '$id' AND IDutente = '$Userid'  ";
+	mysqli_query($db, $MySql);
+}
 
 
 

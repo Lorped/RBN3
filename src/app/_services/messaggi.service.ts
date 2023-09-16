@@ -24,12 +24,12 @@ export class MessaggiService {
 
   constructor( private http: HttpClient ) { }
 
-  getcontatti (id: Number)  {
-    return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/getmessaggi1.php?id=' + id );
+  getcontatti (id: number)  {
+    return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/getmessaggi1.php?id=' + id.toString() );
   
   }
 
-  getmessaggi(contatto: Number) {
+  getmessaggi(contatto: number) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getmessaggi2.php', {
@@ -38,7 +38,7 @@ export class MessaggiService {
     } );
   }
 
-  getmessaggiclan(clanid: Number) {
+  getmessaggiclan(clanid: number) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getmessaggiclan.php', {
@@ -97,8 +97,8 @@ export class MessaggiService {
 
   }
 
-  contanuovimessaggi(id: Number)  {
-      return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/numnewmsg.php?id=' + id );  
+  contanuovimessaggi(id: number)  {
+      return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/numnewmsg.php?id=' + id.toString() );  
   }
 
 

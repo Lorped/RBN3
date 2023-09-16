@@ -35,7 +35,7 @@ export class ThreadComponent {
 
     this.forumService.getforumthread(this.id)
     .subscribe( (data) => {
-      console.log(data);
+      //console.log(data);
      
       this.Nomebacheca = data.NomeB;
       this.Nomemessaggio = data.NomeM;

@@ -18,22 +18,10 @@ export class ForumComponent implements OnInit {
       this.forum = data;
     });
 
-    //this.printpath('', this.router.config);
+
   }
 
 
- 
-  /*
-  printpath(parent: string, config: Route[]) {
-    for (let i = 0; i < config.length; i++) {
-      const route = config[i];
-      console.log(parent + '/' + route.path);
-      if (route.children) {
-        const currentPath = route.path ? `${parent}/${route.path}` : parent;
-        this.printpath(currentPath, route.children);
-      }
-    }
-  }
-  */
+
   
 }

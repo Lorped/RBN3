@@ -12,7 +12,7 @@
       <a [routerLink]="['subforum', sub.IDsottob  ]">
         <mat-card-header>
         <mat-card-title>{{sub.Nome}}</mat-card-title>
-        <mat-card-subtitle>Thread: {{sub.NumThread}} | Nuovi: {{sub.Nuovi}} | Ultimo: {{sub.UltimoInserimento}} </mat-card-subtitle> 
+        <mat-card-subtitle>Thread: {{sub.NumThread}} | <span  [ngClass]="{'accent-text': sub.Nuovi!=0}" > Nuovi: {{sub.Nuovi}} </span> | Ultimo: {{sub.UltimoInserimento}} </mat-card-subtitle> 
       </mat-card-header>
       </a>
     </mat-card>

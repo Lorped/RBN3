@@ -44,7 +44,7 @@ if ( CheckJWT ($token) ) {
 
 $testo=mysqli_real_escape_string($db, $testo);
 
-$MySql="INSERT INTO `Sms` (IDMittente, IDDestinatario, Testo) VALUES ($Userid, $contatto, '$testo')";
+$MySql="INSERT INTO `Sms` (IDMittente, IDDestinatario, Testo) VALUES ('$Userid', '$contatto', '$testo')";
 $Result=mysqli_query($db, $MySql);
 
 if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }

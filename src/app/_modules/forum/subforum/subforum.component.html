@@ -20,7 +20,11 @@
                     <span *ngIf="ft.status !='' ">
                         | <span class='accent-text'>{{ft.status}}</span>
                     </span>
-                    | Ultimo agg.to: {{ft.DT}}</mat-card-subtitle>
+                    | Ultimo agg.to: {{ft.DT}}
+                    <span *ngIf="ft.reply != 0 ">
+                    | Risposte: {{ft.reply}}
+                    </span>
+                </mat-card-subtitle>
                 <span class="spacer"></span>
                 <span *ngIf="ft.Pinned==1" ><mat-icon color="warn" class="icon-08x">pin_drop</mat-icon> </span>
                 <span *ngIf="ft.Chiuso==1"><mat-icon color="accent" class="icon-08x">lock</mat-icon> </span>
