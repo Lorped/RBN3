@@ -15,9 +15,18 @@ hr {
 
 .card-sec {
   padding-bottom: 1.2em;
-  height: 50vh !important;
+  /* height: 50vh !important; */
+  height: 25wh !important;
+  overflow: auto;
 }
 .col-sec {
   padding-left: 0.5em;
   padding-right: 0.5em;
+}
+
+mat-card-header {
+  font-size: 1em !important;
+}
+mat-card-subtitle {
+  font-size: 1em !important;
 }
