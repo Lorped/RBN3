@@ -31,7 +31,7 @@ export class ThreadComponent {
   ngAfterViewInit() {
     this.id = Number(this.route.snapshot.paramMap.get('idx')! );
 
-    console.log(this.id);
+    //console.log(this.id);
 
     this.forumService.getforumthread(this.id)
     .subscribe( (data) => {

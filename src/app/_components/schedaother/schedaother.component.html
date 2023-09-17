@@ -2,10 +2,56 @@
 
 
 <div class="container" *ngIf="status.MasterAdmin==0" >
+
+  <mat-card MatCardAppearance = 'raised'>
+    <mat-card-header>
+      <div mat-card-avatar class="avatar1" style="background-image: url('/assets/clan/round/{{myaPG.ClanImg}}');"></div>
+      <div mat-card-avatar class="avatar1" style="background-image: url('/assets/sette/{{myaPG.SettaImg}}');"></div>
+      <!--<mat-card-title-group>-->
+        <mat-card-title>{{myaPG.Nome}} {{myaPG.Cognome}}</mat-card-title>
+        <mat-card-subtitle>
+          <span class="accent-text">Clan:</span> {{myaPG.Clan}} | <span class="accent-text">Età app.:</span> {{myaPG.EtaA}}
+          <br>
+          <span class="accent-text">Descrizione:</span>
+          {{descrizione}}
+        </mat-card-subtitle>
+        <span class="spacer"></span>
+        <img mat-card-lg-image src="assets/{{myaPG.URLImg}}" >
+      <!--</mat-card-title-group>-->
+    </mat-card-header>
+    <mat-card-content>
+      A Roma da: {{myaPG.DataIscrizione | date:'dd.MM.yyyy'}}
+    </mat-card-content>
+  </mat-card>
+  <div class="container" style="margin-left: 0px; margin-right: 0px; margin-top: 1em;">
+    <div class="row">
+      <div class="col-8 col-sec">
+        <mat-card MatCardAppearance = 'raised' class="card-sec">
+          <mat-card-header>
+            <img src="assets/{{myaPG.ImgLG}}" style="width: 20vw;">
+          </mat-card-header>
+        </mat-card>
+      </div>
+      <div class="col-4 col-sec">
+        <mat-card MatCardAppearance = 'raised' class="card-sec">
+          <mat-card-header>
+            <mat-card-title>
+              <span class="accent-text">Annotazioni</span>
+            </mat-card-title>
+            <mat-card-subtitle>
+            {{annotazioni}}
+            </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <!---
   <div class="row">
     <div class="col-2"><img src="assets/{{myaPG.URLImg}}" height="130" width="130"></div>
     <div class="col">
-      <div class="container"> <!-- inizio container interno -->
+      <div class="container"> 
         <div class="row">
           <div class="col-1 red">Nome</div>
           <div class="col-3">{{myaPG.Nome}} {{myaPG.Cognome}}</div>
@@ -28,11 +74,11 @@
           <div class="col-2 red">A Roma da:</div>
           <div class="col">{{myaPG.DataIscrizione | date:'dd.MM.yyyy'}}</div>
         </div>
-      </div> <!-- fine container interno -->
+      </div> 
     </div>
   </div>
 </div>
-
+-->
 
 <div *ngIf="status.MasterAdmin!=0">
   <div class="container">

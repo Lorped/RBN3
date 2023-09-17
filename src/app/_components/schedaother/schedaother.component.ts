@@ -18,6 +18,7 @@ export class SchedaotherComponent implements OnInit {
 
   bio = '';
   descrizione = '';
+  annotazioni = '';
 
   today: number = (new Date()).getFullYear();
 
@@ -44,6 +45,7 @@ export class SchedaotherComponent implements OnInit {
 
       this.bio = data.pg.Background;
       this.descrizione = data.pg.Descrizione;
+      this.annotazioni = data.pg.Annotazioni;
 
     });
 

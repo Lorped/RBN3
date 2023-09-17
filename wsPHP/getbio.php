@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 include ('token.php');
 
 
@@ -59,14 +59,14 @@ if ( $id == $Userid || $MasterAdmin > 0 ) {
 
 
 if ( ! $full ) {
-	$MySql = "SELECT URLImg, Descrizione FROM Personaggio WHERE Userid='$id'";
+	$MySql = "SELECT URLImg, Descrizione, Annotazioni , ImgLG FROM Personaggio WHERE Userid='$id'";
 
 } else {
-	$MySql = "SELECT URLImg, Background, Descrizione FROM Personaggio WHERE Userid='$id'";
+	$MySql = "SELECT URLImg, Background, Descrizione, Annotazioni, ImgLG FROM Personaggio WHERE Userid='$id'";
 }
 
-$Result=mysql_query($MySql);
-$res = mysql_fetch_array($Result,MYSQL_ASSOC);
+$Result=mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result,MYSQLI_ASSOC);
 
 $out = [
 	'full' => $full,

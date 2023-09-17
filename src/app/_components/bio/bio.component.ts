@@ -12,9 +12,12 @@ import { NgForm } from '@angular/forms';
 export class BioComponent implements OnInit {
   @ViewChild('bioForm', { static: true }) bioForm: NgForm;
 
-  bio: string;
+
   descrizione: string;
+  annotazioni: string;
+  background: string;
   URLImg: string;
+  ImgLG: string;
 
   fileToUpload: File = null;
 
@@ -24,19 +27,22 @@ export class BioComponent implements OnInit {
 
     this.schedaService.getbio(this.status.Userid)
     .subscribe( (data: any) => {
-      this.bio = data.pg.Background;
       this.descrizione = data.pg.Descrizione;
+      this.annotazioni = data.pg.Annotazioni;
+      this.background = data.pg.Background;
       this.URLImg = data.pg.URLImg;
+      this.ImgLG = data.pg.ImgLG;
+      console.log(data.pg);
     });
 
   }
   //fileChange(files: FileList) {
-  fileChange(event: any) {
+  fileChange(event: any, id: number) {
     let files: FileList = event.target.files;
     if (files.length > 0) {
       const fileToUpload = files[0];
 
-      this.schedaService.putavatar(fileToUpload)
+      this.schedaService.putavatar(fileToUpload, id)
       .subscribe(res => {
           this.schedaService.getbio(this.status.Userid)
           .subscribe( (data: any) => {
@@ -49,7 +55,7 @@ export class BioComponent implements OnInit {
   }
 
   addbio() {
-    this.schedaService.addbio(this.bio, this.descrizione)
+    this.schedaService.addbio(this.background, this.descrizione, this.annotazioni)
     .subscribe( (data: any) => {
       this.bioForm.form.markAsPristine();
     });

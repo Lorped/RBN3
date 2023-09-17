@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  //MYSQLI //
 include ('token.php');
 
 
@@ -58,10 +58,11 @@ if ( $id == $Userid || $MasterAdmin > 0 ) {
 
 
 if ( ! $full ) {
-	$MySql = "SELECT Nome, Cognome, DataIscrizione, URLImg, EtaA, Clan FROM Personaggio
-	LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan WHERE Userid='$id'";
-	$Result=mysql_query($MySql);
-	$pg = mysql_fetch_array($Result,MYSQL_ASSOC);
+	$MySql = "SELECT Nome, Cognome, DataIscrizione, URLImg, EtaA, Clan, ClanImg, Setta, SettaImg , ImgLG FROM Personaggio
+	LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan 
+	LEFT JOIN Sette ON Personaggio.IDsetta = Sette.IDsetta WHERE Userid='$id'";
+	$Result=mysqli_query($db, $MySql);
+	$pg = mysqli_fetch_array($Result,MYSQLI_ASSOC);
 
 	$background=[];
 	$attr=[];
@@ -76,13 +77,13 @@ if ( $full ) {
 	    DataIscrizione ,
 			a1.Archetipo as Natura ,
 			a2.Archetipo as Carattere ,
-	 		Clan ,
+	 		Clan , ClanImg ,
 	    Sesso , Eta , EtaA , Personaggio.Generazione , PS , PSmax , FdV , FdVmax ,
 	    Valsentiero , DescSentiero ,
 	    Coscienza , Coraggio , SelfControl , Personaggio.IDsalute  ,
 	    daurto , aggravati , URLImg , Soldi ,
 			MaxStat ,	UsoPS,
-			DescSalute , ModSalute
+			DescSalute , ModSalute, Setta, SettaImg , ImgLG
 		FROM Personaggio
 			LEFT JOIN Sentieri ON Personaggio.IDsentiero = Sentieri.IDsentiero
 			LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan
@@ -90,9 +91,10 @@ if ( $full ) {
 			LEFT JOIN Archetipi AS a2 ON Personaggio.IDcarattere = a2.IDarchetipo
 			LEFT JOIN Generazioni ON Personaggio.Generazione = Generazioni.Generazione
 			LEFT JOIN Livelli_salute ON Personaggio.IDsalute = Livelli_salute.IDsalute
+			LEFT JOIN Sette ON Personaggio.IDsetta = Sette.IDsetta
 			WHERE Userid='$id'";
-	$Result=mysql_query($MySql);
-	$pg = mysql_fetch_array($Result,MYSQL_ASSOC);
+	$Result=mysqli_query($db, $MySql);
+	$pg = mysqli_fetch_array($Result,MYSQLI_ASSOC);
 
 	$MySql = "SELECT
 	Attributi.IDattributo , NomeAttributo , Tipologia , Livello
@@ -100,9 +102,9 @@ if ( $full ) {
 		LEFT JOIN Attributi_main ON Attributi.IDattributo = Attributi_main.IDattributo
 		WHERE Userid='$id'
 		ORDER BY Attributi.IDattributo ASC";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 	$attr=[];
-	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+	while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 		$attr[]=$res;
 	}
 
@@ -112,9 +114,9 @@ if ( $full ) {
 	 FROM Background
 		LEFT JOIN Background_main ON Background.IDbackground = Background_main.IDbackground
 		WHERE Userid='$id'";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 	$background=[];
-	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+	while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 		$background[]=$res;
 	}
 
@@ -126,9 +128,9 @@ if ( $full ) {
 		LEFT JOIN Discipline_main ON Discipline.IDdisciplina = Discipline_main.IDdisciplina
 		WHERE Userid='$id'
 		ORDER BY NomeDisc";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 	$discipline=[];
-	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+	while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 		$discipline[]=$res;
 	}
 
@@ -138,9 +140,9 @@ if ( $full ) {
 		LEFT JOIN Skill ON Skill_main.IDskill = Skill.IDskill and Skill.Userid='$id'
 		WHERE iniziale=1 OR Livello >0
 		ORDER BY Skill_main.IDskill ASC";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 	$skill=[];
-	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+	while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 		$skill[]=$res;
 	}
 

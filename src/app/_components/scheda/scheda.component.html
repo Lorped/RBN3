@@ -1,217 +1,234 @@
-
-<!--  base -->
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-2"><img src="assets/{{myaPG.URLImg}}" height="130" width="130"></div>
-    <div class="col">
-      <div class="container"> <!-- inizio container interno -->
-        <div class="row">
-          <div class="col-1 red">Nome</div>
-          <div class="col-3">{{myaPG.Nome}} {{myaPG.Cognome}}</div>
-          <div class="col-2 red">Clan</div>
-          <div class="col-2">{{myaPG.Clan}}</div>
-          <div class="col-2 alr red">Generazione</div>
-          <div class="col-2 alr">{{myaPG.Generazione}}</div>
-        </div>
-        <div class="row">
-          <div class="col">&nbsp;</div>
-          <div class="col">&nbsp;</div>
-          <div class="col red">Natura</div>
-          <div class="col">{{myaPG.Natura}}</div>
-          <div class="col red">Carattere</div>
-          <div class="col alr">{{myaPG.Carattere}}</div>
-        </div>
-        <div class="row">
-          <div class="col red">Età</div>
-          <div class="col">{{today-myaPG.Eta}}</div>
-          <div class="col-2 red">FdV</div>
-          <div class="col-2">{{myaPG.FdV}}/{{myaPG.FdVmax}}</div>
-          <div class="col-4 alr"><i *ngFor="let i of myaPG.FdVmax | times ; let ix = index" class="fa " [ngClass]="{'fa-circle dred': (ix < myaPG.FdV) , 'fa-times-circle white': ((ix+1 > myaPG.FdV) && (ix < myaPG.FdVmax)) }"></i><i *ngFor="let i of 10-myaPG.FdVmax | times " class="fa fa-circle white" ></i></div>
-        </div>
-        <div class="row">
-          <div class="col red">Età app.</div>
-          <div class="col">{{myaPG.EtaA}}</div>
-          <div class="col-2 red">Sentiero</div>
-          <div class="col-3">{{myaPG.DescSentiero }}</div>
-          <div class="col-3 alr"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myaPG.Valsentiero , 'dred': ix < myaPG.Valsentiero }"></i></div>
-        </div>
-
-        <div class="row">
-          <div class="col">&nbsp;</div>
-          <div class="col">&nbsp;</div>
-          <div class="col red">Liv.Salute</div>
-          <div class="col">{{myaPG.DescSalute}}  <span *ngIf="myaPG.ModSalute != 0">({{myaPG.ModSalute}})</span></div>
-          <div class="col-4 alr" *ngIf="myaPG.IDsalute > -1"><i *ngFor="let i of myaPG.daurto | times" class="fa fa-minus-square"></i><i *ngFor="let i of 7 - myaPG.IDsalute - myaPG.daurto - myaPG.aggravati | times" class="fa fa-check-square"></i><i *ngFor="let i of myaPG.aggravati | times" class="fa fa-check-square dred"></i><i *ngFor="let i of myaPG.IDsalute | times" class="fa fa-square"></i></div>
-        </div>
-        <div class="row">
-          <div class="col">&nbsp;</div>
-          <div class="col">&nbsp;</div>
-          <div class="col red">PS</div>
-          <div class="col-2">{{myaPG.PS}}/{{myaPG.PSmax}} ({{myaPG.UsoPS}}/turno)</div>
-          <div class="col-4 alr"><i *ngFor="let i of myaPG.PSmax | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > myaPG.PS , 'dred': ix < myaPG.PS }"></i></div>
-        </div>
-      </div> <!-- fine container interno -->
-    </div>
-  </div>
-</div>
+<mat-tab-group>
+  <mat-tab label="Scheda"> 
 
 
 
-<!--  ATTRIBUTI -->
-<div class="container">
-  <div class="row">
-    <div class="col"><hr></div>
-    <div class="col-2 alc bigf">Attributi</div>
-    <div class="col"><hr></div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <table class="full">
-        <tr *ngFor="let attr of myPG.listaAttributi">
-        <td *ngIf="attr.Tipologia == 'F'">{{attr.NomeAttributo}}</td>
-        <td *ngIf="attr.Tipologia == 'F'" class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-      </tr>
-      </table>
-    </div>
-    <div class="col">
-      <table class="full">
-        <tr *ngFor="let attr of myPG.listaAttributi">
-        <td *ngIf="attr.Tipologia == 'S'">{{attr.NomeAttributo}}</td>
-        <td *ngIf="attr.Tipologia == 'S'" class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-      </tr>
-      </table>
-    </div>
-    <div class="col">
-      <table class="full">
-        <tr *ngFor="let attr of myPG.listaAttributi">
-          <td *ngIf="attr.Tipologia == 'M'">{{attr.NomeAttributo}}</td>
-          <td *ngIf="attr.Tipologia == 'M'" class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>
+  <!--  base -->
+<p>&nbsp;</p>
 
-<!--  ABILITA' -->
-<div class="container">
-  <div class="row">
-    <div class="col"><hr></div>
-    <div class="col-2 alc bigf">
-      Abilità
-    </div>
-    <div class="col"><hr></div>
-  </div>
-  <div class="row">
-    <div class="col alc">
-      Fisiche
-    </div>
-    <div class="col alc">
-      Sociali
-    </div>
-    <div class="col alc">
-      Mentali
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <table class="full">
-        <tr *ngFor="let attr of myPG.listaSkill">
-          <td *ngIf="attr.Tipologia == '1'">{{attr.NomeSkill}}</td>
-          <td *ngIf="attr.Tipologia == '1'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-        </tr>
-      </table>
-    </div>
-    <div class="col">
-      <table class="full">
-        <tr *ngFor="let attr of myPG.listaSkill">
-          <td *ngIf="attr.Tipologia == '2'">{{attr.NomeSkill}}</td>
-          <td *ngIf="attr.Tipologia == '2'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-        </tr>
-      </table>
-    </div>
-    <div class="col">
-      <table class="full">
-        <tr *ngFor="let attr of myPG.listaSkill">
-          <td *ngIf="attr.Tipologia == '3'">{{attr.NomeSkill}}</td>
-          <td *ngIf="attr.Tipologia == '3'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-2"><img src="assets/{{myaPG.URLImg}}" height="130" width="130"></div>
+      <div class="col">
+        <div class="container"> <!-- inizio container interno -->
+          <div class="row">
+            <div class="col-1 accent-text">Nome</div>
+            <div class="col-3">{{myaPG.Nome}} {{myaPG.Cognome}}</div>
+            <div class="col-2 accent-text">Clan</div>
+            <div class="col-2">{{myaPG.Clan}}</div>
+            <div class="col-2 alr accent-text">Generazione</div>
+            <div class="col-2 alr">{{myaPG.Generazione}}</div>
+          </div>
+          <div class="row">
+            <div class="col">&nbsp;</div>
+            <div class="col">&nbsp;</div>
+            <div class="col accent-text">Natura</div>
+            <div class="col">{{myaPG.Natura}}</div>
+            <div class="col accent-text">Carattere</div>
+            <div class="col alr">{{myaPG.Carattere}}</div>
+          </div>
+          <div class="row">
+            <div class="col accent-text">Età</div>
+            <div class="col">{{today-myaPG.Eta}}</div>
+            <div class="col-2 accent-text">FdV</div>
+            <div class="col-2">{{myaPG.FdV}}/{{myaPG.FdVmax}}</div>
+            <div class="col-4 alr"><i *ngFor="let i of myaPG.FdVmax | times ; let ix = index" class="fa " [ngClass]="{'fa-circle dred': (ix < myaPG.FdV) , 'fa-times-circle white': ((ix+1 > myaPG.FdV) && (ix < myaPG.FdVmax)) }"></i><i *ngFor="let i of 10-myaPG.FdVmax | times " class="fa fa-circle white" ></i></div>
+          </div>
+          <div class="row">
+            <div class="col accent-text">Età app.</div>
+            <div class="col">{{myaPG.EtaA}}</div>
+            <div class="col-2 accent-text">Sentiero</div>
+            <div class="col-3">{{myaPG.DescSentiero }}</div>
+            <div class="col-3 alr"><i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myaPG.Valsentiero , 'dred': ix < myaPG.Valsentiero }"></i></div>
+          </div>
 
-<!-- VANTAGGI -->
-<div class="container">
-  <div class="row">
-    <div class="col"><hr></div>
-    <div class="col-2 alc bigf">
-      Vantaggi
-    </div>
-    <div class="col"><hr></div>
-  </div>
-  <div class="row">
-    <div class="col alc">
-      Discipline
-    </div>
-    <div class="col alc">
-      Background
-    </div>
-    <div class="col alc">
-      Virtù
+          <div class="row">
+            <div class="col">&nbsp;</div>
+            <div class="col">&nbsp;</div>
+            <div class="col accent-text">Liv.Salute</div>
+            <div class="col">{{myaPG.DescSalute}}  <span *ngIf="myaPG.ModSalute != 0">({{myaPG.ModSalute}})</span></div>
+            <div class="col-4 alr" *ngIf="myaPG.IDsalute > -1"><i *ngFor="let i of myaPG.daurto | times" class="fa fa-minus-square"></i><i *ngFor="let i of 7 - myaPG.IDsalute - myaPG.daurto - myaPG.aggravati | times" class="fa fa-check-square"></i><i *ngFor="let i of myaPG.aggravati | times" class="fa fa-check-square dred"></i><i *ngFor="let i of myaPG.IDsalute | times" class="fa fa-square"></i></div>
+          </div>
+          <div class="row">
+            <div class="col">&nbsp;</div>
+            <div class="col">&nbsp;</div>
+            <div class="col accent-text">PS</div>
+            <div class="col-2">{{myaPG.PS}}/{{myaPG.PSmax}} ({{myaPG.UsoPS}}/turno)</div>
+            <div class="col-4 alr"><i *ngFor="let i of myaPG.PSmax | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > myaPG.PS , 'dred': ix < myaPG.PS }"></i></div>
+          </div>
+        </div> <!-- fine container interno -->
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col">
-      <table class="full">
-        <tr *ngFor="let disc of myPG.listaDiscipline">
-          <td>{{disc.NomeDisc}}</td>
-          <td class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i></td>
-        </tr>
-      </table>
-      <table class="full" *ngIf="taum.length > 0">
-        <tr>
-          <td class="alc" colspan="2">Vie Taumaturgiche</td>
-        </tr>
-        <tr *ngFor="let t of taum">
-          <td>{{t.NomeTaum}}</td>
-          <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > t.Livello , 'dred': ix < t.Livello }"></i></td>
-        </tr>
-      </table>
-      <table class="full" *ngIf="necro.length > 0">
-        <tr>
-          <td class="alc" colspan="2">Vie Necromantiche</td>
-        </tr>
-        <tr *ngFor="let t of necro">
-          <td>{{t.NomeNecro}}</td>
-          <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > t.Livello , 'dred': ix < t.Livello }"></i></td>
-        </tr>
-      </table>
+
+
+
+  <!--  ATTRIBUTI -->
+  <div class="container">
+    <div class="row">
+      <div class="col"><hr></div>
+      <div class="col-2 alc bigf">Attributi</div>
+      <div class="col"><hr></div>
     </div>
-    <div class="col">
-      <table class="full">
-        <tr *ngFor="let bg of myPG.listaBackground">
-          <td>{{bg.NomeBackground}}</td>
-          <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > bg.LivelloBG , 'dred': ix < bg.LivelloBG }"></i></td>
+    <div class="row">
+      <div class="col">
+        <table class="full">
+          <tr *ngFor="let attr of myPG.listaAttributi">
+          <td *ngIf="attr.Tipologia == 'F'">{{attr.NomeAttributo}}</td>
+          <td *ngIf="attr.Tipologia == 'F'" class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
         </tr>
-      </table>
-    </div>
-    <div class="col">
-      <table class="full">
-        <tr>
-          <td>Coscienza</td>
-          <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coscienza , 'dred': ix < myPG.aPG.Coscienza }"></i></td>
+        </table>
+      </div>
+      <div class="col">
+        <table class="full">
+          <tr *ngFor="let attr of myPG.listaAttributi">
+          <td *ngIf="attr.Tipologia == 'S'">{{attr.NomeAttributo}}</td>
+          <td *ngIf="attr.Tipologia == 'S'" class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
         </tr>
-        <tr>
-          <td>SelfControl</td>
-          <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.SelfControl , 'dred': ix < myPG.aPG.SelfControl }"></i></td>
-        </tr>
-        <tr>
-          <td>Coraggio</td>
-          <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coraggio , 'dred': ix < myPG.aPG.Coraggio }"></i></td>
-        </tr>
-      </table>
+        </table>
+      </div>
+      <div class="col">
+        <table class="full">
+          <tr *ngFor="let attr of myPG.listaAttributi">
+            <td *ngIf="attr.Tipologia == 'M'">{{attr.NomeAttributo}}</td>
+            <td *ngIf="attr.Tipologia == 'M'" class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+
+  <!--  ABILITA' -->
+  <div class="container">
+    <div class="row">
+      <div class="col"><hr></div>
+      <div class="col-2 alc bigf">
+        Abilità
+      </div>
+      <div class="col"><hr></div>
+    </div>
+    <div class="row">
+      <div class="col alc">
+        Fisiche
+      </div>
+      <div class="col alc">
+        Sociali
+      </div>
+      <div class="col alc">
+        Mentali
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <table class="full">
+          <tr *ngFor="let attr of myPG.listaSkill">
+            <td *ngIf="attr.Tipologia == '1'">{{attr.NomeSkill}}</td>
+            <td *ngIf="attr.Tipologia == '1'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col">
+        <table class="full">
+          <tr *ngFor="let attr of myPG.listaSkill">
+            <td *ngIf="attr.Tipologia == '2'">{{attr.NomeSkill}}</td>
+            <td *ngIf="attr.Tipologia == '2'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col">
+        <table class="full">
+          <tr *ngFor="let attr of myPG.listaSkill">
+            <td *ngIf="attr.Tipologia == '3'">{{attr.NomeSkill}}</td>
+            <td *ngIf="attr.Tipologia == '3'" class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > attr.Livello , 'dred': ix < attr.Livello }"></i></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- VANTAGGI -->
+  <div class="container">
+    <div class="row">
+      <div class="col"><hr></div>
+      <div class="col-2 alc bigf">
+        Vantaggi
+      </div>
+      <div class="col"><hr></div>
+    </div>
+    <div class="row">
+      <div class="col alc">
+        Discipline
+      </div>
+      <div class="col alc">
+        Background
+      </div>
+      <div class="col alc">
+        Virtù
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <table class="full">
+          <tr *ngFor="let disc of myPG.listaDiscipline">
+            <td>{{disc.NomeDisc}}</td>
+            <td class="alr"> <i *ngFor="let i of myaPG.MaxStat | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > disc.LivelloDisc , 'dred': ix < disc.LivelloDisc }"></i></td>
+          </tr>
+        </table>
+        <table class="full" *ngIf="taum.length > 0">
+          <tr>
+            <td class="alc" colspan="2">Vie Taumaturgiche</td>
+          </tr>
+          <tr *ngFor="let t of taum">
+            <td>{{t.NomeTaum}}</td>
+            <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > t.Livello , 'dred': ix < t.Livello }"></i></td>
+          </tr>
+        </table>
+        <table class="full" *ngIf="necro.length > 0">
+          <tr>
+            <td class="alc" colspan="2">Vie Necromantiche</td>
+          </tr>
+          <tr *ngFor="let t of necro">
+            <td>{{t.NomeNecro}}</td>
+            <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > t.Livello , 'dred': ix < t.Livello }"></i></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col">
+        <table class="full">
+          <tr *ngFor="let bg of myPG.listaBackground">
+            <td>{{bg.NomeBackground}}</td>
+            <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > bg.LivelloBG , 'dred': ix < bg.LivelloBG }"></i></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col">
+        <table class="full">
+          <tr>
+            <td>Coscienza</td>
+            <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coscienza , 'dred': ix < myPG.aPG.Coscienza }"></i></td>
+          </tr>
+          <tr>
+            <td>SelfControl</td>
+            <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.SelfControl , 'dred': ix < myPG.aPG.SelfControl }"></i></td>
+          </tr>
+          <tr>
+            <td>Coraggio</td>
+            <td class="alr"> <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > myPG.aPG.Coraggio , 'dred': ix < myPG.aPG.Coraggio }"></i></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<!----------  FINE SCHEDA -->
+  </mat-tab>
+
+  <mat-tab label="Bio e Descrizione">
+    <app-bio></app-bio>
+  </mat-tab>
+
+
+  <mat-tab label="Oggetti">
+
+  </mat-tab>
+</mat-tab-group>

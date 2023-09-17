@@ -79,20 +79,22 @@ export class SchedaService {
     });
   }
 
-  addbio (bio: string, descrizione: string) {
+  addbio (bio: string, descrizione: string, annotazioni: string) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/addbio.php', {
       token: user,
       bio: bio,
-      descr: descrizione
+      descr: descrizione,
+      annotazioni: annotazioni
     });
   }
 
-  putavatar(fileToUpload: File) {
+  putavatar(fileToUpload: File, id: number) {
     const formData: FormData = new FormData();
     const user = sessionStorage.getItem('RBN3currentUser') ;
     formData.append('token', user);
+    formData.append('id', id.toString());
     formData.append('fileKey', fileToUpload, fileToUpload.name);
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/putavatar.php', formData ).pipe(
       map(() => { return  true;} ))

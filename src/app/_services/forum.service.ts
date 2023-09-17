@@ -34,6 +34,9 @@ export class Forumthread {
   Chiuso: number = 0;
   Pinned: number = 0;
   status = '';
+  DataReplyEdit = '';
+  DDT = '';
+  reply = 0;
 }
 
 @Injectable({

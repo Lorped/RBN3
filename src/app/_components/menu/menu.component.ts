@@ -52,9 +52,11 @@ export class MenuComponent implements OnInit {
     if ( id === 'modalpx') {
       this.status.pxon = true ;
     }
+    /**
     if ( id === 'modalbio') {
       this.status.bioon = true ;
     }
+    **/
     if ( id === 'modalanagrafe') {
       this.status.anagon = true ;
     }

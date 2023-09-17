@@ -36,3 +36,6 @@
   font-size: 40px;
   padding: 16px 32px;
 }
+.no-p-l {
+  padding-left: 0;
+}

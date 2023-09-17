@@ -26,6 +26,7 @@ $request = json_decode($postdata);
 $token=$request->token;
 $bio=$request->bio;
 $descr=$request->descr;
+$annotazioni=$request->annotazioni;
 
 $Userid=-1;
 
@@ -46,9 +47,10 @@ if ( CheckJWT ($token) ) {
 
 $bio=mysqli_real_escape_string($db, $bio);
 $descr=mysqli_real_escape_string($db, $descr);
+$annotazioni=mysqli_real_escape_string($db, $annotazioni);
 
 
-$MySql="UPDATE Personaggio SET Background='$bio' , Descrizione='$descr' WHERE Userid='$Userid' ";
+$MySql="UPDATE Personaggio SET Background='$bio' , Descrizione='$descr', Annotazioni = '$annotazioni' WHERE Userid='$Userid' ";
 $Result=mysqli_query($db, $MySql);
 
 

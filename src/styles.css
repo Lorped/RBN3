@@ -63,7 +63,8 @@ html, body {
 }
 
 .dred {
-  color: #b00000;
+  /* color: #b00000; */
+  color: #AD1457;
 }
 .dgreen {
   color: #228B22;
@@ -131,4 +132,8 @@ html, body {
 
 .icon-08x {
   transform: scale(0.8);
+}
+
+.avatar1 {
+  background-size: cover;
 }

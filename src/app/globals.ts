@@ -48,12 +48,15 @@ export class Basicpg {
   // public IDrazza = 0;
   // public IDclan = 0;
   public Clan = ''; // from LEFT Join
+  public ClanImg = ''; // from LEFT Join
+  public Setta = ''; // from LEFT Join
+  public SettaImg = ''; // from LEFT Join
   public Sesso = '';
   public Eta = 0;
   public EtaA = 0;
   public Generazione = 0;
-  public PS = 0;  // inutile, andrà eliminato
-  public PSmax = 0; // inutile, andrà eliminato
+  public PS = 0;  
+  public PSmax = 0; 
   public FdV = 0;
   public FdVmax = 0;
   public Valsentiero = 0;
@@ -71,6 +74,8 @@ export class Basicpg {
   public DescSalute = ''; // from LEFT Join
   public ModSalute = 0; // from LEFT Join
   public Taumaturgo = 0;
+  public ImgLG = '';
+  public Annotazioni = '';
   // V5 da Eliminare
   public Sete;
   public BloodP = 0;  // from LEFT JOIN da BloodPotency
@@ -132,7 +137,6 @@ export class Status {
   // menuState = 'out';
   schedaon = false ;
   pxon = false;
-  bioon = false;
   anagon = false;
   poterion = false;         // DA CANCELLARE
   sceltapoterion = false;  // DA CANCELLARE
