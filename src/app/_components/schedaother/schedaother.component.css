@@ -18,6 +18,7 @@ hr {
   /* height: 50vh !important; */
   height: 25wh !important;
   overflow: auto;
+  aspect-ratio: 2/3;
 }
 .col-sec {
   padding-left: 0.5em;
