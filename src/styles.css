@@ -110,7 +110,7 @@ html, body {
 }
 
 .newl { 
-  white-space:pre-wrap; 
+  white-space:pre-line; 
   word-wrap: break-word;
 }
 
@@ -136,4 +136,8 @@ html, body {
 
 .avatar1 {
   background-size: cover;
+}
+
+.jcc {
+  justify-content: center;
 }

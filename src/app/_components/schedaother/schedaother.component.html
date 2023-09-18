@@ -16,7 +16,7 @@
           {{descrizione}}
         </mat-card-subtitle>
         <span class="spacer"></span>
-        <img mat-card-lg-image src="assets/{{myaPG.URLImg}}" >
+        <img mat-card-md-image src="assets/{{myaPG.URLImg}}" >
       <!--</mat-card-title-group>-->
     </mat-card-header>
     <mat-card-content>
@@ -25,21 +25,23 @@
   </mat-card>
   <div class="container" style="margin-left: 0px; margin-right: 0px; margin-top: 1em;">
     <div class="row">
-      <div class="col-8 col-sec">
+      <div class="col-6 col-sec">
         <mat-card MatCardAppearance = 'raised' class="card-sec">
-          <mat-card-header>
-            <img src="assets/{{myaPG.ImgLG}}" style="width: 20vw;">
+          <mat-card-header class="jcc">
+            <span *ngIf="myaPG.ImgLG != 'img400-500.png'">
+              <img src="assets/{{myaPG.ImgLG}}" style="width: 20vw;">
+            </span>
           </mat-card-header>
         </mat-card>
       </div>
-      <div class="col-4 col-sec">
+      <div class="col-6 col-sec">
         <mat-card MatCardAppearance = 'raised' class="card-sec">
           <mat-card-header>
             <mat-card-title>
               <span class="accent-text">Annotazioni</span>
             </mat-card-title>
           </mat-card-header>
-            <mat-card-content class="card-sec">
+            <mat-card-content class="card-sec newl" style="height: 23vw; overflow: scroll;">
             {{annotazioni}}
             </mat-card-content>
 
