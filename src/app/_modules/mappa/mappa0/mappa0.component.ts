@@ -41,7 +41,8 @@ export class Mappa0Component implements OnInit {
       detectRetina: true
     })],
     zoom:1,
-    center: latLng( 41.9046, 12.4858 ),
+    //center: latLng( 41.9046, 12.4858 ),
+    center: latLng( 41.9046, 12.4758 ),
     attributionControl: false
   };
   

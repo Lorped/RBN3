@@ -181,32 +181,46 @@
             <router-outlet></router-outlet>
           </div>
 
-          <div class="col-2" style="height: 80vh;">
+          <div class="col-3" style="height: 80vh;">
 
             <div class="container">
               <div class="row" >
-                <div class="col">
-                  <app-toolvari></app-toolvari>
+                <div class="col-11">
+
+                  <!------->
+                  <div class="container">
+                    <div class="row" >
+                      <div class="col">
+                        <app-toolvari></app-toolvari>
+                      </div>
+                    </div>
+                    <div class="row" >
+                      <div class="col">
+                        <app-luoghi></app-luoghi>    
+                      </div>
+                    </div>
+                    <div class="row" >
+                      <div class="col">
+                        <app-presenti></app-presenti>               
+                      </div>
+                    </div>
+                  </div>
+                <!------->
                 </div>
-              </div>
-              <div class="row" >
-                <div class="col">
-                  <app-presenti></app-presenti>
-                </div>
-              </div>
-              <div class="row" >
-                <div class="col">
-                  <app-luoghi></app-luoghi>
+                <div class="col-1">
+                  &nbsp;
                 </div>
               </div>
             </div>
 
           </div>
 
+          <!--
           <div class="col-1" >
             &nbsp;
           </div>
-        
+          -->
+
         </div>
       </div>
     </div>

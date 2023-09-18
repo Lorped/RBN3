@@ -26,11 +26,11 @@
     font-size: 13px;
 }
 
-.messaggioF { color: #FF00FF; }
-.messaggioM { color: #1874cd; }
-.ora { color: red; }
+.messaggioF { color: #ec407a; }
+.messaggioM { color: #7986cb; }
+.ora { color: #E91E63; }
 .testo {}
-.suss{ color: #333333 !important; background-color: #cccccc}
+.suss{ color: #424242 !important; background-color: #cccccc}
 .bold { font-weight: bold;}
 .master { color: #00ccff; font-weight: bold;}
 .adm { color: #f00000; font-weight: bold; }
@@ -40,5 +40,9 @@
 }
 
 .btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
-    background-color: #f00000 !important;
+    background-color: #E91E63 !important;
 }
+
+a:link {
+    color:inherit;
+ }

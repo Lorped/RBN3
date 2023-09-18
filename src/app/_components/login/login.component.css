@@ -35,3 +35,7 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+  background-color: #E91E63 !important;
+}
