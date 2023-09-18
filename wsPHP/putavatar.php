@@ -22,6 +22,8 @@ include ('token.php');
 
 
 $token=$_POST['token'];
+$id=$_POST['id'];
+
 
 /*
 $id=$_GET['id'];
@@ -47,8 +49,12 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
+if ( $id == 1 ){
+	$target_path = "/web/htdocs/www.roma-by-night.it/home/RBN3/assets/imgs/";
+} else {
+	$target_path = "/web/htdocs/www.roma-by-night.it/home/RBN3/assets/imgs-lg/";
+}
 
-$target_path = "/web/htdocs/www.roma-by-night.it/home/RBN3/assets/imgs/";
 $filename=urlencode ( basename( $_FILES['fileKey']['name']) );
 
 $ext = pathinfo($filename, PATHINFO_EXTENSION);
@@ -65,12 +71,21 @@ die();
 
 $rc=move_uploaded_file($_FILES['fileKey']['tmp_name'], $newfile);
 
-$target_path = "imgs/";
+if ( $id == 1 ){
+	$target_path = "imgs/";
+} else {
+	$target_path = "imgs-lg/";
+}
 $newfile=$target_path.$Userid.'.'.$ext;
 
+if ( $id == 1 ){
+	$MySql="UPDATE Personaggio SET URLImg = '$newfile' WHERE Userid = '$Userid' ";
+	$Result=mysqli_query($db, $MySql);
+} else {
+	$MySql="UPDATE Personaggio SET ImgLG = '$newfile' WHERE Userid = '$Userid' ";
+	$Result=mysqli_query($db, $MySql);
+}
 
-$MySql="UPDATE Personaggio SET URLImg = '$newfile' WHERE Userid = '$Userid' ";
-$Result=mysqli_query($db, $MySql);
 
 header("HTTP/1.1 200 OK");
 $out=[];

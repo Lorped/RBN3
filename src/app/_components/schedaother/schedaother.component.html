@@ -29,19 +29,19 @@
         <mat-card MatCardAppearance = 'raised' class="card-sec">
           <mat-card-header class="jcc">
             <span *ngIf="myaPG.ImgLG != 'img400-500.png'">
-              <img src="assets/{{myaPG.ImgLG}}" style="width: 20vw;">
+              <img src="assets/{{myaPG.ImgLG}}" style="max-width: 100%;">
             </span>
           </mat-card-header>
         </mat-card>
       </div>
       <div class="col-6 col-sec">
-        <mat-card MatCardAppearance = 'raised' class="card-sec">
+        <mat-card MatCardAppearance = 'raised' class="card-sec" style="height: 22.2vw;">
           <mat-card-header>
             <mat-card-title>
               <span class="accent-text">Annotazioni</span>
             </mat-card-title>
           </mat-card-header>
-            <mat-card-content class="card-sec newl" style="height: 23vw; overflow: scroll;">
+            <mat-card-content class="card-sec newl" style="overflow: scroll;">
             {{annotazioni}}
             </mat-card-content>
 

@@ -27,10 +27,10 @@
   </div>
 
   <div class="row">
-    <div class="col-8">
+    <div class="col-6">
       <div class="img-overlay alc" >
         <label for="avatar2">
-          <img src="assets/{{ImgLG}}" width="20vw" class="avatar">
+          <img src="assets/{{ImgLG}}" max-width="100%" class="avatar">
           <div class="overlay">
             <span class="text-overlay fa fa-upload" ></span>
           </div>
@@ -39,7 +39,7 @@
       <input id="avatar2" name="avatar2" type="file" accept="image/*" style="display:none;" (change)="fileChange($event,2)" >
     </div>
 
-    <div class="col-4 no-p-l">
+    <div class="col-6 no-p-l">
       <div class="container np-p-l"> <!-- inizio container interno -->
         <div class="form-group row">
           <label for="idnote" class="accent-text">Annotazioni</label>
