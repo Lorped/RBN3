@@ -1,8 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators, NgForm, FormGroupDirective,AbstractControl } from '@angular/forms';
 import { Attributo, Clan, Archetipo } from '../../../globals';
 import { SignupService } from '../../../_services/signup.service';
 import { Router } from '@angular/router';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+import { Observable, of } from 'rxjs';
+
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 
 @Component({
@@ -14,7 +26,9 @@ import { Router } from '@angular/router';
 
 export class Registra1Component implements OnInit {
 
-  registrationForm: UntypedFormGroup;
+  matcher = new MyErrorStateMatcher();
+
+  registrationForm: FormGroup;
 
   archetipi: Array<Archetipo> = [];
   clan: Array<Clan> = [];
@@ -45,41 +59,45 @@ export class Registra1Component implements OnInit {
     let olddatastring: string;
 
 
-    this.registrationForm = new UntypedFormGroup ({
-      nomePG: new UntypedFormControl('', [
+    this.registrationForm = new FormGroup ({
+      nomePG: new FormControl('', [
         Validators.required,
         Validators.pattern('^[A-Za-zàèìòù]+$')
       ]),
 
-      cognomePG: new UntypedFormControl('', [
+      cognomePG: new FormControl('', [
         Validators.pattern('^[A-Za-zàèìòù \']+$')
       ]),
 
-      etaPG: new UntypedFormControl('1980', [
+      etaPG: new FormControl(1980, [
         Validators.required,
-        Validators.min(1900),
-        Validators.max(this.today - 16)
+        Validators.min(1890),
+        Validators.max(this.today - 18)
+      ], [
+        this.validateEta.bind(this)
       ]),
 
-      etaAPG: new UntypedFormControl('', [
+      etaAPG: new FormControl(20, [
         Validators.required,
-        Validators.min(16),
-        Validators.max(80)
+        Validators.min(18),
+        Validators.max(60)
+      ], [
+        this.validateEta.bind(this)
       ]),
 
-      naturaPG: new UntypedFormControl('', [
-        Validators.required,
-      ]),
-
-      clanPG: new UntypedFormControl('', [
-        Validators.required,
-      ]),
-
-      caratterePG: new UntypedFormControl('', [
+      naturaPG: new FormControl('', [
         Validators.required,
       ]),
 
-      Sesso: new UntypedFormControl('', [
+      clanPG: new FormControl('', [
+        Validators.required,
+      ]),
+
+      caratterePG: new FormControl('', [
+        Validators.required,
+      ]),
+
+      Sesso: new FormControl('', [
         Validators.required
       ])
 
@@ -233,4 +251,15 @@ export class Registra1Component implements OnInit {
     this.router.navigate(['/registra/2']);
   }
 
+
+  validateEta (control: AbstractControl) : Observable<any> {
+    
+    
+    
+    const esito = (this.registrationForm == undefined) || (this.today - this.etaPG.value >this.etaAPG.value) ? null : { erroreeta: true };
+     
+    //const esito = null;
+    //console.log("here");
+    return of(esito);
+  }
 }

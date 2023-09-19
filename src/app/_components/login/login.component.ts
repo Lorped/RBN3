@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../_services/index';
 import { Router } from '@angular/router';
 
+
 import { Status } from '../../globals';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +13,21 @@ import { Status } from '../../globals';
 })
 export class LoginComponent implements OnInit {
 
-  loginCredentials = { email: '' , password: '' };
+  // loginCredentials = { email: '' , password: '' };
+
+  loginForm = new FormGroup ({
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]),
+    password: new FormControl('', [
+      Validators.required
+    ]),
+  });
+
+  hide = true ; //visualizzazione passwd
   errmsg = '';
-  returnUrl: string;
+  error = false;
 
   constructor (private authenticationService: AuthenticationService, private router: Router , private status: Status) { }
 
@@ -22,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin() {
-    this.authenticationService.login(this.loginCredentials.email, this.loginCredentials.password)
+    this.authenticationService.login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
         data => {
           this.status.Stanza = 0;
@@ -32,7 +46,13 @@ export class LoginComponent implements OnInit {
           this.status.Ongame = 'S';
         },
         error => {
-          this.errmsg = error.statusText;
+          if (error.status = 401 ){
+            this.errmsg = "Errore di autenticazione";  
+          } else {
+            this.errmsg = error.statusText;
+          }
+          
+          this.error = true;
         });
   }
 

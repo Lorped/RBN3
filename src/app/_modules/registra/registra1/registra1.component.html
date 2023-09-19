@@ -5,85 +5,85 @@
   <span>Roma by Night </span>
 </mat-toolbar>
 
+<div class="mx-auto" style="width: 50vw; margin-top: 10vh;">
+  <mat-card MatCardAppearance="raised" style="background: transparent;" >
+    <mat-card-title>
+      <span class="dred"><h2>Dati Iniziali del Personaggio</h2></span>
+    </mat-card-title>
+    <mat-card-content>
 
+    <form [formGroup]="registrationForm" #reg1Form="ngForm">
 
-<div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em; margin-top: 20px;">
-  <div class="row justify-content-center">
-    <div class="col">
-      <h3 class="dred alc">Dati Iniziali del Personaggio</h3>
-    </div>
-  </div>
+      <mat-form-field class="full">
+        <input  matInput formControlName="nomePG" id="nomePG"  placeholder="Nome" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="nomePG.hasError('required')">Inserire un nome</mat-error>
+        <mat-error *ngIf="nomePG.hasError('pattern') && !nomePG.hasError('required')">Solo caratteri alfabetici senza spazi</mat-error>
+      </mat-form-field>
 
+      <mat-form-field class="full">
+        <input  matInput formControlName="cognomePG" id="cognomePG"  placeholder="Cognome" [errorStateMatcher]="matcher">
 
+        <mat-error *ngIf="cognomePG.hasError('pattern') && !cognomePG.hasError('required')">Solo caratteri alfabetici, spazi e singolo apice</mat-error>
+      </mat-form-field>
 
-  <div class="row justify-content-center">
-    <div class="col-10">
-  <form [formGroup]="registrationForm" #reg1Form="ngForm">
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="nomePg">Nome</label>
-          <input id="nomePg" name="nomePg" class="form-control" type="text" placeholder="Nome" required formControlName="nomePG">
-          <div *ngIf="nomePG.invalid && (nomePG.dirty || nomePG.touched)" class="alert alert-danger" color="red">
-            <div *ngIf="nomePG.errors['required']">Inserire un nome</div>
-            <div *ngIf="nomePG.errors['pattern']">Solo caratteri alfabetici senza spazi</div>
-          </div>
+      <div class="row">
+        <div class="col-2">
+          <mat-form-field class="full">
+            <mat-label>Clan</mat-label>
+            <mat-select id="clanPG"  formControlName="clanPG">
+              <mat-option *ngFor="let i of clan" [value]="i.IDclan">{{i.NomeClan}}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-        <div class="form-group col">
-          <label for="cognomePg">Cognome</label>
-          <input id="cognomePg" name="cognomePg" class="form-control" type="text" placeholder="Cognome" formControlName="cognomePG">
-          <div *ngIf="cognomePG.invalid && (cognomePG.dirty || cognomePG.touched)" class="alert alert-danger" color="red">
-            <div *ngIf="cognomePG.errors['pattern']">Solo caratteri alfabetici, spazi e singolo apice</div>
-          </div>
+        <div class="col-2">
+          <mat-form-field class="full">
+            <mat-label>Sesso</mat-label>
+            <mat-select id="sessoPG"   formControlName="Sesso">
+              <mat-option [value]='F'>F</mat-option>
+              <mat-option [value]='M'>M</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
+        <div class="col-2">
+          <mat-form-field class="full">
+            <mat-label>Anno di nascità</mat-label>
+            <input matInput id="etaPG"  type="number" placeholder=1980   min=1890 max=2006 formControlName="etaPG"[errorStateMatcher]="matcher" >
+            <mat-error *ngIf="etaPG.hasError('required')">Inserire un anno di nascita</mat-error>
+            <mat-error *ngIf="etaPG.hasError('max')">Troppo giovane</mat-error>
+            <mat-error *ngIf="etaPG.hasError('min')">Troppo anziano.</mat-error>
+            <mat-error *ngIf="etaPG.hasError('erroreeta')">Troppo giovane</mat-error> 
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field class="full">
+            <mat-label>Età abbraccio</mat-label>
+            <input matInput id="etaAPg"  type="number" placeholder=20  min=18 max=60 formControlName="etaAPG"[errorStateMatcher]="matcher" >
+              <mat-error *ngIf="etaAPG.hasError('required')">Inserire un anno di nascita</mat-error>
+              <mat-error *ngIf="etaAPG.hasError('max')||etaPG.hasError('min')">Età ammessa: 18 - 60 anni</mat-error>
+              <mat-error *ngIf="etaAPG.hasError('erroreeta')">Troppo anziano</mat-error>        
+            </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field class="full">
+            <mat-label>Natura</mat-label>
+            <mat-select id="naturaPG"  formControlName="naturaPG">
+              <mat-option *ngFor="let i of archetipi" [value]="i.IDarchetipo">{{i.Archetipo}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field class="full">
+            <mat-label>Catattere</mat-label>
+            <mat-select id="caratterePG"  formControlName="caratterePG">
+              <mat-option *ngFor="let i of archetipi" [value]="i.IDarchetipo">{{i.Archetipo}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>    
       </div>
-      <div class="form-row">
-        <div class="form-group col-3">
-          <label for="clanPG">Clan</label>
-          <select id="clanPG" name="clanPG" class="form-control" required formControlName="clanPG">
-          <option *ngFor="let i of clan" [ngValue]="i.IDclan">{{i.NomeClan}}</option>
-          </select>
-        </div>
-        <div class="form-group col-1">
-          <label for="sessoPG">Sesso</label>
-          <select id="sessoPG" name="sessoPG" class="form-control" required formControlName="Sesso">
-            <option [ngValue]='F'>F</option>
-            <option [ngValue]='M'>M</option>
-          </select>
-        </div>
-        <div class="form-group col-2">
-          <label for="etaPg">Anno di nascita</label>
-          <input id="etaPg" name="etaPg" type="number" class="form-control"  placeholder=1950 required  min=1900 max=2018 formControlName="etaPG">
-            <div *ngIf="etaPG.invalid && (etaPG.dirty || etaPG.touched)" class="alert alert-danger" color="red">
-              <div *ngIf="etaPG.errors['required']">Inserire un anno di nascita</div>
-              <div *ngIf="etaPG.errors['max']">Troppo giovane</div>
-              <div *ngIf="etaPG.errors['min']">Troppo anziano. Per vampiri più vecchi di un secolo contattare la narrazione</div>
-            </div>
-        </div>
-        <div class="form-group col-2">
-          <label for="etaAPg">Età Abbraccio</label>
-          <input id="etaAPg" name="etaAPg" type="number" class="form-control" placeholder="20" required min=16 max=80 formControlName="etaAPG">
-          <div *ngIf="etaAPG.invalid && (etaAPG.dirty || etaAPG.touched)" class="alert alert-danger" color="red">
-            <div *ngIf="etaAPG.errors['required']">Inserire una età</div>
-            <div *ngIf="etaAPG.errors['min']||etaAPG.errors['max']">Età ammessa: 16 - 80 anni</div>
-          </div>
-          <div *ngIf=" (2018 - etaPG.value < etaAPG.value ) && (etaAPG.dirty || etaAPG.touched)" class="alert alert-danger">
-            <div>Troppo anziano per l'anno di nascita</div>
-          </div>
-        </div>
-        <div class="form-group col-2">
-          <label for="naturaPG">Natura</label>
-          <select id="naturaPG" name="naturaPG" class="form-control" required formControlName="naturaPG">
-            <option *ngFor="let i of archetipi" [ngValue]="i.IDarchetipo">{{i.Archetipo}}</option>
-          </select>
-        </div>
-        <div class="form-group col-2">
-          <label for="caratterePG">Carattere</label>
-          <select id="caratterePG" name="caratterePG" class="form-control" required formControlName="caratterePG">
-            <option *ngFor="let i of archetipi" [ngValue]="i.IDarchetipo">{{i.Archetipo}}</option>
-          </select>
-        </div>
-      </div>
-  </form>
+
+
+    <div class="container full" style="color: white; background-color: #424242d9;">
+
       <!--  ATTRIBUTI -->
 
       <div class="row">
@@ -158,7 +158,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <button type="button" [disabled]="!reg1Form.form.valid || !formOK || (2018 - etaPG.value < etaAPG.value )" (click)="goto2()" class="btn btn-danger btn-block btn-sm">Prosegui</button>
+            <button type="button" [disabled]="!reg1Form.form.valid || !formOK " (click)="goto2()" class="btn btn-danger full btn-sm">Prosegui</button>
             <div class="alc"><a [routerLink]="['/login']" class="btn btn-link">Torna al login</a></div>
           </div>
         </div>
@@ -176,6 +176,11 @@
 
 
     </div>
-  </div>
+  
 
+
+
+    </form>
+    </mat-card-content>
+  </mat-card>
 </div>

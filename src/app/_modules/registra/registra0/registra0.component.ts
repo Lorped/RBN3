@@ -1,9 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormControl, UntypedFormGroup, Validators, AbstractControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+import { Observable, of } from 'rxjs';
 
 import { SignupService } from '../../../_services/signup.service';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-registra0',
@@ -16,6 +27,8 @@ export class Registra0Component implements OnInit {
 
   registrationForm: UntypedFormGroup;
 
+  matcher = new MyErrorStateMatcher();
+
 
   constructor( private signupService: SignupService , private router: Router  ) { }
 
@@ -23,24 +36,26 @@ export class Registra0Component implements OnInit {
 
 
     this.registrationForm = new UntypedFormGroup ({
-      regemail: new UntypedFormControl('', [
+      regemail: new FormControl('', [
         Validators.required,
         Validators.email
       ], [
         this.validateEmailNotTaken.bind(this)
       ]),
 
-      password: new UntypedFormControl('', [
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
         Validators.pattern('^.*((\\d.*[a-zA-Z])|([a-zA-Z].*\\d)).*$')
       ]),
 
-      password2: new UntypedFormControl('', [
+      password2: new FormControl('', [
         Validators.required
+      ], [
+        this.passworduguali.bind(this)
       ]),
 
-      check: new UntypedFormControl('', [
+      check: new FormControl('', [
         Validators.required
       ])
     });
@@ -64,6 +79,10 @@ export class Registra0Component implements OnInit {
     map(res => {
       return res === 'OK' ? null : { emailTaken: true };
     }));
+  }
+  passworduguali (control: AbstractControl) : Observable<any> {
+    const esito = this.password.value == this.password2.value ? null : { pwddiverse: true };
+    return of(esito);
   }
 
   goto1() {

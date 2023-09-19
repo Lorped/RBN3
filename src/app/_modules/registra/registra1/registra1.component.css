@@ -31,10 +31,21 @@ hr {
     background-color: #f02618;
 }
 
+/***
 .ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
+  border-left: 5px solid #42A948; 
 }
 
 .ng-invalid:not(form)  {
-  border-left: 5px solid #a94442; /* red */
+  border-left: 5px solid #a94442; 
+}
+
+***/
+mat-card-title {
+  justify-content: center;
+  display: flex;
+}
+
+mat-card-content {
+  font-size: 0.8em;
 }

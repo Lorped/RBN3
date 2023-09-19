@@ -5,55 +5,56 @@
   <span>Roma by Night </span>
 </mat-toolbar>
 
+<div class="mx-auto" style="width: 30vw; margin-top: 10vh;">
+<mat-card MatCardAppearance="raised" style="background: transparent;" >
+  <mat-card-title>
+    <span class="dred"><h2>Registrazione e Creazione Personaggio</h2></span>
+  </mat-card-title>
+  <mat-card-content>
+
+    <form  [formGroup]="registrationForm" #formDir="ngForm">
+
+      <mat-form-field class="full">
+        <input  matInput formControlName="regemail" id="regemail"  placeholder="Inserire email (login)" [errorStateMatcher]="matcher">
+
+        <mat-error *ngIf="regemail.hasError('required')">Inserire una email</mat-error>
+        <mat-error *ngIf="regemail.hasError('email') && !regemail.hasError('required')">Inserire una email valida</mat-error>
+        <mat-error *ngIf="regemail.hasError('emailTaken')">Email già presente</mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field class="full">
+        <input matInput formControlName="password" id="password" type="password"  placeholder="Password" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="password.hasError('required')">Inserire la password</mat-error>
+        <mat-error *ngIf="password.hasError('pattern')">Solo caratteri alfanumerici, almeno una lettera e un numero</mat-error>
+        <mat-error *ngIf="password.hasError('minlength')">La lunghezza minima è 8 caratteri</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full">
+        <input matInput formControlName="password2" id="password2" type="password"  placeholder="Ripetere la password"  [errorStateMatcher]="matcher">
+        <mat-error *ngIf="password2.hasError('pwddiverse') ">Le due password non coincidono</mat-error>
+      </mat-form-field>
+
+
+
+      <div class="white" color="white" font-size="1em;">
+        In ottemperanza al Regolamento UE 2016/679 (GDPR) e alla normativa sulla protezione dei dati personali si informa che:<br>
+        l’indirizzo email verrà registrato come dato di login per l’accesso al sito e per l’eventuale recupero della password; titolare del trattamento dati è il gestore del sito www.roma-by-night.it; l’email sarà registrato nel database del sito, locato nella UE; le informazioni non verranno comunicate a entità terze ma solo trattate in modo automatico durante il login e durante i backup periodici; la conservazione del dato (indirizzo email) è relativa solo al tempo di mantenimento di una utenza sul sito RBN, al termine del quale tale record verrà cancellato; gli utenti possono in ogni istante autonomamente modificare l’email o richiederne la cancellazione, in quest’ultimo caso verrà contestualmente cancellata l’utenza.
+      </div>
+      <div class="form-group">
+          <input id="Check1" class="btn-check"  type="checkbox" formControlName="check" required>
+          <label class="btn btn-sm btn-outline-primary" for="Check1">Accetto</label>
+      </div>
+
+      <div class="form-group">
+        <button type="button" [disabled]="!formDir.form.valid || password2.value != password.value" (click)="goto1()" class="btn btn-danger full">Prosegui</button>
+        <div class="alc">
+          <a [routerLink]="['/login']" class="btn btn-link">Torna al login</a>
+        </div>
+      </div>
+
+    
   
-<div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em; margin-top: 20px;">
-  <div class="row justify-content-center">
-    <div class="col-6">
-      <h3 class="dred">Registrazione e Creazione Personaggio</h3>
-      <form  [formGroup]="registrationForm" #formDir="ngForm">
-        <div class="form-group">
-          <label for="regEmail">Indirizzo Email (login)</label>
-          <input id="regEmail" class="form-control" type="email" formControlName="regemail" placeholder="Inserire email">
-          <div *ngIf="regemail.invalid && (regemail.dirty || regemail.touched)" class="alert alert-danger" color="red">
-            <div *ngIf="regemail.errors['required']">Inserire una email</div>
-            <div *ngIf="regemail.errors['email']">Inserire una email valida</div>
-            <div *ngIf="regemail.errors['emailTaken']">Email già presente</div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="password1">Password</label>
-          <input id="password1" class="form-control" type="password" formControlName="password" placeholder="Password">
-          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger" color="red">
-            <div *ngIf="password.errors['required']">Inserire la password</div>
-            <div *ngIf="password.errors['pattern']">Solo caratteri alfanumerici, almeno una lettera e un numero</div>
-            <div *ngIf="password.errors['minlength']">La lunghezza minima è 8 caratteri</div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="password2">Ripetere la password</label>
-          <input id="password2" class="form-control" type="password" formControlName="password2" placeholder="Password" >
-          <div *ngIf=" password2.value != password.value && (password2.dirty || password2.touched)" class="alert alert-danger">
-            <div>Le due password non coincidono</div>
-          </div>
-        </div>
-        <div class="form-group">
-          In ottemperanza al Regolamento UE 2016/679 (GDPR) e alla normativa sulla protezione dei dati personali si informa che:<br>
-l’indirizzo email verrà registrato come dato di login per l’accesso al sito e per l’eventuale recupero della password; titolare del trattamento dati è il gestore del sito www.roma-by-night.it; l’email sarà registrato nel database del sito, locato nella UE; le informazioni non verranno comunicate a entità terze ma solo trattate in modo automatico durante il login e durante i backup periodici; la conservazione del dato (indirizzo email) è relativa solo al tempo di mantenimento di una utenza sul sito RBN, al termine del quale tale record verrà cancellato; gli utenti possono in ogni istante autonomamente modificare l’email o richiederne la cancellazione, in quest’ultimo caso verrà contestualmente cancellata l’utenza.
-        </div>
-        <div class="form-check">
-            <input id="Check1" class="form-check-input"  type="checkbox" formControlName="check" required>
-            <label class="form-check-label" for="Check1">Accetto</label>
-        </div>
-        <div class="form-group">
-          <p></p>
-            <button type="button" [disabled]="!formDir.form.valid || password2.value != password.value" (click)="goto1()" class="btn btn-danger btn-block">Prosegui</button>
-            <div class="alc">
-              <a [routerLink]="['/login']" class="btn btn-link">Torna al login</a>
-            </div>
-        </div>
-      </form>
-    </div>
-  </div>
   <div class="row">
     <div class="col">&nbsp;</div>
   </div>
@@ -67,4 +68,8 @@ l’indirizzo email verrà registrato come dato di login per l’accesso al sito
   <div class="row">
     <div class="col">&nbsp;</div>
   </div>
+
+</form>
+</mat-card-content>
+</mat-card>
 </div>
