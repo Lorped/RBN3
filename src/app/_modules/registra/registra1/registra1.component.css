@@ -49,3 +49,16 @@ mat-card-title {
 mat-card-content {
   font-size: 0.8em;
 }
+
+
+
+.colleft {
+  padding-right: 0.3em !important;
+}
+.colcent {
+  padding-left: 0.3em !important;
+  padding-right: 0.3em !important;
+}
+.colright {
+  padding-left: 0.3em !important;
+}

@@ -5,7 +5,7 @@
   <span>Roma by Night </span>
 </mat-toolbar>
 
-<div class="mx-auto" style="width: 50vw; margin-top: 10vh;">
+<div class="mx-auto" style="width: 60vw; margin-top: 10vh;">
   <mat-card MatCardAppearance="raised" style="background: transparent;" >
     <mat-card-title>
       <span class="dred"><h2>Dati Iniziali del Personaggio</h2></span>
@@ -27,7 +27,7 @@
       </mat-form-field>
 
       <div class="row">
-        <div class="col-2">
+        <div class="col-2 colleft">
           <mat-form-field class="full">
             <mat-label>Clan</mat-label>
             <mat-select id="clanPG"  formControlName="clanPG">
@@ -35,7 +35,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-2 colcent">
           <mat-form-field class="full">
             <mat-label>Sesso</mat-label>
             <mat-select id="sessoPG"   formControlName="Sesso">
@@ -44,7 +44,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-2 colcent">
           <mat-form-field class="full">
             <mat-label>Anno di nascità</mat-label>
             <input matInput id="etaPG"  type="number" placeholder=1980   min=1890 max=2006 formControlName="etaPG"[errorStateMatcher]="matcher" >
@@ -54,7 +54,7 @@
             <mat-error *ngIf="etaPG.hasError('erroreeta')">Troppo giovane</mat-error> 
           </mat-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-2 colcent">
           <mat-form-field class="full">
             <mat-label>Età abbraccio</mat-label>
             <input matInput id="etaAPg"  type="number" placeholder=20  min=18 max=60 formControlName="etaAPG"[errorStateMatcher]="matcher" >
@@ -63,7 +63,7 @@
               <mat-error *ngIf="etaAPG.hasError('erroreeta')">Troppo anziano</mat-error>        
             </mat-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-2 colcent">
           <mat-form-field class="full">
             <mat-label>Natura</mat-label>
             <mat-select id="naturaPG"  formControlName="naturaPG">
@@ -71,7 +71,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-2 colright">
           <mat-form-field class="full">
             <mat-label>Catattere</mat-label>
             <mat-select id="caratterePG"  formControlName="caratterePG">
@@ -146,9 +146,6 @@
         <div class="col">&nbsp;</div>
       </div>
 
-      <div class="row">
-        <div class="col">&nbsp;</div>
-      </div>
       <div class="row">
          <div class="col"> <span *ngIf="formOK" class="fa fa-check dgreen"></span> Distribuire <span class="red">7</span> pallini in una categoria di attributi (mentali, fisici o sociali), <span class="red">5</span> in una categoria secondaria e <span class="red">3</span> nella rimanente terziaria</div> 
        </div>
