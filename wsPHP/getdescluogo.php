@@ -16,37 +16,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db2.inc.php');  //MYSQLI //
+include ('db2.inc.php'); // MYSQLI //
 include ('token.php');
 
-$Userid=$_GET['id'];
-
+$Dove=$_GET['id'];
+// $token=$_GET['token'];
 
 $out=[];
-$pxin=0;
-$pxout=0;
 
-$MySql="SELECT sum(px) as somma FROM Quest  WHERE Userid='$Userid' AND Status='OK' ";
-$Result=mysqli_query($db, $MySql);
-$res=mysqli_fetch_array($Result);
-$pxin=$res['somma'];
+$Mysql="SELECT ID, Breve, Descrizione, Immagine FROM Mappa WHERE ID = $Dove";
+$Results=mysqli_query($db, $Mysql);
+while ( $res = mysqli_fetch_array($Results,MYSQLI_ASSOC)   ) {
 
-$MySql="SELECT sum(px) as somma FROM Logpx  WHERE Userid='$Userid' ";
-$Result=mysqli_query($db, $MySql);
-$res=mysqli_fetch_array($Result);
-$pxout=$res['somma'];
-
-$MySql="SELECT *  FROM Logpx  WHERE Userid='$Userid' ORDER BY IDlog DESC";
-$Result = mysqli_query($db, $MySql);
-while ($res=mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 	$out [] =$res;
 }
 
-$out = [
-"px" => $pxin-$pxout
-];
 
-header("HTTP/1.1 200 OK");
+
+
 echo json_encode ($out, JSON_UNESCAPED_UNICODE);
 
 

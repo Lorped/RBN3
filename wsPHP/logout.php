@@ -16,38 +16,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db2.inc.php');  //MYSQLI //
+include ('db2.inc.php');
 include ('token.php');
 
-$Userid=$_GET['id'];
+
+$postdata = file_get_contents("php://input");
+$request = json_decode($postdata);
+
+$token=$request->token;
 
 
-$out=[];
-$pxin=0;
-$pxout=0;
+$Userid=-1;
 
-$MySql="SELECT sum(px) as somma FROM Quest  WHERE Userid='$Userid' AND Status='OK' ";
-$Result=mysqli_query($db, $MySql);
-$res=mysqli_fetch_array($Result);
-$pxin=$res['somma'];
 
-$MySql="SELECT sum(px) as somma FROM Logpx  WHERE Userid='$Userid' ";
-$Result=mysqli_query($db, $MySql);
-$res=mysqli_fetch_array($Result);
-$pxout=$res['somma'];
-
-$MySql="SELECT *  FROM Logpx  WHERE Userid='$Userid' ORDER BY IDlog DESC";
-$Result = mysqli_query($db, $MySql);
-while ($res=mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
-	$out [] =$res;
+if ( CheckJWT ($token) ) {
+	$xx=GetJWT($token);
+	$payload=json_decode($xx);
+	$Userid= $payload->Userid;
+	$MasterAdmin= $payload->MasterAdmin;
+	$NomeCognome= $payload->NomeCognome;
+	$Sesso= $payload->Sesso;
+} else {
+	header("HTTP/1.1 401 Unauthorized");
+	$out=[];
+	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
+	die ();
 }
 
-$out = [
-"px" => $pxin-$pxout
-];
+$MySql = "UPDATE Presenti  SET UltimoRefresh = '1970-01-01 00:00:01'  WHERE Userid = $Userid ";
+mysqli_query($db, $MySql);
 
-header("HTTP/1.1 200 OK");
+$out = [];
 echo json_encode ($out, JSON_UNESCAPED_UNICODE);
-
 
 ?>

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');   // MYSQLI //
 include ('token.php');
 
 $Userid=$_GET['id'];
@@ -27,18 +27,18 @@ $pxin=0;
 $pxout=0;
 
 $MySql="SELECT sum(px) as somma FROM Quest  WHERE Userid='$Userid' AND Status='OK' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxin=$res['somma'];
 
 $MySql="SELECT sum(px) as somma FROM Logpx  WHERE Userid='$Userid' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxout=$res['somma'];
 
 $MySql="SELECT *  FROM Logpx  WHERE Userid='$Userid' ORDER BY IDlog DESC";
-$Result = mysql_query($MySql);
-while ($res=mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+$Result = mysqli_query($db, $MySql);
+while ($res=mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 	$out [] =$res;
 }
 

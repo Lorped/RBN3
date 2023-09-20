@@ -26,6 +26,14 @@ export class AuthenticationService {
 
   logout() {
     // remove user from local storage to log user out
-    sessionStorage.removeItem('RBN3currentUser');
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/logout.php', {
+      token: user,
+    }).subscribe( ()=> {
+      sessionStorage.removeItem('RBN3currentUser');
+    });
+
+
   }
 }

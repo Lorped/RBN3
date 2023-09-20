@@ -40,4 +40,6 @@ export class MapService {
   getmarker()  {
     return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/getmarker.php');
   }
+
+
 }

@@ -23,23 +23,38 @@
 </div>
 -->
 
-<mat-card style="min-height: 25vh;" MatCardAppearance="raised">
-    <mat-card-title style="text-align: center; font-size: 1em;" class="accent-text" >
+<mat-card  MatCardAppearance="raised">
+    <mat-card-title  class="accent-text" >
       Luoghi limitrofi
     </mat-card-title>
   <mat-card-content>
-<div  >
-  <hr>
-  <div *ngFor="let ll of listaluoghi"   [ngClass]="{'full': ll.Tipo == 'Padre' || ll.Tipo == 'Extra' ,'half': ll.Tipo =='Std'}" style="display:inline-block;">
-    <span *ngIf="ll.Tipo == 'Padre' || ll.Tipo == 'Entra'">
-      <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-up blue"></span>{{ll.Breve}}</button>
-    </span>
-    <span *ngIf="ll.Tipo == 'Std' && ll.NomeMappa != null ">
-      <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right red"></span>{{ll.Breve}}</button>
-    </span>
-    <span *ngIf="ll.Tipo == 'Std' && ll.NomeMappa == null ">
-      <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right gold"></span>{{ll.Breve}}</button>
-    </span>
+  <div>
+    <hr>
+    <div id="container">
+      <!--
+      <div *ngFor="let ll of listaluoghi"   [ngClass]="{'full': ll.Tipo == 'Padre' || ll.Tipo == 'Extra' ,'half': ll.Tipo =='Std'}" style="display:inline-block;">
+      <span *ngIf="ll.Tipo == 'Padre' || ll.Tipo == 'Entra'">
+        <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-up blue"></span>{{ll.Breve}}</button>
+      </span>
+      <span *ngIf="ll.Tipo == 'Std' && ll.NomeMappa != null ">
+        <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right red"></span>{{ll.Breve}}</button>
+      </span>
+      <span *ngIf="ll.Tipo == 'Std' && ll.NomeMappa == null ">
+        <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right gold"></span>{{ll.Breve}}</button>
+      </span>
+    </div>
+    -->
+    <div *ngFor="let ll of listaluoghi"    style="display:inline-block;">
+      <span *ngIf="ll.Tipo == 'Padre' || ll.Tipo == 'Entra'">
+        <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-up blue"></span>{{ll.Breve}}</button>
+      </span>
+      <span *ngIf="ll.Tipo == 'Std' && ll.NomeMappa != null ">
+        <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right red"></span>{{ll.Breve}}</button>
+      </span>
+      <span *ngIf="ll.Tipo == 'Std' && ll.NomeMappa == null ">
+        <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right gold"></span>{{ll.Breve}}</button>
+      </span>
+    </div>
   </div>
 </div>
 </mat-card-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {  Router, NavigationEnd } from '@angular/router';
+import { ListpresentiService } from '../../_services/index';
 
 
 
@@ -29,11 +30,11 @@ export class LuoghiComponent implements OnInit {
 
   listaluoghi: Array<Luogo>;
 
-  constructor( private status: Status , private http: HttpClient , private router: Router) {
+  constructor( private status: Status , private http: HttpClient , private router: Router, private presentiservice: ListpresentiService ) {
     this.router.events.subscribe((val) => {
       // see also 
       if (val instanceof NavigationEnd == true ) {
-        console.log("IN = ", this.status.Stanza);
+        //console.log("IN = ", this.status.Stanza);
         this.getLuoghi();
       }
 
@@ -43,7 +44,7 @@ export class LuoghiComponent implements OnInit {
 
   ngOnInit() {
      
-
+    //console.log("here");
     this.getLuoghi();
   }
 
@@ -73,11 +74,17 @@ export class LuoghiComponent implements OnInit {
 
     this.status.Alive = false;
 
-    if ( newmap === null  ) {
-      this.router.navigate(['/chat/' + newloc]);
-    } else {
-      this.router.navigate(['/mappa/' + newmap]);
-    }
-    this.getLuoghi();
+    this.presentiservice.moveto(newloc).subscribe( () => {
+      
+      if ( newmap === null  ) {
+        this.router.navigate(['/chat/' + newloc]);
+      } else {
+        this.router.navigate(['/mappa/' + newmap]);
+      }
+      this.getLuoghi();
+
+    });
+
+
   }
 }

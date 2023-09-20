@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ListpresentiService , Presenti } from '../../_services/index';
-import { IntervalObservable } from 'rxjs/observable/IntervalObservable';
+import { EmitterService, ListpresentiService , Presenti } from '../../_services/index';
+
+import { interval } from 'rxjs';
 import { Status } from '../../globals';
 
 @Component({
@@ -15,7 +16,7 @@ export class PresentiComponent implements OnInit {
   listapresenti: Array<Presenti>;
   numeropresenti: number;
 
-  constructor( private listpresentiService: ListpresentiService, public status: Status ) { }
+  constructor( private listpresentiService: ListpresentiService, public status: Status , private emitter: EmitterService) { }
 
   ngOnInit() {
 
@@ -31,7 +32,8 @@ export class PresentiComponent implements OnInit {
       console.log(error);
     });
     
-    IntervalObservable.create(90000)
+    // IntervalObservable.create(90000)
+    interval(90000)
     .subscribe(() => {
       this.listpresentiService.getpresenti()
       .subscribe(data => {
@@ -39,6 +41,27 @@ export class PresentiComponent implements OnInit {
         this.numeropresenti = data.length;
       });
     });
+
+    this.emitter.emitOnNavEnd().subscribe( () => {
+      
+      
+      this.listpresentiService.getpresenti()
+      .subscribe(data => {
+        this.listapresenti = data;
+        this.numeropresenti = data.length;
+        
+      });
+    });
+    this.emitter.emitOnNavSkipped().subscribe( () => {
+      
+      this.listpresentiService.getpresenti()
+      .subscribe(data => {
+        this.listapresenti = data;
+        this.numeropresenti = data.length;
+        
+      });
+    });
+
   }
 
 }

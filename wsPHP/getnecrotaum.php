@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 include ('token.php');
 
 
@@ -36,8 +36,8 @@ $MySql="SELECT
 	WHERE Userid = '$Userid'
 	ORDER BY Principale DESC";
 
-$Result=mysql_query($MySql);
-while ($res=mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+$Result=mysqli_query($db, $MySql);
+while ($res=mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 	$taum [] =$res;
 	/* no "principale" per le taumaturgie /*
 	/*
@@ -48,8 +48,8 @@ while ($res=mysql_fetch_array($Result,MYSQL_ASSOC) ) {
 	*/
 }
 $MySql="SELECT LivelloDisc FROM Discipline WHERE IDdisciplina= 15 AND Userid = '$Userid'";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $Tmaxlev=$res['LivelloDisc'];
 
 
@@ -60,8 +60,8 @@ $MySql="SELECT
 	WHERE Userid = '$Userid'
 	ORDER BY Principale DESC";
 
-$Result=mysql_query($MySql);
-while ($res=mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+$Result=mysqli_query($db, $MySql);
+while ($res=mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 	$necro [] =$res;
 	if ($res['Principale'] == "S") {
 		$Nprincipale=$res['IDnecro'];

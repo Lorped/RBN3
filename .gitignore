@@ -47,3 +47,5 @@ Thumbs.db
 codice.txt
 
 .angular/cache/*
+
+src/assets/loc/*

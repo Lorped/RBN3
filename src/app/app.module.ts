@@ -60,6 +60,8 @@ import { MessaggiComponent } from './_components/messaggi/messaggi.component';
 import { ReadmessaggiComponent } from './_components/readmessaggi/readmessaggi.component';
 import { ReadmessaggiclanComponent } from './_components/readmessaggiclan/readmessaggiclan.component';
 import { ToolvariComponent } from './_components/toolvari/toolvari.component';
+import { DescluogoComponent } from './_components/descluogo/descluogo.component';
+import { EmitterService } from './_services/emitter.service';
 
 
 
@@ -87,6 +89,7 @@ import { ToolvariComponent } from './_components/toolvari/toolvari.component';
     ReadmessaggiComponent,
     ReadmessaggiclanComponent,
     ToolvariComponent,
+    DescluogoComponent,
 
 
 
@@ -121,6 +124,7 @@ import { ToolvariComponent } from './_components/toolvari/toolvari.component';
     SignupService,
     AnagrafeService,
     MessaggiService,
+    EmitterService,
     AuthGuard,
     Status
   ],

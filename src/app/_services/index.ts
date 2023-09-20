@@ -11,3 +11,4 @@ export * from './anagrafe.service';
 export * from './messaggi.service';
 export * from './map.service';
 export * from './forum.service';
+export * from './emitter.service';

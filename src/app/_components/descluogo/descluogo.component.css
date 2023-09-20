@@ -1,0 +1,12 @@
+mat-card-title {
+    font-size: 1em !important;
+  }
+  
+  mat-card-subtitle {
+    font-size: 0.8em;
+  }
+mat-card {
+    /*background: transparent; */
+    background-color: #42424255;
+    height: 12vh !important;
+}

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php'); //MYSQLI//
 include ('token.php');
 
 
@@ -58,13 +58,13 @@ $MySql = "SELECT
 		LEFT JOIN Discipline ON Discipline_main.IDdisciplina = Discipline.IDdisciplina AND Userid = '$id'
 		WHERE  LivelloDisc IS NULL AND Acquisibile = 1";
 
-$Result=mysql_query($MySql);
-while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC) ) {
+$Result=mysqli_query($db, $MySql);
+while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
 	$testdisc=$res['IDdisciplina'];
 	$MySql2="SELECT * FROM Personaggio LEFT JOIN Clan ON Personaggio.IDclan=Clan.IDclan
 		WHERE Userid='$id' AND ( Disc1 = '$testdisc' OR Disc2 = '$testdisc' OR Disc3 = '$testdisc' ) ";
-	$Result2=mysql_query($MySql2);
-	if ( $res2=mysql_fetch_array($Result2) ) {
+	$Result2=mysqli_query($db, $MySql2);
+	if ( $res2=mysqli_fetch_array($Result2) ) {
 		$res['DiClan'] = 'S';
 	} else {
 		$res['DiClan'] = 'N';
