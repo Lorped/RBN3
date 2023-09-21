@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {  Router, NavigationEnd } from '@angular/router';
-import { ListpresentiService } from '../../_services/index';
+import { EmitterService, ListpresentiService } from '../../_services/index';
 
 
 
 // import 'rxjs/add/operator/map' ;
 import {Status} from '../../globals';
+import { Subscription } from 'rxjs';
 
 export class Luogo {
   Tipo: string;
@@ -29,23 +30,18 @@ export class Luogo {
 export class LuoghiComponent implements OnInit {
 
   listaluoghi: Array<Luogo>;
+  sub1: Subscription;
 
-  constructor( private status: Status , private http: HttpClient , private router: Router, private presentiservice: ListpresentiService ) {
-    this.router.events.subscribe((val) => {
-      // see also 
-      if (val instanceof NavigationEnd == true ) {
-        //console.log("IN = ", this.status.Stanza);
-        this.getLuoghi();
-      }
-
-    });
-
-   }
+  constructor( private status: Status , private http: HttpClient , private router: Router, private presentiservice: ListpresentiService , private emitter: EmitterService) { }
 
   ngOnInit() {
      
     //console.log("here");
     this.getLuoghi();
+
+    this.sub1 = this.emitter.emitOnNavEnd().subscribe(()=>{
+      this.getLuoghi();
+    });
   }
 
   getLuoghi () {
@@ -63,8 +59,6 @@ export class LuoghiComponent implements OnInit {
       this.listaluoghi = mialista;
 
     });
-
- 
 
   }
 
@@ -85,6 +79,9 @@ export class LuoghiComponent implements OnInit {
 
     });
 
+  }
 
+  ngOnDestroy(){
+    this.sub1.unsubscribe();
   }
 }

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { EmitterService } from '../../_services/index';
+import { Subscription } from 'rxjs';
 
 
 export interface descluogo {
@@ -29,6 +30,8 @@ export class DescluogoComponent implements OnInit{
   nomebreve = '';
   descrizione = '';
   
+  sub1: Subscription;
+  sub2: Subscription;
   
 
   constructor( private status: Status,  private http: HttpClient , private emitservice: EmitterService) {}
@@ -36,11 +39,11 @@ export class DescluogoComponent implements OnInit{
   ngOnInit(){
     this.reload();
 
-    this.emitservice.emitOnNavEnd().subscribe( (val ) => {
+    this.sub1 = this.emitservice.emitOnNavEnd().subscribe( (val ) => {
       //console.log("RICARCO PER NAVEND");
       this.reload();
     });
-    this.emitservice.emitOnNavSkipped().subscribe( (val ) => {
+    this.sub2 = this.emitservice.emitOnNavSkipped().subscribe( (val ) => {
       //console.log("RICARCO PER NAVSKIPPED");
       this.reload();
     });
@@ -61,5 +64,10 @@ export class DescluogoComponent implements OnInit{
 
   getdescluogo(id: number){
     return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/getdescluogo.php?id=' + id.toString() );
+  }
+
+  ngOnDestroy(){
+    this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
   }
 }

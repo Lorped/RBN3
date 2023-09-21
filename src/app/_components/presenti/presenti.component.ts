@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmitterService, ListpresentiService , Presenti } from '../../_services/index';
 
-import { interval } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 import { Status } from '../../globals';
 
 @Component({
@@ -11,7 +11,9 @@ import { Status } from '../../globals';
 })
 export class PresentiComponent implements OnInit {
 
-
+  sub1: Subscription;
+  sub2: Subscription;
+  sub3: Subscription;
 
   listapresenti: Array<Presenti>;
   numeropresenti: number;
@@ -33,7 +35,7 @@ export class PresentiComponent implements OnInit {
     });
     
     // IntervalObservable.create(90000)
-    interval(90000)
+    this.sub1 = interval(90000)
     .subscribe(() => {
       this.listpresentiService.getpresenti()
       .subscribe(data => {
@@ -42,17 +44,8 @@ export class PresentiComponent implements OnInit {
       });
     });
 
-    this.emitter.emitOnNavEnd().subscribe( () => {
+    this.sub2 = this.emitter.emitOnNavEnd().subscribe( () => {
       
-      
-      this.listpresentiService.getpresenti()
-      .subscribe(data => {
-        this.listapresenti = data;
-        this.numeropresenti = data.length;
-        
-      });
-    });
-    this.emitter.emitOnNavSkipped().subscribe( () => {
       
       this.listpresentiService.getpresenti()
       .subscribe(data => {
@@ -62,6 +55,22 @@ export class PresentiComponent implements OnInit {
       });
     });
 
+    this.sub3 = this.emitter.emitOnNavSkipped().subscribe( () => {
+      
+      this.listpresentiService.getpresenti()
+      .subscribe(data => {
+        this.listapresenti = data;
+        this.numeropresenti = data.length;
+        
+      });
+    });
+
+  }
+
+  ngOnDestroy() {
+    this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
+    this.sub3.unsubscribe();
   }
 
 }
