@@ -63,7 +63,8 @@ $out = [];
 
 $MySql="SELECT ID, Messaggiclan.IDclan, IDMittente, Ora , Testo , CONCAT(Nome,' ',Cognome) as Nomemittente , URLImg FROM Messaggiclan 
 LEFT JOIN Personaggio on IDMittente = Userid 
-WHERE Messaggiclan.IDclan = $clanid";
+WHERE Messaggiclan.IDclan = $clanid
+ORDER BY Ora DESC";
 $Result=mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ){
 	$out [] =$res;

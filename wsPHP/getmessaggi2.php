@@ -50,7 +50,7 @@ $out=[];
 
 $MySql= "SELECT ID, IDMittente, IDDestinatario,  Testo, DATE_FORMAT( Ora , '%d %b - %H:%i'  ) AS Ora , Ora as Oraraw FROM `Sms` WHERE ( ( IDMittente = $Userid AND IDDestinatario = $contatto ) AND ( Cancellato = 0 OR Cancellato = 2 ) ) OR
 									( ( IDMittente = $contatto AND IDDestinatario = $Userid ) AND ( Cancellato = 0 OR Cancellato = 1  ) )
-			order by Oraraw ASC , ID ASC ";
+			order by Oraraw DESC , ID DESC ";
 
 $Result=mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC)   ) {

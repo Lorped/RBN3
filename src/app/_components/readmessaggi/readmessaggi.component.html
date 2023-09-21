@@ -1,4 +1,24 @@
 <div class="container">
+    <form name="msgForm" (ngSubmit)="SendMsg()" #msgForm="ngForm" >
+
+        <div class="full">
+            <div class="row">
+                <div class="col-11">
+                    <div #multilineinput contenteditable="true" (keyup)="mykey($event)" style="background-color: white; color:darkred; font-size: 1.1em;"></div>
+                    <input id="txt" name="txt" type="hidden" pattern=".*\S.*" [(ngModel)]="testo" required>
+                </div>
+                <div class="col-1">
+                    <button type="submit" class="btn btn-danger btn-sm btn-block" [disabled]="testo==''"> <i class="fa fa-chevron-circle-right"></i></button>
+                </div>
+            </div>
+    
+        </div>
+    
+        </form>
+        <div class="row full no-gutters" >
+            <div class="col"><hr></div>
+        </div>
+    
 
     <div class="full" *ngFor="let item of listaMsg">
         <span *ngIf="item.IDMittente == status.Userid" >
@@ -32,47 +52,11 @@
             </mat-card-actions>
         </mat-card>
 
-        <!----
-
-        <div class="row full no-gutters" *ngIf="item.IDMittente == status.Userid" style="padding-bottom: 3px;">
-
-            <div class="col-2">&nbsp;</div>
-            <div class="col-9 msgfrom newl"><div style="padding-left: 5px;"><span class="bigger">{{item.Testo}}</span> <br> <span class="smallerf">{{item.Ora}}</span></div></div>
-            <div class="col-1 msgfrom cent ico"><i class="fa fa-trash" (click)="cancellamsg(item.ID)"></i></div>
-
-        </div>
-
-        <div class="row full no-gutters" *ngIf="item.IDDestinatario == status.Userid" style="padding-bottom: 3px;">
-
-            <div class="col-1 msgto"><img src="assets/{{status.contattourl}}" height="40px" width="40px" > </div>
-            <div class="col-10 msgto newl"><span class="bigger">{{item.Testo}}</span> <br> <span class="smallert">{{item.Ora}}</span></div>
-            <div class="col-1 msgto cent ico"><i class="fa fa-trash" (click)="cancellamsg(item.ID)"></i></div>
-
-        </div>
-         -->
-    
-    </div>
-
-
-    <div class="row full no-gutters" >
-        <div class="col"><hr></div>
-    </div>
-
-    <form name="msgForm" (ngSubmit)="SendMsg()" #msgForm="ngForm" >
-
-    <div class="full">
-        <div class="row">
-            <div class="col-11">
-                <div #multilineinput contenteditable="true" (keyup)="mykey($event)" style="background-color: white; color:darkred; font-size: 1.1em;"></div>
-                <input id="txt" name="txt" type="hidden" pattern=".*\S.*" [(ngModel)]="testo" required>
-            </div>
-            <div class="col-1">
-                <button type="submit" class="btn btn-danger btn-sm btn-block" [disabled]="testo==''"> <i class="fa fa-chevron-circle-right"></i></button>
-            </div>
-        </div>
 
     </div>
 
-    </form>
+
+
+
 
 </div>
