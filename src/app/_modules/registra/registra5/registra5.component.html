@@ -5,48 +5,43 @@
   <span>Roma by Night </span>
 </mat-toolbar>
 
+<div class="mx-auto" style="width: 60vw; margin-top: 10vh; color: white;">
+  <mat-card MatCardAppearance="raised" >
+    <mat-card-title>
+      <span class="true_primary"><h2>Registrazione personaggio completata</h2></span>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <hr>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div class="container full" style="color: white">
+        <p>La creazione del personaggio e la registrazione su RBN3 è completa.</p>
+        <p>Puoi tornare al login ed entrare con le credenziali (email/password) che hai indicato in precedenza.</p>
+        <p>Dopo l'accesso, nel menù alla voce "Scheda Personaggio" puoi inserire la biografia del Personaggio, la descrizione fisica (che sarà visibile a tutti gli utenti) e caricare l'avatar del tuo personaggio (obbligatorio) ed una immagine personalizzata (facoltativa).</p>
+        <p>L'inserimento dei dati è richiesto entro una settimana dall'iscrizione.</p>
+        <p>L'assegnzione della Setta alla creazione è effettuata non considerando personaggi anti-tribu. Un personaggio anti-tribu (da giustificare nella Biografia) deve contattare quanto prima un Master/Admin sottoponendo la Biografia e chiedendo l'eventuale cambio.</p>
 
-<div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em; margin-top: 20px;">
-  <div class="row justify-content-center">
-    <div class="col-8">
-
-      <h3 class="dred alc">Registrazione personaggio completata</h3>
-      <div class="container">
-        <div class="row">
-          <div class="col"><hr></div>
-          <div class="col">&nbsp;</div>
-          <div class="col"><hr></div>
-        </div>
-        <div class="row">
-          <div class="col bigf">
-La creazione del personaggio e la registrazione su RBN è completa<br>
-Puoi tornare al login ed entrare con le credenziali (email/password) che hai indicato in precedenza.<br>
-Dopo l'accesso, nel menù alla voce "Profilo PG" puoi inserire la biografia del Personaggio, la descrizione fisica (che sarà visibile a tutti gli utenti) e caricare una immagine personalizzata.<br>
-L'inserimento della biografia è richiesto entro una settimana dall'iscrizione.
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">&nbsp;</div>
-        </div>
+      
         <div class="row">
           <div class="col">
-            <a [routerLink]="['/login']" class="btn btn btn-danger btn-block btn-sm">Torna al login</a>
+            <a [routerLink]="['/login']" class="btn btn btn-danger full btn-sm">Torna al login</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">&nbsp;</div>
+        </div>
+              
+        <div class="row">
+          <div class="col">
+            <div class="progress">
+              <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" >100%</div>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col">&nbsp;</div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="progress">
-        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" >100%</div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">&nbsp;</div>
-  </div>
+    </mat-card-content>
+  </mat-card>
 </div>

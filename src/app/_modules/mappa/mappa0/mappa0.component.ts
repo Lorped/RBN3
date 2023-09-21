@@ -141,8 +141,8 @@ export class Mappa0Component implements OnInit {
               weight: 2,
               opacity: 0.3,
               color: '#000000' ,
-              fillOpacity: 0.3 ,
-              fillColor: '#3d3d3d' 
+              fillOpacity: 0.7 ,
+              fillColor: '#303030' 
             })
           });
           map.addLayer(baseLayer);
@@ -162,7 +162,7 @@ export class Mappa0Component implements OnInit {
               weight: 1,
               opacity: 1,
               color: 'black',
-              fillOpacity: 0.3
+              fillOpacity: 0.7
             };
           }
 

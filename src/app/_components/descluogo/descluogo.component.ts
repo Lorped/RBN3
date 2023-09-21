@@ -25,7 +25,7 @@ export interface descluogo {
 export class DescluogoComponent implements OnInit{
 
   dove = 0 ;
-  img = '';
+  img = 'spacer10.png';
   nomebreve = '';
   descrizione = '';
   

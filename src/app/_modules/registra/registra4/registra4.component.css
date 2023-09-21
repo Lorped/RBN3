@@ -21,13 +21,23 @@ hr {
     background-color: #f0f0f0;
 }
 
-.btn.btn-primary:disabled{
-    background-color: #a0a0a0;
-}
+
 
 .btn-xs:disabled{
     background-color: #a0a0a0;
 }
 .btn-xs:enabled:hover{
     background-color: #f02618;
+}
+
+mat-card {
+  background-color: #424242d9;
+}
+mat-card-title {
+  justify-content: center;
+  display: flex;
+}
+
+mat-card-content {
+  font-size: 0.8em;
 }

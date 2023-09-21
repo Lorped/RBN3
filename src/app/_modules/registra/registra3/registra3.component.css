@@ -21,9 +21,6 @@ hr {
     background-color: #f0f0f0;
 }
 
-.btn.btn-primary:disabled{
-    background-color: #a0a0a0;
-}
 
 .btn-xs:disabled{
     background-color: #a0a0a0;
@@ -32,11 +29,14 @@ hr {
     background-color: #f02618;
 }
 
-
-.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
+mat-card {
+  background-color: #424242d9;
+}
+mat-card-title {
+  justify-content: center;
+  display: flex;
 }
 
-.ng-invalid:not(form)  {
-  border-left: 5px solid #a94442; /* red */
+mat-card-content {
+  font-size: 0.8em;
 }

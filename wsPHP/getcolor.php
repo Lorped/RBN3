@@ -30,16 +30,21 @@ while ( $res = mysqli_fetch_array($Result) ) {
 	switch ($res['IDSetta']) {
 		case "1":
 			$color = $res['IDcontrollo'] == 'T' ? "#0570b0" : "#74a9cf";
+			$color = $res['IDcontrollo'] == 'T' ? "#59191F" : "#701D24";  //prova rosso scuro
 			break;
 		case "2":
 			$color = $res['IDcontrollo'] == 'T' ? "#d7301f" : "#fc8d59";
+			$color = $res['IDcontrollo'] == 'T' ? "#47243C" : "#844C82";  //viola
 			break;
 		case "3":
 			$color = $res['IDcontrollo'] == 'T' ? "#238b45" : "#74c476";
+			$color = $res['IDcontrollo'] == 'T' ? "#00414B" : "#006a7a";  //ottanio
 			break;
 		case "0":
 		default:
 		  $color = "#fef0d9";
+		  $color = "#193153";  // indigo
+
 	  }
 	$out [] = [
 		"IDzona" => $res['IDzona'] ,

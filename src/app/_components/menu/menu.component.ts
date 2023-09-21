@@ -24,19 +24,24 @@ export class MenuComponent implements OnInit {
     
 
     this.status.Alive = false ;
-    this.authenticationService.logout();
+    this.authenticationService.logout().subscribe( ()=> {
+      sessionStorage.removeItem('RBN3currentUser');
+
+      if (this.status.forumactivated == true) {
+        this.router.navigate( [ '', {outlets: { forum: null } } ] );
+        this.router.events.pipe(first(evt => evt instanceof NavigationEnd)).
+        subscribe(() => {
+          //console.log("nav end");
+          this.router.navigate( [ '/login' ] );
+        });
+      } else {
+        //console.log("no nav need");
+        this.router.navigate( [ '/login' ] );     
+      }
+      
+    });
     
-    if (this.status.forumactivated == true) {
-      this.router.navigate( [ '', {outlets: { forum: null } } ] );
-      this.router.events.pipe(first(evt => evt instanceof NavigationEnd)).
-      subscribe(() => {
-        console.log("nav end");
-        this.router.navigate( [ '/login' ] );
-      });
-    } else {
-      console.log("no nav need");
-      this.router.navigate( [ '/login' ] );     
-    }
+
 
       
 

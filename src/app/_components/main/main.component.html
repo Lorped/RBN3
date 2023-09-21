@@ -19,39 +19,24 @@
     <!-- <app-modal id="modal-modalpx"> -->
       
     <app-modal #modalpx modalId="modalpx">
-      <div class="app-modal-header my-modal-header">
+      <div class="app-modal-header my-modal-header true_primary">
         Quest e Log Spesa PX <mat-icon color="warn" class="closing-button" (click)="this.status.pxon=false; modalpx.hide()">close</mat-icon>
-        <!-- <button type="button" class="btn close" style="color: red !important;" (click)="this.status.pxon=false; modalpx.hide()">&times;</button> -->
+        
       </div>
       <div class="app-modal-body">
         <app-questpx *ngIf="this.status.pxon"></app-questpx>
       </div>
-      <!--
-      <div class="app-modal-footer">
-        <button type="button" class="btn btn-danger btn-sm" (click)="this.status.pxon=false; modalpx.hide()">Chiudi</button>
-      </div>
-      -->
+
     </app-modal>
 
     <!-- ----->
 
-    <!-- <app-modal id="modal-modalbio"> 
 
-    <app-modal #modalbio modalId="modalbio">
-      <div class="app-modal-header my-modal-header">
-        Biografia e Profilo Personaggio <mat-icon color="warn" class="closing-button" (click)="this.status.bioon=false; modalbio.hide()">close</mat-icon>
-      </div>
-      <div class="app-modal-body">
-        <app-bio *ngIf="this.status.bioon"></app-bio>
-      </div>
-    </app-modal>
-
-     ----->
 
     <!-- <app-modal id="modal-modalanagrafe"> -->
 
     <app-modal #modalanagrafe modalId="modalanagrafe">
-      <div class="app-modal-header my-modal-header">
+      <div class="app-modal-header my-modal-header true_primary">
         Anagrafe Personaggi <mat-icon color="warn" class="closing-button" (click)="this.status.anagon=false; modalanagrafe.hide()">close</mat-icon>
       </div>
       <div class="app-modal-body">
@@ -64,7 +49,7 @@
     <!-- <app-modal id="modal-modalscheda"> -->
 
     <app-modal #modalscheda modalId="modalscheda" >
-      <div class="app-modal-header my-modal-header">
+      <div class="app-modal-header my-modal-header true_primary">
         Scheda Personaggio <mat-icon color="warn" class="closing-button" (click)="this.status.schedaon=false; modalscheda.hide()">close</mat-icon>
       </div>
       <div class="app-modal-body">
@@ -77,7 +62,7 @@
     <!-- <app-modal id="modal-modalschedaoth"> -->
 
     <app-modal #modalschedaoth modalId="modalschedaoth">
-      <div class="app-modal-header  my-modal-header">
+      <div class="app-modal-header  my-modal-header true_primary">
         Scheda Personaggio <mat-icon color="warn" class="closing-button" (click)="this.status.schedaothon=false; modalschedaoth.hide()">close</mat-icon>
       </div>
       <div class="app-modal-body">
@@ -90,7 +75,7 @@
     <!-- <app-modal id="modal-modalpoteri"> -->
 
     <app-modal #modalpoteri modalId="modalpoteri">
-      <div class="app-modal-header my-modal-header">
+      <div class="app-modal-header my-modal-header true_primary">
         Poteri <mat-icon color="warn" class="closing-button" (click)="this.status.poterion=false; modalpoteri.hide()">close</mat-icon>
       </div>
       <div class="app-modal-body">
@@ -103,7 +88,7 @@
     <!-- <app-modal id="modal-modalsceltapoteri"> -->
 
     <app-modal #modalsceltapoteri modalId="modalsceltapoteri">
-      <div class="app-modal-header my-modal-header">
+      <div class="app-modal-header my-modal-header true_primary">
         Scelta Poteri <mat-icon color="warn" class="closing-button" (click)="this.status.sceltapoterion=false; modalsceltapoteri.hide()">close</mat-icon>
       </div>
       <div class="app-modal-body">
@@ -129,7 +114,7 @@
     <!-- <app-modal id="modal-modallistamsg"> -->
 
     <app-modal #modallistamsg modalId="modallistamsg">
-      <div class="app-modal-header my-modal-header">
+      <div class="app-modal-header my-modal-header true_primary">
         Messaggi con {{status.contattonome}} <mat-icon color="warn" class="closing-button" (click)="this.status.listamsgon=false; modallistamsg.hide()">close</mat-icon>
       </div>
       <div class="app-modal-body">
@@ -142,7 +127,7 @@
     <!-- <app-modal id="modal-modallistamsgclan"> -->
 
     <app-modal #modallistamsgclan modalId="modallistamsgclan">
-      <div class="app-modal-header my-modal-header">
+      <div class="app-modal-header my-modal-header true_primary">
         Messaggi con il clan {{status.clancontattonome}} <mat-icon color="warn" class="closing-button" (click)="this.status.listamsgclanon=false; modallistamsgclan.hide()">close</mat-icon>
       </div>
       <div class="app-modal-body">
@@ -155,7 +140,7 @@
     <!-- <app-modal id="modal-modalforum"> -->
 
     <app-modal #modalforum modalId="modalforum">
-      <div class="app-modal-header my-modal-header">
+      <div class="app-modal-header my-modal-header true_primary">
         Forum <mat-icon color="warn" class="closing-button" (click)="this.status.forumon=false; modalforum.hide()">close</mat-icon>
       </div>
       <div class="app-modal-body">
@@ -185,15 +170,7 @@
               </div>
             </div>
           </div>
-          <!--
-          <div class="col-1">
-            &nbsp;
-          </div>
-          
-          <div class="col-8" style="height: 80vh;">
-            <router-outlet></router-outlet>
-          </div>
-          -->
+   
 
           <div class="col-4" style="height: 80vh;">
 

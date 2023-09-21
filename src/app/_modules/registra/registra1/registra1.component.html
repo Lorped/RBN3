@@ -8,7 +8,7 @@
 <div class="mx-auto" style="width: 60vw; margin-top: 10vh;">
   <mat-card MatCardAppearance="raised" style="background: transparent;" >
     <mat-card-title>
-      <span class="dred"><h2>Dati Iniziali del Personaggio</h2></span>
+      <span class="true_primary"><h2>Dati Iniziali del Personaggio</h2></span>
     </mat-card-title>
     <mat-card-content>
 
@@ -147,7 +147,7 @@
       </div>
 
       <div class="row">
-         <div class="col"> <span *ngIf="formOK" class="fa fa-check dgreen"></span> Distribuire <span class="red">7</span> pallini in una categoria di attributi (mentali, fisici o sociali), <span class="red">5</span> in una categoria secondaria e <span class="red">3</span> nella rimanente terziaria</div> 
+         <div class="col"> <span *ngIf="formOK" class="fa fa-check dgreen"></span> Distribuire <span class="accent-text">7</span> pallini in una categoria di attributi (mentali, fisici o sociali), <span class="accent-text">5</span> in una categoria secondaria e <span class="accent-text">3</span> nella rimanente terziaria</div> 
        </div>
       <div class="row">
         <div class="col">&nbsp;</div>
@@ -155,7 +155,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <button type="button" [disabled]="!reg1Form.form.valid || !formOK " (click)="goto2()" class="btn btn-danger full btn-sm">Prosegui</button>
+            <button mat-raised-button color="primary" type="button" [disabled]="!reg1Form.form.valid || !formOK " (click)="goto2()" class=" full ">Prosegui</button>
             <div class="alc"><a [routerLink]="['/login']" class="btn btn-link">Torna al login</a></div>
           </div>
         </div>

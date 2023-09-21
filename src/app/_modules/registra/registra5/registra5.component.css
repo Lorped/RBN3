@@ -12,3 +12,15 @@ hr {
   margin: 1em 0;
   padding: 0;
 }
+
+mat-card {
+  background-color: #424242d9;
+}
+mat-card-title {
+  justify-content: center;
+  display: flex;
+}
+
+mat-card-content {
+  font-size: 0.8em;
+}
