@@ -62,6 +62,7 @@ import { ReadmessaggiclanComponent } from './_components/readmessaggiclan/readme
 import { ToolvariComponent } from './_components/toolvari/toolvari.component';
 import { DescluogoComponent } from './_components/descluogo/descluogo.component';
 import { EmitterService } from './_services/emitter.service';
+import { FinanzaComponent } from './_components/finanza/finanza.component';
 
 
 
@@ -90,6 +91,7 @@ import { EmitterService } from './_services/emitter.service';
     ReadmessaggiclanComponent,
     ToolvariComponent,
     DescluogoComponent,
+    FinanzaComponent,
 
 
 

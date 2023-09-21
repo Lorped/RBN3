@@ -1,0 +1,49 @@
+<p>finanza works!</p>
+
+<div class="row">
+    <div class="col">
+        Bilancio di cassa
+    </div>
+    <div class="col">
+        &nbsp;
+    </div>
+    <div class="col">
+        {{finanzepg.cash| currency:'EUR':'':'1.0'}} €
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        Risorse
+    </div>
+    <div class="col">
+        {{finanzepg.risorse}}
+    </div>
+    <div class="col">
+        {{finanzepg.entrate| currency:'EUR':'':'1.0'}} €
+    </div>
+</div>
+
+<div class="row" *ngFor="let item of finanzepg.mybalance">
+    <div class="col">
+        {{item.nome}}
+    </div>
+    <div class="col">
+        {{item.livello}}
+    </div>
+    <div class="col">
+        {{item.mensile| currency:'EUR':'':'1.0'}} €
+    </div>
+</div>
+<div class="row" >
+    <div class="col">
+        Bilancio mensile
+    </div>
+    <div class="col">
+        &nbsp;
+    </div>
+    <div class="col">
+        {{sommamensile| currency:'EUR':'symbol':'1.0'}} €
+    </div>
+</div>
+

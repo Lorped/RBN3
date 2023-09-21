@@ -139,7 +139,7 @@ export class Status {
   pxon = false;
   anagon = false;
   poterion = false;         // DA CANCELLARE
-  sceltapoterion = false;  // DA CANCELLARE
+  
   schedaothon = false;
   otherID = 0;
   // per i messaggi normali
@@ -160,6 +160,8 @@ export class Status {
   forumon = false;
   forumactivated = false;
   Nomebacheca = '';
+
+  finanzaon = false; 
 }
 
 

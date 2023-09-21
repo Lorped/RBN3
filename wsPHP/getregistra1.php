@@ -23,7 +23,7 @@ include ('token.php');
 $clan=[];
 
 
-$MySql="SELECT IDclan, NomeClan FROM Clan  WHERE Soototipo = 1 ";
+$MySql="SELECT IDclan, NomeClan FROM Clan  WHERE Open = 1 ";
 $Result=mysqli_query($db,$MySql);
 while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$clan[] = $res;

@@ -85,14 +85,14 @@
 
     <!-- ----->
 
-    <!-- <app-modal id="modal-modalsceltapoteri"> -->
+    <!-- <app-modal id="modal-modalfinanza"> -->
 
-    <app-modal #modalsceltapoteri modalId="modalsceltapoteri">
+    <app-modal #modalfinanza modalId="modalfinanza">
       <div class="app-modal-header my-modal-header true_primary">
-        Scelta Poteri <mat-icon color="warn" class="closing-button" (click)="this.status.sceltapoterion=false; modalsceltapoteri.hide()">close</mat-icon>
+        Scelta Poteri <mat-icon color="warn" class="closing-button" (click)="this.status.finanzaon=false; modalfinanza.hide()">close</mat-icon>
       </div>
       <div class="app-modal-body">
-        <app-sceltapoteri *ngIf="this.status.sceltapoterion"></app-sceltapoteri>
+        <app-finanza *ngIf="this.status.finanzaon"></app-finanza>
       </div>
     </app-modal>
 

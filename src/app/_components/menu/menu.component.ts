@@ -68,8 +68,8 @@ export class MenuComponent implements OnInit {
     if ( id === 'modalpoteri') {
       this.status.poterion = true ;
     }
-    if ( id === 'modalsceltapoteri') {
-      this.status.sceltapoterion = true ;
+    if ( id === 'modalfinanza') {
+      this.status.finanzaon = true ;
     }
     if ( id === 'modalmessaggi') {
       this.status.messaggion = true ;

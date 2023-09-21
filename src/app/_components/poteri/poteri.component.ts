@@ -43,11 +43,12 @@ export class PoteriComponent implements OnInit {
   }
 
   gosceltapoteri  () {
+    /*
     this.status.poterion = false ;
     this.status.sceltapoterion = true ;
     this.modalService.hide('modalpoteri') ;
     this.modalService.show('modalsceltapoteri') ;
-
+    */
   }
 
 }

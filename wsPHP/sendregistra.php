@@ -84,6 +84,7 @@ switch ($newPG->Clan ){
 	case 11: // giovanni
 	case 12: // ravnos
 	case 13: // setiti
+	case 14: // tlacique
 		$IDsetta = 4; //indip
 		break;
 	
@@ -166,14 +167,37 @@ if ($px > 0) {
 	mysqli_query($db, $MySql);
 }
 
+// RISORSE
+$MySql = "SELECT * FROM Background WHERE Userid = '$Userid' and IDbackground = 10";
+$Result = mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result); 
+
+
+$liv = $res['LivelloBG'];
+
+if ( $liv == '') {
+	$liv = 0 ;
+}
+
+$MySql = "SELECT totale FROM Risorse WHERE livello = '$liv' ";
+$Result = mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result); 
+$cash = $res['totale'] ;
+
+
+
+$MySql = "UPDATE Personaggio SET Soldi = '$cash' WHERE Userid = '$Userid'";
+mysqli_query($db, $MySql);
+
+
 
 // Messaggio iniziale //
 if ( $newPG->Sesso = 'S' ) {
-	$msg= "Benvenuta "+$nome+"!\n";
+	$msg= "Benvenuta ".$nome."!\n";
 } else {
-	$msg= "Benvenuto "+$nome+"!\n";
+	$msg= "Benvenuto ".$nome."!\n";
 }
-$msg = "Per iniziare ti consigliamo di sbirciare i Messaggi di Clan, almeno gli ultimi, e le notizie sul Forum.\nNon esitare a contattarmi per qualsiasi dubbio o chiarimento o curiosità.\nJ.";
+$msg = $msg."Per iniziare ti consigliamo di sbirciare i Messaggi di Clan, almeno gli ultimi, e le notizie sul Forum.\nNon esitare a contattarci per qualsiasi dubbio o chiarimento o curiosità.\nJ.";
 $MySql = "INSERT INTO Sms ( IDMittente, IDDestinatario, Testo ) VALUES ( 1 , '$Userid' ,  '$msg') ";
 mysqli_query($db, $MySql);
 //

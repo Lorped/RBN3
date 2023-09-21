@@ -33,7 +33,7 @@
 
   <mat-card  (click)="showmsgclan(myMsgClan.IDclan,myMsgClan.NomeClan,myMsgClan.ClanImg)">
     <mat-card-header>
-      <div mat-card-avatar class="avatar1 " style="background-image: url('/assets/clan/round/{{myMsgClan.ClanImg}}');"></div>
+      <div mat-card-avatar class="avatar1 " style="background-image: url('assets/clan/round/{{myMsgClan.ClanImg}}');"></div>
       <mat-card-title><span [class.warning]="myMsgClan.numero != 0">Clan {{myMsgClan.NomeClan}}</span></mat-card-title>
       <mat-card-subtitle>Ultimo messaggio: {{myMsgClan.ultimo}} | <span *ngIf="myMsgClan.numero != 0">Nuovi <span class="warning">{{myMsgClan.numero}}</span></span></mat-card-subtitle>
     </mat-card-header>
@@ -42,7 +42,7 @@
 
   <mat-card *ngFor="let cont of status.myContatti"  (click)="showmsg(cont.IDX,cont.NomeCognome,cont.UrlImg)">
     <mat-card-header>
-      <div mat-card-avatar class="avatar1 " style="background-image: url('/assets/{{cont.UrlImg}}');"></div>
+      <div mat-card-avatar class="avatar1 " style="background-image: url('assets/{{cont.UrlImg}}');"></div>
       <mat-card-title><span [class.warning]="cont.Nuovi != 0">{{cont.NomeCognome}}</span></mat-card-title>
       <mat-card-subtitle>Ultimo messaggio: {{cont.Ultimo}} | <span *ngIf="cont.Nuovi != 0"><span class="warning">Nuovi {{cont.Nuovi}}</span></span></mat-card-subtitle>
     </mat-card-header>

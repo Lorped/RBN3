@@ -7,6 +7,18 @@ import { HttpClient } from '@angular/common/http';
 import { Background, Attributo, Skill, Disciplina, Basicpg, Personaggio } from '../globals';
 
 
+export class balance {
+  nome = '';
+  livello = 0;
+  mensile = 0;
+}
+export class finanza {
+  cash = 0;
+  risorse = 0;
+  entrate = 0;
+  mybalance: Array<balance> = [];
+}
+
 @Injectable()
 export class SchedaService {
 
@@ -125,6 +137,13 @@ export class SchedaService {
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/addpoteri.php', {
       token: user,
       lista: lista
+    });
+  }
+
+  finanze(){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/finanze.php', {
+      token: user
     });
   }
 
