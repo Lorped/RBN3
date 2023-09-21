@@ -26,8 +26,8 @@
 
 mat-card {
   /* background: #020202; */
-  min-height: 25vh !important;
-  width: 75%;
+  min-height: 21vh !important;
+  /*width: 80%;*/
   background: #42424240;
 }
 
@@ -49,7 +49,7 @@ padding: 0;
 
 #container {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns:    1fr 1fr ;
   grid-auto-flow: column;
 }

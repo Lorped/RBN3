@@ -3,10 +3,11 @@ mat-card-title {
   }
   
   mat-card-subtitle {
-    font-size: 0.8em;
+    font-size: 0.8em !important;
   }
 mat-card {
     /*background: transparent; */
     background-color: #42424255;
+    /*width: 80%;*/
     height: 12vh !important;
 }

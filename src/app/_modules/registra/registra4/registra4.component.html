@@ -175,16 +175,16 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col">FdV</div>
-                  <div class="col" style="padding-right: 0px;padding-left: 0px;">
+                  <div class="col-5">FdV</div>
+                  <div class="col-7" style="padding-right: 0px;padding-left: 0px;">
                     <button class="btn btn-xs" (click)="minfdv()" [disabled]="newPG.FdVmax==newPG_orig.FdVmax"><i class="fa fa-minus"></i></button>
                     <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': ix < newPG.FdVmax , 'white': ix+1 > newPG.FdVmax }"></i>
                     <button *ngIf="newPG.FdVmax<10" class="btn btn-xs" (click)="addfdv()" [disabled]="px < 1"><i class="fa fa-plus"></i></button>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col">Sentiero</div>
-                  <div class="col" style="padding-right: 0px;padding-left: 0px;">
+                  <div class="col-5">Sentiero</div>
+                  <div class="col-7" style="padding-right: 0px;padding-left: 0px;">
                     <button class="btn btn-xs" (click)="minsentiero()" [disabled]="newPG.Valsentiero==newPG_orig.Valsentiero"><i class="fa fa-minus"></i></button>
                     <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > newPG.Valsentiero , 'dred': ix < newPG.Valsentiero }"></i>
                     <button  *ngIf="newPG.Valsentiero<10" class="btn btn-xs" (click)="addsentiero()" [disabled]="px < 1"><i class="fa fa-plus"></i></button>
@@ -243,7 +243,7 @@
                   <div class="col">Punti rimasti: <span class="accent-text bigf">{{px}}</span></div>
                   <div class="col">
                     <input id="Check1" class="form-check-input"  type="checkbox" [(ngModel)]="export" >
-                    <label class="form-check-label" for="Check1">Conserva come PX</label>
+                    <label class="form-check-label" for="Check1">Usa come PX</label>
                   </div>
                 </div>
 

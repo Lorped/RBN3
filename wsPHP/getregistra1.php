@@ -16,32 +16,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  //MYSQLI //
 include ('token.php');
 
 
 $clan=[];
 
 
-$MySql="SELECT IDclan, NomeClan FROM Clan   ";
-$Result=mysql_query($MySql);
-while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
+$MySql="SELECT IDclan, NomeClan FROM Clan  WHERE Soototipo = 1 ";
+$Result=mysqli_query($db,$MySql);
+while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$clan[] = $res;
 }
 
 $archetipi=[];
 
 $MySql="SELECT * FROM Archetipi   ";
-$Result=mysql_query($MySql);
-while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
+$Result=mysqli_query($db,$MySql);
+while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$archetipi[] = $res;
 }
 
 $attributi=[];
 
 $MySql="SELECT * , '1' as Livello FROM Attributi_main   ";
-$Result=mysql_query($MySql);
-while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
+$Result=mysqli_query($db, $MySql);
+while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$attributi[] = $res;
 }
 

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  //MYSQLI //
 include ('token.php');
 
 
@@ -24,8 +24,8 @@ $skill=[];
 
 
 $MySql="SELECT * , '0' as Livello FROM Skill_main WHERE iniziale = 1 ";
-$Result=mysql_query($MySql);
-while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
+$Result=mysqli_query($db, $MySql);
+while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$skill[] = $res;
 }
 

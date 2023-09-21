@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
 include ('token.php');
 
 $IDclan=$_GET['IDclan'];
@@ -25,14 +25,14 @@ $bg=[];
 
 
 $MySql="SELECT * , '0' as LivelloBG FROM Background_main WHERE iniziale = 0 ORDER BY NomeBackground";
-$Result=mysql_query($MySql);
-while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
+$Result=mysqli_query($db, $MySql);
+while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$bg[] = $res;
 }
 
 $MySql="SELECT Disc1, Disc2, Disc3 FROM Clan WHERE IDclan = '$IDclan' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $disc1=$res['Disc1'];
 $disc2=$res['Disc2'];
 $disc3=$res['Disc3'];
@@ -40,8 +40,8 @@ $disc3=$res['Disc3'];
 $disc = [];
 
 $MySql="SELECT *, '0' as LivelloDisc FROM Discipline_main WHERE IDdisciplina IN ( '$disc1', '$disc2', '$disc3') ";
-$Result=mysql_query($MySql);
-while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
+$Result=mysqli_query($db,$MySql);
+while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$disc[] = $res;
 }
 
@@ -51,16 +51,16 @@ $necro=[];
 
 if ( $IDclan == 7 ) { // Tremere
 	$MySql="SELECT *, '0' as Livello FROM Taumaturgie_main  ";
-	$Result=mysql_query($MySql);
-	while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
+	$Result=mysqli_query($db,$MySql);
+	while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 		$taum[] = $res;
 	}
 }
 
 if ( $IDclan == 11 ) { // Giovanni
 	$MySql="SELECT *, '0' as Livello FROM Necromanzie_main  ";
-	$Result=mysql_query($MySql);
-	while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
+	$Result=mysqli_query($db,$MySql);
+	while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 		$necro[] = $res;
 	}
 }
@@ -69,8 +69,8 @@ if ( $IDclan == 11 ) { // Giovanni
 $sent = [];
 
 $MySql="SELECT *  FROM Sentieri  ";
-$Result=mysql_query($MySql);
-while ( $res=mysql_fetch_array($Result, MYSQL_ASSOC) ) {
+$Result=mysqli_query($db,$MySql);
+while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$sent[] = $res;
 }
 

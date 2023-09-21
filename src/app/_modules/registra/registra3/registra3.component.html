@@ -17,7 +17,7 @@
 
 
         <div class="row justify-content-center">
-          <div class="col-9">
+          <div class="col-11">
 
             <div class="row">
               <div class="col"><hr></div>
@@ -46,21 +46,27 @@
             </div>
 
             <form #necrotaumForm=ngForm  >
-            <div class="form-group row" *ngIf="necro.length>0">
-              <label for="necropg" class="col-2 col-form-label" >Via necromantica iniziale</label>
+            <div class="row" *ngIf="necro.length>0">
+              
               <div class="col">
-                <select id="necropg" name="necropg" class="form-control" [required]="discipline[z].LivelloDisc>0" [disabled]="discipline[z].LivelloDisc<1" [(ngModel)]="necroPG">
-                <option *ngFor="let i of necro" [ngValue]="i">{{i.NomeNecro}}</option>
-                </select>
+                <mat-form-field class="full" >
+                <mat-label >Via necromantica iniziale</mat-label>
+                <mat-select id="necropg"   [required]="discipline[z].LivelloDisc>0" [disabled]="discipline[z].LivelloDisc<1" [(ngModel)]="necroPG">
+                <mat-option *ngFor="let i of necro" [value]="i">{{i.NomeNecro}}</mat-option>
+                </mat-select>
+              </mat-form-field>
               </div>
             </div>
 
             <div class="row" *ngIf="taum.length>0">
-              <label for="taumpg" class="col-2 col-form-label">Via taumaturgica iniziale</label>
+              
               <div class="col">
-                <select id="taumpg" name="taumpg" class="form-control" [required]="discipline[z].LivelloDisc>0" [disabled]="discipline[z].LivelloDisc<1" [(ngModel)]="taumPG">
-                <option *ngFor="let i of taum" [ngValue]="i">{{i.NomeTaum}}</option>
-                </select>
+                <mat-form-field class="full">
+                <mat-label >Via taumaturgica iniziale</mat-label>
+                <mat-select id="taumpg"  [required]="discipline[z].LivelloDisc>0" [disabled]="discipline[z].LivelloDisc<1" [(ngModel)]="taumPG">
+                <mat-option *ngFor="let i of taum" [value]="i">{{i.NomeTaum}}</mat-option>
+                </mat-select>
+                </mat-form-field>
               </div>
             </div>
 
@@ -154,20 +160,22 @@
                 </table>
               </div>
               <div class="col-4">
-
-                <select id="sent" name="sent" class="form-control" [disabled]="coscienza+selfcontrol<6" [(ngModel)]="sentieroPG" >
-                  <option *ngFor="let i of sent" [ngValue]="i" >{{i.DescSentiero}}</option>
-                </select>
+                <mat-form-field class="full">
+                  <mat-label>Sentiero</mat-label>
+                <mat-select id="sent"  [disabled]="coscienza+selfcontrol<6" [(ngModel)]="sentieroPG" >
+                  <mat-option *ngFor="let i of sent" [value]="i" >{{i.DescSentiero}}</mat-option>
+                </mat-select>
+                </mat-form-field>
               </div>
             </div>
 
-            <div class="row">
+            <!--<div class="row">
               <div class="col">&nbsp;</div>
-            </div>
+            </div>-->
             <div class="row">
               <div class="col">Distribuire:<br>
-                <span *ngIf="discOK" class="fa fa-check dgreen"></span> <span class="accent-text">3</span> pallini tra le Discipline, <br>
-                <span *ngIf="bgOK" class="fa fa-check dgreen"></span> <span class="accent-text">5</span> tra i Background e <br>
+                <span *ngIf="discOK" class="fa fa-check dgreen"></span> <span class="accent-text">3</span> pallini tra le Discipline; 
+                <span *ngIf="bgOK" class="fa fa-check dgreen"></span> <span class="accent-text">5</span> tra i Background;
                 <span *ngIf="virtuOK" class="fa fa-check dgreen"></span> <span class="accent-text">7</span> tra le Virtù. <br>
                 FdV e Umanità sono valori derivati. Per scegliere un Sentiero di Illuminazione, il valore di Sentiero deve essere almeno 6.<br>
                 Il valore di Generazione non può suparare 3, nè quello di status 2.
@@ -180,10 +188,10 @@
               <div class="col">
                 <div class="btn-group d-flex">
                   <div class="btn-group w-100" >
-                    <button type="button" (click)="goback()" class="btn btn-primary  btn-sm" >Indietro</button>
+                    <button mat-raised-button color="accent" type="button" (click)="goback()" class="full" >Indietro</button>
                   </div>
                   <div class="btn-group w-100" >
-                    <button type="button" [disabled]="!bgOK || !discOK || !virtuOK || !(necrotaumForm.form.valid||discipline[z].LivelloDisc<1) " (click)="goto4()" class="btn btn-danger btn-sm" >Prosegui</button>
+                    <button mat-raised-button color="primary" type="button" [disabled]="!bgOK || !discOK || !virtuOK || !(necrotaumForm.form.valid||discipline[z].LivelloDisc<1) " (click)="goto4()" class="full" >Prosegui</button>
                   </div>
                 </div>
                 <div class="alc"><a [routerLink]="['/login']" class="btn btn-link">Torna al login</a></div>
