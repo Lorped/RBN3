@@ -119,7 +119,7 @@ export class Mappa0Component implements OnInit {
               }
             }         
             if (ff.Setta != null ) {
-              ff.SettaImg = '<img src="/assets/sette/' + ff.SettaImg + '" height=30 >';
+              ff.SettaImg = '<img src="assets/sette/' + ff.SettaImg + '" height=30 >';
               if (ff.IDcontrollo == 'P') {
                 ff.Setta = ff.Setta + ' - Controllo parziale'
               }

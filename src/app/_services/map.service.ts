@@ -27,10 +27,10 @@ export class MapService {
 
 
   getmunicipi() {
-    return this.http.get("/assets/geoJson/municipi2.geojson");
+    return this.http.get("assets/geoJson/municipi2.geojson");
   }
   getbase() {
-    return this.http.get("/assets/geoJson/mio.geojson");
+    return this.http.get("assets/geoJson/mio.geojson");
   }
 
   getcolor()  {
