@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Basicpg, Skill, Attributo, Personaggio, Disciplina, Background } from '../../../globals';
+import { Basicpg, Skill, Attributo,  Disciplina, Background } from '../../../globals';
 import { Router } from '@angular/router';
 import { SignupService } from '../../../_services/signup.service';
 

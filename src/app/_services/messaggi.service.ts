@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 
 export class Messaggiclan {
   IDclan = 0;
-  numero: number = 0 ; //num msg da ultima volta;
-	ultimo: string = '';
-	NomeClan: string = '';
-	ClanImg: string = '';
+  numero = 0 ; //num msg da ultima volta;
+	ultimo = '';
+	NomeClan = '';
+	ClanImg = '';
 }
 
 export class UnMessaggioclan {
@@ -15,8 +15,8 @@ export class UnMessaggioclan {
   IDMittente = 0;
   NomeMittente = '';
 	Ora = '';
-	URLImg: string = '';
-	Testo: string = '';
+	URLImg = '';
+	Testo = '';
 }
 
 @Injectable()

@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           this.status.Ongame = 'S';
         },
         error => {
-          if (error.status = 401 ){
+          if (error.status == 401 ){
             this.errmsg = "Errore di autenticazione";  
           } else {
             this.errmsg = error.statusText;

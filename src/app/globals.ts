@@ -204,7 +204,7 @@ export class Potere {
 
 @Injectable()
 export class ListaPoteri {
-  public NomeDisc: String;
+  public NomeDisc: string;
   public pot: Array<Potere>;
   public LivelloDisc: number;
 

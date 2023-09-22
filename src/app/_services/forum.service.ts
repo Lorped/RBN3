@@ -22,17 +22,17 @@ export class Bacheca {
 }
 
 export class Forumthread {
-  IDmessaggio: number = 0;
-  IDsottobacheca: number = 0;
-  Data: string = '';
-  DT: string = '';
-  Utente: string = '';
-  IDutente: number = 0;
-  Nome: string = '';
-  Testo: string = '';
-  OP: number = 0;
-  Chiuso: number = 0;
-  Pinned: number = 0;
+  IDmessaggio = 0;
+  IDsottobacheca = 0;
+  Data = '';
+  DT = '';
+  Utente = '';
+  IDutente = 0;
+  Nome = '';
+  Testo = '';
+  OP = 0;
+  Chiuso = 0;
+  Pinned = 0;
   status = '';
   DataReplyEdit = '';
   DDT = '';

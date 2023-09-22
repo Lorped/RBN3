@@ -99,7 +99,7 @@ export class MessaggiComponent implements OnInit {
     this.status.contattourl = url ;
     this.status.listamsgon = true ;
 
-    for ( var j = 0 ; j< this.status.myContatti.length ; j++) {
+    for ( let j = 0 ; j< this.status.myContatti.length ; j++) {
       if ( this.status.myContatti[j].IDX == this.status.contattoID ) {
         this.status.myContatti[j].Nuovi = 0 ;
       }
