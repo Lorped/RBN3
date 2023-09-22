@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         data => {
           this.status.Stanza = 0;
           this.status.Userid = data.Userid;
-          this.status.MasterAdmin = data.MasterAdmin;
+          this.status.MasterAdmin = Number(data.MasterAdmin);
           this.router.navigate(['']);
           this.status.Ongame = 'S';
         },

@@ -31,6 +31,7 @@ export class SchedaotherComponent implements OnInit {
 
       this.myPG = data;
       this.myaPG = this.myPG.aPG;
+      this.myaPG.ModSalute = Number (this.myaPG.ModSalute);
 
     });
 
