@@ -3,15 +3,16 @@
   font-size: 1.1em;
 }
 
-hr {
-  color: #ff0000;
+hr  {
+  color: #E91E63;
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #f00;
-  margin: 1em 0;
+  border-top: 1px solid #E91E63;
+  margin: auto;
   padding: 0;
-}
+  
+  }
 
 mat-card {
   background-color: #424242d9;

@@ -1,3 +1,4 @@
+
 <mat-card  MatCardAppearance="raised">
   <mat-card-title style="text-align: center; font-size: 1em;" class="true_primary" >
     Presenti ({{numeropresenti}})
@@ -6,18 +7,18 @@
     <hr>
     <table class="tabellapresenti">
       <!--<tr><th colspan="3">{{numeropresenti}}</th></tr>-->
-      <tr *ngFor="let pres of listapresenti" >
+      <tr *ngFor="let pres of listapresenti" class="full">
               
-        <td *ngIf="pres.Sesso == 'M'"><span class="fa fa-caret-right blue"></span></td>
-        <td *ngIf="pres.Sesso == 'F'"><span class="fa fa-caret-right pink"></span></td>
-        <td style="width:10em;">{{pres.NomeCognome}}</td>
+        <td *ngIf="pres.Sesso === 'M'"><span class="fa fa-caret-right blue"></span></td>
+        <td *ngIf="pres.Sesso === 'F'"><span class="fa fa-caret-right pink"></span></td>
+        <td style="width:15em;">{{pres.NomeCognome}}</td>
           
           
-        <td *ngIf="pres.Userid == status.Userid"><span class="fa fa-circle" [style.color]="(status.Ongame == 'S' ? 'green' : 'red') "></span></td>
+        <td *ngIf="pres.Userid === status.Userid"><span class="fa fa-circle" [style.color]="(status.Ongame === 'S' ? 'green' : 'red') "></span></td>
           
               
-        <td *ngIf="pres.ongame == 'S' && (pres.Userid != status.Userid)"><span class="fa fa-circle green"></span></td>
-        <td *ngIf="pres.ongame == 'N' && (pres.Userid != status.Userid)"><span class="fa fa-circle red"></span></td>
+        <td *ngIf="pres.ongame === 'S' && (pres.Userid !== status.Userid)"><span class="fa fa-circle green"></span></td>
+        <td *ngIf="pres.ongame === 'N' && (pres.Userid !== status.Userid)"><span class="fa fa-circle red"></span></td>
         
         <td>&nbsp; {{pres.Breve}}</td>
               

@@ -147,4 +147,14 @@ export class SchedaService {
     });
   }
 
+  sendmoney(to: number, importo: number, causale: string) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/sendmoney.php', {
+      token: user,
+      to: to,
+      importo: importo,
+      causale: causale
+    });
+  }
+
 }

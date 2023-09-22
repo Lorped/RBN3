@@ -54,7 +54,7 @@ export class DescluogoComponent implements OnInit{
   reload(){
     this.dove=this.status.Stanza;
     this.getdescluogo(this.dove).subscribe( (data: Array<descluogo>) => {
-      console.log(data);
+      //console.log(data);
       this.img = data[0].Immagine;
       this.nomebreve = data[0].Breve;
       this.descrizione = data[0].Descrizione;

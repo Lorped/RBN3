@@ -16,8 +16,8 @@ export class BioComponent implements OnInit {
   descrizione: string;
   annotazioni: string;
   background: string;
-  URLImg: string;
-  ImgLG: string;
+  URLImg = 'nopicture.gif';
+  ImgLG = 'img400-600.png';
 
   fileToUpload: File = null;
 
@@ -32,7 +32,7 @@ export class BioComponent implements OnInit {
       this.background = data.pg.Background;
       this.URLImg = data.pg.URLImg;
       this.ImgLG = data.pg.ImgLG;
-      console.log(data.pg);
+      //console.log(data.pg);
     });
 
   }

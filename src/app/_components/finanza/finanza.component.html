@@ -1,49 +1,113 @@
-<p>finanza works!</p>
+<div class="container"></div>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+        Bilancio di cassa:  {{finanzepg.cash| currency:'EUR':'':'1.0'}} €
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <div class="col">
+                Bilancio preventivo del prossimo mese
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+               <hr>
+            </div>
+        </div>
+        <div class="container" style="width: 75%; justify-content: center;">
+            <div class="row" >
+                <div class="col">
+                    Entrate standard (Risorse)
+                </div>
+                <div class="col">
+                    <i *ngFor="let i of finanzepg.risorse | times ; let ix = index" class="fa " [ngClass]="{'fa-circle dred': (ix < finanzepg.risorse) , 'fa-times-circle white': ((ix+1 > finanzepg.risorse) && (ix < 5)) }"></i><i *ngFor="let i of 5-finanzepg.risorse | times " class="fa fa-circle white" ></i>
+                </div>
+                <div class="col alr">
+                    {{finanzepg.entrate| currency:'EUR':'':'1.0'}} €
+                </div>
+            </div>
+        
+            <div class="row" *ngFor="let item of finanzepg.mybalance">
+                <div class="col">
+                    {{item.nome}}
+                </div>
+                <div class="col">
+                    <i *ngFor="let i of item.livello | times ; let ix = index" class="fa " [ngClass]="{'fa-circle dred': (ix < item.livello) , 'fa-times-circle white': ((ix+1 > item.livello) && (ix < 10)) }"></i><i *ngFor="let i of 5-item.livello | times " class="fa fa-circle white" ></i>
+                </div>
+                <div class="col alr">
+                    <span [ngClass]="{'accent': (item.mensile<0) , 'white': (item.mensile >0 ) }">{{item.mensile| currency:'EUR':'':'1.0'}} €</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">&nbsp;</div>
+                <div class="col">&nbsp;</div>
+                <div class="col">
+                    <hr>
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col">
+                    Prossime intrate stimate
+                </div>
+                <div class="col">
+                    &nbsp;
+                </div>
+                <div class="col alr">
+                    <span [ngClass]="{'warning': (sommamensile<0) , 'white': (sommamensile >0 ) }">{{sommamensile| currency:'EUR':'symbol':'1.0'}} €</span>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
 
-<div class="row">
-    <div class="col">
-        Bilancio di cassa
-    </div>
-    <div class="col">
-        &nbsp;
-    </div>
-    <div class="col">
-        {{finanzepg.cash| currency:'EUR':'':'1.0'}} €
-    </div>
-</div>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+        Traferimento denaro
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
 
-<div class="row">
-    <div class="col">
-        Risorse
-    </div>
-    <div class="col">
-        {{finanzepg.risorse}}
-    </div>
-    <div class="col">
-        {{finanzepg.entrate| currency:'EUR':'':'1.0'}} €
-    </div>
-</div>
+    </mat-card-content>
+    <form [formGroup]="myFormGroup">
+        <mat-form-field >
+            <mat-label>Destinatario</mat-label>
+            <input type="text"
+                placeholder="Destinatario"
+                matInput
+                formControlName="destinatarioFC"
+                [matAutocomplete]="auto" > 
+            <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn" > 
+                <mat-option *ngFor="let cont of filteredOptions | async"  [value]="cont">
+                    <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+                    {{ cont.Nome }} 
+                    <!-- <img src="assets/{{cont.ClanImg}}" height="25px" > -->
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
 
-<div class="row" *ngFor="let item of finanzepg.mybalance">
-    <div class="col">
-        {{item.nome}}
-    </div>
-    <div class="col">
-        {{item.livello}}
-    </div>
-    <div class="col">
-        {{item.mensile| currency:'EUR':'':'1.0'}} €
-    </div>
-</div>
-<div class="row" >
-    <div class="col">
-        Bilancio mensile
-    </div>
-    <div class="col">
-        &nbsp;
-    </div>
-    <div class="col">
-        {{sommamensile| currency:'EUR':'symbol':'1.0'}} €
-    </div>
-</div>
+        <mat-form-field >
+            <mat-label>Importo</mat-label>
+            <input type="number"
+                step="10"
+                matInput 
+                formControlName="importoFC" > 
+        </mat-form-field>
+        <mat-form-field class="full">
+            <mat-label>Causale</mat-label>
+            <input type="text" 
+                matInput 
+                formControlName="causaleFC" > 
+        </mat-form-field>
+
+            <button mat-raised-button color="primary" type="button" [disabled]="!myFormGroup.valid" (click)="invia()" class="full">Effettua trasferimento</button>
+
+
+    </form>
+</mat-card>
+
+
+
 

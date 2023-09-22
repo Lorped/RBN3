@@ -67,7 +67,7 @@ export class Basicpg {
   public IDsalute = 0;
   public daurto = 0;
   public aggravati = 0;
-  public URLImg = '';
+  public URLImg = 'nopicture.gif';
   public Soldi = 0;
   public MaxStat = 5;
   public UsoPS = 1;
