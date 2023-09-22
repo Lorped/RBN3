@@ -83,7 +83,7 @@ if ( $full ) {
 	    Coscienza , Coraggio , SelfControl , Personaggio.IDsalute  ,
 	    daurto , aggravati , URLImg , Soldi ,
 			MaxStat ,	UsoPS,
-			DescSalute , ModSalute, Setta, SettaImg , ImgLG
+			DescSalute , ModSalute, Setta, SettaImg , ImgLG, Taumaturgo
 		FROM Personaggio
 			LEFT JOIN Sentieri ON Personaggio.IDsentiero = Sentieri.IDsentiero
 			LEFT JOIN Clan ON Personaggio.IDclan = Clan.IDclan

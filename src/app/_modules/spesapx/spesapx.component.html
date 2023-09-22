@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 
 <div class="container" style="background-color:black; background:rgba(0,0,0,0.5); color: white; font-size: 0.8em;">
   <div class="row">
@@ -197,7 +198,7 @@
                     <!-- <option value="0">- Disciplina -</option> -->
                     <option *ngFor="let i of newtaum" [ngValue]="i">{{i.NomeTaum}}</option>
                   </select>
-                  <button  *ngIf="newtaum.length > 0 " class="btn btn-primary btn-xs" (click)="addtaum()" [disabled]="px < 7 || nuovataum.IDtaum == 0 || Tmaxlev == 1 "><i class="fa fa-plus"></i></button>
+                  <button  *ngIf="newtaum.length > 0 " class="btn btn-primary btn-xs" (click)="addtaum()" [disabled]="(px < 7 && taum.length>0) || nuovataum.IDtaum == 0 || Tmaxlev == 1 "><i class="fa fa-plus"></i></button>
                 </div>
               </div>
             </div>

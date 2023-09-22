@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SchedaService } from '../../_services/index';
 import { Status } from '../../globals';
-import { Background, Attributo, Skill, Disciplina, Basicpg, Personaggio } from '../../globals';
+import {  Basicpg, Personaggio } from '../../globals';
 
 @Component({
   selector: 'app-schedaother',

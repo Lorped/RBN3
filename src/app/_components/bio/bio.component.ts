@@ -38,12 +38,12 @@ export class BioComponent implements OnInit {
   }
   //fileChange(files: FileList) {
   fileChange(event: any, id: number) {
-    let files: FileList = event.target.files;
+    const files: FileList = event.target.files;
     if (files.length > 0) {
       const fileToUpload = files[0];
 
       this.schedaService.putavatar(fileToUpload, id)
-      .subscribe(res => {
+      .subscribe( () => {
           this.schedaService.getbio(this.status.Userid)
           .subscribe( (data: any) => {
             this.URLImg = data.pg.URLImg;
@@ -56,7 +56,7 @@ export class BioComponent implements OnInit {
 
   addbio() {
     this.schedaService.addbio(this.background, this.descrizione, this.annotazioni)
-    .subscribe( (data: any) => {
+    .subscribe( () => {
       this.bioForm.form.markAsPristine();
     });
   }

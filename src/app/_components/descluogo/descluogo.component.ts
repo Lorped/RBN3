@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Status } from '../../globals';
-
-import { Router } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -23,7 +21,7 @@ export interface descluogo {
   templateUrl: './descluogo.component.html',
   styleUrls: ['./descluogo.component.css']
 })
-export class DescluogoComponent implements OnInit{
+export class DescluogoComponent implements OnInit, OnDestroy {
 
   dove = 0 ;
   img = 'spacer10.png';
@@ -39,11 +37,11 @@ export class DescluogoComponent implements OnInit{
   ngOnInit(){
     this.reload();
 
-    this.sub1 = this.emitservice.emitOnNavEnd().subscribe( (val ) => {
+    this.sub1 = this.emitservice.emitOnNavEnd().subscribe( ( ) => {
       //console.log("RICARCO PER NAVEND");
       this.reload();
     });
-    this.sub2 = this.emitservice.emitOnNavSkipped().subscribe( (val ) => {
+    this.sub2 = this.emitservice.emitOnNavSkipped().subscribe( ( ) => {
       //console.log("RICARCO PER NAVSKIPPED");
       this.reload();
     });

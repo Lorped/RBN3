@@ -20,7 +20,7 @@ export class AnagrafeComponent implements OnInit {
 
   ngOnInit() {
     this.anagrafeservice.anagrafe()
-    .subscribe( (data: any) => {
+    .subscribe( (data: Array<AnagrafeRow> ) => {
       this.anagrafe = data;
       // console.log(this.anagrafe);
     });

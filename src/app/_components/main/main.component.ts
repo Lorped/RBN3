@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 
@@ -13,12 +13,12 @@ import { Status } from '../../globals';
 })
 
 
-export class MainComponent implements OnInit {
+export class MainComponent  {
 
 
   constructor( public status: Status ) { }
 
-  ngOnInit() {}
+
 
 
 
