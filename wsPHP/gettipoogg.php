@@ -16,31 +16,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  // MYSQLI //
+include ('token.php');
 
-$Userid=$_GET['id'];
 
-//$Userid= 1;
 
-$out=[];
 
-$MySql= "SELECT * FROM Personaggio WHERE Userid = $Userid ";
+$MySql="SELECT * From TipoOggetto";
 
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+while ($res=mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
+	$out [] =$res;
 
-$Sete = $res['Sete'];
-$FdV = $res['FdV'];
-$FdVmax = $res['FdVmax'];
+}
 
-$out = [
-	'Sete' => $Sete,
-	'FdV' => $FdV,
-	'FdVmax' => $FdVmax
-];
 
 
 header("HTTP/1.1 200 OK");
-
 echo json_encode ($out, JSON_UNESCAPED_UNICODE);
+
+
 ?>

@@ -51,12 +51,9 @@ $gen=0;
 $gen=13-(int)$generazionebg;
 $ps=10+(int)$generazionebg;
 
-/*
-$taumaturgo = 0;
-if ( IDclan == 7 ) {
-	$taumaturgo = 1;
-}
-*/
+
+
+
 
 // SETTA BASE //
 
@@ -93,6 +90,11 @@ switch ($newPG->Clan ){
 
 }
 
+$taumaturgo = 0;
+if ( $newPG->Clan == 7 || $newPG->Clan == 14 ) {
+	$taumaturgo = 1;
+}
+
 
 $nome=mysqli_real_escape_string($db, $newPG->Nome);
 $cognome=mysqli_real_escape_string($db, $newPG->Cognome);
@@ -104,7 +106,7 @@ $MySql="INSERT INTO Personaggio ( Nome, Cognome, Email, Pass, DataIscrizione,
  Generazione, PS, PSmax,
  FdV, FdVmax,
  IDsentiero, Valsentiero,
- Coscienza, Coraggio, SelfControl , IDsetta
+ Coscienza, Coraggio, SelfControl , IDsetta, Taumaturgo
  )
 VALUES (
 	'$nome' , '$cognome' ,'$email' , '$pass' , NOW() ,
@@ -112,7 +114,7 @@ VALUES (
 	$gen, $ps, $ps,
 	$newPG->FdVmax, $newPG->FdVmax,
 	$newPG->DescSentiero, $newPG->Valsentiero,
-	$newPG->Coscienza, $newPG->Coraggio, $newPG->SelfControl , $IDsetta
+	$newPG->Coscienza, $newPG->Coraggio, $newPG->SelfControl , $IDsetta, $taumaturgo
 )";
 
 mysqli_query($db, $MySql);

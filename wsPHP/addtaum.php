@@ -60,7 +60,11 @@ $pxout=$res['somma'];
 
 $px=$pxin-$pxout;
 
+$MySql="SELECT Taumaturgo FROM Personaggio WHERE Userid = '$Userid' ";
+$Result=mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result,MYSQLI_ASSOC);
 
+$taumaturgo = $res ['Taumaturgo'];
 
 $MySql="SELECT Livello FROM Taumaturgie	WHERE Userid='$Userid' AND Principale = 'S' ";
 $Result=mysqli_query($db, $MySql);
@@ -79,6 +83,16 @@ if ( $px >= 7 && $Tmaxlev > 1 ) {
 	$MySql="INSERT INTO Logpx (Data, Userid, Px, Dati ) VALUES ( NOW() , '$Userid', '$pxspesi', '$Dati') ";
 	$Result=mysqli_query($db, $MySql);
 
+}
+
+if ( $taumaturgo == 1 && $Tmaxlev == '') {
+	$MySql="INSERT INTO Taumaturgie (IDtaum, Userid, Livello, Principale) VALUES ('$attr', '$Userid', 1, 'S') ";
+	$Result=mysqli_query($db, $MySql);
+
+	$pxspesi=0;
+	$Dati="[Taumaturgia] Acquisita ".$nomeattr;
+	$MySql="INSERT INTO Logpx (Data, Userid, Px, Dati ) VALUES ( NOW() , '$Userid', '$pxspesi', '$Dati') ";
+	$Result=mysqli_query($db, $MySql);
 }
 
 $out = [];

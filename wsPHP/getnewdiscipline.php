@@ -52,11 +52,28 @@ if ( CheckJWT ($token) ) {
 
 $out=[];
 
-$MySql = "SELECT
+$MySql="SELECT Taumaturgo FROM Personaggio WHERE Userid = '$Userid' ";
+$Result=mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result,MYSQLI_ASSOC);
+
+$taumaturgo = $res ['Taumaturgo'];
+
+if ( $taumaturgo == 1 ){
+	$MySql = "SELECT
+	Discipline_main.IDdisciplina , NomeDisc, DiClan
+	FROM Discipline_main
+	LEFT JOIN Discipline ON Discipline_main.IDdisciplina = Discipline.IDdisciplina AND Userid = '$id'
+	WHERE  LivelloDisc IS NULL AND (Acquisibile = 1  OR Discipline_main.IDdisciplina = 15) ";
+} else {
+	$MySql = "SELECT
 		Discipline_main.IDdisciplina , NomeDisc, DiClan
 		FROM Discipline_main
 		LEFT JOIN Discipline ON Discipline_main.IDdisciplina = Discipline.IDdisciplina AND Userid = '$id'
 		WHERE  LivelloDisc IS NULL AND Acquisibile = 1";
+
+}
+
+
 
 $Result=mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {

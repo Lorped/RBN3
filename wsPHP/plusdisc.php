@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');   //MYSQLI //
 include ('token.php');
 
 
@@ -49,13 +49,13 @@ $pxout=0;
 $px=0;
 
 $MySql="SELECT sum(px) as somma FROM Quest  WHERE Userid='$Userid' AND Status='OK' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxin=$res['somma'];
 
 $MySql="SELECT sum(px) as somma FROM Logpx  WHERE Userid='$Userid' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxout=$res['somma'];
 
 $px=$pxin-$pxout;
@@ -63,13 +63,13 @@ $px=$pxin-$pxout;
 
 
 $MySql="SELECT MaxStat from Personaggio LEFT JOIN Generazioni ON Personaggio.Generazione = Generazioni.Generazione WHERE Userid='$Userid'";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $MaxStat=$res['MaxStat'];
 
 $MySql="SELECT * FROM Discipline WHERE Userid='$Userid' AND IDdisciplina = '$attr' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $DiClan = $res['DiClan'];
 $Livello = $res['LivelloDisc'];
 
@@ -82,22 +82,22 @@ if ( $DiClan == 'S' ) {
 if ( $Livello < $MaxStat && $px >= $pxspesi ) {
 
 	$MySql="UPDATE Discipline SET LivelloDisc=LivelloDisc+1 WHERE IDdisciplina='$attr' AND  Userid='$Userid' ";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 
 	if ( $attr == 7 && $Livello < 5 ) {  // Necromanzia
 		$MySql="UPDATE Necromanzie SET Livello=Livello+1 WHERE Principale='S' AND  Userid='$Userid' ";
-		$Result=mysql_query($MySql);
+		$Result=mysqli_query($db, $MySql);
 	}
 	if ( $attr == 15 && $Livello < 5 ) {  // Taumaturgia
 		$MySql="UPDATE Taumaturgie SET Livello=Livello+1 WHERE Principale='S' AND  Userid='$Userid' ";
-		$Result=mysql_query($MySql);
+		$Result=mysqli_query($db, $MySql);
 	}
 
 
 
 	$Dati="[Disciplina] ".$nomeattr." ".$Livello." => ".($Livello+1);
 	$MySql="INSERT INTO Logpx (Data, Userid, Px, Dati ) VALUES ( NOW() , '$Userid', '$pxspesi', '$Dati') ";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 
 }
 

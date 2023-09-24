@@ -36,8 +36,8 @@ export class SpesapxComponent implements OnInit {
   newnecro = [];
   newtaum = [];
 
-  nuovanecro = {IDnecro: 0, NomeNecro: '', Primaria: 'N'} ;
-  nuovataum = {IDtaum: 0, NomeTaum: '', Primaria: 'N'} ;
+  nuovanecro = {IDnecro: 0, NomeNecro: '', Principale: 'N'} ;
+  nuovataum = {IDtaum: 0, NomeTaum: '', Principale: 'N'} ;
 
 
   //
@@ -221,22 +221,34 @@ export class SpesapxComponent implements OnInit {
   addtaum () {
     this.listaspesa.push( {x: 'addtaum.php' , y: this.nuovataum.IDtaum, z: this.nuovataum.NomeTaum} );
 
-    this.taum.push({IDtaum: this.nuovataum.IDtaum , NomeTaum: this.nuovataum.NomeTaum, Livello: 1 , Primaria: 'N' });
+    if (this.taum.length == 0) {
+      // se è la prima è quella primaria
+      this.taum.push({IDtaum: this.nuovataum.IDtaum , NomeTaum: this.nuovataum.NomeTaum, Livello: 1 , Principale: 'S' });     
+    } else {
+      this.taum.push({IDtaum: this.nuovataum.IDtaum , NomeTaum: this.nuovataum.NomeTaum, Livello: 1 , Principale: 'N' });
+    }
 
+  
     for ( let j = 0 ; j < this.newtaum.length ; j ++ ) {
       if ( this.newtaum[j].IDtaum === this.nuovataum.IDtaum ) {
         this.newtaum.splice(j, 1);
       }
     }
 
-    this.px = this.px - 7 ;
-    this.nuovataum =  {IDtaum: 0, NomeTaum: '', Primaria: 'N'} ;
+    if (this.taum.length == 1) {
+      //this.px = this.px - 7 ;  inclusa nel costo di taumaturgia
+      this.nuovataum =  {IDtaum: 0, NomeTaum: '', Principale: 'N'} ;
+    } else {
+      this.px = this.px - 7 ;
+      this.nuovataum =  {IDtaum: 0, NomeTaum: '', Principale: 'N'} ;
+    }
+    
   }
 
   addnecro () {
     this.listaspesa.push( {x: 'addnecro.php' , y: this.nuovanecro.IDnecro, z: this.nuovanecro.NomeNecro} );
 
-    this.necro.push({IDnecro: this.nuovanecro.IDnecro , NomeNecro: this.nuovanecro.NomeNecro, Livello: 1 , Primaria: 'N' });
+    this.necro.push({IDnecro: this.nuovanecro.IDnecro , NomeNecro: this.nuovanecro.NomeNecro, Livello: 1 , Principale: 'N' });
     for ( let j = 0 ; j < this.newnecro.length ; j ++ ) {
       if ( this.newnecro[j].IDnecro === this.nuovanecro.IDnecro ) {
         this.newnecro.splice(j, 1);
@@ -244,7 +256,7 @@ export class SpesapxComponent implements OnInit {
     }
 
     this.px = this.px - 7 ;
-    this.nuovanecro =  {IDnecro: 0, NomeNecro: '', Primaria: 'N'} ;
+    this.nuovanecro =  {IDnecro: 0, NomeNecro: '', Principale: 'N'} ;
   }
 
 

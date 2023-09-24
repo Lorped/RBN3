@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  //MYSQLI //
 include ('token.php');
 
 
@@ -33,8 +33,8 @@ $locazione=$request->locazione;
 
 
 
-$testo=mysql_real_escape_string($testo);
-$locazione=mysql_real_escape_string($locazione);
+$testo=mysqli_real_escape_string($db, $testo);
+$locazione=mysqli_real_escape_string($db, $locazione);
 
 $MasterAdmin=0;
 $Userid=-1;
@@ -62,26 +62,26 @@ if ( ($tipo=="M" && $MasterAdmin <1)  || ($tipo=="A" && $MasterAdmin <2) ) {
 $destinatario="";
 if ( $IDdestinatario != "0" ) {
 	$MySql="SELECT CONCAT(Nome,' ', Cognome) as NomeCognome FROM Personaggio WHERE Userid='$IDdestinatario' ";
-	$Result=mysql_query($MySql);
-	$res=mysql_fetch_array($Result);
+	$Result=mysqli_query($db, $MySql);
+	$res=mysqli_fetch_array($Result);
 	$destinatario=$res['NomeCognome'];
 
 }
 
-$NomeCognome=mysql_real_escape_string($NomeCognome);
-$destinatario=mysql_real_escape_string($destinatario);
+$NomeCognome=mysqli_real_escape_string($db, $NomeCognome);
+$destinatario=mysqli_real_escape_string($db, $destinatario);
 
 
 
 $MySql="INSERT INTO Chat ( Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso , Tipo, Testo, Locazione )
 VALUES ($stanza, $Userid, '$NomeCognome' , $IDdestinatario, '$destinatario', '$Sesso', '$tipo', '$testo','$locazione')";
 
-$Result = mysql_query($MySql);
-if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
+$Result = mysqli_query($db, $MySql);
+if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }
 
 $MySql = "UPDATE Presenti SET UltimoRefresh = NOW() WHERE Userid = $Userid ";
-$Result = mysql_query($MySql);
-if (mysql_errno()) { die ( mysql_errno().": ".mysql_error() ); }
+$Result = mysqli_query($db,$MySql);
+if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }
 
 header("HTTP/1.1 200 OK");
 

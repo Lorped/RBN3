@@ -12,3 +12,4 @@ export * from './messaggi.service';
 export * from './map.service';
 export * from './forum.service';
 export * from './emitter.service';
+export * from './oggetti.service';

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');  //MYSQLI //
 include ('token.php');
 
 
@@ -49,13 +49,13 @@ $pxout=0;
 $px=0;
 
 $MySql="SELECT sum(px) as somma FROM Quest  WHERE Userid='$Userid' AND Status='OK' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db,$MySql);
+$res=mysqli_fetch_array($Result);
 $pxin=$res['somma'];
 
 $MySql="SELECT sum(px) as somma FROM Logpx  WHERE Userid='$Userid' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $pxout=$res['somma'];
 
 $px=$pxin-$pxout;
@@ -63,25 +63,25 @@ $px=$pxin-$pxout;
 
 
 $MySql="SELECT Livello FROM Taumaturgie	WHERE Userid='$Userid' AND Principale = 'S' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $Tmaxlev=$res['Livello'];
 
 $MySql="SELECT Livello FROM Taumaturgie	WHERE Userid='$Userid' AND IDtaum = '$attr' ";
-$Result=mysql_query($MySql);
-$res=mysql_fetch_array($Result);
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result);
 $Livello=$res['Livello'];
 
 
 if ( (($Tmaxlev == 5 && $Livello <5 )||($Tmaxlev < 5 && $Livello+1 < $Tmaxlev  ))&& $px >= $Livello*4  ) {
 
 	$MySql="UPDATE Taumaturgie SET Livello=Livello+1 WHERE IDtaum='$attr' AND Userid='$Userid' ";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db,$MySql);
 
 	$pxspesi=4*$Livello;
 	$Dati="[Taumaturgia] ".$nomeattr." ".$Livello." => ".($Livello+1);
 	$MySql="INSERT INTO Logpx (Data, Userid, Px, Dati ) VALUES ( NOW() , '$Userid', '$pxspesi', '$Dati') ";
-	$Result=mysql_query($MySql);
+	$Result=mysqli_query($db, $MySql);
 
 }
 

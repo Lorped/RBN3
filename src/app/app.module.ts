@@ -17,6 +17,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav'; 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 import {MatBadgeModule} from '@angular/material/badge'; 
+import {MatExpansionModule} from '@angular/material/expansion';
 import { APP_ROUTES } from './app.routing' ;
 
 import { AuthenticationService } from './_services/index';
@@ -53,7 +54,6 @@ import { UtilityModule } from './_modules/utility/utility.module';
 
 /* questi si possono cancellare */
 import { PoteriComponent } from './_components/poteri/poteri.component';
-import { SceltapoteriComponent } from './_components/sceltapoteri/sceltapoteri.component';
 /** ************* */
 
 import { MessaggiComponent } from './_components/messaggi/messaggi.component';
@@ -63,6 +63,7 @@ import { ToolvariComponent } from './_components/toolvari/toolvari.component';
 import { DescluogoComponent } from './_components/descluogo/descluogo.component';
 import { EmitterService } from './_services/emitter.service';
 import { FinanzaComponent } from './_components/finanza/finanza.component';
+import { OggettiComponent } from './_components/oggetti/oggetti.component';
 
 
 
@@ -86,14 +87,12 @@ import { FinanzaComponent } from './_components/finanza/finanza.component';
     SchedaotherComponent,
     MessaggiComponent,
     PoteriComponent,
-    SceltapoteriComponent,
     ReadmessaggiComponent,
     ReadmessaggiclanComponent,
     ToolvariComponent,
     DescluogoComponent,
     FinanzaComponent,
-
-
+    OggettiComponent
 
   ],
   imports: [
@@ -115,7 +114,8 @@ import { FinanzaComponent } from './_components/finanza/finanza.component';
     MatSidenavModule,
     MatSlideToggleModule,
     MatBadgeModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule
   ],
   providers: [
     AuthenticationService,
