@@ -138,6 +138,7 @@ export class Status {
   schedaon = false ;
   pxon = false;
   anagon = false;
+
   poterion = false;         // DA CANCELLARE
   
   schedaothon = false;
@@ -162,6 +163,7 @@ export class Status {
   Nomebacheca = '';
 
   finanzaon = false; 
+  cash = 0;
 }
 
 

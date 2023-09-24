@@ -6,7 +6,10 @@ mat-expansion-panel , mat-card {
   mat-panel-description {
     font-size: 1.2em !important;
   }
-  
+  mat-card-actions {
+    font-size: 1em;
+    font-weight: bold;
+  }
 
 mat-card {
     padding-bottom: 0.5em;

@@ -23,7 +23,7 @@ export class FinanzaComponent implements OnInit{
   anagrafe: Array<AnagrafeRow> = [];
   myFormGroup: FormGroup;
 
-  constructor ( private schedaservice: SchedaService, private anagrafeservice: AnagrafeService, private status: Status) {}
+  constructor ( private schedaservice: SchedaService, private anagrafeservice: AnagrafeService, public status: Status) {}
 
   ngOnInit(): void {
 
@@ -53,6 +53,7 @@ export class FinanzaComponent implements OnInit{
       this.finanzepg.cash = Number(data.cash);
       this.finanzepg.risorse = Number(data.risorse);
       this.finanzepg.entrate = Number(data.entrate);
+      this.status.cash = this.finanzepg.cash;
 
       this.sommamensile = Number(this.finanzepg.entrate);
       for ( let i = 0; i < this.finanzepg.mybalance.length ; i++) {
@@ -108,7 +109,7 @@ export class FinanzaComponent implements OnInit{
       this.finanzepg.cash = this.finanzepg.cash - this.myFormGroup.value.importoFC;
       this.myFormGroup.reset();
     });
-
-
   }
+
+
 }

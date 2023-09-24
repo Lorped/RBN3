@@ -46,20 +46,41 @@ if ( CheckJWT ($token) ) {
 }
 
 
-$MySql="SELECT ArmiDaFuoco.* , Quantita From ArmiDaFuoco
-	LEFT JOIN Possesso ON (ArmiDaFuoco.IDoggetto = Possesso.IDoggetto AND  Possesso.IDtipoOggetto = 3 AND Userid = '$Userid')";
 
-
+$MySql="SELECT * From ArmiDaFuoco WHERE IDoggetto = '$id' ";  
 $Result=mysqli_query($db, $MySql);
-while ($res=mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
-	if($res['Quantita'] == '') {
-		$res['Quantita'] = 0 ;
+$res=mysqli_fetch_array($Result,MYSQLI_ASSOC);
+$costo = $res['Costo'];
+$tipo = $res['IDtipoOggetto']; 
+
+
+$MySql="SELECT * From Personaggio WHERE  Userid = '$Userid' ";  
+$Result=mysqli_query($db, $MySql);
+$res=mysqli_fetch_array($Result,MYSQLI_ASSOC);
+$soldi = $res['Soldi']; 
+
+if ( $soldi >= $costo) {
+	$MySql="UPDATE Personaggio SET Soldi = Soldi - '$costo' WHERE  Userid = '$Userid' ";  
+	mysqli_query($db, $MySql);
+
+	$MySql="SELECT * FROM Possesso  WHERE  Userid = '$Userid' AND IDoggetto = '$id' AND IDtipoOggetto = '$tipo' ";
+	$Result=mysqli_query($db, $MySql);
+	$res=mysqli_fetch_array($Result,MYSQLI_ASSOC);
+	if ( $res['Quantita'] == '') {
+		$MySql = "INSERT INTO Possesso (Userid, IDoggetto, IDtipoOggetto, Quantita) VALUES ( '$Userid', '$id' , '$tipo', 1)";
+		mysqli_query($db, $MySql);
+	} else {
+		$MySql="UPDATE  Possesso SET Quantita = Quantita + 1 WHERE  Userid = '$Userid' AND IDoggetto = '$id' AND IDtipoOggetto = '$tipo' ";
+		mysqli_query($db, $MySql);
 	}
 
-	$out [] = $res;
-
-
 }
+
+
+
+$out = [];
+
+
 
 
 

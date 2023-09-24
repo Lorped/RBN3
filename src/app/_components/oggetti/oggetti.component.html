@@ -31,10 +31,11 @@
         <mat-card-content>
             Danno: <span class="accent-text">{{item.Danno}}</span> | Precisione: <span class="accent-text">+{{item.BonusTiro}}</span> | Colpi: <span class="accent-text">{{item.Caricatore}}</span> |
             Rate tiro: <span class="accent-text">{{item.Rate}}</span> | Raffica: <span class="accent-text">{{item.Raffica}}</span> | Occultabilità: <span class="accent-text">{{item.Occultabile}}</span>
-            <p>{{item.Costo}}€</p>            
+            <p>Posseduti: <span class="accent-text">{{item.Quantita}}</span></p>         
         </mat-card-content>
         <mat-card-actions align="end">
-            <button mat-button color="warn" *ngIf="livellocriminalita >= item.Reperibilita" [disabled]="cash < item.Costo">Acquista</button>
+            {{item.Costo}}€ <span class="spacer"></span>
+            <button mat-button color="warn" *ngIf="livellocriminalita >= item.Reperibilita" [disabled]="cash < item.Costo" (click)="acquista(item.IDoggetto)">Acquista</button>
             <span *ngIf="livellocriminalita < item.Reperibilita" class="warning">Conoscenza dei Bassifondi insufficiente</span>
         </mat-card-actions>
     </mat-card>

@@ -6,7 +6,7 @@ export class tipooggetto {
   Tipo = '';
 }
 export class armidaf {
-  IDarma = 0;
+  IDoggetto = 0;
   Nome = '';
   Descrizione = '';
   Danno = 0;
@@ -19,6 +19,7 @@ export class armidaf {
   Reperibilita = 0;
   Costo = 0;
   Immagine = '';
+  Quantita = 0;
 }
 
 @Injectable({
@@ -32,7 +33,10 @@ export class OggettiService {
     return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/gettipoogg.php');
   }
   getarmidaf (){
-    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/getarmidaf.php');
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getarmidaf.php',  {
+      token: user
+    });
   }
 
   getcriminal() {
@@ -40,6 +44,15 @@ export class OggettiService {
     // console.log(id);
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getcriminal.php', {
       token: user
+    });
+  }
+
+  compra(id: number) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    // console.log(id);
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/compra.php', {
+      token: user,
+      id: id
     });
   }
 }
