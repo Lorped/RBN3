@@ -48,17 +48,15 @@ export class FinanzaComponent implements OnInit{
     });
 
     
-    this.schedaservice.finanze().subscribe((data)=> {
+    this.schedaservice.finanze().subscribe((data: finanza)=> {
       this.finanzepg = data;
-      this.finanzepg.cash = Number(data.cash);
-      this.finanzepg.risorse = Number(data.risorse);
-      this.finanzepg.entrate = Number(data.entrate);
+      console.log(this.finanzepg);
+
       this.status.cash = this.finanzepg.cash;
 
       this.sommamensile = Number(this.finanzepg.entrate);
       for ( let i = 0; i < this.finanzepg.mybalance.length ; i++) {
-        this.finanzepg.mybalance[i].mensile = Number(this.finanzepg.mybalance[i].mensile);
-        this.finanzepg.mybalance[i].livello = Number(this.finanzepg.mybalance[i].livello);
+
         this.sommamensile = this.sommamensile + this.finanzepg.mybalance[i].mensile;
       }
     });
