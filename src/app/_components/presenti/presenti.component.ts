@@ -24,11 +24,12 @@ export class PresentiComponent implements OnInit {
 
     
     this.listpresentiService.getpresenti()
-    .subscribe(data => {
+    .subscribe(( data :Array<Presenti> ) => {
         this.listapresenti = data;
         this.numeropresenti = data.length;
         //console.log(this.listapresenti);
         //console.log(this.status.Ongame);
+        //console.log(this.status);
     },
     error => {
       console.log(error);
@@ -38,7 +39,8 @@ export class PresentiComponent implements OnInit {
     this.sub1 = interval(90000)
     .subscribe(() => {
       this.listpresentiService.getpresenti()
-      .subscribe(data => {
+      .subscribe(( data :Array<Presenti> ) => {
+
         this.listapresenti = data;
         this.numeropresenti = data.length;
       });
@@ -48,7 +50,10 @@ export class PresentiComponent implements OnInit {
       
       
       this.listpresentiService.getpresenti()
-      .subscribe(data => {
+      .subscribe(( data :Array<Presenti> ) => {
+        for (let i = 0; i<data.length;i++){
+          data[i].Userid=Number(data[i].Userid);
+        }
         this.listapresenti = data;
         this.numeropresenti = data.length;
         
@@ -58,7 +63,10 @@ export class PresentiComponent implements OnInit {
     this.sub3 = this.emitter.emitOnNavSkipped().subscribe( () => {
       
       this.listpresentiService.getpresenti()
-      .subscribe(data => {
+      .subscribe(( data :Array<Presenti> ) => {
+        for (let i = 0; i<data.length;i++){
+          data[i].Userid=Number(data[i].Userid);
+        }
         this.listapresenti = data;
         this.numeropresenti = data.length;
         

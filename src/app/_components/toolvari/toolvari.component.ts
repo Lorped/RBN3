@@ -83,9 +83,11 @@ export class ToolvariComponent implements OnInit {
   }
 
   onChange(event) {
-    this.ingame == "In Game" ? this.ingame = "OFF Game" : this.ingame = "In Game" ;
+    this.ingame === "In Game" ? this.ingame = "OFF Game" : this.ingame = "In Game" ;
 
-    this.status.Ongame == 'S' ? this.status.Ongame = 'N' : this.status.Ongame = 'S' ;
+    this.status.Ongame === 'S' ? this.status.Ongame = 'N' : this.status.Ongame = 'S' ;
+
+    //console.log(this.status.Ongame);
 
     this.listpresentiService.changeonoffgame().subscribe( );
 

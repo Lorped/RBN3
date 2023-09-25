@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.status.Stanza = 0;
-          this.status.Userid = data.Userid;
+          this.status.Userid = Number(data.Userid);
           this.status.MasterAdmin = Number(data.MasterAdmin);
           this.router.navigate(['']);
           this.status.Ongame = 'S';
