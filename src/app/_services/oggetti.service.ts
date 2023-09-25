@@ -38,6 +38,12 @@ export class OggettiService {
       token: user
     });
   }
+  getarmidamischia (){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getarmidamischia.php',  {
+      token: user
+    });
+  }
 
   getcriminal() {
     const user = sessionStorage.getItem('RBN3currentUser') ;

@@ -1,29 +1,30 @@
+<!-- eslint-disable @angular-eslint/template/alt-text -->
 <div class="container">
   <div class="row align-items-center">
     <div class="col size9" >Ordina per:</div>
     <div class="col">
       <button class="btn btn-sm btn-block btn-std" (click)="sortBy('Nome')">Nome
-      <span class="sortorder" *ngIf="propertyName === 'Nome'" [ngClass]="{reverse: order == 1}"></span>
+      <span class="sortorder" *ngIf="propertyName === 'Nome'" [ngClass]="{reverse: order === 1}"></span>
       </button>
     </div>
     <div class="col">
       <button class="btn btn-sm btn-block btn-std" (click)="sortBy('Cognome')">Cognome
-      <span class="sortorder" *ngIf="propertyName === 'Cognome'" [ngClass]="{reverse: order == 1}"></span>
+      <span class="sortorder" *ngIf="propertyName === 'Cognome'" [ngClass]="{reverse: order === 1}"></span>
       </button>
     </div>
     <div class="col">
       <button class="btn btn-sm btn-block btn-std" (click)="sortBy('Sesso')">Sesso
-      <span class="sortorder" *ngIf="propertyName === 'Sesso'" [ngClass]="{reverse: order == 1}"></span>
+      <span class="sortorder" *ngIf="propertyName === 'Sesso'" [ngClass]="{reverse: order === 1}"></span>
       </button>
     </div>
     <div class="col">
       <button class="btn btn-sm btn-block btn-std" (click)="sortBy('Clan')">Clan
-      <span class="sortorder" *ngIf="propertyName === 'Clan'" [ngClass]="{reverse: order == 1}"></span>
+      <span class="sortorder" *ngIf="propertyName === 'Clan'" [ngClass]="{reverse: order === 1}"></span>
       </button>
     </div>
     <div class="col">
       <button class="btn btn-sm btn-block btn-std" (click)="sortBy('Setta')">Setta
-      <span class="sortorder" *ngIf="propertyName === 'Setta'" [ngClass]="{reverse: order == 1}"></span>
+      <span class="sortorder" *ngIf="propertyName === 'Setta'" [ngClass]="{reverse: order === 1}"></span>
       </button>
     </div>
   </div>
@@ -35,7 +36,7 @@
     <mat-card-header>
       <div mat-card-avatar class="avatar1" style="background-image: url('assets/{{item.URLImg}}');"></div>
       <mat-card-title>{{item.Nome}} {{item.Cognome}}</mat-card-title>
-      <mat-card-subtitle>{{item.Clan}} <i class="fa" [ngClass]="{'fa-female female': item.Sesso=='F', 'fa-male male': item.Sesso=='M' }" ></i> | {{item.Setta}} | Ultimo login: {{item.OraEntrataF}}</mat-card-subtitle>
+      <mat-card-subtitle>{{item.Clan}} <i class="fa" [ngClass]="{'fa-female female': item.Sesso==='F', 'fa-male male': item.Sesso==='M' }" ></i> | {{item.Setta}} | Ultimo login: {{item.OraEntrataF}}</mat-card-subtitle>
       <span class="spacer"></span>
       <img src="assets/clan/base/{{item.ClanImg}}" height="50">
       <img src="assets/spacer10.png"> 
@@ -45,15 +46,3 @@
 
 </div>
 
-<!---
-
-  <div class="row" *ngFor="let item of anagrafe">
-    <div class="col"><img src="assets/{{item.URLImg}}" height="60px"> </div>
-    <div class="col"><span [ngClass]="{'messaggioM': item.Sesso == 'M' , 'messaggioF': item.Sesso == 'F' }"><a href="javascript:void(0)" (click)="showoth(item.Userid)">{{item.Nome}}</a></span></div>
-    <div class="col"><span [ngClass]="{'messaggioM': item.Sesso == 'M' , 'messaggioF': item.Sesso == 'F' }"><a href="javascript:void(0)" (click)="showoth(item.Userid)">{{item.Cognome}}</a></span></div>
-    <div class="col">{{item.Sesso}}</div>
-    <div class="col"><span style="background-color: azure;"><img src="assets/{{item.ClanImg}}" height="60px"></span> {{item.Clan}}</div>
-  </div>
-
-
--->

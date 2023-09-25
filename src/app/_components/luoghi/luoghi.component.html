@@ -8,13 +8,13 @@
     <div id="container">
 
     <div *ngFor="let ll of listaluoghi"    style="display:inline-block;">
-      <span *ngIf="ll.Tipo == 'Padre' || ll.Tipo == 'Entra'">
+      <span *ngIf="ll.Tipo === 'Padre' || ll.Tipo === 'Entra'">
         <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-up blue"></span>{{ll.Breve}}</button>
       </span>
-      <span *ngIf="ll.Tipo == 'Std' && ll.NomeMappa != null ">
+      <span *ngIf="ll.Tipo === 'Std' && ll.NomeMappa !== null ">
         <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right red"></span>{{ll.Breve}}</button>
       </span>
-      <span *ngIf="ll.Tipo == 'Std' && ll.NomeMappa == null ">
+      <span *ngIf="ll.Tipo === 'Std' && ll.NomeMappa === null ">
         <button type="button" class="btn btn-sm full btn-primary" (click)="cambialoc(ll.ID,ll.NomeMappa)">&nbsp;<span class="fa fa-chevron-right gold"></span>{{ll.Breve}}</button>
       </span>
     </div>

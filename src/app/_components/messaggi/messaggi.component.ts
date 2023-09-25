@@ -52,6 +52,7 @@ export class MessaggiComponent implements OnInit {
     this.messaggiService.contamessaggiclan()
     .subscribe((data: any) => {
       this.myMsgClan = data ;
+      this.myMsgClan.numero = Number(this.myMsgClan.numero);
 
     });
 

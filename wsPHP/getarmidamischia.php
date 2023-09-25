@@ -47,8 +47,8 @@ if ( CheckJWT ($token) ) {
 
 
 $MySql="SELECT Armi.* , Quantita From Armi
-	LEFT JOIN Possesso ON (Armi.IDoggetto = Possesso.IDoggetto  AND Userid = '$Userid')
-	WHERE Armi.IDtipoOggetto = 3 AND Unico = 'N' ";
+	LEFT JOIN Possesso ON (Armi.IDoggetto = Possesso.IDoggetto AND Userid = '$Userid')
+	WHERE (Armi.IDtipoOggetto = 2  OR Armi.IDtipoOggetto = 1 ) AND Unico = 'N' ";
 
 
 $Result=mysqli_query($db, $MySql);

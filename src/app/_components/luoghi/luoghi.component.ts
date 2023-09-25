@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {  Router, NavigationEnd } from '@angular/router';
+import {  Router } from '@angular/router';
 import { EmitterService, ListpresentiService } from '../../_services/index';
 
 
@@ -27,7 +27,7 @@ export class Luogo {
   templateUrl: './luoghi.component.html',
   styleUrls: ['./luoghi.component.css']
 })
-export class LuoghiComponent implements OnInit {
+export class LuoghiComponent implements OnInit, OnDestroy {
 
   listaluoghi: Array<Luogo>;
   sub1: Subscription;
@@ -49,8 +49,8 @@ export class LuoghiComponent implements OnInit {
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
 
-    this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/luoghi.php', {Dove: this.status.Stanza, token: user} )
-    .subscribe ((data: Array<any>)=> {
+    this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/luoghi.php', {Dove: this.status.Stanza, token: user} )
+    .subscribe ((data: Array<Luogo>)=> {
       for (let i = 0; i < data.length; i++) {
         const item = data[i];
         const newluogo = new Luogo(item.Tipo, item.ID, item.Breve, item.NomeMappa);

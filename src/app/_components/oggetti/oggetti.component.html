@@ -1,5 +1,6 @@
 <!-- eslint-disable @angular-eslint/template/alt-text -->
 
+
 <mat-expansion-panel  >
     <mat-expansion-panel-header>
         <mat-panel-title>
@@ -9,6 +10,29 @@
             Armi bianche e da rissa
         </mat-panel-description>
     </mat-expansion-panel-header>
+    
+    <mat-card *ngFor="let item of armidamischia">
+        <mat-card-header>
+            <mat-card-title>{{item.Nome}}</mat-card-title>
+            <mat-card-subtitle>{{item.Descrizione}}</mat-card-subtitle>
+            <span class="spacer"></span>
+            <img mat-card-sm-image src="assets/oggetti/{{item.Immagine}}"  >
+        </mat-card-header>
+        <mat-card-content>
+            Danno: <span class="accent-text">Forza +{{item.Danno}}</span> | Tipo danno: <span class="accent-text">
+                <span *ngIf="item.IDtipoOggetto===1">Da Urto</span>
+                <span *ngIf="item.IDtipoOggetto===2">Letale</span>
+            </span> | Bonus/Malus: <span class="accent-text">{{item.BonusTiro}}</span>
+             | Occultabilità: <span class="accent-text">{{item.Occultabile}}</span>
+            <p>Posseduti: <span class="accent-text">{{item.Quantita}}</span></p>         
+        </mat-card-content>
+        <mat-card-actions align="end">
+            {{item.Costo}}€ <span class="spacer"></span>
+            <button mat-button color="warn" [disabled]="cash < item.Costo" (click)="acquista(item.IDoggetto)">Acquista</button>
+
+        </mat-card-actions>
+    </mat-card>
+
 </mat-expansion-panel>
 
 <mat-expansion-panel  >
@@ -52,3 +76,5 @@
         </mat-panel-description>
     </mat-expansion-panel-header>
 </mat-expansion-panel>
+
+

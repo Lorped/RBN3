@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component  } from '@angular/core';
 import { AuthenticationService } from '../../_services/index';
 import { ModalService } from '../../_services/index';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -12,13 +12,12 @@ import { first } from 'rxjs/operators';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent  {
 
   constructor( private authenticationService: AuthenticationService, private router: Router,
     private status: Status, private modalService: ModalService, private route: ActivatedRoute ) { }
 
-  ngOnInit() {
-  }
+
 
   dologout() {
     

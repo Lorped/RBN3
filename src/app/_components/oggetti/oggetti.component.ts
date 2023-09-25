@@ -4,6 +4,11 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Status } from '../../globals';
 
+export interface criminal {
+  livello: number;
+  cash: number;
+}
+
 @Component({
   selector: 'app-oggetti',
   templateUrl: './oggetti.component.html',
@@ -12,6 +17,7 @@ import { Status } from '../../globals';
 export class OggettiComponent implements OnInit{
 
   armidafuoco: Array<armidaf> = [];
+  armidamischia: Array<armidaf> = [];
   livellocriminalita= 0;
   cash = 0 ;
 
@@ -22,12 +28,15 @@ export class OggettiComponent implements OnInit{
 
   ngOnInit(): void {
     
-    this.oggettiservice.getcriminal().subscribe( (data: any)=>{
+    this.oggettiservice.getcriminal().subscribe( (data: criminal)=>{
       this.livellocriminalita = Number(data.livello);
       this.cash = Number(data.cash);
     });
     
-
+    this.oggettiservice.getarmidamischia().subscribe ( (data: Array<armidaf>) => {
+      this.armidamischia = data;
+    });
+    
     this.oggettiservice.getarmidaf().subscribe ( (data: Array<armidaf>) => {
       this.armidafuoco = data;
     });
@@ -42,6 +51,14 @@ export class OggettiComponent implements OnInit{
           this.status.cash = this.cash;
         }
       }
+      for (let i=0; i<this.armidamischia.length ; i++){
+        if (this.armidamischia[i].IDoggetto === id) {
+          ++this.armidamischia[i].Quantita;
+          this.cash = this.cash - this.armidamischia[i].Costo;
+          this.status.cash = this.cash;
+        }
+      }
+      
     });
   }
 }

@@ -47,7 +47,7 @@ if ( CheckJWT ($token) ) {
 
 
 
-$MySql="SELECT * From ArmiDaFuoco WHERE IDoggetto = '$id' ";  
+$MySql="SELECT * From Armi WHERE IDoggetto = '$id' ";  
 $Result=mysqli_query($db, $MySql);
 $res=mysqli_fetch_array($Result,MYSQLI_ASSOC);
 $costo = $res['Costo'];
