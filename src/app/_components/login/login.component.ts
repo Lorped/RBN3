@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
           this.status.MasterAdmin = Number(data.MasterAdmin);
           this.router.navigate(['']);
           this.status.Ongame = 'S';
+          this.status.Sesso = data.Sesso;
         },
         error => {
           if (error.status == 401 ){

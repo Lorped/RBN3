@@ -148,4 +148,5 @@ html, body {
 
 .jcc {
   justify-content: center;
+  display: flex;
 }

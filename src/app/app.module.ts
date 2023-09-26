@@ -64,6 +64,7 @@ import { DescluogoComponent } from './_components/descluogo/descluogo.component'
 import { EmitterService } from './_services/emitter.service';
 import { FinanzaComponent } from './_components/finanza/finanza.component';
 import { OggettiComponent } from './_components/oggetti/oggetti.component';
+import { OggettipgComponent } from './_components/oggettipg/oggettipg.component';
 
 
 
@@ -92,7 +93,8 @@ import { OggettiComponent } from './_components/oggetti/oggetti.component';
     ToolvariComponent,
     DescluogoComponent,
     FinanzaComponent,
-    OggettiComponent
+    OggettiComponent,
+    OggettipgComponent
 
   ],
   imports: [

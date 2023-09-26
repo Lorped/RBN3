@@ -1,10 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+
 export class tipooggetto {
   IDtipoOggetto = 0;
   Tipo = '';
 }
+
+export class disposizione {
+  tasca1 = 0;
+  tasca2 = 0;
+  giacca = 0;
+  impermeabile = 0;
+  nessuno = 0;
+  tasca1_img = "slot/belt-x.png";
+  tasca2_img = "slot/purse-x.png";
+  giacca_img = "slot/jacket-x.png";
+  impermeabile_img = "slot/trench-x.png";
+  nessuno_img = "slot/out-x.png";
+}
+
 export class armidaf {
   IDoggetto = 0;
   Nome = '';
@@ -20,6 +35,11 @@ export class armidaf {
   Costo = 0;
   Immagine = '';
   Quantita = 0;
+}
+
+export class posseduti extends armidaf {
+  Indossato = "N" ;
+  Usato = "N";
 }
 
 @Injectable({
@@ -57,6 +77,15 @@ export class OggettiService {
     const user = sessionStorage.getItem('RBN3currentUser') ;
     // console.log(id);
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/compra.php', {
+      token: user,
+      id: id
+    });
+  }
+
+  getoggetti(id: number) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    // console.log(id);
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getoggetti.php', {
       token: user,
       id: id
     });
