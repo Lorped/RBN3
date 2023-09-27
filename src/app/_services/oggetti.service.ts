@@ -13,11 +13,11 @@ export class disposizione {
   giacca = 0;
   impermeabile = 0;
   nessuno = 0;
-  tasca1_img = "slot/belt-x.png";
-  tasca2_img = "slot/purse-x.png";
-  giacca_img = "slot/jacket-x.png";
-  impermeabile_img = "slot/trench-x.png";
-  nessuno_img = "slot/out-x.png";
+  tasca1_img = "slot/belt.png";
+  tasca2_img = "slot/purse.png";
+  giacca_img = "slot/jacket.png";
+  impermeabile_img = "slot/trench.png";
+  nessuno_img = "slot/out.png";
 }
 
 export class armidaf {

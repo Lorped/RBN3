@@ -19,6 +19,23 @@ export class finanza {
   mybalance: Array<balance> = [];
 }
 
+export class minipg {
+  Background = '';
+  Annotazioni = '';
+  Descrizione = '';
+  ImgLG = '';
+  StatusPG = 0;
+  URLImg = '';
+}
+
+export class datidabio {
+  full = false;
+  pg = new minipg();
+  
+}
+
+
+
 @Injectable()
 export class SchedaService {
 
@@ -36,6 +53,7 @@ export class SchedaService {
       const full = data.full;
       const myPG: Personaggio = new Personaggio;
       myPG.aPG = data.pg;
+
       myPG.listaAttributi =  data.attr;
       myPG.listaSkill = data.skill;
       myPG.listaBackground = data.background;

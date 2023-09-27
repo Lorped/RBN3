@@ -59,14 +59,22 @@ if ( $id == $Userid || $MasterAdmin > 0 ) {
 
 
 if ( ! $full ) {
-	$MySql = "SELECT URLImg, Descrizione, Annotazioni , ImgLG FROM Personaggio WHERE Userid='$id'";
+	$MySql = "SELECT URLImg, Descrizione, Annotazioni , ImgLG , Background.LivelloBG as StatusPG FROM Personaggio 
+	LEFT JOIN Background ON Personaggio.Userid = Background.Userid AND Background.IDbackground = 13 
+	WHERE Personaggio.Userid='$id' ";
 
 } else {
-	$MySql = "SELECT URLImg, Background, Descrizione, Annotazioni, ImgLG FROM Personaggio WHERE Userid='$id'";
+	$MySql = "SELECT URLImg, Background, Descrizione, Annotazioni, ImgLG , Background.LivelloBG as StatusPG  FROM Personaggio 
+	LEFT JOIN Background ON Personaggio.Userid = Background.Userid AND Background.IDbackground = 13 
+	WHERE Personaggio.Userid='$id'";
 }
 
 $Result=mysqli_query($db, $MySql);
 $res = mysqli_fetch_array($Result,MYSQLI_ASSOC);
+
+if ($res['StatusPG'] == '') {
+	$res['StatusPG'] = 0;
+}
 
 $out = [
 	'full' => $full,

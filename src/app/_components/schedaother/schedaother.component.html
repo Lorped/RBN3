@@ -13,7 +13,7 @@
           <!--<mat-card-title-group>-->
             <mat-card-title>{{myaPG.Nome}} {{myaPG.Cognome}}</mat-card-title>
             <mat-card-subtitle>
-              <span class="accent-text">Clan:</span> {{myaPG.Clan}} | <span class="accent-text">Età app.:</span> {{myaPG.EtaA}}
+              <span class="accent-text">Clan:</span> {{myaPG.Clan}} | <span class="accent-text">Età app.:</span> {{myaPG.EtaA}} | Status: <i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'white': ix+1 > StatusPG , 'dred': ix < StatusPG }"></i>
               <br>
               <span class="accent-text">Descrizione:</span>
               {{descrizione}}

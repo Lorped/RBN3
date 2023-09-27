@@ -76,7 +76,9 @@ export class Basicpg {
   public Taumaturgo = 0;
   public ImgLG = '';
   public Annotazioni = '';
+
   // V5 da Eliminare
+  /*
   public Sete;
   public BloodP = 0;  // from LEFT JOIN da BloodPotency
   public Surge = 0 ;
@@ -86,7 +88,7 @@ export class Basicpg {
   public MinSete = 0;
   public MinBP = 0 ; // from LEFT JOIN da Generazioni
   public MaxBP = 0 ;
-  
+  */
 
 
 }

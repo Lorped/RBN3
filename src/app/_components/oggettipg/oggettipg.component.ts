@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OggettiService, posseduti, disposizione } from '../../_services/index';
 import { Status } from '../../globals';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-oggettipg',
@@ -18,7 +20,7 @@ export class OggettipgComponent implements OnInit{
   
   miadisp = new disposizione();
 
-  constructor(private oggettiservice: OggettiService, public status: Status) {}
+  constructor(private oggettiservice: OggettiService, public status: Status) {  }
 
   ngOnInit() {
     

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SchedaService } from '../../_services/index';
+import { SchedaService, datidabio } from '../../_services/index';
 import { Status } from '../../globals';
 import {  Basicpg, Personaggio } from '../../globals';
 
@@ -19,6 +19,7 @@ export class SchedaotherComponent implements OnInit {
   bio = '';
   descrizione = '';
   annotazioni = '';
+  StatusPG = 0;
 
   today: number = (new Date()).getFullYear();
 
@@ -33,6 +34,8 @@ export class SchedaotherComponent implements OnInit {
       this.myaPG = this.myPG.aPG;
       this.myaPG.ModSalute = Number (this.myaPG.ModSalute);
 
+      console.log()
+
     });
 
     this.schedaService.getnecrotaum(this.status.otherID)
@@ -42,11 +45,14 @@ export class SchedaotherComponent implements OnInit {
     });
 
     this.schedaService.getbio(this.status.otherID)
-    .subscribe ( data => {
+    .subscribe ( (data: datidabio) => {
 
       this.bio = data.pg.Background;
       this.descrizione = data.pg.Descrizione;
       this.annotazioni = data.pg.Annotazioni;
+      this.StatusPG = data.pg.StatusPG;
+
+      console.log(data);
 
     });
 

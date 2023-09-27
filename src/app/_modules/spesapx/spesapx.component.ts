@@ -121,15 +121,15 @@ export class SpesapxComponent implements OnInit {
     this.location.back();
   }
 
+  /*
   addbp () {
     this.listaspesa.push( {x: 'addbp.php' , y: 0, z: 'Blood Potency'} );
 
     this.px = this.px - 10*(this.myPG.aPG.BloodP+1);
     this.myPG.aPG.BloodP++;
 
-
   }
-
+  */
 
 
 
