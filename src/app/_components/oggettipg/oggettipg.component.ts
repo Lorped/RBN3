@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OggettiService, posseduti, disposizione } from '../../_services/index';
 import { Status } from '../../globals';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-oggettipg',
@@ -46,13 +45,13 @@ export class OggettipgComponent implements OnInit{
       //console.log(this.oggettiindossati);
 
       for ( let i = 0 ; i < this.oggettiindossati.length ; i++){
-        if (this.oggettiindossati[i].Occultabile == 'G' ) {
-          this.miadisp.giacca = this.oggettiindossati[i].IDoggetto;
-          this.miadisp.giacca_img = this.oggettiindossati[i].Immagine;
-        }
         if (this.oggettiindossati[i].Occultabile == 'I' ) {
           this.miadisp.impermeabile = this.oggettiindossati[i].IDoggetto;
           this.miadisp.impermeabile_img = this.oggettiindossati[i].Immagine;
+        }
+        if (this.oggettiindossati[i].Occultabile == 'G' ) {
+          this.miadisp.giacca = this.oggettiindossati[i].IDoggetto;
+          this.miadisp.giacca_img = this.oggettiindossati[i].Immagine;
         }
         if (this.oggettiindossati[i].Occultabile == 'N' ) {
           this.miadisp.nessuno = this.oggettiindossati[i].IDoggetto;
@@ -72,6 +71,18 @@ export class OggettipgComponent implements OnInit{
 
 
     });
+    
+  }
+
+
+  swapout(id: number) {
+    // 1 - T1
+    // 2 - T2
+    // 3 - G
+    // 4 - I
+    // 5 - N
+    console.log("swapout", id);
+
     
   }
 

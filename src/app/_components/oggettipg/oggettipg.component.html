@@ -1,6 +1,7 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <!-- eslint-disable @angular-eslint/template/alt-text -->
 
-<mat-card *ngIf="oggettousato.IDoggetto != 0">
+<mat-card *ngIf="oggettousato.IDoggetto !== 0">
     <mat-card-header>
         <mat-card-title>Oggetto Usato: {{oggettousato.Nome}}</mat-card-title>
         <mat-card-subtitle>
@@ -31,24 +32,23 @@
                 <td>
                     <table>
                     <tr>
-                        <!--
-                        <td class="jcc" [ngClass]="{'bord': miadisp.giacca !==0}" width="95">
-                            <img src="assets/oggetti/{{miadisp.giacca_img}}" height="75">
-                        </td>
-                        -->
                         <td style="height: 50px;">
                             &nbsp;
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="jcc">
-                            <img src="assets/oggetti/{{miadisp.tasca1_img}}" height="50" [ngClass]="{'bord': miadisp.tasca1 !==0, 'free':miadisp.tasca1 === 0 }">
+                        <td >
+                            <button class="btn"  (click)="swapout(1)"  [disabled]="miadisp.tasca1 === 0 ">
+                            <img src="assets/oggetti/{{miadisp.tasca1_img}}" height="50" [ngClass]="{'bord': miadisp.tasca1 !==0, 'free':miadisp.tasca1 === 0 }" >
+                            </button>
                         </td>
                     </tr>
                     <tr>
-                        <td class="jcc" [ngClass]="{'bord': miadisp.tasca2 !==0}">
-                            <img src="assets/oggetti/{{miadisp.tasca2_img}}" height="50" [ngClass]="{'bord': miadisp.tasca2 !==0, 'free':miadisp.tasca2 === 0 }">
+                        <td >
+                            <button class="btn" (click)="swapout(2)"  [disabled]="miadisp.tasca2 === 0 ">
+                            <img src="assets/oggetti/{{miadisp.tasca2_img}}" height="50" [ngClass]="{'bord': miadisp.tasca2 !==0, 'free':miadisp.tasca2 === 0 }"  >
+                            </button>
                         </td>
                     </tr>
                     <tr>
@@ -71,13 +71,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="jcc"  >
-                            <img src="assets/oggetti/{{miadisp.giacca_img}}" height="80" [ngClass]="{'bord': miadisp.giacca !==0, 'free':miadisp.giacca === 0 }">
+                        <td >
+                            <button class="btn"  (click)="swapout(3)"  [disabled]="miadisp.giacca === 0 ">
+                            <img src="assets/oggetti/{{miadisp.giacca_img}}" height="80" [ngClass]="{'bord': miadisp.giacca !==0, 'free':miadisp.giacca === 0 }" >
+                            </button>
                         </td>
                     </tr>
                     <tr>
-                        <td class="jcc"  >
-                            <img src="assets/oggetti/{{miadisp.impermeabile_img}}" height="80" [ngClass]="{'bord': miadisp.impermeabile !==0, 'free':miadisp.impermeabile === 0 }">
+                        <td >
+                            <button class="btn"  (click)="swapout(4)"  [disabled]="miadisp.impermeabile === 0 ">
+                            <img src="assets/oggetti/{{miadisp.impermeabile_img}}" height="80" [ngClass]="{'bord': miadisp.impermeabile !==0, 'free':miadisp.impermeabile === 0 }" >
+                            </button>
                         </td>
                     </tr>
                     <tr>
@@ -95,8 +99,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <span style="font-size: 2em;"> + </span> <img src="assets/oggetti/{{miadisp.nessuno_img}}" height="100" [ngClass]="{'bord': miadisp.nessuno !==0, 'free':miadisp.nessuno === 0 }">
+                        <td >
+                            <span style="font-size: 2em;"> + </span> 
+                            <button class="btn"  (click)="swapout(5)"  [disabled]="miadisp.nessuno === 0 ">
+                            <img src="assets/oggetti/{{miadisp.nessuno_img}}" height="100" [ngClass]="{'bord': miadisp.nessuno !==0, 'free':miadisp.nessuno === 0 }" >
+                            </button>
                         </td>
                     </tr>
                     <tr>
@@ -124,7 +131,7 @@
     
     <mat-card *ngFor="let item of oggettiposseduti">
         <mat-card-header>
-            <mat-card-title>{{item.Nome}}</mat-card-title>
+            <mat-card-title>{{item.Nome}} <span *ngIf="item.Quantita>1">({{item.Quantita}})</span></mat-card-title>
             <mat-card-subtitle>
                 <span *ngIf="item.IDtipoOggetto === 1 || item.IDtipoOggetto === 2 ">
                     Danno: <span class="accent-text">Forza +{{item.Danno}}</span> | Tipo danno: <span class="accent-text">
