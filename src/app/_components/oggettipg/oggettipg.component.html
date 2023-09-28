@@ -128,8 +128,9 @@
       <mat-panel-description>Oggetti posseduti</mat-panel-description>
     </mat-expansion-panel-header>
 
+
     
-    <mat-card *ngFor="let item of oggettiposseduti">
+    <mat-card *ngFor="let item of oggettiposseduti" class="movable" (click)="swapin(item.IDoggetto)">
         <mat-card-header>
             <mat-card-title>{{item.Nome}} <span *ngIf="item.Quantita>1">({{item.Quantita}})</span></mat-card-title>
             <mat-card-subtitle>
