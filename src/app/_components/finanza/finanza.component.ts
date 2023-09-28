@@ -50,7 +50,7 @@ export class FinanzaComponent implements OnInit{
     
     this.schedaservice.finanze().subscribe((data: finanza)=> {
       this.finanzepg = data;
-      console.log(this.finanzepg);
+      //console.log(this.finanzepg);
 
       this.status.cash = this.finanzepg.cash;
 

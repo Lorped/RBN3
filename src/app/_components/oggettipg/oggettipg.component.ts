@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { OggettiService, posseduti, disposizione } from '../../_services/index';
+import { OggettiService, posseduti, disposizione, AnagrafeRow, AnagrafeService } from '../../_services/index';
 import { Status } from '../../globals';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -19,10 +22,35 @@ export class OggettipgComponent implements OnInit{
   
   miadisp = new disposizione();
 
-  constructor(private oggettiservice: OggettiService, public status: Status) {  }
+
+  quantitamax = 1;
+
+  myFormGroup: FormGroup;
+  filteredOptions: Observable<AnagrafeRow[]>;
+  anagrafe: Array<AnagrafeRow> = [];
+  filteredOptions2: Observable<posseduti[]>;
+
+
+  constructor(private oggettiservice: OggettiService, public status: Status, private anagrafeservice: AnagrafeService) {  }
 
   ngOnInit() {
-    
+
+
+    this.myFormGroup = new FormGroup({
+      destinatarioFC: new FormControl('', [
+        Validators.required
+      ]),
+      oggettoFC: new FormControl('', [
+        Validators.required
+      ]),
+      quantitaFC: new FormControl(1, [
+        Validators.required,
+        Validators.min(1),
+        (control: AbstractControl) => Validators.max(this.quantitamax)(control)
+      ]),
+    });
+
+    //console.log (this.myFormGroup);
 
     this.oggettiservice.getoggetti(this.status.Userid).subscribe( (data: Array<posseduti>)=> {
       console.log(data);
@@ -66,23 +94,50 @@ export class OggettipgComponent implements OnInit{
           this.miadisp.tasca1 = this.oggettiindossati[i].IDoggetto;
           this.miadisp.tasca1_img = this.oggettiindossati[i].Immagine;
         }
-
       }
 
-
+      this.filteredOptions2 = this.myFormGroup.get('oggettoFC').valueChanges.pipe(
+        startWith(''),
+        map(value => this.myfilter2(value || '' )),
+      );   
 
     });
+
+
+    this.anagrafeservice.anagrafe()
+    .subscribe( (data: Array<AnagrafeRow>) => {
+      this.anagrafe = data;
+      //console.log(this.anagrafe);
+      
+      for (let i = 0; i < this.anagrafe.length; i++) {
+        if (this.anagrafe[i].Userid === this.status.Userid) {
+          this.anagrafe.splice(i--, 1);
+        }
+      }
+
+      // forzo nome = nome + cognome
+      for (let i = 0; i < this.anagrafe.length; i++) {
+        this.anagrafe[i].Nome = this.anagrafe[i].Nome + ' ' + this.anagrafe[i].Cognome;
+      }
+
+      this.filteredOptions = this.myFormGroup.get('destinatarioFC').valueChanges.pipe(
+        startWith(''),
+        map(value => this.myfilter(value || '' )),
+      );      
+    });
+
+
     
   }
 
 
-  swapout(id: number) {
+  swapout(id: number, IDoggetto: number) {
     // 1 - T1
     // 2 - T2
     // 3 - G
     // 4 - I
     // 5 - N
-    console.log("swapout", id);
+    //console.log("swapout", id);
 
     switch (id) {
        case 1:
@@ -109,6 +164,7 @@ export class OggettipgComponent implements OnInit{
       default:
         break;
     }
+    this.oggettiservice.swapinout( 'out', IDoggetto).subscribe();
   }
 
   swapin(id) {
@@ -118,10 +174,7 @@ export class OggettipgComponent implements OnInit{
 
     switch (found.Occultabile) {
       case 'T':
-        //console.log(this.miadisp.tasca1);
-        //console.log(this.miadisp.tasca2);
-        //console.log(id);
-        //console.log(found.Quantita);
+
         if( (this.miadisp.tasca1 !== id && this.miadisp.tasca2 !== id) || found.Quantita>1 ) {
           if (this.miadisp.tasca1 === 0) {
             this.miadisp.tasca1 = found.IDoggetto;
@@ -148,8 +201,37 @@ export class OggettipgComponent implements OnInit{
      default:
        break;
    }
+   this.oggettiservice.swapinout( 'in', found.IDoggetto).subscribe();
  }
   
 
+ myfilter(obj: string): AnagrafeRow[] {
+  if ( typeof obj != "string" ) return null;
+  // console.log("in myfilter :" , obj);
+  const filterValue = obj.toLowerCase();
+  return this.anagrafe.filter(option => option.Nome.toLowerCase().includes(filterValue));
+  }
+  displayFn  (user: AnagrafeRow) :string {
+    return user && user ? user.Nome : '';
+  }
+
+  myfilter2(obj: string): posseduti[] {
+    if ( typeof obj != "string" ) return null;
+    // console.log("in myfilter :" , obj);
+    const filterValue = obj.toLowerCase();
+    return this.oggettiposseduti.filter(option => option.Nome.toLowerCase().includes(filterValue));
+  }
+  displayFn2  (user: posseduti) :string {
+
+    return user && user ? user.Nome : '';
+  }
+
+  trasferisci(){
+    console.log("here");
+  }
+
+  updqty() {
+    this.quantitamax = this.myFormGroup.value.oggettoFC.Quantita;
+  }
   
 }

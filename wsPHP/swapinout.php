@@ -24,6 +24,7 @@ $request = json_decode($postdata);
 
 $token=$request->token;
 $id=$request->id;
+$tipo=$request->tipo;
 
 
 
@@ -45,22 +46,18 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-
-$MySql="SELECT Armi.* , Quantita From Armi
-	LEFT JOIN Possesso ON (Armi.IDoggetto = Possesso.IDoggetto AND Userid = '$Userid')
-	WHERE (Armi.IDtipoOggetto = 2  OR Armi.IDtipoOggetto = 1 ) AND Unico = 'N' ";
-
-
-$Result=mysqli_query($db, $MySql);
-while ($res=mysqli_fetch_array($Result,MYSQLI_ASSOC) ) {
-	if($res['Quantita'] == '') {
-		$res['Quantita'] = 0 ;
-	}
-
-	$out [] = $res;
-
-
+if ( $tipo == 'in') {
+	$MySql="UPDATE  Possesso SET Indossato = 'S' WHERE  Userid = '$Userid' AND IDoggetto = '$id' ";
 }
+if ( $tipo == 'out') {
+	$MySql="UPDATE  Possesso SET Indossato = 'N' WHERE  Userid = '$Userid' AND IDoggetto = '$id' ";
+}
+mysqli_query($db, $MySql);
+
+
+$out = [];
+
+
 
 
 

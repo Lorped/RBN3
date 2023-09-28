@@ -20,24 +20,28 @@ export class disposizione {
   nessuno_img = "slot/out.png";
 }
 
-export class armidaf {
+export class oggettibase {
   IDoggetto = 0;
+  IDtipoOggetto = 0;
   Nome = '';
   Descrizione = '';
+  Costo = 0;
+  Immagine = '';
+  Quantita = 0;
+  Unico = '';
+}
+
+export class armi extends oggettibase{
   Danno = 0;
   BonusTiro = 0;
   Rate = 0;
   Raffica = '';
   Caricatore = 0;
-  IDtipoOggetto = 0;
   Occultabile = '';
   Reperibilita = 0;
-  Costo = 0;
-  Immagine = '';
-  Quantita = 0;
 }
 
-export class posseduti extends armidaf {
+export class posseduti extends armi {
   Indossato = "N" ;
   Usato = "N";
 }
@@ -52,18 +56,13 @@ export class OggettiService {
   gettipologia (){
     return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/gettipoogg.php');
   }
-  getarmidaf (){
+  getalloggetti (){
     const user = sessionStorage.getItem('RBN3currentUser') ;
-    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getarmidaf.php',  {
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getalloggetti.php',  {
       token: user
     });
   }
-  getarmidamischia (){
-    const user = sessionStorage.getItem('RBN3currentUser') ;
-    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getarmidamischia.php',  {
-      token: user
-    });
-  }
+
 
   getcriminal() {
     const user = sessionStorage.getItem('RBN3currentUser') ;
@@ -88,6 +87,16 @@ export class OggettiService {
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getoggetti.php', {
       token: user,
       id: id
+    });
+  }
+
+  swapinout(tipo: string , id: number){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    // console.log(id);
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/swapinout.php', {
+      token: user,
+      id: id,
+      tipo: tipo
     });
   }
 }

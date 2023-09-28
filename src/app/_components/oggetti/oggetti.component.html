@@ -65,6 +65,33 @@
     </mat-card>
 </mat-expansion-panel>
 
+<mat-expansion-panel  >
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <mat-icon svgIcon="pentacle"></mat-icon> 
+        </mat-panel-title>
+        <mat-panel-description>
+            Oggetti esoterici
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+    <mat-card *ngFor="let item of oggettiesot">
+        <mat-card-header>
+            <mat-card-title>{{item.Nome}}</mat-card-title>
+            <mat-card-subtitle>{{item.Descrizione}}</mat-card-subtitle>
+            <span class="spacer"></span>
+            <img mat-card-sm-image src="assets/oggetti/{{item.Immagine}}"  >
+        </mat-card-header>
+        <mat-card-content>
+            <p>Posseduti: <span class="accent-text">{{item.Quantita}}</span></p>         
+        </mat-card-content>
+        <mat-card-actions align="end">
+            {{item.Costo}}€ <span class="spacer"></span>
+            <button mat-button color="warn" [disabled]="cash < item.Costo" (click)="acquista(item.IDoggetto)">Acquista</button>
+        </mat-card-actions>
+    </mat-card>
+</mat-expansion-panel>
+
 
 <mat-expansion-panel  >
     <mat-expansion-panel-header>

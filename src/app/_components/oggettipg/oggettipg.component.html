@@ -39,14 +39,14 @@
 
                     <tr>
                         <td >
-                            <button class="btn"  (click)="swapout(1)"  [disabled]="miadisp.tasca1 === 0 ">
+                            <button class="btn"  (click)="swapout(1, miadisp.tasca1)"  [disabled]="miadisp.tasca1 === 0 ">
                             <img src="assets/oggetti/{{miadisp.tasca1_img}}" height="50" [ngClass]="{'bord': miadisp.tasca1 !==0, 'free':miadisp.tasca1 === 0 }" >
                             </button>
                         </td>
                     </tr>
                     <tr>
                         <td >
-                            <button class="btn" (click)="swapout(2)"  [disabled]="miadisp.tasca2 === 0 ">
+                            <button class="btn" (click)="swapout(2, miadisp.tasca2)"  [disabled]="miadisp.tasca2 === 0 ">
                             <img src="assets/oggetti/{{miadisp.tasca2_img}}" height="50" [ngClass]="{'bord': miadisp.tasca2 !==0, 'free':miadisp.tasca2 === 0 }"  >
                             </button>
                         </td>
@@ -72,14 +72,14 @@
                     </tr>
                     <tr>
                         <td >
-                            <button class="btn"  (click)="swapout(3)"  [disabled]="miadisp.giacca === 0 ">
+                            <button class="btn"  (click)="swapout(3, miadisp.giacca)"  [disabled]="miadisp.giacca === 0 ">
                             <img src="assets/oggetti/{{miadisp.giacca_img}}" height="80" [ngClass]="{'bord': miadisp.giacca !==0, 'free':miadisp.giacca === 0 }" >
                             </button>
                         </td>
                     </tr>
                     <tr>
                         <td >
-                            <button class="btn"  (click)="swapout(4)"  [disabled]="miadisp.impermeabile === 0 ">
+                            <button class="btn"  (click)="swapout(4, miadisp.impermeabile)"  [disabled]="miadisp.impermeabile === 0 ">
                             <img src="assets/oggetti/{{miadisp.impermeabile_img}}" height="80" [ngClass]="{'bord': miadisp.impermeabile !==0, 'free':miadisp.impermeabile === 0 }" >
                             </button>
                         </td>
@@ -101,7 +101,7 @@
                     <tr>
                         <td >
                             <span style="font-size: 2em;"> + </span> 
-                            <button class="btn"  (click)="swapout(5)"  [disabled]="miadisp.nessuno === 0 ">
+                            <button class="btn"  (click)="swapout(5, miadisp.nessuno)"  [disabled]="miadisp.nessuno === 0 ">
                             <img src="assets/oggetti/{{miadisp.nessuno_img}}" height="100" [ngClass]="{'bord': miadisp.nessuno !==0, 'free':miadisp.nessuno === 0 }" >
                             </button>
                         </td>
@@ -130,10 +130,11 @@
 
 
     
-    <mat-card *ngFor="let item of oggettiposseduti" class="movable" (click)="swapin(item.IDoggetto)">
+    <mat-card *ngFor="let item of oggettiposseduti" [ngClass]="{'movable': item.IDtipoOggetto!== 4}" (click)="swapin(item.IDoggetto)">
         <mat-card-header>
             <mat-card-title>{{item.Nome}} <span *ngIf="item.Quantita>1">({{item.Quantita}})</span></mat-card-title>
             <mat-card-subtitle>
+                {{item.Descrizione}}<br>
                 <span *ngIf="item.IDtipoOggetto === 1 || item.IDtipoOggetto === 2 ">
                     Danno: <span class="accent-text">Forza +{{item.Danno}}</span> | Tipo danno: <span class="accent-text">
                     <span *ngIf="item.IDtipoOggetto === 1">Da Urto</span>
@@ -152,4 +153,63 @@
 
 
 </mat-expansion-panel>
+
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+        Traferimento oggetti
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+    </mat-card-content>
+    <form [formGroup]="myFormGroup">
+        <mat-form-field >
+            <mat-label>Destinatario</mat-label>
+            <input type="text"
+                placeholder="Destinatario"
+                matInput
+                formControlName="destinatarioFC"
+                [matAutocomplete]="auto" > 
+            <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn" > 
+                <mat-option *ngFor="let cont of filteredOptions | async"  [value]="cont">
+                    <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+                    {{ cont.Nome }} 
+
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field >
+            <mat-label>Oggetto</mat-label>
+            <input type="text"
+                placeholder="Oggetto"
+                matInput
+                formControlName="oggettoFC"
+                [matAutocomplete]="auto2" > 
+            <mat-autocomplete #auto2="matAutocomplete"  [displayWith]="displayFn2" (optionSelected)="updqty()"> 
+                <mat-option *ngFor="let cont of filteredOptions2 | async"  [value]="cont">
+                    <img style="vertical-align:middle;"  src="assets/oggetti/{{cont.Immagine}}" height="25" />
+                    {{ cont.Nome }} 
+                    <!-- <img src="assets/{{cont.ClanImg}}" height="25px" > -->
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field >
+            <mat-label>Quantita</mat-label>
+            <input type="number"
+                matInput 
+                formControlName="quantitaFC" > 
+        </mat-form-field>
+
+
+            <button mat-raised-button color="primary" type="button" [disabled]="!myFormGroup.valid" (click)="trasferisci()" class="full">Effettua trasferimento</button>
+
+
+    </form>
+</mat-card>
+
+
 

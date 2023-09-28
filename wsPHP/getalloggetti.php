@@ -45,10 +45,16 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-
-$MySql="SELECT Armi.* , Quantita From Armi
+if ( $MasterAdmin >1 ) {
+	$MySql="SELECT Armi.* , Quantita From Armi
+	LEFT JOIN Possesso ON (Armi.IDoggetto = Possesso.IDoggetto  AND Userid = '$Userid') ";
+} else {
+	$MySql="SELECT Armi.* , Quantita From Armi
 	LEFT JOIN Possesso ON (Armi.IDoggetto = Possesso.IDoggetto  AND Userid = '$Userid')
-	WHERE Armi.IDtipoOggetto = 3 AND Unico = 'N' ";
+	WHERE  Unico = 'N' ";
+}
+
+
 
 
 $Result=mysqli_query($db, $MySql);

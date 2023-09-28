@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { armidaf , OggettiService } from '../../_services/index';
+import { armi , oggettibase, OggettiService } from '../../_services/index';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Status } from '../../globals';
@@ -16,14 +16,17 @@ export interface criminal {
 })
 export class OggettiComponent implements OnInit{
 
-  armidafuoco: Array<armidaf> = [];
-  armidamischia: Array<armidaf> = [];
+  armidafuoco: Array<armi> = [];
+  armidamischia: Array<armi> = [];
+  oggettiesot: Array<oggettibase> = [];
+  alloggetti: Array<oggettibase> = [];
   livellocriminalita= 0;
   cash = 0 ;
 
   constructor (private oggettiservice: OggettiService, private maticonreg: MatIconRegistry, private sanitizer: DomSanitizer, private status: Status) {
     this.maticonreg.addSvgIcon( 'gun' , this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/gun.svg') );
     this.maticonreg.addSvgIcon( 'sword' , this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/sword.svg'));
+    this.maticonreg.addSvgIcon( 'pentacle' , this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/pentacle.svg'));
   }
 
   ngOnInit(): void {
@@ -33,30 +36,55 @@ export class OggettiComponent implements OnInit{
       this.cash = Number(data.cash);
     });
     
-    this.oggettiservice.getarmidamischia().subscribe ( (data: Array<armidaf>) => {
-      this.armidamischia = data;
+    this.oggettiservice.getalloggetti().subscribe ( (data: Array<armi>) => {
+      this.alloggetti = data;
+      console.log(data);
+      for (let i=0; i < data.length; i++){
+        data[i].IDtipoOggetto = Number (data[i].IDtipoOggetto);
+        data[i].Costo = Number (data[i].Costo);
+        data[i].Reperibilita = Number (data[i].Reperibilita);
+        data[i].Quantita = Number (data[i].Quantita);
+        switch (data[i].IDtipoOggetto) {
+          case 1:
+          case 2:
+            this.armidamischia.push(data[i]);
+            break;
+          case 3:
+            this.armidafuoco.push(data[i]);
+            break;
+          case 4:
+            this.oggettiesot.push(data[i]);
+            break;
+          default:
+            break;
+        }
+      }
     });
     
-    this.oggettiservice.getarmidaf().subscribe ( (data: Array<armidaf>) => {
-      this.armidafuoco = data;
-    });
   }
 
   acquista(id: number){
     this.oggettiservice.compra(id).subscribe(()=> {
-      for (let i=0; i<this.armidafuoco.length ; i++){
-        if (this.armidafuoco[i].IDoggetto === id) {
-          ++this.armidafuoco[i].Quantita;
-          this.cash = this.cash - this.armidafuoco[i].Costo;
+
+      const found = this.alloggetti.find( (xx) => xx.IDoggetto === id);
+
+      if (found.IDtipoOggetto === 1 || found.IDtipoOggetto === 2) {
+        const idx = this.armidamischia.findIndex( (xx) => xx.IDoggetto === id);
+        ++this.armidamischia[idx].Quantita;
+        this.cash = this.cash - this.armidamischia[idx].Costo;
           this.status.cash = this.cash;
-        }
       }
-      for (let i=0; i<this.armidamischia.length ; i++){
-        if (this.armidamischia[i].IDoggetto === id) {
-          ++this.armidamischia[i].Quantita;
-          this.cash = this.cash - this.armidamischia[i].Costo;
+      if (found.IDtipoOggetto === 3 ) {
+        const idx = this.armidafuoco.findIndex( (xx) => xx.IDoggetto === id);
+        ++this.armidafuoco[idx].Quantita;
+        this.cash = this.cash - this.armidafuoco[idx].Costo;
           this.status.cash = this.cash;
-        }
+      }
+      if (found.IDtipoOggetto === 4 ) {
+        const idx = this.oggettiesot.findIndex( (xx) => xx.IDoggetto === id);
+        ++this.oggettiesot[idx].Quantita;
+        this.cash = this.cash - this.oggettiesot[idx].Costo;
+          this.status.cash = this.cash;
       }
       
     });
