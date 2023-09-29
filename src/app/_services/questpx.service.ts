@@ -76,22 +76,10 @@ export class QuestpxService {
 
   constructor( private status: Status, private http: HttpClient ) { }
 
-  getquest () {
+  getquest (id: number) {
 
-    const mialista = [];
-
-    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/quest.php?id=' + this.status.Userid.toString() ).pipe(
-    map((res: Array<any>) => {
-      for (let i = 0; i < res.length; i++) {
-        const item = res[i];
-        const newquest = new Questrow ( item.IDquest, item.Quest, item.MasterOpen, item.DataOpen,
-          item.Px, item.Status, item.DataClose, item.MasterClose);
-          mialista.push(newquest);
-      }
-
-      return mialista;
-    }));
-
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/quest.php?id=' + id.toString() );
+   
   }
 
   getlogpx () {

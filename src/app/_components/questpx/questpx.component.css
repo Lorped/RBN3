@@ -1,4 +1,5 @@
 mat-card {
+  margin-top: 0.1em;
   padding-bottom: 0.5em;
   margin-bottom: 0.1em;
 }
@@ -28,40 +29,3 @@ hr {
 }
 
 
-
-.nav-tabs{
-  color: #fff;
-
-}
-
-.nav-tabs > li > a,
-.nav-tabs > li > a:focus {
-  border-color: transparent transparent #ff0000 transparent;
-  /* background-color: #202020; */
-  background-color: transparent;
-  color: #b0b0b0 ;
-}
-
-.nav-tabs > li > a:hover {
-  background-color: #3d3d3d;
-  border-color: #ff0000 ;
-  color: #ffffff ;
-}
-
-
-.nav-link.active  {
-  background-color: #a00505 !important;
-  /* border-color: #ff0000 ; */
-  color: #ffffff !important;
-}
-
-.tab-pane {
-  background-color: transparent;
-}
-
-
-
-.rborder {
-  border-color: transparent transparent #ff0000 transparent;
-  border-bottom: 1px solid #f00;
-}

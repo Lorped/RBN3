@@ -4,6 +4,7 @@ import { Status } from '../../globals';
 import { NgForm } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-bio',
   templateUrl: './bio.component.html',
@@ -24,6 +25,7 @@ export class BioComponent implements OnInit {
   constructor( private schedaService: SchedaService, private status: Status  ) { }
 
   ngOnInit() {
+
 
     this.schedaService.getbio(this.status.Userid)
     .subscribe( (data: any) => {
@@ -46,7 +48,9 @@ export class BioComponent implements OnInit {
       .subscribe( () => {
           this.schedaService.getbio(this.status.Userid)
           .subscribe( (data: any) => {
-            this.URLImg = data.pg.URLImg;
+            const xx = Date.now();
+            this.URLImg = data.pg.URLImg+'?'+xx;
+            this.ImgLG = data.pg.ImgLG+'?'+xx;
           });
       }, error => {
         console.log(error);

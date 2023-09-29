@@ -29,7 +29,16 @@ hr  {
 mat-card-header {
   font-size: 1em !important;
 }
+
+mat-card-title {
+  font-size: 1.2em !important;
+}
 mat-card-subtitle {
   font-size: 1em !important;
 }
 
+mat-card {
+  margin-top: 0.1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.1em;
+}

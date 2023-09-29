@@ -48,9 +48,9 @@ export class Basicpg {
   // public IDrazza = 0;
   // public IDclan = 0;
   public Clan = ''; // from LEFT Join
-  public ClanImg = ''; // from LEFT Join
+  public ClanImg = 'dummy.png'; // from LEFT Join
   public Setta = ''; // from LEFT Join
-  public SettaImg = ''; // from LEFT Join
+  public SettaImg = 'dummy.png'; // from LEFT Join
   public Sesso = '';
   public Eta = 0;
   public EtaA = 0;
@@ -74,7 +74,7 @@ export class Basicpg {
   public DescSalute = ''; // from LEFT Join
   public ModSalute = 0; // from LEFT Join
   public Taumaturgo = 0;
-  public ImgLG = '';
+  public ImgLG = 't-500x600.png';
   public Annotazioni = '';
 
   // V5 da Eliminare

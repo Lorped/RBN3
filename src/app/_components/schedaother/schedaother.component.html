@@ -266,4 +266,57 @@
       </div>
     </div>
   </mat-tab>
+
+  <mat-tab label="Quest" *ngIf="status.MasterAdmin!==0"> 
+
+    <mat-card>
+
+    <form [formGroup]="myFormGroup">
+      <mat-form-field style="width:50% !important">
+          <mat-label>Descrizione Quest</mat-label>
+          <input type="text"
+              placeholder="Descrizione"
+              matInput
+              formControlName="questFC"> 
+      </mat-form-field>
+
+      <mat-form-field >
+          <mat-label>PX</mat-label>
+          <input type="number"
+              placeholder="1"
+              matInput 
+              formControlName="pxFC" > 
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" [disabled]="!myFormGroup.valid" (click)="assegna()" class="full">Assegna Quest</button>
+    </form>
+
+  </mat-card>
+
+
+
+    <!----   QUESTA E' LA PARTE CON IL LOG DELLE QUEST -->
+    <mat-card *ngFor="let q of listaquest" >
+      <mat-card-header [ngClass]="{'warning': q.Status==='Open' }">
+        <mat-card-title>{{q.Quest}}</mat-card-title>
+        <mat-card-subtitle >
+            PX : {{q.Px}} | Data: {{q.DataOpen | date:'dd.MM.yyyy'}} | Status: {{q.Status}}
+            <span *ngIf="q.Status !== 'Open' ">
+              | Data chiusura: {{q.DataClose | date:'dd.MM.yyyy'}}
+            </span>
+        </mat-card-subtitle>
+        <span class="spacer"></span>
+        <span *ngIf="q.Status === 'Open' ">
+          <mat-icon color="warn" class="icon-08x">error_outline</mat-icon>
+        </span>
+        <span *ngIf="q.Status === 'KO' ">
+          <mat-icon color="warn" class="icon-08x">thumb_down</mat-icon>
+        </span>
+        <span *ngIf="q.Status === 'OK' ">
+          <mat-icon color="accent" class="icon-08x" >thumb_up</mat-icon>
+        </span>
+      </mat-card-header>
+    </mat-card>
+
+  </mat-tab>
+
 </mat-tab-group>
