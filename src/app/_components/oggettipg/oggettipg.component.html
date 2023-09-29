@@ -23,7 +23,7 @@
 
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Oggetti indossati <hr class="full"></mat-card-title>
+        <mat-card-title>Oggetti indossati <span *ngIf="swaplock === true"> <span class="accent-text">- Indossare/Dismettere oggetti è inibito durante le chat -</span></span> <hr class="full"></mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <div class="container jcc">
@@ -154,11 +154,18 @@
 
 </mat-expansion-panel>
 
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>swap_horiz</mat-icon> 
+      </mat-panel-title>
+      <mat-panel-description>Traferimento oggetti</mat-panel-description>
+    </mat-expansion-panel-header>
 
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-        Traferimento oggetti
+        Traferimento 
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -210,6 +217,7 @@
 
     </form>
 </mat-card>
+</mat-expansion-panel>
 
 
 

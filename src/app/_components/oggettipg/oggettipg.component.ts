@@ -30,10 +30,23 @@ export class OggettipgComponent implements OnInit{
   anagrafe: Array<AnagrafeRow> = [];
   filteredOptions2: Observable<posseduti[]>;
 
+ 
+  swaplock = false;
 
   constructor(private oggettiservice: OggettiService, public status: Status, private anagrafeservice: AnagrafeService) {  }
 
   ngOnInit() {
+    interface Checkchat {
+      c: number;
+    }
+
+    this.oggettiservice.checkckat().subscribe( (data: Checkchat) => {
+      if ( Number(data.c) !== 0 ) {
+        console.log(data);
+        this.swaplock = true;
+      }
+
+    });
 
 
     this.myFormGroup = new FormGroup({
@@ -110,6 +123,7 @@ export class OggettipgComponent implements OnInit{
       //console.log(this.anagrafe);
       
       for (let i = 0; i < this.anagrafe.length; i++) {
+        this.anagrafe[i].Userid = Number(this.anagrafe[i].Userid);
         if (this.anagrafe[i].Userid === this.status.Userid) {
           this.anagrafe.splice(i--, 1);
         }
@@ -137,7 +151,7 @@ export class OggettipgComponent implements OnInit{
     // 3 - G
     // 4 - I
     // 5 - N
-    //console.log("swapout", id);
+    if (this.swaplock) return;
 
     switch (id) {
        case 1:
@@ -168,6 +182,8 @@ export class OggettipgComponent implements OnInit{
   }
 
   swapin(id) {
+
+    if (this.swaplock) return;
     
     const found = this.oggettiposseduti.find( (xx) => xx.IDoggetto === id);
     
@@ -228,6 +244,41 @@ export class OggettipgComponent implements OnInit{
 
   trasferisci(){
     console.log("here");
+
+    this.oggettiservice.cedi( this.myFormGroup.value.destinatarioFC.Userid, this.myFormGroup.value.oggettoFC.IDoggetto, this.myFormGroup.value.quantitaFC)
+    .subscribe( () => {
+
+      const idx = this.oggettiposseduti.findIndex( (xx) => xx.IDoggetto === this.myFormGroup.value.oggettoFC.IDoggetto);
+
+      this.oggettiposseduti[idx].Quantita = this.oggettiposseduti[idx].Quantita - this.myFormGroup.value.quantitaFC;
+
+      if (this.oggettiposseduti[idx].Quantita == 0 ) {
+        let i = idx;
+        this.oggettiposseduti.splice(i--, 1);
+      }
+
+      
+
+      if ( this.myFormGroup.value.oggettoFC.IDoggetto == this.miadisp.tasca1  ){
+        this.miadisp.tasca1 = 0;
+        this.miadisp.tasca1_img = "slot/belt.png";
+      } else if ( this.myFormGroup.value.oggettoFC.IDoggetto == this.miadisp.tasca2 ) {
+        this.miadisp.tasca2 = 0;
+        this.miadisp.tasca2_img = "slot/purse.png";
+      } else if (this.myFormGroup.value.oggettoFC.IDoggetto == this.miadisp.giacca ) {
+        this.miadisp.giacca = 0;
+        this.miadisp.giacca_img = "slot/jacket.png";
+      } else if (this.myFormGroup.value.oggettoFC.IDoggetto == this.miadisp.impermeabile ) {
+        this.miadisp.impermeabile = 0;
+        this.miadisp.impermeabile_img = "slot/trench.png";
+      } else if (this.myFormGroup.value.oggettoFC.IDoggetto == this.miadisp.nessuno ) {
+        this.miadisp.nessuno = 0;
+        this.miadisp.nessuno_img = "slot/out.png";
+      }
+
+      this.myFormGroup.reset();
+
+    });
   }
 
   updqty() {

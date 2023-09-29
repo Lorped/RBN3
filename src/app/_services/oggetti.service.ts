@@ -99,4 +99,23 @@ export class OggettiService {
       tipo: tipo
     });
   }
+
+  cedi( destinatario: number , id: number , quantita: number) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    // console.log(id);
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/cedi.php', {
+      token: user,
+      destinatario: destinatario,
+      id: id,
+      quantita: quantita
+    });
+  }
+
+  checkckat ( ) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    // console.log(id);
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/checkchat.php', {
+      token: user
+    });
+  }
 }

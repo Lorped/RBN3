@@ -46,11 +46,11 @@ if ( CheckJWT ($token) ) {
 }
 
 if ( $MasterAdmin >1 ) {
-	$MySql="SELECT Armi.* , Quantita From Armi
-	LEFT JOIN Possesso ON (Armi.IDoggetto = Possesso.IDoggetto  AND Userid = '$Userid') ";
+	$MySql="SELECT Oggetti.* , Quantita From Oggetti
+	LEFT JOIN Possesso ON (Oggetti.IDoggetto = Possesso.IDoggetto  AND Userid = '$Userid') ";
 } else {
-	$MySql="SELECT Armi.* , Quantita From Armi
-	LEFT JOIN Possesso ON (Armi.IDoggetto = Possesso.IDoggetto  AND Userid = '$Userid')
+	$MySql="SELECT Oggetti.* , Quantita From Oggetti
+	LEFT JOIN Possesso ON (Oggetti.IDoggetto = Possesso.IDoggetto  AND Userid = '$Userid')
 	WHERE  Unico = 'N' ";
 }
 
