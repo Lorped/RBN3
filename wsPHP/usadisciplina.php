@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php'); //MYSQLI //
 include ('token.php');
 
 
@@ -27,7 +27,7 @@ $token=$request->token;
 $potere=$request->potere; // id potere
 $target=$request->target; // target - se esiste
 $fdv=$request->fdv; // uso Fdv
-$surge=$request->surge; // uso blood surge
+
 
 /*
 $id=$_GET['id'];
@@ -37,7 +37,7 @@ $token=$_GET['token'];
 $MasterAdmin=0;
 $Userid=-1;
 
-/************ DEBUG !!!
+
 if ( CheckJWT ($token) ) {
 	$xx=GetJWT($token);
 	$payload=json_decode($xx);
@@ -53,11 +53,12 @@ if ( CheckJWT ($token) ) {
 }
 
 
-*******************/
+/*********  
 $Userid=1;
 $NomeCognome="Julien Sorel";
 $potere = 12;
 $surge = 1;
+********/
 
 
 
@@ -65,8 +66,8 @@ $MySql = "SELECT * FROM Poteri
 	LEFT JOIN Poteri_main ON Poteri_main.IDpotere=Poteri.IDpotere
 	LEFT JOIN Discipline_main ON Poteri_main.IDdisciplina=Discipline_main.IDdisciplina
 	WHERE Userid = $Userid AND Poteri.IDpotere = $potere ";
-$Result=mysql_query($MySql);
-if ( ! $res=mysql_fetch_array($Result) ) {
+$Result=mysqli_query($db,$MySql);
+if ( ! $res=mysqli_fetch_array($Result) ) {
 	header("HTTP/1.1 401 Unauthorized");
 	$out=[];
 	echo json_encode ($out, JSON_UNESCAPED_UNICODE);
@@ -92,8 +93,8 @@ if ( $res['Auto'] == 1 ) {
 		$MySql2 = "SELECT * FROM Discipline
 		LEFT JOIN Discipline_main ON Discipline.IDdisciplina=Discipline_main.IDdisciplina
 		WHERE Discipline.IDdisciplina = $dpdisc and Userid = $Userid";
-		$Result2 = mysql_query($MySql2);
-		$Res2=mysql_fetch_array($Result2);
+		$Result2 = mysqli_query($db,$MySql2);
+		$Res2=mysqli_fetch_array($Result2);
 
 		$esito = $esito . $Res2['NomeDisc'] . ' + ';
 
@@ -106,8 +107,8 @@ if ( $res['Auto'] == 1 ) {
 		$MySql2 = "SELECT * FROM Attributi
 		LEFT JOIN Attributi_main ON Attributi.IDattributo=Attributi_main.IDattributo
 		WHERE Attributi.IDattributo = $dpattr and Userid = $Userid";
-		$Result2 = mysql_query($MySql2);
-		$Res2=mysql_fetch_array($Result2);
+		$Result2 = mysqli_query($db,$MySql2);
+		$Res2=mysqli_fetch_array($Result2);
 
 		$esito = $esito . $Res2['NomeAttributo'] ;
 
@@ -120,8 +121,8 @@ if ( $res['Auto'] == 1 ) {
 		$MySql2 = "SELECT * FROM Skill
 		LEFT JOIN Skill_main ON Skill.IDskill=Skill_main.IDskill
 		WHERE Skill.IDskill = $dpskill and Userid = $Userid";
-		$Result2 = mysql_query($MySql2);
-		if ( $Res2=mysql_fetch_array($Result2) )  {
+		$Result2 = mysqli_query($db,$MySql2);
+		if ( $Res2=mysqli_fetch_array($Result2) )  {
 
 			$esito = $esito . ' + ' . $Res2['NomeSkill'] ;
 			$DicePool = $DicePool + $Res2['Livello'];
@@ -129,8 +130,8 @@ if ( $res['Auto'] == 1 ) {
 		} else {  //non ho lo skill
 			$MySql2 = "SELECT * FROM Skill_main
 			WHERE IDskill = $dpskill";
-			$Result2 = mysql_query($MySql2);
-			$Res2=mysql_fetch_array($Result2);
+			$Result2 = mysqli_query($db,$MySql2);
+			$Res2=mysqli_fetch_array($Result2);
 			$esito = $esito . ' + ' . $Res2['NomeSkill'] ;
 		}
 
@@ -145,8 +146,8 @@ if ( $res['Auto'] == 1 ) {
 	$MySql = "SELECT * FROM Personaggio
 		LEFT JOIN BloodPotency ON Personaggio.BloodP=BloodPotency.BloodP
 		WHERE Userid = $Userid";
-	$Result=mysql_query($MySql);
-	$res=mysql_fetch_array($Result);
+	$Result=mysqli_query($db,$MySql);
+	$res=mysqli_fetch_array($Result);
 
 	$BonusD=$res['BonusD'];
 

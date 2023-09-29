@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php'); //MYSQKI //
+include ('db2.inc.php'); //MYSQLI //
 include ('token.php');
 
 $Userid=$_GET['id'];
