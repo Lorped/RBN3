@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestpxService, Questrow, SchedaService, datidabio } from '../../_services/index';
 import { Status } from '../../globals';
-import {  Basicpg, Personaggio } from '../../globals';
+import { Basicpg, Personaggio } from '../../globals';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-schedaother',
@@ -84,6 +85,23 @@ export class SchedaotherComponent implements OnInit {
 
   }
 
-  assegna(){}
+  assegna(){
 
+    this.questpx.sendquest(this.myFormGroup.value.questFC,this.status.otherID, this.myFormGroup.value.pxFC ).subscribe ((data: Questrow)=> {
+      this.listaquest.unshift(data);
+      //console.log(data);
+      //console.log(this.listaquest);
+    });
+  }
+
+  setquest(id:number, esito: string){
+    //console.log(esito);
+    this.questpx.esitoquest(id, esito).subscribe (()=> {
+      const idx = this.listaquest.findIndex( (xx)=> xx.IDquest == id );
+
+      this.listaquest[idx].Status=esito;
+      this.listaquest[idx].DataClose=Date();
+    });
+  }
+  
 }

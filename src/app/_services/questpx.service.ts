@@ -104,4 +104,25 @@ export class QuestpxService {
     map((res: Apx) => res.px));
   }
 
+  sendquest(quest: string, player: number, px: number){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/sendquest.php', {
+      token: user,
+      quest: quest,
+      player: player,
+      px: px
+    } );
+  }
+
+  esitoquest(IDquest: number, esito: string){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/esitoquest.php', {
+      token: user,
+      IDquest: IDquest,
+      esito: esito
+    } );
+  }
+
 }

@@ -306,7 +306,9 @@
         </mat-card-subtitle>
         <span class="spacer"></span>
         <span *ngIf="q.Status === 'Open' ">
+          <mat-icon color="accent" class="icon-08x" (click)="setquest(q.IDquest, 'OK')" class="clickable">thumb_up</mat-icon>
           <mat-icon color="warn" class="icon-08x">error_outline</mat-icon>
+          <mat-icon color="accent" class="icon-08x" (click)="setquest(q.IDquest, 'KO')" class="clickable">thumb_down</mat-icon>
         </span>
         <span *ngIf="q.Status === 'KO' ">
           <mat-icon color="warn" class="icon-08x">thumb_down</mat-icon>

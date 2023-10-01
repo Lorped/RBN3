@@ -38,7 +38,7 @@ export class OggettiComponent implements OnInit{
     
     this.oggettiservice.getalloggetti().subscribe ( (data: Array<armi>) => {
       this.alloggetti = data;
-      console.log(data);
+      //console.log(data);
       for (let i=0; i < data.length; i++){
         data[i].IDtipoOggetto = Number (data[i].IDtipoOggetto);
         data[i].Costo = Number (data[i].Costo);

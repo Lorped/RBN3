@@ -66,7 +66,7 @@ export class OggettipgComponent implements OnInit{
     //console.log (this.myFormGroup);
 
     this.oggettiservice.getoggetti(this.status.Userid).subscribe( (data: Array<posseduti>)=> {
-      console.log(data);
+      //console.log(data);
       this.oggettiposseduti = data;
 
       for ( let i = 0 ; i < this.oggettiposseduti.length; i++) {
@@ -243,7 +243,6 @@ export class OggettipgComponent implements OnInit{
   }
 
   trasferisci(){
-    console.log("here");
 
     this.oggettiservice.cedi( this.myFormGroup.value.destinatarioFC.Userid, this.myFormGroup.value.oggettoFC.IDoggetto, this.myFormGroup.value.quantitaFC)
     .subscribe( () => {

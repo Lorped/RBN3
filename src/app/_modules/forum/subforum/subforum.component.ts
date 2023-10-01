@@ -81,7 +81,6 @@ export class SubforumComponent implements OnInit{
   }
 
   pagevent( event: any){
-    console.log(event);
     if ( this.pageSize != event.PageSize ) {
 
       localStorage.setItem("RBN3page", event.pageSize.toString());

@@ -30,19 +30,19 @@ export class EditComponent implements OnInit {
 
     this.forumService.getsinglethread(this.idy).subscribe( (data: Forumthread) => { 
       
-      console.log(data);
+      //console.log(data);
       this.forumForm.patchValue({titoloFC: data.Nome, testoFC: data.Testo});
 
-      console.log(this.forumForm);
+      //console.log(this.forumForm);
 
       if (data.OP != 0 ) {
-        console.log(data.OP);
+        //console.log(data.OP);
 
         this.forumForm.get('titoloFC').clearValidators(); 
         this.forumForm.get('titoloFC').updateValueAndValidity(); 
         this.forumForm.get('titoloFC').disable(); 
       }
-      console.log(this.forumForm);
+      //console.log(this.forumForm);
     });
   }
 

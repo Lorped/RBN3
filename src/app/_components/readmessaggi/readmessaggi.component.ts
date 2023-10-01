@@ -23,7 +23,7 @@ export class ReadmessaggiComponent implements OnInit {
     this.messaggiService.getmessaggi(this.status.contattoID)
     .subscribe( data => {
        this.listaMsg = data;
-       console.log("qui e riconto2");
+       // console.log("qui e riconto2");
        this.messaggiService.contanuovimessaggi(this.status.Userid)
        .subscribe((data) => {
         this.status.Newmsg = data.Newmsg;
@@ -33,11 +33,10 @@ export class ReadmessaggiComponent implements OnInit {
 
 
   caricamessaggi(){
-    console.log("qui prima");
        this.messaggiService.getmessaggi(this.status.contattoID)
        .subscribe( data => {
           this.listaMsg = data;
-          console.log("qui e riconto");
+          // console.log("qui e riconto");
           this.messaggiService.contanuovimessaggi(this.status.Userid)
           .subscribe((data) => {
            this.status.Newmsg = data.Newmsg;

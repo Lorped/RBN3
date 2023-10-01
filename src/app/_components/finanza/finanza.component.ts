@@ -97,10 +97,7 @@ export class FinanzaComponent implements OnInit{
 
 
   invia(){
-    /*
-    console.log(this.myFormGroup.value.destinatarioFC.Userid) ;
-    console.log(this.myFormGroup.value.importoFC) ;
-    console.log(this.myFormGroup.value.causaleFC) ; */
+    
 
     this.schedaservice.sendmoney(this.myFormGroup.value.destinatarioFC.Userid, this.myFormGroup.value.importoFC, this.myFormGroup.value.causaleFC )
     .subscribe( () =>{
