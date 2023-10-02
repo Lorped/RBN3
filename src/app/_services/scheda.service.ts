@@ -137,26 +137,14 @@ export class SchedaService {
 
   getpoteri() {
     const user = sessionStorage.getItem('RBN3currentUser') ;
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/listapoteri.php', {
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/listapoteri.php', {
       token: user
     });
 
   }
 
-  getsceltapoteri() {
-    const user = sessionStorage.getItem('RBN3currentUser') ;
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/sceltapoteri.php', {
-      token: user
-    });
 
-  }
-  addpoteri(lista) {
-    const user = sessionStorage.getItem('RBN3currentUser') ;
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/addpoteri.php', {
-      token: user,
-      lista: lista
-    });
-  }
+
 
   finanze(){
     const user = sessionStorage.getItem('RBN3currentUser') ;

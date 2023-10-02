@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	exit(0);
 }
 
-include ('db.inc.php');
+include ('db2.inc.php');   //MYSQLI //
 include ('token.php');
-include ('dicepool.inc.php');
+//include ('dicepool.inc.php');
 
 
 $postdata = file_get_contents("php://input");
@@ -27,10 +27,7 @@ $request = json_decode($postdata);
 $token=$request->token;
 
 
-/*
-$id=$_GET['id'];
-$token=$_GET['token'];
-*/
+
 
 $MasterAdmin=0;
 $Userid=-1;
@@ -50,8 +47,9 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
-
-//$Userid= 1;
+/*
+$Userid= 1;
+*/
 
 $out=[];
 
@@ -59,33 +57,77 @@ $MySql= "SELECT * FROM Discipline
 	LEFT JOIN Discipline_main ON Discipline.IDdisciplina = Discipline_main.IDdisciplina
 	WHERE Userid = $Userid ORDER BY NomeDisc ASC ";
 
-$Result=mysql_query($MySql);
-while ( $res=mysql_fetch_array($Result) ) {
+$Result=mysqli_query($db,$MySql);
+while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
 	$NomeDisc = $res['NomeDisc'];
 	$IDdisciplina=$res['IDdisciplina'];
 	$LivelloDisc=$res['LivelloDisc'];
 	$pot=[];
 
-	$MySql2= "SELECT * FROM Poteri
-		LEFT JOIN Poteri_main ON Poteri.IDpotere = Poteri_main.IDpotere
-		WHERE Userid = $Userid AND IDdisciplina = $IDdisciplina ORDER BY LivPotere ";
-	$Result2=mysql_query($MySql2);
+	$MySql2= "SELECT Poteri.* , Attributi_main.NomeAttributo, Skill_main.NomeSkill , DV.NomeAttributo as DVNomeAttributo, SV.NomeSkill as DVNomeSkill , 
+		0  as TotaleDP ,
+		'' as NomeMerito ,
+		'' as DVNomeMerito 
+		FROM Poteri
+		LEFT JOIN Attributi_main on Poteri.IDattributo = Attributi_main.IDattributo
+		LEFT JOIN Skill_main on Poteri.IDskill = Skill_main.IDskill
+		LEFT JOIN Attributi_main as DV on Poteri.DVIDattributo = DV.IDattributo
+		LEFT JOIN Skill_main as SV on Poteri.DVIDskill = SV.IDskill
+		WHERE IDdisciplina = $IDdisciplina AND LivelloPotere <= $LivelloDisc ORDER BY LivelloPotere ";
+	$Result2=mysqli_query($db, $MySql2);
 
 
-	while ( $res2=mysql_fetch_array($Result2) ) {
+	while ( $res2=mysqli_fetch_array($Result2, MYSQLI_ASSOC) ) {
 
-		$pot[] = dicepool ( $Userid , $res2['IDpotere'] );
+		switch ($res2['Meriti']) {
+			case 'F':
+				$res2['NomeMerito']='FdV';
+				break;
+			case 'C':
+				$res2['NomeMerito']='Coraggio';
+				break;
+			case 'S':
+				$res2['NomeMerito']='Self Control';
+				break;
+			case 'K':
+				$res2['NomeMerito']='Coscienza';
+				break;								
+			default:
+				break;
+		}
+		switch ($res2['DVMeriti']) {
+			case 'F':
+				$res2['DVNomeMerito']='FdV';
+				break;
+			case 'C':
+				$res2['DVNomeMerito']='Coraggio';
+				break;
+			case 'S':
+				$res2['DVNomeMerito']='Self Control';
+				break;
+			case 'K':
+				$res2['DVNomeMerito']='Coscienza';
+				break;								
+			default:
+				break;
+		}
 
+		//$pot = dicepool ( $Userid , $res2 );
+		$dp = 0;
+
+		$res2['TotaleDP'] = $dp;
+
+		$pot[] = $res2;
 	}
 
-	$outx = [
+	
+
+	$out[] = [
 		'NomeDisc' => $NomeDisc,
 		'LivelloDisc' => $LivelloDisc,
 		'pot' => $pot
 	];
-
-	$out[] = $outx;
 
 
 }

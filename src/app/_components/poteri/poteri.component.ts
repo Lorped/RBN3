@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SchedaService } from '../../_services/index';
-import { ModalService } from '../../_services/index';
 
-import { Potere, ListaPoteri, Status } from '../../globals';
+import {  ListaPoteri, Status } from '../../globals';
 
 
 
@@ -20,35 +19,20 @@ export class PoteriComponent implements OnInit {
 
   myLista: Array<ListaPoteri> = [];
 
-  constructor( private schedaService: SchedaService, private status: Status, private modalService: ModalService ) { }
+  constructor( private schedaService: SchedaService, private status: Status ) { }
 
   ngOnInit() {
 
-    this.schedaService.getsetefdv(this.status.Userid)
-    .subscribe( (data) => {
-      //console.log (data);
-      this.mysete = Number(data.Sete);
-      this.myFdV = Number(data.FdV);
-      this.myFdVmax = Number(data.FdVmax);
-
-    });
 
     this.schedaService.getpoteri()
-    .subscribe( (data) => {
+    .subscribe( (data: Array<ListaPoteri>) => {
       this.myLista = data;
 
-      //console.log(this.myLista);
+      console.log(this.myLista);
     });
 
   }
 
-  gosceltapoteri  () {
-    /*
-    this.status.poterion = false ;
-    this.status.sceltapoterion = true ;
-    this.modalService.hide('modalpoteri') ;
-    this.modalService.show('modalsceltapoteri') ;
-    */
-  }
+
 
 }

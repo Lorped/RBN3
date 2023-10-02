@@ -77,18 +77,7 @@ export class Basicpg {
   public ImgLG = 't-500x600.png';
   public Annotazioni = '';
 
-  // V5 da Eliminare
-  /*
-  public Sete;
-  public BloodP = 0;  // from LEFT JOIN da BloodPotency
-  public Surge = 0 ;
-  public Danni = 0 ;
-  public BonusD = 0;
-  public Bane = 0 ;
-  public MinSete = 0;
-  public MinBP = 0 ; // from LEFT JOIN da Generazioni
-  public MaxBP = 0 ;
-  */
+ 
 
 
 }
@@ -191,51 +180,42 @@ export class Messaggi {
 }
 
 
-//  *********** QUESTO ANDREBBE CANCELLATO
 
 
 @Injectable()
 export class Potere {
-  IDpotere = 0;
+  ID = 0;
+  IDdisciplina = 0;
+  LivelloPotere = 0 ;
   NomePotere = '';
-  NomeDisc = '';
-  LivelloPotere = 0;
-  DPvariabili = '';
-  Costo = 0;
+  Passive = '';
+  Auto = '';
   Target = '';
-  DicePool = 0;
+  IDattributo = 0;
+  NomeAttributo = '' ; //DA LEFT JOIN
+  IDskill = 0;
+  NomeSkill = ''; // DA LEFT JOIN
+  Meriti = '';
+  NomeMerito = ''; //esplicito
+  Difficolta = '';  // 0 = variabile , se non Auto = S 
+  DVIDattributo = 0;
+  DVNomeAttributo = '' ; //DA LEFT JOIN
+  DVIDskill = 0 ;
+  DVNomeSkill = ''; // DA LEFT JOIN
+  DVMeriti = '';
+  DVNomeMerito = ''; //esplicito
+  UsoSangue = 0;
+  UsoFdv = 0;
+  TotaleDP = 0;
 }
 
 @Injectable()
 export class ListaPoteri {
-  public NomeDisc: string;
-  public pot: Array<Potere>;
-  public LivelloDisc: number;
-
-  constructor () {
-    this.NomeDisc = '';
-    this.pot = [];
-    this.LivelloDisc = 0;
-  }
-}
-
-
-@Injectable()
-export class SceltaPotere {
-  IDpotere = 0;
-  LivPotere = 0;
-  NomePotere = '';
-  accessibile = 0;
-  bloccato = 0;
-  preso = 0;
-}
-
-@Injectable()
-export class SceltaPotereDisc {
-  LivelloDisc = 0;
   NomeDisc = '';
-  numpresi = 0;
-  pot: Array<SceltaPotere> = [];
+  LivelloDisc = '';
+  pot: Array<Potere> = [];
+
+
 }
 
 
