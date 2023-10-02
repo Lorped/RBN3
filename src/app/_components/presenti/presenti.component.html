@@ -11,7 +11,7 @@
               
         <td *ngIf="pres.Sesso === 'M'"><span class="fa fa-caret-right blue"></span></td>
         <td *ngIf="pres.Sesso === 'F'"><span class="fa fa-caret-right pink"></span></td>
-        <td style="width:15em;">{{pres.NomeCognome}}</td>
+        <td style="width:10em;">{{pres.NomeCognome}}</td>
           
           
         <td *ngIf="pres.Userid === status.Userid"><span class="fa fa-circle" [style.color]="(status.Ongame === 'S' ? 'green' : 'red') "></span></td>
@@ -20,7 +20,7 @@
         <td *ngIf="pres.ongame === 'S' && (pres.Userid !== status.Userid)"><span class="fa fa-circle green"></span></td>
         <td *ngIf="pres.ongame === 'N' && (pres.Userid !== status.Userid)"><span class="fa fa-circle red"></span></td>
         
-        <td>&nbsp; {{pres.Breve}}</td>
+        <td style="width:10em;">&nbsp; {{pres.Breve}}</td>
               
       </tr>
     </table>

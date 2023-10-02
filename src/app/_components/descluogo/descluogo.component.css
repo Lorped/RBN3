@@ -1,13 +1,24 @@
-mat-card-title {
-    font-size: 1em !important;
-  }
+
   
-  mat-card-subtitle {
-    font-size: 0.8em !important;
+ mat-card-header {
+  padding-bottom: 0.5em;
+    
   }
 mat-card {
     /*background: transparent; */
     background-color: #42424255;
     /*width: 80%;*/
     height: 12vh !important;
+}
+
+mat-card-title {
+  font-size: 0.8em !important;
+}
+
+mat-card-subtitle {
+  font-size: 0.7em !important;
+  line-height: 0.9em !important;
+  max-height: 2.7em !important;
+  /* min-height: 8vh !important; */
+  overflow-y: auto;
 }
