@@ -93,7 +93,10 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 				break;
 			case 'K':
 				$res2['NomeMerito']='Coscienza';
-				break;								
+				break;
+			case 'U':
+				$res2['DVNomeMerito']='Umanita';
+				break;											
 			default:
 				break;
 		}
@@ -109,6 +112,9 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 				break;
 			case 'K':
 				$res2['DVNomeMerito']='Coscienza';
+				break;
+			case 'U':
+				$res2['DVNomeMerito']='Umanita';
 				break;								
 			default:
 				break;
