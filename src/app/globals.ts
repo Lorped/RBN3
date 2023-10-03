@@ -125,13 +125,15 @@ export class Status {
   Alive = true;
   Sesso = 'M';
   MasterAdmin = 0;
+  PS = 0;
+  PSmax = 0;
+  FdV = 0 ;
+  FdVmax = 0;
   // menuState = 'out';
   schedaon = false ;
   pxon = false;
   anagon = false;
-
-  poterion = false;         // DA CANCELLARE
-  
+  poterion = false;          
   schedaothon = false;
   otherID = 0;
   // per i messaggi normali
@@ -181,41 +183,5 @@ export class Messaggi {
 
 
 
-
-@Injectable()
-export class Potere {
-  ID = 0;
-  IDdisciplina = 0;
-  LivelloPotere = 0 ;
-  NomePotere = '';
-  Passive = '';
-  Auto = '';
-  Target = '';
-  IDattributo = 0;
-  NomeAttributo = '' ; //DA LEFT JOIN
-  IDskill = 0;
-  NomeSkill = ''; // DA LEFT JOIN
-  Meriti = '';
-  NomeMerito = ''; //esplicito
-  Difficolta = '';  // 0 = variabile , se non Auto = S 
-  DVIDattributo = 0;
-  DVNomeAttributo = '' ; //DA LEFT JOIN
-  DVIDskill = 0 ;
-  DVNomeSkill = ''; // DA LEFT JOIN
-  DVMeriti = '';
-  DVNomeMerito = ''; //esplicito
-  UsoSangue = 0;
-  UsoFdv = 0;
-  TotaleDP = 0;
-}
-
-@Injectable()
-export class ListaPoteri {
-  NomeDisc = '';
-  LivelloDisc = '';
-  pot: Array<Potere> = [];
-
-
-}
 
 

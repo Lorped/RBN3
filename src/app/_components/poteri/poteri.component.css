@@ -12,3 +12,43 @@ hr  {
   padding: 0;
   
   }
+
+ .icon {
+    width: 28px;
+  }
+
+  mat-expansion-panel , mat-card {
+    margin-top: 0.5em;
+  }
+  
+  mat-panel-description {
+    font-size: 1.2em !important;
+  }
+  
+  :host ::ng-deep .mat-expansion-panel-body {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+  }
+   
+  
+  mat-card-header {
+    padding-top: 0.5em !important;
+    padding-bottom: 0.5em !important;
+  }
+    
+  mat-card-title {
+    font-size: 1em !important; 
+  }
+    
+  mat-card-subtitle {
+    font-size: 1em;
+  }  
+
+  .nopadding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .nopadright {
+    padding-left: 1em !important;
+    padding-right: 0 !important;
+  }

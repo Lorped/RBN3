@@ -35,6 +35,41 @@ export class datidabio {
 }
 
 
+export class Potere {
+  ID = 0;
+  IDdisciplina = 0;
+  LivelloPotere = 0 ;
+  NomePotere = '';
+  Passive = '';
+  Auto = '';
+  Target = '';
+  IDattributo = 0;
+  NomeAttributo = '' ; //DA LEFT JOIN
+  IDskill = 0;
+  NomeSkill = ''; // DA LEFT JOIN
+  Meriti = '';
+  NomeMerito = ''; //esplicito
+  Difficolta = 0 ;  // 0 = variabile , se non Auto = S 
+  DVIDattributo = 0;
+  DVNomeAttributo = '' ; //DA LEFT JOIN
+  DVIDskill = 0 ;
+  DVNomeSkill = ''; // DA LEFT JOIN
+  DVMeriti = '';
+  DVNomeMerito = ''; //esplicito
+  UsoSangue = 0;
+  UsoFdV = 0;
+  TotaleDP = 0;
+}
+
+export class ListaPoteri {
+  NomeDisc = '';
+  LivelloDisc = '';
+  IcoDisc = 'dummy.png';
+  pot: Array<Potere> = [];
+}
+
+
+
 
 @Injectable()
 export class SchedaService {

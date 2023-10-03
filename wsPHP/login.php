@@ -44,6 +44,11 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		$NomeCognome=$Nome.' '.$Cognome;
 		$Sesso=$res['Sesso'];
 		$MasterAdmin=$res['MasterAdmin'];
+		$PS=$res['PS'];
+		$PSmax=$res['PSmax'];
+		$FdV=$res['FdV'];
+		$FdVmax=$res['FdVmax'];
+
 
 		$payload = [
 			"Userid" => "$Userid",
@@ -61,6 +66,10 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 			"Email" => "$Email",
 			"MasterAdmin" => "$MasterAdmin",
 			"Sesso" => "$Sesso",
+			"PS" => "$PS",
+			"PSmax" => "$PSmax",
+			"FdV" => "$FdV",
+			"FdVmax" => "$FdVmax",
 			"token" => "$token"
 		];
 		echo json_encode ($out, JSON_UNESCAPED_UNICODE);

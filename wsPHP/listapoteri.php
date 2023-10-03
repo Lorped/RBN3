@@ -63,6 +63,7 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$NomeDisc = $res['NomeDisc'];
 	$IDdisciplina=$res['IDdisciplina'];
 	$LivelloDisc=$res['LivelloDisc'];
+	$IcoDisc=$res['IcoDisc'];
 	$pot=[];
 
 	$MySql2= "SELECT Poteri.* , Attributi_main.NomeAttributo, Skill_main.NomeSkill , DV.NomeAttributo as DVNomeAttributo, SV.NomeSkill as DVNomeSkill , 
@@ -114,7 +115,7 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 		}
 
 		//$pot = dicepool ( $Userid , $res2 );
-		$dp = 0;
+		$dp = 7;
 
 		$res2['TotaleDP'] = $dp;
 
@@ -126,6 +127,7 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$out[] = [
 		'NomeDisc' => $NomeDisc,
 		'LivelloDisc' => $LivelloDisc,
+		'IcoDisc' => $IcoDisc,
 		'pot' => $pot
 	];
 

@@ -6,6 +6,19 @@ import { Router } from '@angular/router';
 import { Status } from '../../globals';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+
+interface logindata {
+  Userid: string,
+  NomeCognome: string,
+  Email: string,
+  MasterAdmin: number,
+  Sesso: string,
+  PS: number;
+  PSmax: number;
+  FdV: number,
+  FdVmax: number
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -38,13 +51,17 @@ export class LoginComponent implements OnInit {
   doLogin() {
     this.authenticationService.login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(
-        data => {
+        (data: logindata) => {
           this.status.Stanza = 0;
           this.status.Userid = Number(data.Userid);
           this.status.MasterAdmin = Number(data.MasterAdmin);
-          this.router.navigate(['']);
           this.status.Ongame = 'S';
           this.status.Sesso = data.Sesso;
+          this.status.FdV = Number (data.FdV);
+          this.status.FdVmax = Number (data.FdVmax);
+          this.status.PS = Number (data.PS);
+          this.status.PSmax = Number (data.PSmax);
+          this.router.navigate(['']);
         },
         error => {
           if (error.status == 401 ){

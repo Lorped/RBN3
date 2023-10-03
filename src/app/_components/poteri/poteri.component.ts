@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SchedaService } from '../../_services/index';
+import { ListaPoteri, SchedaService } from '../../_services/index';
 
-import {  ListaPoteri, Status } from '../../globals';
+import { Status } from '../../globals';
 
 
 
@@ -13,7 +13,8 @@ import {  ListaPoteri, Status } from '../../globals';
 })
 export class PoteriComponent implements OnInit {
 
-  mysete = 0 ;
+  myPS= 0;
+  myPSmax = 0;
   myFdV = 0 ;
   myFdVmax = 0 ;
 
@@ -23,9 +24,23 @@ export class PoteriComponent implements OnInit {
 
   ngOnInit() {
 
+    this.myPS = this.status.PS;
+    this.myPSmax = this.status.PSmax;
+    this.myFdV = this.status.FdV;
+    this.myFdVmax = this.status.FdVmax;
 
     this.schedaService.getpoteri()
     .subscribe( (data: Array<ListaPoteri>) => {
+      
+      
+      for (let i=0 ; i<data.length; i++) {
+        for (let j = 0 ; j < data[i].pot.length ; j++ ) {
+          data[i].pot[j].Difficolta = Number ( data[i].pot[j].Difficolta );
+          data[i].pot[j].UsoSangue = Number ( data[i].pot[j].UsoSangue );
+          data[i].pot[j].UsoFdV = Number ( data[i].pot[j].UsoFdV );
+          data[i].pot[j].TotaleDP = Number ( data[i].pot[j].TotaleDP );
+        }
+      }
       this.myLista = data;
 
       console.log(this.myLista);

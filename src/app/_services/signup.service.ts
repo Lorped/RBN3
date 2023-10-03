@@ -12,8 +12,7 @@ export class SignupService {
     interface Ares {
       res: string;
     }
-    return this.http
-      .get('https://www.roma-by-night.it/RBN3/wsPHP/checkemail.php?email=' + email).pipe(
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/checkemail.php?email=' + email).pipe(
       map( (data: Ares) => data.res ));
   }
 

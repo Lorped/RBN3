@@ -1,4 +1,84 @@
-<div class="container">
+<!-- eslint-disable @angular-eslint/template/alt-text -->
+
+  <mat-card>
+    <mat-card-content style="display: flex;">
+      Punti sangue: ( {{myPS}}/{{myPSmax}} ) &nbsp; <i *ngFor="let i of myPSmax | times ; let ix = index" class="fa fa-square" [ngClass]="{'dred': (ix < myPS) , 'white': (ix+1 > myPS)  }"></i>
+      <span class="spacer"></span>
+      FdV: ( {{myFdV}}/{{myFdVmax}} )  &nbsp; <i *ngFor="let i of myFdVmax | times ; let ix = index" class="fa " [ngClass]="{'fa-circle dred': (ix < myFdV) , 'fa-times-circle white': ((ix+1 > myFdV) && (ix < myFdVmax)) }"></i><i *ngFor="let i of 10-myFdVmax | times " class="fa fa-circle white" ></i>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-expansion-panel *ngFor="let item of myLista" >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <img src="assets/icons/discipline/{{item.IcoDisc}}" class="icon" >
+      </mat-panel-title>
+      <mat-panel-description>
+       {{item.NomeDisc}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-card *ngFor="let sub of item.pot" >
+      <mat-card-header>
+      <mat-card-title>
+        {{sub.LivelloPotere}}. {{sub.NomePotere}}
+      </mat-card-title>
+    </mat-card-header>
+      <mat-card-content class="full">
+        <div class="content" class="full">
+          <span *ngIf="sub.Passive==='S'">- Passiva -</span>
+          <span *ngIf="sub.Auto ==='S'">- Automatica -</span>
+          <div *ngIf="sub.Auto ==='N' && sub.Passive==='N'" class="row" style="width: 100%;">
+            <div class="col-3 nopadright">
+                  {{sub.NomeAttributo}}
+                  <span *ngIf="sub.NomeSkill !== null ">+ {{sub.NomeSkill}}</span>
+                  <span *ngIf="sub.NomeMerito !== '' ">+ {{sub.NomeMerito}}</span>
+            </div>
+            <div class="col-3 nopadding">
+              <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': (ix < sub.TotaleDP) , 'white': (ix+1 > sub.TotaleDP)  }"></i>
+            </div>
+            <div class="col-3 nopadding">
+                  Diff.: 
+                  <span *ngIf="sub.Difficolta !== 0"> {{sub.Difficolta}} </span>
+                  <span *ngIf="sub.Difficolta === 0"> (
+                    <span *ngIf="sub.DVNomeMerito !== '' ">{{sub.DVNomeMerito}}</span>
+                    <span *ngIf="sub.DVNomeAttributo !== null ">+ {{sub.DVNomeAttributo}}</span>
+                    <span *ngIf="sub.DVNomeSkill !== null ">+ {{sub.DVNomeSkill}}</span>
+                    )
+                  </span>
+            </div>
+            <div class="col-3 nopadding" style="text-align: right;" >
+              <span *ngIf="sub.Target === 'S'">
+                <form >
+                  <mat-form-field class="full">
+                    <mat-label>Target</mat-label>
+                    <input type="text"
+                      placeholder="Target"
+                      matInput 
+                      [matAutocomplete]="auto" >
+                      <mat-autocomplete #auto="matAutocomplete"  > 
+                      </mat-autocomplete>
+                    <!--
+                    <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn" > 
+                      <mat-option *ngFor="let cont of filteredOptions | async"  [value]="cont">
+                        <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+                        {{ cont.Nome }} 
+                      </mat-option>
+                    </mat-autocomplete>
+                    -->
+                  </mat-form-field>
+                </form>
+              </span>
+            </div>
+          </div>
+          <span *ngIf="sub.UsoSangue !== 0"> Costo sangue <i *ngFor="let i of sub.UsoSangue| times" class="fa fa-square dred" ></i></span> <span *ngIf="sub.UsoFdV !== 0"> Costo FdV <i *ngFor="let i of sub.UsoFdV| times " class="fa fa-circle dred" ></i></span>
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+  </mat-expansion-panel>
+
+  
 <!---
   <div class="row">
     <div class="col-2">Livello di Sete</div>
@@ -46,4 +126,3 @@
 
 </div>
 -->
-</div>
