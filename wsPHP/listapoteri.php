@@ -120,8 +120,47 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 				break;
 		}
 
-		//$pot = dicepool ( $Userid , $res2 );
-		$dp = 7;
+		// CALCOLO DP//
+		$dp = 0;
+
+		if ( $res2['IDattributo'] != '' ) {
+			$id=$res2['IDattributo'];
+			$MySql3 = "SELECT Livello from Attributi WHERE IDattributo = $id AND Userid = $Userid";
+			$Result3 = mysqli_query($db, $MySql3);
+			$res3 = mysqli_fetch_array($Result3);
+			$dp = $dp + $res3['Livello'];
+		}
+		if ( $res2['IDskill'] != '' ) {
+			$id=$res2['IDskill'];
+			$MySql3 = "SELECT Livello from Skill WHERE IDskill = $id AND Userid = $Userid";
+			$Result3 = mysqli_query($db, $MySql3);
+			$res3 = mysqli_fetch_array($Result3);
+			$dp = $dp + $res3['Livello'];
+		}
+		if ( $res2['Meriti'] != '') {
+			$MySql3 = "SELECT * from Personaggio  Userid = $Userid";
+			$Result3 = mysqli_query($fb, $MySql3);
+			$res3 = mysqli_fetch_array($Result3);
+			switch ($res2['Meriti']) {
+				case 'F':
+					$dp = $dp + $res3 ['FdV'];
+					break;
+				case 'C':
+					$dp = $dp + $res3 ['Coraggio'];
+					break;
+				case 'S':
+					$dp = $dp + $res3 ['SelfControl'];
+					break;
+				case 'K':
+					$dp = $dp + $res3 ['Coscienza'];
+					break;
+				case 'K':
+					$dp = $dp + $res3 ['Valsentiero '];
+					break;																						
+				default:
+					break;
+			}
+		}
 
 		$res2['TotaleDP'] = $dp;
 
