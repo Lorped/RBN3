@@ -10,7 +10,7 @@
     </mat-card>
     <mat-card *ngFor="let ft of fulldata">
         <mat-card-header>
-            <mat-card-title text-color="accent" >{{ft.Nome}}</mat-card-title>
+            <mat-card-title text-color="accent"> <span class="bigger">{{ft.Nome}}</span></mat-card-title>
             <mat-card-subtitle>
                 <span class="spacer"></span> {{ft.Utente}} | {{ft.DT}}
                 <mat-divider></mat-divider>  
@@ -31,7 +31,7 @@
 
             <mat-card-content>
                     
-                <span class="newl">{{ft.Testo}}</span>
+                <div [innerHTML]="ft.Testo"></div>
             </mat-card-content>
         </mat-card>
 

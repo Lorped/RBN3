@@ -14,11 +14,11 @@ mat-card {
   }
   
   mat-card-title {
-    font-size: 0.9em !important; 
+    font-size: 1em !important; 
   }
   
   mat-card-subtitle {
-    font-size: 0.8em;
+    font-size: 1em;
   }  
 
   .bigger {

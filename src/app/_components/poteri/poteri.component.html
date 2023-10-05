@@ -40,7 +40,7 @@
             <div class="col-3 nopadding">
                   Diff.: 
                   <span *ngIf="sub.Difficolta !== 0"> {{sub.Difficolta}} </span>
-                  <span *ngIf="sub.Difficolta === 0"> (
+                  <span *ngIf="sub.Difficolta === 0 || sub.Resistito !== null"> ( <span *ngIf="sub.Resistito !== null">Resist: </span>
                     <span *ngIf="sub.DVNomeMerito !== '' ">{{sub.DVNomeMerito}}</span>
                     <span *ngIf="sub.DVNomeAttributo !== null ">+ {{sub.DVNomeAttributo}}</span>
                     <span *ngIf="sub.DVNomeSkill !== null ">+ {{sub.DVNomeSkill}}</span>

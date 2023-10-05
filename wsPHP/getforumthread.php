@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 include ('db2.inc.php');   //MYSQLI//
 include ('token.php');
+include ('Parsedown.php');
 
 
 $postdata = file_get_contents("php://input");
@@ -78,11 +79,13 @@ if ($res['LivAccesso']>$MasterAdmin) {
 
 $out_content = [];
 
+$Parsedown = new Parsedown();
 
 $MySql = "SELECT * , DATE_FORMAT(Data,'%d %b - %H:%i') as DT  from Thread WHERE IDmessaggio = $id OR OP = $id ORDER BY Data ASC";
 $Result = mysqli_query($db, $MySql);
 while ( $res = mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
+	$res['Testo'] = $Parsedown->text($res['Testo']);
 	$out_content [] = $res;
 
 }

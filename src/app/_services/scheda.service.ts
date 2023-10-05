@@ -58,6 +58,7 @@ export class Potere {
   DVNomeMerito = ''; //esplicito
   UsoSangue = 0;
   UsoFdV = 0;
+  Resistito = '';
   TotaleDP = 0;
 }
 

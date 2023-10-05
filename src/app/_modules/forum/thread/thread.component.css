@@ -17,3 +17,25 @@ mat-card-header {
     margin-bottom: 1em;
 }
 
+.bigger {
+  font-size: 1.2em;
+}
+
+mat-card-header {
+  padding-top: 0.25em !important;
+  padding-bottom: 0.25em !important;
+}
+
+mat-card-title {
+  font-size: 1.1em !important; 
+}
+
+mat-card-subtitle {
+  font-size: 1em !important;
+} 
+
+mat-card-content {
+  font-size: 1em !important;
+} 
+
+
