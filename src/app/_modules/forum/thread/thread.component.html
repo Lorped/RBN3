@@ -40,50 +40,7 @@
             <a [routerLink]="['reply']"><button mat-raised-button color="accent" class="full" >Rispondi</button></a>
         </span>
 
-    <!--
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z9">
-    <ng-container matColumnDef="IDmessaggio" >
-        <th mat-header-cell *matHeaderCellDef>
-            <a [routerLink]="['../../../..']">Forum Generale</a> > 
-            <a [routerLink]="['../..']">{{Nomebacheca}}</a> >
-            {{Nomemessaggio}}
-        </th>
-        <td mat-cell *matCellDef="let ft">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title text-color="accent" >{{ft.Nome}}</mat-card-title>
-                    <mat-card-subtitle><span class="spacer"></span> {{ft.Utente}} | {{ft.DT}}
-                        <mat-divider></mat-divider>  
-                    </mat-card-subtitle>
-
-                    <span class="spacer"></span>
-                    <span *ngIf="status.MasterAdmin > 1 && ft.OP == 0">
-                    <span *ngIf="Chiuso==1"><mat-icon class="clickable" (click)="onofflock()">lock</mat-icon></span>
-                    <span *ngIf="Chiuso==0"><mat-icon class="clickable" (click)="onofflock()">lock_open</mat-icon></span>
-                    <span *ngIf="Pinned==1"><mat-icon class="clickable" color="warn"(click)="onoffpin()">pin_drop</mat-icon></span>
-                    <span *ngIf="Pinned==0"><mat-icon class="clickable" (click)="onoffpin()">pin_drop</mat-icon></span>
-                    </span>
-                    <span *ngIf="(status.MasterAdmin > 1 || ft.IDutente == status.Userid) && Chiuso==0">
-                        <a [routerLink]="['edit', ft.IDmessaggio]"><mat-icon class="clickable" >edit</mat-icon></a>
-                        </span>
-                      
-                </mat-card-header>
-
-                <mat-card-content>
-                    
-                    <span class="newl">{{ft.Testo}}</span>
-                </mat-card-content>
-
-
-            </mat-card>
-
-        </td>
-    </ng-container>
     
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
--->
 
 </div>
