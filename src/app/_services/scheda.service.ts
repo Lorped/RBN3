@@ -65,6 +65,7 @@ export class Potere {
 export class ListaPoteri {
   NomeDisc = '';
   LivelloDisc = '';
+  IDdisciplina = 0;
   IcoDisc = 'dummy.png';
   pot: Array<Potere> = [];
 }

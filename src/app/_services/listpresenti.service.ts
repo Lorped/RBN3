@@ -12,13 +12,15 @@ export class Presenti {
   Userid: number;
   ongame: string;
   Breve: string;
+  URLImg: string;
   constructor(
     aNomeCognome: string,
     aSesso: string,
     aoffgame: number,
     aUserid: number,
     aongame: string,
-    aBreve: string
+    aBreve: string,
+    aURLImg: string
   ) {
     this.NomeCognome = aNomeCognome;
     this.Sesso = aSesso;
@@ -26,6 +28,7 @@ export class Presenti {
     this.Userid = aUserid;
     this.ongame = aongame;
     this.Breve = aBreve;
+    this.URLImg = aURLImg;
   }
 }
 
@@ -43,7 +46,7 @@ export class ListpresentiService {
     map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         const item = res[i];
-        const newpresente = new Presenti(item.NomeCognome, item.Sesso, item.offgame, Number(item.Userid), item.ongame, item.Breve);
+        const newpresente = new Presenti(item.NomeCognome, item.Sesso, item.offgame, Number(item.Userid), item.ongame, item.Breve, item.URLImg);
         mialista.push(newpresente);
       }
       return mialista;
@@ -59,7 +62,7 @@ export class ListpresentiService {
     map((res: Array<any>) => {
       for (let i = 0; i < res.length; i++) {
         const item = res[i];
-        const newpresente = new Presenti(item.NomeCognome, item.Sesso, item.offgame, Number(item.Userid), item.ongame, '');
+        const newpresente = new Presenti(item.NomeCognome, item.Sesso, item.offgame, Number(item.Userid), item.ongame, '', '');
         mialista.push(newpresente);
       }
       return mialista;

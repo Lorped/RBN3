@@ -122,7 +122,7 @@ export class Status {
   Stanza = 0;
   Ongame = 'S';
   Last = 0;
-  Alive = true;
+  Alive = false;
   Sesso = 'M';
   MasterAdmin = 0;
   PS = 0;

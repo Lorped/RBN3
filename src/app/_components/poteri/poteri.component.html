@@ -8,7 +8,7 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-expansion-panel *ngFor="let item of myLista" >
+  <mat-expansion-panel *ngFor="let item of myLista ; index as itx" >
     <mat-expansion-panel-header>
       <mat-panel-title>
         <img src="assets/icons/discipline/{{item.IcoDisc}}" class="icon" >
@@ -18,7 +18,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-card *ngFor="let sub of item.pot" >
+    <mat-card *ngFor="let sub of item.pot; ; index as s" [ngClass]="{'movable': this.status.Alive && this.myvariformarray[itx].myFormGroupArray[s].valid}" (click)="gopoteri(item.pot, sub.ID, itx, s)" >
       <mat-card-header>
       <mat-card-title>
         {{sub.LivelloPotere}}. {{sub.NomePotere}}
@@ -49,21 +49,26 @@
             </div>
             <div class="col-3 nopadding" style="text-align: right;" >
               <span *ngIf="sub.Target === 'S'">
-                <form >
+                <form [formGroup]="myvariformarray[itx].myFormGroupArray[s]">
                   <mat-form-field class="full">
                     <mat-label>Target</mat-label>
                     <input type="text"
                       placeholder="Target"
-                      matInput 
+                      matInput
+                      formControlName="targetFC"
                       [matAutocomplete]="auto" >
-                      <mat-autocomplete #auto="matAutocomplete"  > 
+                      <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn" (optionSelected)="doStuff($event)"> 
+                        <mat-option *ngFor="let cont of presenti"  [value]="cont">
+                          <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+                          {{ cont.NomeCognome }} 
+                        </mat-option>
                       </mat-autocomplete>
                     <!--
-                    <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn" > 
-                      <mat-option *ngFor="let cont of filteredOptions | async"  [value]="cont">
-                        <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
-                        {{ cont.Nome }} 
-                      </mat-option>
+                    <mat-autocomplete #auto="matAutocomplete"   > 
+                        <mat-option *ngFor="let cont of filteredOptions | async"  [value]="cont">
+                          <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+                          {{ cont.NomeCognome }} 
+                        </mat-option>
                     </mat-autocomplete>
                     -->
                   </mat-form-field>
@@ -78,51 +83,3 @@
     </mat-card>
   </mat-expansion-panel>
 
-  
-<!---
-  <div class="row">
-    <div class="col-2">Livello di Sete</div>
-    <div class="col-1">{{mysete}}</div>
-    <div class="col-2"><i *ngFor="let i of 5 | times ; let ix = index" class="fa fa-square" [ngClass]="{'white': ix+1 > mysete , 'dred': ix < mysete }"></i></div>
-    <div class="col-3">Forza di Volontà</div>
-    <div class="col-1">{{myFdV}}/{{myFdVmax}}</div>
-    <div class="col-3"><i *ngFor="let i of myFdVmax | times ; let ix = index" class="fa " [ngClass]="{'fa-circle dred': (ix < myFdV) , 'fa-times-circle white': ((ix+1 > myFdV) && (ix < myFdVmax)) }"></i><i *ngFor="let i of 10-myFdVmax | times " class="fa fa-circle white" ></i></div>
-  </div>
-  <div class="row">
-    <div class="col"><hr></div>
-  </div>
-
-  <div class="row" >
-    <div class="col-3">Potere</div>
-    <div class="col-4">Dice Pool</div>
-    <div class="col-1">Uso Sangue</div>
-    <div class="col-1" >Uso Fdv</div>
-    <div class="col-1">Costo</div>
-    <div class="col-2">Target</div>
-  </div>
-<div class="full" *ngFor="let disc of myLista">
-  <div class="row" >
-    <div class="col-1"><hr></div>
-    <div class="col-2 alc bigf">{{disc.NomeDisc}}</div>
-    <div class="col-1"><hr></div>
-    <div class="col">&nbsp;</div>
-  </div>
-
-  <div class="row" *ngFor="let pot of disc.pot">
-    <div class="col-3">{{pot.LivelloPotere}} {{pot.NomePotere}}</div>
-    <div class="col-3" *ngIf="pot.DicePool != -1 ">{{pot.DPvariabili}}</div>
-    <div class="col-1" *ngIf="pot.DicePool != -1 " >{{pot.DicePool}}</div>
-    <div class="col-1" *ngIf="pot.DicePool != -1 " ><input id="Rouse" type="checkbox" ></div>
-    <div class="col-1" *ngIf="pot.DicePool != -1 " ><input id="UsoFdV" type="checkbox" ></div>
-    <div class="col-6" *ngIf="pot.DicePool == -1 "> - Automatico - </div>
-    <div class="col-1">{{pot.Costo}}</div>
-    <div class="col-2" *ngIf="pot.Target == 'T'">[Target]</div>
-    <div class="col-2" *ngIf="pot.Target != 'T'" >[ n/a ]</div>
-  </div>
-  <div class="row" *ngIf="disc.pot.length < disc.LivelloDisc">
-    <div class="col alc"><a href="javascript:void(0)" (click)="gosceltapoteri()"> - Aggiungi potere di {{disc.NomeDisc}} - </a></div>
-  </div>
-
-
-</div>
--->

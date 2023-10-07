@@ -171,6 +171,7 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 
 	$out[] = [
 		'NomeDisc' => $NomeDisc,
+		'IDdisciplina' => $IDdisciplina,
 		'LivelloDisc' => $LivelloDisc,
 		'IcoDisc' => $IcoDisc,
 		'pot' => $pot
