@@ -22,7 +22,7 @@
     <mat-card *ngFor="let sub of item.pot; ; index as s" [ngClass]="{'movable': ( this.status.Alive && this.myvariformarray[itx].myFormGroupArray[s].valid && (this.status.FdV > sub.UsoFdV ) && (this.status.PS > sub.UsoSangue) )}" (click)="gopoteri(item.pot, sub.ID, itx, s)" class="btn" > 
       <mat-card-header>
       <mat-card-title>
-        {{sub.LivelloPotere}}. {{sub.NomePotere}}
+        {{sub.NomeTaum}} {{sub.LivelloPotere}}. {{sub.NomePotere}}
       </mat-card-title>
     </mat-card-header>
       <mat-card-content class="full">
@@ -32,8 +32,8 @@
           <div *ngIf="sub.Auto ==='N' && sub.Passive==='N'" class="row" style="width: 100%;">
             <div class="col-3 nopadright">
                   {{sub.NomeAttributo}}
-                  <span *ngIf="sub.NomeSkill !== null ">+ {{sub.NomeSkill}}</span>
-                  <span *ngIf="sub.NomeMerito !== '' ">+ {{sub.NomeMerito}}</span>
+                  <span *ngIf="sub.NomeAttributo !== null && sub.NomeSkill !== null ">+</span> {{sub.NomeSkill}} 
+                  <span *ngIf="(sub.NomeAttributo !== null || sub.NomeSkill !== null) && sub.NomeMerito !=='' ">+ </span> {{sub.NomeMerito}} 
             </div>
             <div class="col-3 nopadding">
               <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': (ix < sub.TotaleDP) , 'white': (ix+1 > sub.TotaleDP)  }"></i>

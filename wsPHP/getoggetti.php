@@ -52,6 +52,7 @@ if ( $id != $Userid && $MasterAdmin == 0) {
 	die ();
 }
 
+$out=[];
 
 $MySql="SELECT Quantita, Indossato, Usato,  Oggetti.* From Possesso
 	LEFT JOIN Oggetti ON Possesso.IDoggetto = Oggetti.IDoggetto

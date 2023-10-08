@@ -69,6 +69,8 @@ export class OggettipgComponent implements OnInit{
       //console.log(data);
       this.oggettiposseduti = data;
 
+      //console.log(this.oggettiposseduti);
+
       for ( let i = 0 ; i < this.oggettiposseduti.length; i++) {
         this.oggettiposseduti[i].IDoggetto =  Number(this.oggettiposseduti[i].IDoggetto);
         this.oggettiposseduti[i].IDtipoOggetto =  Number(this.oggettiposseduti[i].IDtipoOggetto);
@@ -85,6 +87,7 @@ export class OggettipgComponent implements OnInit{
         }
       }
       //console.log(this.oggettiindossati);
+
 
       for ( let i = 0 ; i < this.oggettiindossati.length ; i++){
         if (this.oggettiindossati[i].Occultabile == 'I' ) {

@@ -66,17 +66,36 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 	$IcoDisc=$res['IcoDisc'];
 	$pot=[];
 
-	$MySql2= "SELECT Poteri.* , Attributi_main.NomeAttributo, Skill_main.NomeSkill , DV.NomeAttributo as DVNomeAttributo, SV.NomeSkill as DVNomeSkill , 
-		0  as TotaleDP ,
-		'' as NomeMerito ,
-		'' as DVNomeMerito 
-		FROM Poteri
-		LEFT JOIN Attributi_main on Poteri.IDattributo = Attributi_main.IDattributo
-		LEFT JOIN Skill_main on Poteri.IDskill = Skill_main.IDskill
-		LEFT JOIN Attributi_main as DV on Poteri.DVIDattributo = DV.IDattributo
-		LEFT JOIN Skill_main as SV on Poteri.DVIDskill = SV.IDskill
-		WHERE IDdisciplina = $IDdisciplina AND LivelloPotere <= $LivelloDisc ORDER BY LivelloPotere ";
-	$Result2=mysqli_query($db, $MySql2);
+	if ( $IDdisciplina != 7 && $IDdisciplina != 15) {
+
+		$MySql2= "SELECT Poteri.* , Attributi_main.NomeAttributo, Skill_main.NomeSkill , DV.NomeAttributo as DVNomeAttributo, SV.NomeSkill as DVNomeSkill , 
+			0  as TotaleDP ,
+			'' as NomeMerito ,
+			'' as DVNomeMerito 
+			FROM Poteri
+			LEFT JOIN Attributi_main on Poteri.IDattributo = Attributi_main.IDattributo
+			LEFT JOIN Skill_main on Poteri.IDskill = Skill_main.IDskill
+			LEFT JOIN Attributi_main as DV on Poteri.DVIDattributo = DV.IDattributo
+			LEFT JOIN Skill_main as SV on Poteri.DVIDskill = SV.IDskill
+			WHERE IDdisciplina = $IDdisciplina AND LivelloPotere <= $LivelloDisc ORDER BY LivelloPotere ";
+		$Result2=mysqli_query($db, $MySql2);
+	} else if ( $IDdisciplina == 15 ) {
+		$MySql2="SELECT Poteri_Taum.* , Taumaturgie_main.NomeTaum ,
+			'N' as Auto,
+			'N' as Passive,
+			null as Resistito,
+			null as NomeSkill,
+			null as NomeAttributo,
+
+			0  as TotaleDP ,
+			'' as NomeMerito ,
+			'' as DVNomeMerito 
+			FROM Taumaturgie
+			LEFT JOIN Poteri_Taum ON Poteri_Taum.IDtaum = Taumaturgie.IDtaum
+			LEFT JOIN Taumaturgie_main ON Taumaturgie_main.IDtaum = Taumaturgie.IDtaum
+			WHERE Poteri_Taum.LivelloPotere <= Taumaturgie.Livello AND Taumaturgie.Userid = $Userid";
+		$Result2=mysqli_query($db, $MySql2);
+	}
 
 
 	while ( $res2=mysqli_fetch_array($Result2, MYSQLI_ASSOC) ) {
@@ -138,8 +157,8 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 			$dp = $dp + $res3['Livello'];
 		}
 		if ( $res2['Meriti'] != '') {
-			$MySql3 = "SELECT * from Personaggio  Userid = $Userid";
-			$Result3 = mysqli_query($fb, $MySql3);
+			$MySql3 = "SELECT * from Personaggio WHERE Userid = $Userid";
+			$Result3 = mysqli_query($db, $MySql3);
 			$res3 = mysqli_fetch_array($Result3);
 			switch ($res2['Meriti']) {
 				case 'F':
@@ -163,6 +182,11 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 		}
 
 		$res2['TotaleDP'] = $dp;
+
+		if ( $res2['LivelloPotere'] == 0 ) {  //poteri incrementali : Velocità/Robustezza/Potenza
+			$res2['LivelloPotere'] = $LivelloDisc;
+
+		}
 
 		$pot[] = $res2;
 	}

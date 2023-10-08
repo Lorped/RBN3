@@ -38,8 +38,8 @@ export class datidabio {
 export class Potere {
   ID = 0;
   IDdisciplina = 0;
-  LivelloPotere = 0 ;
-  NomePotere = '';
+  LivelloPotere = 0 ;  // SE 0 Incrementale (p.es. vel)
+  NomePotere = ''; 
   Passive = '';
   Auto = '';
   Target = '';
@@ -60,6 +60,7 @@ export class Potere {
   UsoFdV = 0;
   Resistito = '';
   TotaleDP = 0;
+  NomeTaum = '' ;  // PER LE TAUMATURGIE
 }
 
 export class ListaPoteri {
