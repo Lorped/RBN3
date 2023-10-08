@@ -61,6 +61,7 @@ export class Potere {
   Resistito = '';
   TotaleDP = 0;
   NomeTaum = '' ;  // PER LE TAUMATURGIE
+  IDtaum = 0 ;  // PER LE TAUMATURGIE
 }
 
 export class ListaPoteri {

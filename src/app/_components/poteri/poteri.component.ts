@@ -98,6 +98,7 @@ export class PoteriComponent implements OnInit  {
     if (!this.status.Alive) return;
     const found = pot.find( (xx) => xx.ID == idx);
     if ( found.Target === 'S' &&  ! this.myvariformarray[itx].myFormGroupArray[s].valid ) return;
+    if ( found.Passive === 'S' ) return;
 
     if ( found.UsoFdV >= this.status.FdV  ) {
       return;
@@ -114,6 +115,9 @@ export class PoteriComponent implements OnInit  {
     console.log("here");
     console.log("iddisciplina = ", found.IDdisciplina,  );
     console.log("disciplina = ", found.NomePotere  );
+    console.log("taum = ", found.NomeTaum  );
+    console.log("idtaum = ", found.IDtaum  );
+
 
     if  ( found.Target === 'S' ) {
       const target = this.myvariformarray[itx].myFormGroupArray[s].value.targetFC;
