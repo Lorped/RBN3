@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 
 import {  ListaPoteri, ListpresentiService, Potere, Presenti, SchedaService } from '../../_services/index';
 
@@ -20,17 +20,14 @@ export class variform {
   templateUrl: './poteri.component.html',
   styleUrls: ['./poteri.component.css']
 })
-export class PoteriComponent implements OnInit , AfterViewInit {
+export class PoteriComponent implements OnInit  {
 
   myvariformarray: Array<variform> = [];
 
-  filteredOptions: Observable<Presenti[]>;
+
   presenti: Array<Presenti>;
 
-  myPS= 0;
-  myPSmax = 0;
-  myFdV = 0 ;
-  myFdVmax = 0 ;
+
 
   myLista: Array<ListaPoteri> = [];
 
@@ -42,17 +39,13 @@ export class PoteriComponent implements OnInit , AfterViewInit {
 
   ngOnInit() {
 
-    this.myPS = this.status.PS;
-    this.myPSmax = this.status.PSmax;
-    this.myFdV = this.status.FdV;
-    this.myFdVmax = this.status.FdVmax;
 
     this.schedaService.getpoteri()
     .subscribe( (data: Array<ListaPoteri>) => {
       
       
       for (let i=0 ; i<data.length; i++) {
-        var unvariform = new variform();
+        const unvariform = new variform();
         unvariform.idform = data[i].IDdisciplina;
 
         for (let j = 0 ; j < data[i].pot.length ; j++ ) {
@@ -88,88 +81,60 @@ export class PoteriComponent implements OnInit , AfterViewInit {
         this.presenti[i].Userid = Number(this.presenti[i].Userid);
       }
 
-      const PNG = new Presenti("PNG", 'M', 0, 0, 'S', "", "");
+      const PNG = new Presenti();
+      PNG.NomeCognome = "PNG";
 
       this.presenti.push(PNG);
-      console.log (this.presenti);
+      //console.log (this.presenti);
 
-      for (let i = 0 ; i < this.myvariformarray.length ; i ++) {
-        for (let j = 0 ; j < this.myvariformarray[i].myFormGroupArray.length ; j ++) {
-          this.filteredOptions = this.myvariformarray[i].myFormGroupArray[j].get('targetFC').valueChanges.pipe(
-            startWith(''),
-            map(value => this.myfilter(value || '' )),
-          );
-          console.log("filtered opt = ", this.filteredOptions);
-        }  
-      }
     });
 
   }
 
 
-  ngAfterViewInit() {
-  }
+
 
   gopoteri(pot: Array<Potere>, idx: number, itx: number, s: number){
     if (!this.status.Alive) return;
     const found = pot.find( (xx) => xx.ID == idx);
     if ( found.Target === 'S' &&  ! this.myvariformarray[itx].myFormGroupArray[s].valid ) return;
-    
+
+    if ( found.UsoFdV >= this.status.FdV  ) {
+      return;
+    } else {
+      this.status.FdV = this.status.FdV - found.UsoFdV;
+    }
+
+    if ( found.UsoSangue >= this.status.PS  ) {
+      return;
+    } else {
+      this.status.PS = this.status.PS - found.UsoSangue;
+    }
+   
     console.log("here");
     console.log("iddisciplina = ", found.IDdisciplina,  );
     console.log("disciplina = ", found.NomePotere  );
 
     if  ( found.Target === 'S' ) {
-      var target = this.myvariformarray[itx].myFormGroupArray[s].value.targetFC;
+      const target = this.myvariformarray[itx].myFormGroupArray[s].value.targetFC;
       console.log("target =", target.NomeCognome );
-      console.log(this.presenti);
-      const foundx = this.presenti.find( (xx) => xx.NomeCognome === target.NomeCognome );
-      
-      console.log(foundx);
-
-      if ( !foundx  ) {
-        for (let i = 0 ; i < this.myvariformarray.length; i++){
-          for (let j=0; j <this.myvariformarray[i].myFormGroupArray.length ; j++) {
-            this.myvariformarray[i].myFormGroupArray[j].reset();
-          }
-        }
-        console.log("non trovato => reset");
-        return;
-      }
-
+      console.log("targetID =", target.Userid );
     }
-  }
+       
 
+  
 
-  myfilter(obj: string): Presenti[] {
-    if ( typeof obj != "string" ) return null;
-    console.log("in myfilter :" , obj);
-    const filterValue = obj.toLowerCase();
-    return this.presenti.filter(option => option.NomeCognome.toLowerCase().includes(filterValue));
-  }
-  displayFn  (user: Presenti) :string {
-    return user && user ? user.NomeCognome : '';
-  }
-
-  doStuff(event:any) {
-
-    console.log("event: ", event);
-    /*
-    this.trigger.panelClosingActions.subscribe((e) => {
-      if (!(e && e.source)) {
-        console.log("e =",e);
-        // clear value if is not from the filtered list
-        for (let i = 0 ; i < this.myvariformarray.length; i++){
-          for (let j=0; j <this.myvariformarray[i].myFormGroupArray.length ; j++) {
-            this.myvariformarray[i].myFormGroupArray[j].setValue({targetFC: ''});
-            this.trigger.closePanel();
-          }
-        }
-        
+    for (let i = 0 ; i < this.myvariformarray.length; i++){
+      for (let j=0; j <this.myvariformarray[i].myFormGroupArray.length ; j++) {
+        this.myvariformarray[i].myFormGroupArray[j].reset();
       }
-    });
-    */
+    }
 
   }
+
+
+
+
+
 
 }

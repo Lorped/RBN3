@@ -25,7 +25,9 @@ $but=$_GET['but'];
 if ($but=="") { $but=0; }
 
 $out = [];
-$Mysql= "SELECT * , (DATE_ADD(Presenti.startoff, INTERVAL 1200 MINUTE) > NOW()) as offgame  FROM Presenti WHERE DATE_ADD(UltimoRefresh, INTERVAL 10 MINUTE) > NOW() AND Inv IS NULL AND Stanza=$Dove AND Userid <> $but ORDER BY NomeCognome DESC ";
+$Mysql= "SELECT Presenti.* , Personaggio.URLImg , (DATE_ADD(Presenti.startoff, INTERVAL 1200 MINUTE) > NOW()) as offgame  FROM Presenti 
+	LEFT JOIN Personaggio ON Personaggio.Userid = Presenti.Userid
+	WHERE DATE_ADD(UltimoRefresh, INTERVAL 10 MINUTE) > NOW() AND Inv IS NULL AND Stanza=$Dove AND Presenti.Userid <> $but ORDER BY NomeCognome DESC ";
 $Result = mysqli_query($db, $Mysql);
 while ( $res = mysqli_fetch_array($Result,MYSQLI_ASSOC)   ) {
 	$out [] =$res;

@@ -1,35 +1,18 @@
 
-import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Status } from '../globals';
 
 
 export class Presenti {
-  NomeCognome: string;
-  Sesso: string;
-  offgame: number;
-  Userid: number;
-  ongame: string;
-  Breve: string;
-  URLImg: string;
-  constructor(
-    aNomeCognome: string,
-    aSesso: string,
-    aoffgame: number,
-    aUserid: number,
-    aongame: string,
-    aBreve: string,
-    aURLImg: string
-  ) {
-    this.NomeCognome = aNomeCognome;
-    this.Sesso = aSesso;
-    this.offgame = aoffgame;
-    this.Userid = aUserid;
-    this.ongame = aongame;
-    this.Breve = aBreve;
-    this.URLImg = aURLImg;
-  }
+  NomeCognome = '';
+  Sesso = 'M';
+  offgame = 0;
+  Userid = 0;
+  ongame = "S";
+  Breve ='';
+  URLImg = 'nopicture.gif';
+  
 }
 
 
@@ -39,34 +22,13 @@ export class ListpresentiService {
   constructor(private http: HttpClient, private status: Status) { }
 
   getpresenti() {
-
-    const mialista = [];
-
-    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapresenti.php?id=' + this.status.Userid.toString() ).pipe(
-    map((res: Array<any>) => {
-      for (let i = 0; i < res.length; i++) {
-        const item = res[i];
-        const newpresente = new Presenti(item.NomeCognome, item.Sesso, item.offgame, Number(item.Userid), item.ongame, item.Breve, item.URLImg);
-        mialista.push(newpresente);
-      }
-      return mialista;
-    }));
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapresenti.php?id=' + this.status.Userid.toString() );
 
   }
 
   getpginstanza( stanza: number, but: number) {
 
-    const mialista = [];
-
-    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapginstanza.php?dove=' + stanza.toString() + '&but=' + but.toString() ).pipe(
-    map((res: Array<any>) => {
-      for (let i = 0; i < res.length; i++) {
-        const item = res[i];
-        const newpresente = new Presenti(item.NomeCognome, item.Sesso, item.offgame, Number(item.Userid), item.ongame, '', '');
-        mialista.push(newpresente);
-      }
-      return mialista;
-    }));
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/listapginstanza.php?dove=' + stanza.toString() + '&but=' + but.toString() );
 
   }
 
