@@ -4,8 +4,7 @@ import {  ListaPoteri, ListpresentiService, Potere, Presenti, SchedaService } fr
 
 import { Status } from '../../globals';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+
 
 
 export class variform {
@@ -113,19 +112,25 @@ export class PoteriComponent implements OnInit  {
     }
    
     console.log("here");
+    console.log ("potere =" , idx );
     console.log("iddisciplina = ", found.IDdisciplina,  );
     console.log("disciplina = ", found.NomePotere  );
     console.log("taum = ", found.NomeTaum  );
     console.log("idtaum = ", found.IDtaum  );
 
+    let tt = -1;
 
     if  ( found.Target === 'S' ) {
       const target = this.myvariformarray[itx].myFormGroupArray[s].value.targetFC;
       console.log("target =", target.NomeCognome );
       console.log("targetID =", target.Userid );
-    }
+      tt = target.Userid;
+    } 
        
 
+    this.schedaService.usapotere( idx, found.IDdisciplina, found.IDtaum , tt).subscribe((data)=>{
+      console.log(data);
+    });
   
 
     for (let i = 0 ; i < this.myvariformarray.length; i++){

@@ -173,7 +173,7 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 				case 'K':
 					$dp = $dp + $res3 ['Coscienza'];
 					break;
-				case 'K':
+				case 'U':
 					$dp = $dp + $res3 ['Valsentiero '];
 					break;																						
 				default:

@@ -1,7 +1,56 @@
 <?php
 
-function dado ( $neri , $rossi, $difficolta, $fdv ) {
+function dado ( $dicepool, $difficolta, $fdv = "N") {
 
+
+
+	$successi = 0;
+	$fc = 0;
+
+	if ($fdv == 'S') {
+		$successi++;
+	}
+
+	for ( $i = 0 ; $i < $dicepool ; $i++) {
+
+		$x = mt_rand (1, 10);
+		if ($x >= $difficolta ) {
+			$successi++;
+		} elseif ($x == 1 ) {
+			$fc++;
+		}
+	}
+
+	if ( $fc >= $successi ) {
+		$risutato = 0;
+		$esito = "nessun successo";
+	}
+	if ( $fc > 0 && $successi == 0 ) {
+		$risutato = -1;
+		$esito = "un fallimento critico!";
+	}
+	if ( $successi > $fc) {
+		$risultato = $successi - $fc ;
+
+		$esito = $risultato." successi";
+
+		if ($risultato == 1) {
+			$esito = "1 successo";
+		}
+		
+	}
+
+	$out = [
+		'risultato' => $risultato,
+		'esito' => $esito
+	];
+
+	return $out;
+
+}
+
+
+function dado_v5 ( $neri , $rossi, $difficolta, $fdv ) {
 
 	$BlackFailure=0;
 	$BlackSuccess=0;

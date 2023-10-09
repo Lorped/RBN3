@@ -1,116 +1,88 @@
 <?php
 
-include ('db.inc.php');
-
-function dicepool ( $Userid, $potere) {
 
 
-	$MySql = "SELECT * FROM Poteri
-		LEFT JOIN Poteri_main ON Poteri_main.IDpotere=Poteri.IDpotere
-		LEFT JOIN Discipline_main ON Poteri_main.IDdisciplina=Discipline_main.IDdisciplina
-		WHERE Userid = $Userid AND Poteri.IDpotere = $potere ";
-	$Result=mysql_query($MySql);
+function dicepool ( $Userid, $IDattributo, $IDskill, $Meriti ) {
 
-	if ( ! $res=mysql_fetch_array($Result) ) {
-		$out=[];
-		return $out;
+	include ('db2.inc.php');   //MYSQLI //
+
+	// CALCOLO DP//
+	$dp = 0;
+
+	if ( $IDattributo != '' ) {
+		$MySql3 = "SELECT Livello from Attributi WHERE IDattributo = $IDattributo AND Userid = $Userid";
+		$Result3 = mysqli_query($db, $MySql3);
+		$res3 = mysqli_fetch_array($Result3);
+		$dp = $dp + $res3['Livello'];
+	}
+	if ( $IDskill != '' ) {
+		$MySql3 = "SELECT Livello from Skill WHERE IDskill = $IDskill AND Userid = $Userid";
+		$Result3 = mysqli_query($db, $MySql3);
+		$res3 = mysqli_fetch_array($Result3);
+		$dp = $dp + $res3['Livello'];
+	}
+	if ( $Meriti != '') {
+		$MySql3 = "SELECT * from Personaggio WHERE Userid = $Userid";
+		$Result3 = mysqli_query($db, $MySql3);
+		$res3 = mysqli_fetch_array($Result3);
+		switch ($Meriti) {
+			case 'F':
+				$dp = $dp + $res3 ['FdV'];
+				break;
+			case 'C':
+				$dp = $dp + $res3 ['Coraggio'];
+				break;
+			case 'S':
+				$dp = $dp + $res3 ['SelfControl'];
+				break;
+			case 'K':
+				$dp = $dp + $res3 ['Coscienza'];
+				break;
+			case 'K':
+				$dp = $dp + $res3 ['Valsentiero '];
+				break;																						
+			default:
+				break;
+		}
 	}
 
-	$IDpotere=$res['IDpotere'];
-	$NomePotere=$res['NomePotere'];
-	$NomeDisc=$res['NomeDisc'];
-	$LivelloPotere=$res['LivPotere'];
-	$Costo=$res['Costo'];
-
-	$Difficolta = $res['Difficolta'];
-
-	$Target = "N";
-	if ( $res['VSdisc'] != "" || $res['VSattr'] != "" ||  $res['VSattr2'] != "" || $res['VSskill'] != "") {
-		$Target = 'T';
-	}
-
-	$DPvariabili="";
-
-	$DicePool = 0 ;
-
-
-	if ( $res['Auto'] == 1 ) {
-		// AUTO == 1   -> Dichiaro il potere e basta
-		$DicePool = -1 ;
-	} else {
-
-
-		if ( $res['DPdisc'] != "" ) {
-			$dpdisc=$res['DPdisc'];
-			$MySql2 = "SELECT * FROM Discipline
-				LEFT JOIN Discipline_main ON Discipline.IDdisciplina=Discipline_main.IDdisciplina
-				WHERE Discipline.IDdisciplina = $dpdisc and Userid = $Userid";
-			$Result2 = mysql_query($MySql2);
-			$Res2=mysql_fetch_array($Result2);
-
-			$DPvariabili = $DPvariabili . $Res2['NomeDisc'] . ' + ';
-			$DicePool = $DicePool + $Res2['LivelloDisc'];
-
-		}
-
-		if ( $res['DPattr'] != "" ) {
-			$dpattr=$res['DPattr'];
-			$MySql2 = "SELECT * FROM Attributi
-				LEFT JOIN Attributi_main ON Attributi.IDattributo=Attributi_main.IDattributo
-				WHERE Attributi.IDattributo = $dpattr and Userid = $Userid";
-			$Result2 = mysql_query($MySql2);
-			$Res2=mysql_fetch_array($Result2);
-
-			$DPvariabili = $DPvariabili . $Res2['NomeAttributo'] ;
-			$DicePool = $DicePool + $Res2['Livello'];
-
-		}
-
-		if ( $res['DPskill'] != "" ) {
-			$dpskill=$res['DPskill'];
-			$MySql2 = "SELECT * FROM Skill
-				LEFT JOIN Skill_main ON Skill.IDskill=Skill_main.IDskill
-				WHERE Skill.IDskill = $dpskill and Userid = $Userid";
-			$Result2 = mysql_query($MySql2);
-			if ( $Res2=mysql_fetch_array($Result2) )  {
-
-				$DPvariabili = $DPvariabili . ' + ' . $Res2['NomeSkill'] ;
-				$DicePool = $DicePool + $Res2['Livello'];
-
-			} else {  //non ho lo skill
-				$MySql2 = "SELECT * FROM Skill_main WHERE IDskill = $dpskill";
-				$Result2 = mysql_query($MySql2);
-				$Res2=mysql_fetch_array($Result2);
-				$DPvariabili = $DPvariabili . ' + ' . $Res2['NomeSkill'] ;
-			}
-
-		}
-
-		$MySql = "SELECT * FROM Personaggio
-			LEFT JOIN BloodPotency ON Personaggio.BloodP=BloodPotency.BloodP
-			WHERE Userid = $Userid";
-		$Result=mysql_query($MySql);
-		$res=mysql_fetch_array($Result);
-
-		$BonusD=$res['BonusD'];
-
-		$DicePool = $DicePool + $BonusD;
-
-
-
-	}
-
-	$out = [
-		'IDpotere' => $IDpotere,
-		'NomePotere' => $NomePotere,
-		'NomeDisc' => $NomeDisc,
-		'LivelloPotere' => $LivelloPotere,
-		'DPvariabili' => $DPvariabili,
-		'Costo' => $Costo,
-		'Target' => $Target,
-		'DicePool' => $DicePool
-	];
-
-	return $out;
+	return $dp;
 }
+
+function dicepool_png ( $IDattributo, $IDskill, $Meriti ) {
+
+	// CALCOLO DP//
+	$dp = 0;
+
+	if ( $IDattributo != '' ) {
+		$dp = $dp + 3 ;
+	}
+	if ( $IDskill != '' ) {
+		$dp = $dp + 3 ;
+	}
+	if ( $Meriti != '') {
+		switch ($Meriti) {
+			case 'F':
+				$dp = $dp + 4;    // FDV
+				break;
+			case 'C':
+				$dp = $dp + 2;   // CORAGGIO
+				break;
+			case 'S':
+				$dp = $dp + 3;   // SELFCONTROL
+				break;
+			case 'K':
+				$dp = $dp + 3;  // COSCIENZA
+				break;
+			case 'U':
+				$dp = $dp + 7;  // UMANITA
+				break;																						
+			default:
+				break;
+		}
+	}
+
+	return $dp;
+}
+
 ?>
