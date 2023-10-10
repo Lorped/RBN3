@@ -4,6 +4,9 @@
     <mat-card-content style="display: flex;">
       Punti sangue: ( {{status.PS}}/{{status.PSmax}} ) &nbsp; <i *ngFor="let i of status.PSmax | times ; let ix = index" class="fa fa-square" [ngClass]="{'dred': (ix < status.PS) , 'white': (ix+1 > status.PS)  }"></i>
       <span class="spacer"></span>
+      Uso FdV
+      <mat-checkbox [disabled]="status.FdV < 2" [(ngModel)]="usofdv" (change)="changefdv($event.checked)" style="margin-top: -0.9em;"></mat-checkbox>
+      <span class="spacer"></span>
       FdV: ( {{status.FdV}}/{{status.FdVmax}} )  &nbsp; <i *ngFor="let i of status.FdVmax | times ; let ix = index" class="fa " [ngClass]="{'fa-circle dred': (ix < status.FdV) , 'fa-times-circle white': ((ix+1 > status.FdV) && (ix < status.FdVmax)) }"></i><i *ngFor="let i of 10-status.FdVmax | times " class="fa fa-circle white" ></i>
     </mat-card-content>
   </mat-card>
@@ -19,7 +22,7 @@
     </mat-expansion-panel-header>
 
 
-    <mat-card *ngFor="let sub of item.pot; ; index as s" [ngClass]="{'movable': ( this.status.Alive && this.myvariformarray[itx].myFormGroupArray[s].valid && (this.status.FdV > sub.UsoFdV ) && (this.status.PS > sub.UsoSangue) && sub.Passive !== 'S')}" (click)="gopoteri(item.pot, sub.ID, itx, s)" class="btn" > 
+    <mat-card *ngFor="let sub of item.pot; ; index as s" [ngClass]="{'movable': ( this.status.Alive && this.myvariformarray[itx].myFormGroupArray[s].valid && (this.status.FdV > (sub.UsoFdV + plusfdv) ) && (this.status.PS > sub.UsoSangue) && sub.Passive !== 'S')}" (click)="gopoteri(item.pot, sub.ID, itx, s)" class="btn" > 
       <mat-card-header>
       <mat-card-title>
         {{sub.NomeTaum}} {{sub.LivelloPotere}}. {{sub.NomePotere}}
@@ -36,7 +39,7 @@
                   <span *ngIf="(sub.NomeAttributo !== null || sub.NomeSkill !== null) && sub.NomeMerito !=='' ">+ </span> {{sub.NomeMerito}} 
             </div>
             <div class="col-3 nopadding">
-              <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': (ix < sub.TotaleDP) , 'white': (ix+1 > sub.TotaleDP)  }"></i>
+              <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': (ix < (sub.TotaleDP+plusfdv) ) , 'white': (ix+1 > (sub.TotaleDP+plusfdv)) }" > </i>
             </div>
             <div class="col-3 nopadding">
                   Diff.: 
@@ -64,7 +67,7 @@
               </span>
             </div>
           </div>
-          <span *ngIf="sub.UsoSangue !== 0"> Costo sangue: <i *ngFor="let i of sub.UsoSangue| times" class="fa fa-square dred" ></i></span> <span *ngIf="sub.UsoFdV !== 0"> Costo FdV: <i *ngFor="let i of sub.UsoFdV| times " class="fa fa-circle dred" ></i></span>
+          <span *ngIf="sub.UsoSangue !== 0"> Costo sangue: <i *ngFor="let i of sub.UsoSangue| times" class="fa fa-square dred" ></i></span> <span *ngIf="sub.UsoFdV !== 0"> Costo FdV: <i *ngFor="let i of sub.UsoFdV| times " class="fa fa-circle dred" ></i></span>  
         </div>
       </mat-card-content>
 

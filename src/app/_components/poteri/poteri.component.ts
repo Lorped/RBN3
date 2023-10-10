@@ -23,12 +23,13 @@ export class PoteriComponent implements OnInit  {
 
   myvariformarray: Array<variform> = [];
 
-
   presenti: Array<Presenti>;
 
-
-
   myLista: Array<ListaPoteri> = [];
+
+
+  usofdv = false;
+  plusfdv = 0;
 
   constructor( private schedaService: SchedaService, public status: Status, private listapresenti: ListpresentiService ) {}
 
@@ -99,10 +100,10 @@ export class PoteriComponent implements OnInit  {
     if ( found.Target === 'S' &&  ! this.myvariformarray[itx].myFormGroupArray[s].valid ) return;
     if ( found.Passive === 'S' ) return;
 
-    if ( found.UsoFdV >= this.status.FdV  ) {
+    if ( (found.UsoFdV+this.plusfdv) >= this.status.FdV  ) {
       return;
     } else {
-      this.status.FdV = this.status.FdV - found.UsoFdV;
+      this.status.FdV = this.status.FdV - found.UsoFdV - this.plusfdv;
     }
 
     if ( found.UsoSangue >= this.status.PS  ) {
@@ -110,6 +111,8 @@ export class PoteriComponent implements OnInit  {
     } else {
       this.status.PS = this.status.PS - found.UsoSangue;
     }
+
+
    
     console.log("here");
     console.log ("potere =" , idx );
@@ -130,19 +133,26 @@ export class PoteriComponent implements OnInit  {
 
     this.schedaService.usapotere( idx, found.IDdisciplina, found.IDtaum , tt).subscribe((data)=>{
       console.log(data);
+
+      for (let i = 0 ; i < this.myvariformarray.length; i++){
+        for (let j=0; j <this.myvariformarray[i].myFormGroupArray.length ; j++) {
+          this.myvariformarray[i].myFormGroupArray[j].reset();
+        }
+      }
+
+      this.usofdv = false;
+      this.plusfdv = 0;
     });
   
 
-    for (let i = 0 ; i < this.myvariformarray.length; i++){
-      for (let j=0; j <this.myvariformarray[i].myFormGroupArray.length ; j++) {
-        this.myvariformarray[i].myFormGroupArray[j].reset();
-      }
-    }
+
 
   }
 
 
-
+  changefdv(event) {
+    this.plusfdv === 0 ? this.plusfdv = 1 : this.plusfdv = 0;
+  }
 
 
 

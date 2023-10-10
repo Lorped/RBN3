@@ -18,6 +18,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 import {MatBadgeModule} from '@angular/material/badge'; 
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { APP_ROUTES } from './app.routing' ;
 
 import { AuthenticationService } from './_services/index';
@@ -117,7 +118,8 @@ import { OggettipgComponent } from './_components/oggettipg/oggettipg.component'
     MatSlideToggleModule,
     MatBadgeModule,
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCheckboxModule
   ],
   providers: [
     AuthenticationService,
