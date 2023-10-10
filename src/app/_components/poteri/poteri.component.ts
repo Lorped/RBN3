@@ -122,16 +122,18 @@ export class PoteriComponent implements OnInit  {
     console.log("idtaum = ", found.IDtaum  );
 
     let tt = -1;
+    let ttn = '';
 
     if  ( found.Target === 'S' ) {
       const target = this.myvariformarray[itx].myFormGroupArray[s].value.targetFC;
       console.log("target =", target.NomeCognome );
       console.log("targetID =", target.Userid );
       tt = target.Userid;
+      ttn = target.NomeCognome;
     } 
        
 
-    this.schedaService.usapotere( idx, found.IDdisciplina, found.IDtaum , tt).subscribe((data)=>{
+    this.schedaService.usapotere( idx, found.IDdisciplina, found.IDtaum , tt, ttn, this.usofdv).subscribe((data)=>{
       console.log(data);
 
       for (let i = 0 ; i < this.myvariformarray.length; i++){

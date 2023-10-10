@@ -31,6 +31,8 @@ $ID = $request->ID;
 $IDdisciplina = $request->IDdisciplina;
 $IDtaum = $request->IDtaum;
 $target = $request->target;
+$nometarget = $request->nometarget;
+$usofdv = $request -> usofdv;
 
 
 
@@ -150,15 +152,17 @@ if ( $Auto != 'S') {
 
     if ( $Target == 'N') {
 
-        $tirodado = dado ($dp , $Difficolta);
+        $tirodado = dado ($dp , $Difficolta,  $usofdv);
 
-        $esito = $esito . ' ottenendo ' . $tirodado['esito'] ;
+        $esito = $esito .   $tirodado['esito'] ;
     } else {
 
         if ( $target == 0) {  //PNG
             $diff = dicepool_png ( $DVIDattributo, $DVIDskill, $DVMeriti);
+            $esito = $esito . " contro PNG";
         } else {
             $diff = dicepool ( $target , $DVIDattributo, $DVIDskill, $DVMeriti);
+            $esito = $esito . " contro " . $nometarget;
         }
 
         
@@ -175,17 +179,17 @@ if ( $Auto != 'S') {
             $g2= $resx['Generazione'];
 
             if ( $g1 > $g2) {
-                $esito = $esito . "DEBUG2 g1=" . $g1 . " G2= ". $g2;
-                $esito = $esito . ' ottenendo nessun successo' ;
+                //$esito = $esito . "DEBUG2 g1=" . $g1 . " G2= ". $g2;
+                $esito = $esito . ' non ottenendo nessun successo' ;
             } else {
-                $tirodado = dado ($dp , $diff);
+                $tirodado = dado ($dp , $diff, $usofdv);
                 //$esito = $esito . "DEBUG3 Diff=" . $diff;
-                $esito = $esito . ' ottenendo ' . $tirodado['esito'] ;
+                $esito = $esito .  $tirodado['esito'] ;
             }
         } else {
-            $tirodado = dado ($dp , $diff);
+            $tirodado = dado ($dp , $diff, $usofdv);
             //$esito = $esito . "DEBUG4 Diff=" . $diff;
-            $esito = $esito . ' ottenendo ' . $tirodado['esito'] ;
+            $esito = $esito .   $tirodado['esito'] ;
         }
 
         if ( $Resistito == 'S') {

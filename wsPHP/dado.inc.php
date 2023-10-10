@@ -1,15 +1,13 @@
 <?php
 
-function dado ( $dicepool, $difficolta, $fdv = "N") {
+function dado ( $dicepool, $difficolta, $fdv = false) {
 
 
 
 	$successi = 0;
 	$fc = 0;
 
-	if ($fdv == 'S') {
-		$successi++;
-	}
+
 
 	for ( $i = 0 ; $i < $dicepool ; $i++) {
 
@@ -21,25 +19,40 @@ function dado ( $dicepool, $difficolta, $fdv = "N") {
 		}
 	}
 
-	if ( $fc >= $successi ) {
-		$risutato = 0;
-		$esito = "nessun successo";
-	}
-	if ( $fc > 0 && $successi == 0 ) {
-		$risutato = -1;
-		$esito = "un fallimento critico!";
-	}
-	if ( $successi > $fc) {
-		$risultato = $successi - $fc ;
-
-		$esito = $risultato." successi";
-
-		if ($risultato == 1) {
-			$esito = "1 successo";
+	if ( $fdv == false ) {
+		if ( $fc >= $successi ) {
+			$risutato = 0;
+			$esito = " non ottenendo nessun successo";
 		}
-		
-	}
+		if ( $fc > 0 && $successi == 0 ) {
+			$risutato = -1;
+			$esito = " ottenendo un fallimento critico!";
+		}
+		if ( $successi > $fc) {
+			$risultato = $successi - $fc ;
 
+			$esito =  " ottenendo " . $risultato." successi";
+
+			if ($risultato == 1) {
+				$esito = " ottenendo 1 successo";
+			}	
+		}
+	} else {  // CORREZIONE per USO FDV
+		if ( $fc >= $successi ) {
+			$risutato = 1;
+			$esito = "  ottenendo 1  successo";
+		}
+
+		if ( $successi > $fc) {
+			$risultato = $successi - $fc  + 1;
+
+			$esito =  " ottenendo " . $risultato." successi";
+
+			if ($risultato == 1) {
+				$esito = " ottenendo 1 successo";
+			}	
+		}
+	}
 	$out = [
 		'risultato' => $risultato,
 		'esito' => $esito

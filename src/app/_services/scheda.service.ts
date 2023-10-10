@@ -202,14 +202,16 @@ export class SchedaService {
     });
   }
 
-  usapotere (ID: number, IDdisciplina: number, IDtaum: number , target: number) {
+  usapotere (ID: number, IDdisciplina: number, IDtaum: number , target: number, nometarget: string,  usofdv: boolean) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
     return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/usapotere.php', {
       token: user,
       ID: ID,
       IDdisciplina: IDdisciplina,
       IDtaum: IDtaum,
-      target: target
+      target: target,
+      nometarger: nometarget,
+      usofdv: usofdv
     });
   }
 
