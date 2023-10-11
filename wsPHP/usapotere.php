@@ -165,39 +165,73 @@ if ( $Auto != 'S') {
             $esito = $esito . " contro " . $nometarget;
         }
 
+        if ( $Resistito != 'S') {
         
-        //$esito = $esito . "DEBUG1 Diff=" . $diff;
+            //$esito = $esito . "DEBUG1 Diff=" . $diff;
 
-        if ( $IDdisciplina == 6 && $target != 0 ) { //dominazione su PG
-            $MySqlx ="SELECT Generazione from Personaggio WHERE Userid = $Userid";
-            $Resultx = mysqli_query($db, $MySqlx);
-            $resx=mysqli_fetch_array($Resultx);
-            $g1= $resx['Generazione'];
-            $MySqlx ="SELECT Generazione from Personaggio WHERE Userid = $target";
-            $Resultx = mysqli_query($db, $MySqlx);
-            $resx=mysqli_fetch_array($Resultx);
-            $g2= $resx['Generazione'];
+            if ( $IDdisciplina == 6 && $target != 0 ) { //dominazione su PG
+                $MySqlx ="SELECT Generazione from Personaggio WHERE Userid = $Userid";
+                $Resultx = mysqli_query($db, $MySqlx);
+                $resx=mysqli_fetch_array($Resultx);
+                $g1= $resx['Generazione'];
+                $MySqlx ="SELECT Generazione from Personaggio WHERE Userid = $target";
+                $Resultx = mysqli_query($db, $MySqlx);
+                $resx=mysqli_fetch_array($Resultx);
+                $g2= $resx['Generazione'];
 
-            if ( $g1 > $g2) {
-                //$esito = $esito . "DEBUG2 g1=" . $g1 . " G2= ". $g2;
-                $esito = $esito . ' non ottenendo nessun successo' ;
+                if ( $g1 > $g2) {
+                    //$esito = $esito . "DEBUG2 g1=" . $g1 . " G2= ". $g2;
+                    $esito = $esito . ' non ottenendo nessun successo' ;
+                } else {
+                    $tirodado = dado ($dp , $diff, $usofdv);
+                    //$esito = $esito . "DEBUG3 Diff=" . $diff;
+                    $esito = $esito .  $tirodado['esito'] ;
+                }
             } else {
                 $tirodado = dado ($dp , $diff, $usofdv);
-                //$esito = $esito . "DEBUG3 Diff=" . $diff;
-                $esito = $esito .  $tirodado['esito'] ;
+                //$esito = $esito . "DEBUG4 Diff=" . $diff;
+                $esito = $esito .   $tirodado['esito'] ;
             }
-        } else {
-            $tirodado = dado ($dp , $diff, $usofdv);
-            //$esito = $esito . "DEBUG4 Diff=" . $diff;
-            $esito = $esito .   $tirodado['esito'] ;
-        }
+        } else  {
 
-        if ( $Resistito == 'S') {
+            $tirodadoA =  dado ($dp , $Difficolta, $usofdv);
+
+            $dptarget = dicepool ( $target , $DVIDattributo, $DVIDskill, $DVMeriti);
+
+            $tirodadoT =  dado ($dptarget , $Difficolta, false);
+
+            if ($tirodadoT['risultato'] < 0 ) {
+                $tirodadoT['risultato'] = 0 ;
+            }
+            $net = $tirodadoA['risultato'] - $tirodadoT['risultato'];
+            if ( $net < 0) {
+                $esito = ' ottenendo un fallimento critico';
+            } elseif ( $net == 0 ) {
+                $esito = ' non ottenendo nessun successo';
+            } elseif ( $net == 1 ) {
+                $esito = ' ottenendo 1 successo';
+            } elseif ( $net > 1 ) {
+                $esito = ' ottenendo '.$net.' successi';
+            }            
 
         }
 
     }
 
+}
+
+// consumo sangue se richiesto
+if ( $UsoSangue > 0 ) {
+    $MySql = "UPDATE Personaggio SET PS = PS - $UsoSangue , ultimosangue = NOW() WHERE Userid = $Userid";
+    mysqli_query($db, $MySql);
+}
+if ( $UsoFdv > 0 ) {
+    $MySql = "UPDATE Personaggio SET FdV = FdV - $UsoFdV , ultimofdv = NOW() WHERE Userid = $Userid";
+    mysqli_query($db, $MySql);
+}
+if ( $usofdv == true ) {
+    $MySql = "UPDATE Personaggio SET FdV = FdV - 1 , ultimofdv = NOW() WHERE Userid = $Userid";
+    mysqli_query($db, $MySql);
 }
 
 
