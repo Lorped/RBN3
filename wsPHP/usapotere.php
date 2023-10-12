@@ -235,6 +235,29 @@ if ( $usofdv == true ) {
 }
 
 
+// EFFETTI SPECIALI //
+if ( $IDdisciplina == 25 ) {  // ORRIDA REALTA
+    if ( $tirodado['risultato']> 0 ) {
+        $esito = $esito. ' e causando '. $tirodado['risultato'] . " danni letali";
+        if ( $target != 0 ) {
+            $MySql = "SELECT IDsalute from Personaggio WHERE Userid = $Userid";
+            $Result = mysqli_query($db, $MySql);
+            $res= mysqli_fetch_array($Result);
+            $IDsalute = $res['IDsalute'];
+            $newsalute = $IDsalute - $tirodado['risultato'];
+            if ($newsalute <0) { 
+                $MySql = "UPDATE Personaggio SET IDsalute = 0 WHERE Userid = $Userid";
+                mysqli_query($db, $MySql);
+            } else {
+                $MySql = "UPDATE Personaggio SET IDsalute = IDsalute - $IDsalute WHERE Userid = $Userid";
+                mysqli_query($db, $MySql);
+            }
+        }
+    }
+}
+if ( $IDdisciplina == 25 ) {  // ORRIDA REALTA
+}
+
 $out = [
     'esito' => $esito
     ];
