@@ -48,6 +48,9 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		$PSmax=$res['PSmax'];
 		$FdV=$res['FdV'];
 		$FdVmax=$res['FdVmax'];
+		$ultimosangue=$res['ultimosangue'];
+		$IDsalute=$res['IDsalute'];
+		$ultimofdv=$res['ultimofdv'];
 
 
 		$payload = [
@@ -60,19 +63,7 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 
 		$token=CreaJWT($payload);
 
-		$out = [
-			"Userid" => "$Userid",
-			"NomeCognome" => "$NomeCognome",
-			"Email" => "$Email",
-			"MasterAdmin" => "$MasterAdmin",
-			"Sesso" => "$Sesso",
-			"PS" => "$PS",
-			"PSmax" => "$PSmax",
-			"FdV" => "$FdV",
-			"FdVmax" => "$FdVmax",
-			"token" => "$token"
-		];
-		echo json_encode ($out, JSON_UNESCAPED_UNICODE);
+
 
 		//
 		//	Do a lot of other stuff !!
@@ -91,7 +82,89 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		mysqli_query($db, $MySql);
 		if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }
 
-		// FINE OPERAZIONI LOGIN
+		// SISTEMO i PUNTI SANGUE
+		if ( $PSmax == $PS )   {
+			$MySql = "UPDATE Personaggio SET ultimosangue=NOW() WHERE Userid=$Userid ";
+			mysqli_query($db, $MySql);
+			if (mysqli_errno($db)) { 
+				die ( mysqli_errno($db).": ".mysqli_error($db) );
+			}
+		} else {
+			$giornidiff = floor((time() - strtotime($ultimosangue) ) / (24 * 60 * 60));  //giorni per sangue
+			$PS=$PS+$giornidiff;
+	
+			/* *** VENTRUE
+			if ( $Esclusione == "S" ) {
+				if ( rand(1,10) == 1  ) {
+					$PS=$PS-2*ceil($giornidiff/2);
+					if ($PS<1) {
+						$qps=1;
+					}
+				}
+			}
+			*******/
+			if ($PS >= $PSmax ) {
+				$PS=$PSmax;
+				$MySql = "UPDATE Personaggio SET PS='$PS' , ultimosangue = NOW() WHERE Userid=$Userid ";	
+			} else {
+				$MySql = "UPDATE Personaggio SET PS='$PS' , ultimosangue = DATE_ADD( ultimosangue, INTERVAL $giornidiff DAY ) WHERE Userid=$Userid ";	
+			}			
+			mysqli_query($db, $MySql);
+			if (mysqli_errno($db)) { 
+				die ( mysqli_errno($db).": ".mysqli_error($db) );
+			}
+		}
+	
+		if ($IDsalute < 0) { // torpore - MU - I PS NON AUMENTANO
+			$MySql = "UPDATE Personaggio SET PS=0 , ultimosangue = NOW() WHERE Userid=$Userid ";
+			mysqli_query($db, $MySql);
+			if (mysqli_errno($db)) { 
+				die ( mysqli_errno($db).": ".mysqli_error($db) );
+			}
+		}
+
+		// E FDV
+		if ( $FdV == $FdVmax ) {
+			$MySql = "UPDATE Personaggio SET ultimofdv=NOW() WHERE Userid=$quserid ";
+			mysqli_query($db, $MySql);
+			if (mysqli_errno($db)) { 
+				die ( mysqli_errno($db).": ".mysqli_error($db) );
+			}
+		} else {
+			$settimanadiff = floor((time() - strtotime($ultimofdv) ) / (7* 24 * 60 * 60));
+
+			if ($settimanadiff >= 1) {
+				$FdV=$FdV+$settimanadiff;
+				if ($FdV >= $FdVvmax ) {
+					$FdV=$FdVvmax;
+					$MySql = "UPDATE Personaggio SET FdV='$FdV' , ultimofdv = NOW() WHERE Userid=$Userid ";
+				} else {
+					$ggdif=7*$settimanadiff;
+					$MySql = "UPDATE Personaggio SET FdV='$FdV' , ultimofdv = DATE_ADD( ultimofdv, INTERVAL $ggdif DAY ) WHERE Userid=$Userid ";	
+				}
+
+				mysqli_query($db, $MySql);
+				if (mysqli_errno($db)) { 
+					die ( mysqli_errno($db).": ".mysqli_error($db) );
+				}
+			}
+		}
+
+		// FINE OPERAZIONI LOGIN ORA MANDO FUORI IL TUTTO
+
+		$out = [
+			"Userid" => "$Userid",
+			"NomeCognome" => "$NomeCognome",
+			"Email" => "$Email",
+			"MasterAdmin" => "$MasterAdmin",
+			"Sesso" => "$Sesso",
+			"PS" => "$PS",
+			"PSmax" => "$PSmax",
+			"FdV" => "$FdV",
+			"FdVmax" => "$FdVmax",
+			"token" => "$token"
+		];
+		echo json_encode ($out, JSON_UNESCAPED_UNICODE);
 
 	} else {
 		header("HTTP/1.1 401 Unauthorized");
