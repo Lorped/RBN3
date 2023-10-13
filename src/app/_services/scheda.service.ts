@@ -210,7 +210,7 @@ export class SchedaService {
       IDdisciplina: IDdisciplina,
       IDtaum: IDtaum,
       target: target,
-      nometarger: nometarget,
+      nometarget: nometarget,
       usofdv: usofdv
     });
   }

@@ -6,6 +6,7 @@ function dado ( $dicepool, $difficolta, $fdv = false) {
 
 	$successi = 0;
 	$fc = 0;
+	$risultato = 0;
 
 
 
@@ -21,11 +22,11 @@ function dado ( $dicepool, $difficolta, $fdv = false) {
 
 	if ( $fdv == false ) {
 		if ( $fc >= $successi ) {
-			$risutato = 0;
+			$risultato = 0;
 			$esito = " non ottenendo nessun successo";
 		}
 		if ( $fc > 0 && $successi == 0 ) {
-			$risutato = -1;
+			$risultato = -1;
 			$esito = " ottenendo un fallimento critico!";
 		}
 		if ( $successi > $fc) {
@@ -39,7 +40,7 @@ function dado ( $dicepool, $difficolta, $fdv = false) {
 		}
 	} else {  // CORREZIONE per USO FDV
 		if ( $fc >= $successi ) {
-			$risutato = 1;
+			$risultato = 1;
 			$esito = "  ottenendo 1  successo";
 		}
 

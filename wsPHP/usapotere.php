@@ -20,6 +20,7 @@ include ('db2.inc.php');   //MYSQLI //
 include ('token.php');
 include ('dicepool.inc.php');
 include ('dado.inc.php');
+include ('soak.inc.php');
 
 
 $postdata = file_get_contents("php://input");
@@ -107,7 +108,7 @@ if ( $IDdisciplina ) {
     $DVIDskill = $res['DVIDskill'];
     $DVMeriti = $res['DVMeriti'];
     $UsoSangue = $res['UsoSangue'];
-    $UsoFdv= $res['UsoFdv'];
+    $UsoFdV= $res['UsoFdV'];
     $Resistito= $res['Resistito'];
 
     if ($LivelloPotere != 0 ) {
@@ -225,7 +226,7 @@ if ( $UsoSangue > 0 ) {
     $MySql = "UPDATE Personaggio SET PS = PS - $UsoSangue , ultimosangue = NOW() WHERE Userid = $Userid";
     mysqli_query($db, $MySql);
 }
-if ( $UsoFdv > 0 ) {
+if ( $UsoFdV > 0 ) {
     $MySql = "UPDATE Personaggio SET FdV = FdV - $UsoFdV , ultimofdv = NOW() WHERE Userid = $Userid";
     mysqli_query($db, $MySql);
 }
@@ -236,26 +237,40 @@ if ( $usofdv == true ) {
 
 
 // EFFETTI SPECIALI //
-if ( $IDdisciplina == 25 ) {  // ORRIDA REALTA
+if ( $ID == 25 && $IDdisciplina == 4 ) {  // ORRIDA REALTA
     if ( $tirodado['risultato']> 0 ) {
-        $esito = $esito. ' e causando '. $tirodado['risultato'] . " danni letali";
+        if ($tirodado['risultato'] == 1){
+            $esito = $esito. ' e causando 1 danno letale';
+        } else {
+            $esito = $esito. ' e causando '. $tirodado['risultato'] . " danni letali";
+        }
         if ( $target != 0 ) {
-            $MySql = "SELECT IDsalute from Personaggio WHERE Userid = $Userid";
+            $MySql = "SELECT IDsalute from Personaggio WHERE Userid = $target";
             $Result = mysqli_query($db, $MySql);
             $res= mysqli_fetch_array($Result);
             $IDsalute = $res['IDsalute'];
             $newsalute = $IDsalute - $tirodado['risultato'];
             if ($newsalute <0) { 
-                $MySql = "UPDATE Personaggio SET IDsalute = 0 WHERE Userid = $Userid";
+                $MySql = "UPDATE Personaggio SET IDsalute = 0 WHERE Userid = $target";
                 mysqli_query($db, $MySql);
             } else {
-                $MySql = "UPDATE Personaggio SET IDsalute = IDsalute - $IDsalute WHERE Userid = $Userid";
+                $MySql = "UPDATE Personaggio SET IDsalute = $newsalute WHERE Userid = $target";
                 mysqli_query($db, $MySql);
             }
         }
     }
 }
-if ( $IDdisciplina == 25 ) {  // ORRIDA REALTA
+if ( $ID== 56 && $IDdisciplina == 12 ) {  // Richiamo di Dagon
+    if ( $tirodado['risultato']> 0 ) {
+        $danni = soak($target, $tirodado['risultato'] , 'L');
+        $esito = $esito. ' e causando '. $danni . " danni letali";
+    }
+}
+if ( $ID== 58 &&  $IDdisciplina == 12 ) {  // Gusto di Morte
+    if ( $tirodado['risultato']> 0 ) {
+        $danni = soak($target, 2 , 'A');
+        $esito = $esito. ' e causando '. $danni . " danni aggravati";
+    }
 }
 
 $out = [
