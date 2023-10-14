@@ -4,15 +4,16 @@ import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@ang
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
-import { timer } from 'rxjs';
+//import { timer } from 'rxjs';
 
 
 // import { takeWhile } from 'rxjs/operators';
 
-import { MyChat, Chatrow , ChatService, ListpresentiService, PostService, Presenti } from '../../_services/index';
+import { MyChat, Chatrow , ChatService, ListpresentiService, PostService, Presenti, SchedaService } from '../../_services/index';
 import { ModalService } from '../../_services/index';
 
 import { Status } from '../../globals';
+
 
 @Component({
   selector: 'app-chat',
@@ -41,7 +42,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   constructor( private status: Status, private chatservice: ChatService, private postservice: PostService,
     private listpresentiservice: ListpresentiService, private route: ActivatedRoute, private router: Router,
-    private modalService: ModalService ) { }
+    private modalService: ModalService, private schedaservice: SchedaService ) { }
 
 
   ngOnInit() {
@@ -86,6 +87,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.listapg = data;
       });
     });
+
+    this.schedaservice.azionatoobs.subscribe( (val) => {
+      this.updateperazione();
+    });
+
+
   }
 
 
@@ -117,7 +124,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch (err) { }
+    } catch (err) { 
+      console.log("essore in scroll");
+    }
   }
   radiox(): void {
 
@@ -164,6 +173,21 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       }
     }
   }
+
+
+  updateperazione(){
+    this.chatservice.getchat()
+      .subscribe((data: MyChat) => {
+
+        this.dostuffwithdata(data);
+        this.scrollToBottom();
+
+        this.mycheckadmin.nativeElement.checked = this.checkadmin;
+        this.mycheckmaster.nativeElement.checked = this.checkmaster;
+
+      });
+  }
+
 
 
 

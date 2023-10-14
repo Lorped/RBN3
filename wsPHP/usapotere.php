@@ -34,6 +34,7 @@ $IDtaum = $request->IDtaum;
 $target = $request->target;
 $nometarget = $request->nometarget;
 $usofdv = $request -> usofdv;
+$stanza = $request -> stanza;
 
 
 
@@ -59,7 +60,8 @@ if ( CheckJWT ($token) ) {
 $Userid= 1;
 */
 
-$esito = $NomeCognome . " usa ";
+//$esito = $NomeCognome . " usa ";
+$esito = " usa ";
 
 if ( $IDdisciplina ) {
 	$MySql= "SELECT LivelloDisc FROM Discipline WHERE Userid = $Userid AND IDdisciplina = $IDdisciplina ";
@@ -272,6 +274,10 @@ if ( $ID== 58 &&  $IDdisciplina == 12 ) {  // Gusto di Morte
         $esito = $esito. ' e causando '. $danni . " danni aggravati";
     }
 }
+
+$MySql="INSERT INTO Chat ( Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso , Tipo, Testo, Locazione )
+VALUES ($stanza, $Userid, '$NomeCognome' , 0, '' , '$Sesso', '+', '$esito', '' )";
+mysqli_query($db, $MySql);
 
 $out = [
     'esito' => $esito

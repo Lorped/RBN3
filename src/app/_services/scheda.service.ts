@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 import {  Personaggio } from '../globals';
+import { Subject } from 'rxjs';
 
 
 export class balance {
@@ -77,6 +78,12 @@ export class ListaPoteri {
 
 @Injectable()
 export class SchedaService {
+
+  azionato  = new Subject();
+  azionatoobs = this.azionato.asObservable();
+  updateazionato ( newvalue: string) {
+    this.azionato.next(newvalue);
+  }
 
   constructor( private http: HttpClient ) { }
 
@@ -200,7 +207,7 @@ export class SchedaService {
     });
   }
 
-  usapotere (ID: number, IDdisciplina: number, IDtaum: number , target: number, nometarget: string,  usofdv: boolean) {
+  usapotere (ID: number, IDdisciplina: number, IDtaum: number , target: number, nometarget: string,  usofdv: boolean, stanza: number) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/usapotere.php', {
       token: user,
@@ -209,7 +216,8 @@ export class SchedaService {
       IDtaum: IDtaum,
       target: target,
       nometarget: nometarget,
-      usofdv: usofdv
+      usofdv: usofdv,
+      stanza: stanza
     });
   }
 

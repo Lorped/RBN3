@@ -133,8 +133,9 @@ export class PoteriComponent implements OnInit  {
     } 
        
 
-    this.schedaService.usapotere( idx, found.IDdisciplina, found.IDtaum , tt, ttn, this.usofdv).subscribe((data)=>{
-      console.log(data);
+    this.schedaService.usapotere( idx, found.IDdisciplina, found.IDtaum , tt, ttn, this.usofdv, this.status.Stanza).subscribe(()=>{
+      //console.log(data);
+      this.schedaService.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
 
       for (let i = 0 ; i < this.myvariformarray.length; i++){
         for (let j=0; j <this.myvariformarray[i].myFormGroupArray.length ; j++) {
