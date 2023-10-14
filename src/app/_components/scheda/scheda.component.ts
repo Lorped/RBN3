@@ -32,7 +32,7 @@ export class SchedaComponent implements OnInit {
     });
 
     this.schedaService.getnecrotaum(this.status.Userid)
-    .subscribe ( data => {
+    .subscribe ( (data: any) => {
       this.necro = data.necro;
       this.taum = data.taum;
     });

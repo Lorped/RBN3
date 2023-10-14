@@ -59,7 +59,7 @@ export class SchedaotherComponent implements OnInit {
 
     if ( this.status.MasterAdmin !== 0 ) {
 
-      this.schedaService.getnecrotaum(this.status.otherID).subscribe ( data => {
+      this.schedaService.getnecrotaum(this.status.otherID).subscribe ( (data: any) => {
         this.necro = data.necro;
         this.taum = data.taum;
       });

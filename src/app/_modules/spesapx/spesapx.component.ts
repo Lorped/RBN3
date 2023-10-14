@@ -66,12 +66,12 @@ export class SpesapxComponent implements OnInit {
     });
 
     this.schedaService.getnewdiscipline(this.status.Userid)
-    .subscribe ( data => {
+    .subscribe ( (data: any) => {
       this.newdiscipline = data;
     });
 
     this.schedaService.getnecrotaum(this.status.Userid)
-    .subscribe ( data => {
+    .subscribe ( (data: any) => {
 
 //console.log(data);
       this.necro = data.necro;
@@ -88,7 +88,7 @@ export class SpesapxComponent implements OnInit {
     });
 
     this.schedaService.getnewnecrotaum(this.status.Userid)
-    .subscribe ( data => {
+    .subscribe ( (data: any) => {
       this.newnecro = data.newnecro;
       this.newtaum = data.newtaum;
     });

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 
-import { Background, Attributo, Skill, Disciplina, Basicpg, Personaggio } from '../globals';
+import {  Personaggio } from '../globals';
 
 
 export class balance {
@@ -116,7 +116,7 @@ export class SchedaService {
   getnewdiscipline (id: number) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getnewdiscipline.php', {
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getnewdiscipline.php', {
       token: user,
       id: id
     });
@@ -125,7 +125,7 @@ export class SchedaService {
   getnewnecrotaum (id: number) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getnewnecrotaum.php', {
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getnewnecrotaum.php', {
       token: user,
       id: id
     });
@@ -135,14 +135,14 @@ export class SchedaService {
 
   getnecrotaum (id: number) {
 
-    return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/getnecrotaum.php?id=' + id.toString() );
+    return this.http.get('https://www.roma-by-night.it/RBN3/wsPHP/getnecrotaum.php?id=' + id.toString() );
   }
 
 
   getbio (id: number) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getbio.php', {
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getbio.php', {
       token: user,
       id: id
     });
@@ -151,7 +151,7 @@ export class SchedaService {
   addbio (bio: string, descrizione: string, annotazioni: string) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/addbio.php', {
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/addbio.php', {
       token: user,
       bio: bio,
       descr: descrizione,
@@ -170,9 +170,7 @@ export class SchedaService {
 
   }
 
-  getsetefdv (id: number) {
-    return this.http.get<any>('https://www.roma-by-night.it/RBN3/wsPHP/getsete.php?id=' + id.toString()  );
-  }
+
 
   getpoteri() {
     const user = sessionStorage.getItem('RBN3currentUser') ;
@@ -187,14 +185,14 @@ export class SchedaService {
 
   finanze(){
     const user = sessionStorage.getItem('RBN3currentUser') ;
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/finanze.php', {
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/finanze.php', {
       token: user
     });
   }
 
   sendmoney(to: number, importo: number, causale: string) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/sendmoney.php', {
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/sendmoney.php', {
       token: user,
       to: to,
       importo: importo,
@@ -204,7 +202,7 @@ export class SchedaService {
 
   usapotere (ID: number, IDdisciplina: number, IDtaum: number , target: number, nometarget: string,  usofdv: boolean) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/usapotere.php', {
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/usapotere.php', {
       token: user,
       ID: ID,
       IDdisciplina: IDdisciplina,
