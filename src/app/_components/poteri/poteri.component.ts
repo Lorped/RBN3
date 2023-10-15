@@ -120,6 +120,8 @@ export class PoteriComponent implements OnInit  {
     console.log("disciplina = ", found.NomePotere  );
     console.log("taum = ", found.NomeTaum  );
     console.log("idtaum = ", found.IDtaum  );
+    console.log("necro = ", found.NomeNecro  );
+    console.log("idnecro = ", found.IDnecro  );
 
     let tt = -1;
     let ttn = '';
@@ -133,7 +135,7 @@ export class PoteriComponent implements OnInit  {
     } 
        
 
-    this.schedaService.usapotere( idx, found.IDdisciplina, found.IDtaum , tt, ttn, this.usofdv, this.status.Stanza).subscribe(()=>{
+    this.schedaService.usapotere( idx, found.IDdisciplina, found.IDtaum , found.IDnecro,  tt, ttn, this.usofdv, this.status.Stanza).subscribe(()=>{
       //console.log(data);
       this.schedaService.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
 
@@ -153,7 +155,7 @@ export class PoteriComponent implements OnInit  {
   }
 
 
-  changefdv(event) {
+  changefdv() {
     this.plusfdv === 0 ? this.plusfdv = 1 : this.plusfdv = 0;
   }
 

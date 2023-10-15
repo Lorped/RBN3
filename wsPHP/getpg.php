@@ -154,11 +154,12 @@ if ( $full ) {
 
 	$out = [
 		'full' => $full,
-		'pg' => $pg ,
-		'background' => $background,
-		'attr' => $attr,
-		'discipline' => $discipline,
-		'skill' => $skill
+		'aPG' => $pg ,
+		'listaAttributi' => $attr,
+		'listaSkill' => $skill,
+		'listaBackground' => $background,
+		'listaDiscipline' => $discipline
+
 	];
 
 

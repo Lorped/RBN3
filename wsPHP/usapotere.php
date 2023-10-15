@@ -31,6 +31,7 @@ $token=$request->token;
 $ID = $request->ID;
 $IDdisciplina = $request->IDdisciplina;
 $IDtaum = $request->IDtaum;
+$IDnecro = $request->IDnecro;
 $target = $request->target;
 $nometarget = $request->nometarget;
 $usofdv = $request -> usofdv;
@@ -89,9 +90,20 @@ if ( $IDdisciplina ) {
     $Result = mysqli_query($db, $MySql);
 	$res=mysqli_fetch_array($Result);
     $esito = $esito . $res['NomeTaum'];
-} else {
-	die();
+} elseif ( $IDnecro ) {
+	$MySql= "SELECT LivelloNecro FROM Necromanzie WHERE Userid = $Userid AND IDnecro = $IDnecro ";
+	$Result = mysqli_query($db, $MySql);
+	$res=mysqli_fetch_array($Result);
+    $LivelloNecro = $res['LivelloNecro'];
+	if ( $LivelloNecro == ' ') {
+		die();
+	}
+    $MySql= "SELECT * FROM Necromanzie_main WHERE IDnecro = $IDnecro ";
+    $Result = mysqli_query($db, $MySql);
+	$res=mysqli_fetch_array($Result);
+    $esito = $esito . $res['NomeNecro'];
 }
+
 
 if ( $IDdisciplina ) {
 	$MySql= "SELECT * FROM Poteri WHERE ID = $ID ";
@@ -141,6 +153,30 @@ if ( $IDdisciplina ) {
         $esito = $esito . '.' . $LivelloPotere . ' - ' . $NomePotere ;
     } else {
         $esito = $esito . '.' . $LivelloTaum;
+    }
+} elseif ( $IDnecro ) {
+    $MySql= "SELECT * FROM Poteri_Necro WHERE ID = $ID ";
+	$Result = mysqli_query($db, $MySql);
+	$res=mysqli_fetch_array($Result);
+
+    $LivelloPotere = $res['LivelloPotere'];
+    $NomePotere = $res['NomePotere'];
+    $IDattributo = $res['IDattributo'];
+    $IDskill = $res['IDskill'];
+    $Meriti = $res['Meriti'];
+    $Difficolta = $res['Difficolta'];
+    $Auto = 'N';
+    $Target= $res['Target'];
+    $DVIDattributo = '';
+    $DVIDskill = '';
+    $DVMeriti = $res['DVMeriti'];
+    $UsoSangue = $res['UsoSangue'];
+    $UsoFdv= $res['UsoFdv'];
+    $Resistito= $res['Resistito'];
+    if ($LivelloPotere != 0 ) {
+        $esito = $esito . '.' . $LivelloPotere . ' - ' . $NomePotere ;
+    } else {
+        $esito = $esito . '.' . $LivelloNecro;
     }
 }
 

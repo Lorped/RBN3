@@ -80,7 +80,7 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 			WHERE IDdisciplina = $IDdisciplina AND LivelloPotere <= $LivelloDisc ORDER BY LivelloPotere ";
 		$Result2=mysqli_query($db, $MySql2);
 	} else if ( $IDdisciplina == 15 ) {
-		$MySql2="SELECT Poteri_Taum.* , Taumaturgie_main.NomeTaum ,
+		$MySql2="SELECT Poteri_Taum.* , Taumaturgie_main.NomeTaum , 
 			'N' as Auto,
 			'N' as Passive,
 			null as Resistito,
@@ -94,6 +94,21 @@ while ( $res=mysqli_fetch_array($Result, MYSQLI_ASSOC) ) {
 			LEFT JOIN Poteri_Taum ON Poteri_Taum.IDtaum = Taumaturgie.IDtaum
 			LEFT JOIN Taumaturgie_main ON Taumaturgie_main.IDtaum = Taumaturgie.IDtaum
 			WHERE Poteri_Taum.LivelloPotere <= Taumaturgie.Livello AND Taumaturgie.Userid = $Userid";
+		$Result2=mysqli_query($db, $MySql2);
+	} else if ( $IDdisciplina == 7 ) { 
+		$MySql2="SELECT Poteri_Necro.* , Necromanzie_main.NomeNecro , Attributi_main.NomeAttributo, Skill_main.NomeSkill,
+			'N' as Auto,
+			'N' as Passive,
+
+			0  as TotaleDP ,
+			'' as NomeMerito ,
+			'' as DVNomeMerito 
+			FROM Necromanzie
+			LEFT JOIN Poteri_Necro ON Poteri_Necro.IDnecro = Necromanzie.IDnecro
+			LEFT JOIN Attributi_main on Poteri_Necro.IDattributo = Attributi_main.IDattributo
+			LEFT JOIN Skill_main on Poteri_Necro.IDskill = Skill_main.IDskill	
+			LEFT JOIN Necromanzie_main ON Necromanzie_main.IDnecro = Necromanzie.IDnecro
+			WHERE Poteri_Necro.LivelloPotere <= Necromanzie.Livello AND Necromanzie.Userid = $Userid";
 		$Result2=mysqli_query($db, $MySql2);
 	}
 

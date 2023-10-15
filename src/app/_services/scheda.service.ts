@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 
-import {  Personaggio } from '../globals';
+
 import { Subject } from 'rxjs';
 
 
@@ -63,6 +63,8 @@ export class Potere {
   TotaleDP = 0;
   NomeTaum = '' ;  // PER LE TAUMATURGIE
   IDtaum = 0 ;  // PER LE TAUMATURGIE
+  NomeNecro = '' ;  // PER LE NECROMANZIE
+  IDnecro = 0 ;  // PER LE NECROMANZIE
 }
 
 export class ListaPoteri {
@@ -72,8 +74,6 @@ export class ListaPoteri {
   IcoDisc = 'dummy.png';
   pot: Array<Potere> = [];
 }
-
-
 
 
 @Injectable()
@@ -91,33 +91,10 @@ export class SchedaService {
 
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
-    return this.http.post<any>('https://www.roma-by-night.it/RBN3/wsPHP/getpg.php', {
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/getpg.php', {
       token: user,
       id: id
-    }).pipe(
-    map( (data) => {
-      const full = data.full;
-      const myPG: Personaggio = new Personaggio;
-      myPG.aPG = data.pg;
-
-      myPG.listaAttributi =  data.attr;
-      myPG.listaSkill = data.skill;
-      myPG.listaBackground = data.background;
-      myPG.listaDiscipline = data.discipline;
-      for (let i = 0 ; i < myPG.listaSkill.length ; i++) {
-        myPG.listaSkill[i].Livello = +myPG.listaSkill[i].Livello;
-        myPG.listaSkill[i].IDskill = +myPG.listaSkill[i].IDskill;
-      }
-      for (let i = 0 ; i < myPG.listaAttributi.length ; i++) {
-        myPG.listaAttributi[i].Livello = +myPG.listaAttributi[i].Livello;
-        myPG.listaAttributi[i].IDattributo = +myPG.listaAttributi[i].IDattributo;
-      }
-      for (let i = 0 ; i < myPG.listaDiscipline.length ; i++) {
-        myPG.listaDiscipline[i].LivelloDisc = +myPG.listaDiscipline[i].LivelloDisc;
-        myPG.listaDiscipline[i].IDdisciplina = +myPG.listaDiscipline[i].IDdisciplina;
-      }
-      return myPG;
-    }));
+    });
   }
 
   getnewdiscipline (id: number) {
@@ -207,13 +184,14 @@ export class SchedaService {
     });
   }
 
-  usapotere (ID: number, IDdisciplina: number, IDtaum: number , target: number, nometarget: string,  usofdv: boolean, stanza: number) {
+  usapotere (ID: number, IDdisciplina: number, IDtaum: number , IDnecro: number, target: number, nometarget: string,  usofdv: boolean, stanza: number) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/usapotere.php', {
       token: user,
       ID: ID,
       IDdisciplina: IDdisciplina,
       IDtaum: IDtaum,
+      IDnecro: IDnecro,
       target: target,
       nometarget: nometarget,
       usofdv: usofdv,

@@ -56,7 +56,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.listachat = [];
     this.status.Alive = true;
 
-    const Emitter = this.route.url.pipe(switchMap( (val) =>   {
+    const Emitter = this.route.url.pipe(switchMap( () =>   {
       // console.log("dentro switchmap"+this.status.Stanza);
 
       this.checkadmin = false;
@@ -75,7 +75,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         takeWhile(() => this.status.Alive));
     }));
 
-    Emitter.subscribe((val) => {
+    Emitter.subscribe(() => {
 
       this.chatservice.getchat().subscribe((data: MyChat) => {
         this.dostuffwithdata(data);
@@ -88,7 +88,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       });
     });
 
-    this.schedaservice.azionatoobs.subscribe( (val) => {
+    this.schedaservice.azionatoobs.subscribe( () => {
       this.updateperazione();
     });
 
