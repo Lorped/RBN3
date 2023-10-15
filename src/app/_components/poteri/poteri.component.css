@@ -41,7 +41,21 @@
     padding-right: 0 !important;
   }
 
-  .btn {
+
+
+  .btn-primary {
     color: inherit !important;
+    background-color: transparent;
+    border-color: transparent; /*set the color you want here*/
+    font-size: inherit !important;
     text-align: inherit !important;
+    padding: 0;
+  }
+  .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+
+    /*background-color: #424242;*/
+    border-color: #E71C61; 
+  }
+  .btn {
+    opacity: inherit !important;
   }

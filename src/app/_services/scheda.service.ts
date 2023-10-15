@@ -7,6 +7,29 @@ import { HttpClient } from '@angular/common/http';
 
 import { Subject } from 'rxjs';
 
+export class ataum {
+  IDtaum = 0 ;
+  Livello = 0;
+  Principale = '';
+  NomeTaum = '';
+}
+export class anecro {
+  IDnecro = 0 ;
+  Livello = 0;
+  Principale = '';
+  NomeNecro = '';
+}
+
+
+export class necrotaum {
+  Tprincipale = 0;
+  Tmaxlev = 0 ;
+  taum: Array<ataum> = [];
+  Nprincipale = 0 ;
+  Nmaxlev = 0;
+  necro: Array<anecro> = [];
+}
+
 
 export class balance {
   nome = '';

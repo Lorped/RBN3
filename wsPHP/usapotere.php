@@ -268,7 +268,7 @@ if ( $UsoFdV > 0 ) {
     $MySql = "UPDATE Personaggio SET FdV = FdV - $UsoFdV , ultimofdv = NOW() WHERE Userid = $Userid";
     mysqli_query($db, $MySql);
 }
-if ( $usofdv == true ) {
+if ( $usofdv == true && $Auto != 'S' ) {   // NO USO FDV per DP se disciplina Auto 
     $MySql = "UPDATE Personaggio SET FdV = FdV - 1 , ultimofdv = NOW() WHERE Userid = $Userid";
     mysqli_query($db, $MySql);
 }

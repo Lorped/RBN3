@@ -22,10 +22,10 @@
     </mat-expansion-panel-header>
 
 
-    <mat-card *ngFor="let sub of item.pot; ; index as s" [ngClass]="{'movable': ( this.status.Alive && this.myvariformarray[itx].myFormGroupArray[s].valid && (this.status.FdV > (sub.UsoFdV + plusfdv) ) && (this.status.PS > sub.UsoSangue) && sub.Passive !== 'S')}" (click)="gopoteri(item.pot, sub.ID, itx, s)" class="btn" > 
+    <mat-card *ngFor="let sub of item.pot; ; index as s" [ngClass]="{'movable': ( this.status.Alive && this.myvariformarray[itx].myFormGroupArray[s].valid && (this.status.FdV > (sub.UsoFdV + plusfdv) ) && (this.status.PS > sub.UsoSangue) && sub.Passive !== 'S')}" > 
       <mat-card-header>
       <mat-card-title>
-        {{sub.NomeNecro}}{{sub.NomeTaum}} {{sub.LivelloPotere}}. {{sub.NomePotere}}
+        <button type="button" class="btn btn-sm full btn-primary" (click)="gopoteri(item.pot, sub.ID, itx, s)" [disabled]="!( this.status.Alive && this.myvariformarray[itx].myFormGroupArray[s].valid && (this.status.FdV > (sub.UsoFdV + plusfdv) ) && (this.status.PS > sub.UsoSangue) && sub.Passive !== 'S')"> {{sub.NomeNecro}}{{sub.NomeTaum}} {{sub.LivelloPotere}}. {{sub.NomePotere}}</button>
       </mat-card-title>
     </mat-card-header>
       <mat-card-content class="full">

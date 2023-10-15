@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestpxService, Questrow, SchedaService, datidabio } from '../../_services/index';
+import { QuestpxService, Questrow, SchedaService, anecro, ataum, datidabio, necrotaum } from '../../_services/index';
 import { Status } from '../../globals';
 import { Basicpg, Personaggio } from '../../globals';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,8 +17,8 @@ export class SchedaotherComponent implements OnInit {
 
   listaquest: Array<Questrow> = [];
 
-  necro = [];
-  taum = [];
+  necro: Array<anecro> = [];
+  taum: Array<ataum> = [];
 
   bio = '';
   descrizione = '';
@@ -59,7 +59,7 @@ export class SchedaotherComponent implements OnInit {
 
     if ( this.status.MasterAdmin !== 0 ) {
 
-      this.schedaService.getnecrotaum(this.status.otherID).subscribe ( (data: any) => {
+      this.schedaService.getnecrotaum(this.status.otherID).subscribe ( (data: necrotaum) => {
         this.necro = data.necro;
         this.taum = data.taum;
       });

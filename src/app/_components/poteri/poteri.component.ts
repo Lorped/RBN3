@@ -103,7 +103,10 @@ export class PoteriComponent implements OnInit  {
     if ( (found.UsoFdV+this.plusfdv) >= this.status.FdV  ) {
       return;
     } else {
-      this.status.FdV = this.status.FdV - found.UsoFdV - this.plusfdv;
+      if ( found.Auto !== 'S' ) {   // NO USO FDV EXTRA PER DISCIPLIEN AUTO 
+        this.status.FdV = this.status.FdV - found.UsoFdV - this.plusfdv;
+      }
+
     }
 
     if ( found.UsoSangue >= this.status.PS  ) {
