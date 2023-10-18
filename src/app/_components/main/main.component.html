@@ -149,6 +149,18 @@
     </app-modal>
 
   <!-- ----->
+      <!-- <app-modal id="modal-modalazioni"> -->
+
+        <app-modal #modalazioni modalId="modalazioni">
+          <div class="app-modal-header my-modal-header true_primary">
+            Azioni <mat-icon color="warn" class="closing-button" (click)="this.status.azionion=false; modalazioni.hide()">close</mat-icon>
+          </div>
+          <div class="app-modal-body">
+            <app-azioni *ngIf="this.status.azionion"></app-azioni>
+          </div>
+        </app-modal>
+    
+      <!-- ----->
   <!-- ----->
 
 

@@ -157,6 +157,8 @@ export class Status {
 
   finanzaon = false; 
   cash = 0;
+
+  azionion = false;
 }
 
 

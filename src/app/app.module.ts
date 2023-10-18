@@ -53,9 +53,9 @@ import { Status } from './globals';
 
 import { UtilityModule } from './_modules/utility/utility.module';
 
-/* questi si possono cancellare */
-import { PoteriComponent } from './_components/poteri/poteri.component';
-/** ************* */
+
+
+
 
 import { MessaggiComponent } from './_components/messaggi/messaggi.component';
 import { ReadmessaggiComponent } from './_components/readmessaggi/readmessaggi.component';
@@ -66,6 +66,8 @@ import { EmitterService } from './_services/emitter.service';
 import { FinanzaComponent } from './_components/finanza/finanza.component';
 import { OggettiComponent } from './_components/oggetti/oggetti.component';
 import { OggettipgComponent } from './_components/oggettipg/oggettipg.component';
+import { PoteriComponent } from './_components/poteri/poteri.component';
+import { AzioniComponent } from './_components/azioni/azioni.component';
 
 
 
@@ -95,7 +97,8 @@ import { OggettipgComponent } from './_components/oggettipg/oggettipg.component'
     DescluogoComponent,
     FinanzaComponent,
     OggettiComponent,
-    OggettipgComponent
+    OggettipgComponent,
+    AzioniComponent
 
   ],
   imports: [

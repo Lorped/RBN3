@@ -51,11 +51,9 @@ export class MenuComponent  {
     if ( id === 'modalpx') {
       this.status.pxon = true ;
     }
-    /**
-    if ( id === 'modalbio') {
-      this.status.bioon = true ;
+    if ( id === 'modalazioni') {
+      this.status.azionion = true ;
     }
-    **/
     if ( id === 'modalanagrafe') {
       this.status.anagon = true ;
     }
