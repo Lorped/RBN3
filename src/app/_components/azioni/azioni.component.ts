@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SignupService } from '../../_services/index';
+import { SignupService, getreg1, getreg2 } from '../../_services/index';
 import { Attributo,  Skill, Status } from '../../globals';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
