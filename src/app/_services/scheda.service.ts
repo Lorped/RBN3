@@ -222,4 +222,15 @@ export class SchedaService {
     });
   }
 
+  checkattr (IDattributo: number, IDskill: number, difficolta: number ,  stanza: number) {
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/check.php', {
+      token: user,
+      IDattributo: IDattributo,
+      IDskill: IDskill,
+      difficolta: difficolta,
+      stanza: stanza
+    });
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SignupService, getreg1, getreg2 } from '../../_services/index';
+import { SchedaService, SignupService, getreg1, getreg2 } from '../../_services/index';
 import { Attributo,  Skill, Status } from '../../globals';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -23,7 +23,7 @@ export class AzioniComponent implements OnInit{
   });
 
 
-  constructor ( private signup: SignupService, public status: Status) {}
+  constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService) {}
 
   ngOnInit() {
 
@@ -32,19 +32,28 @@ export class AzioniComponent implements OnInit{
 
     this.signup.getregistra1().subscribe((data: getreg1)=>{
       this.listaattributi = data.attributi;
-      console.log(this.listaattributi);
+      //console.log(this.listaattributi);
     });
     this.signup.getregistra2().subscribe((data: getreg2)=>{
       this.listaskill = data.skill;
-      console.log(this.listaskill);
+      //console.log(this.listaskill);
     });
     
   }
 
 
   docheck() {
-    console.log(this.checkFG.value.attrFC, this.checkFG.value.skillFC, this.checkFG.value.diffFC);
+    const idattr=Number(this.checkFG.value.attrFC);
+    const idskill=Number(this.checkFG.value.skillFC);
+    const diff=this.checkFG.value.diffFC;
+    this.schedaservice.checkattr(idattr, idskill, diff, this.status.Stanza).subscribe( ()=> {
+      this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
+    })
+
+    //console.log(this.checkFG.value.attrFC, this.checkFG.value.skillFC, this.checkFG.value.diffFC);
+    
     this.checkFG.reset();
+    this.checkFG.patchValue({diffFC: 6});
   }
 
 }

@@ -32,7 +32,7 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-         <button mat-button color="primary" [disabled]="!status.Alive || !checkFG.valid"><mat-icon >play_circle_outline</mat-icon></button>
+         <button mat-button color="primary" [disabled]="!status.Alive || !checkFG.valid" (click)="docheck()"><mat-icon >play_circle_outline</mat-icon></button>
         </form>
     </mat-card-content>
 </mat-card>
