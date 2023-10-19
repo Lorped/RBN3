@@ -166,7 +166,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         if ( data.Listachat[i].Locazione !== '' ) {
           data.Listachat[i].Testo = '[' + data.Listachat[i].Locazione + '] ' + data.Listachat[i].Testo ;
         }
-        if ( data.Listachat[i].Tipo === 'A' || data.Listachat[i].Tipo === 'M' ) {
+        if ( data.Listachat[i].Tipo === 'A' || data.Listachat[i].Tipo === 'M' || data.Listachat[i].Tipo === '+') {
           data.Listachat[i].Mittente = '';
         }
         this.listachat.push(data.Listachat[i]);

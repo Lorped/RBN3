@@ -61,8 +61,8 @@ if ( CheckJWT ($token) ) {
 $Userid= 1;
 */
 
-//$esito = $NomeCognome . " usa ";
-$esito = " usa ";
+$esito = $NomeCognome . " usa ";
+//$esito = " usa ";
 
 if ( $IDdisciplina ) {
 	$MySql= "SELECT LivelloDisc FROM Discipline WHERE Userid = $Userid AND IDdisciplina = $IDdisciplina ";
