@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, NgForm, FormGroupDirective,AbstractControl } from '@angular/forms';
 import { Attributo, Clan, Archetipo } from '../../../globals';
-import { SignupService } from '../../../_services/signup.service';
+import { SignupService, getreg1 } from '../../../_services/signup.service';
 import { Router } from '@angular/router';
 import {ErrorStateMatcher} from '@angular/material/core';
 
@@ -110,7 +110,7 @@ export class Registra1Component implements OnInit {
 
     this.signupservice.getregistra1()
     .subscribe(
-      (res: any) => {
+      (res: getreg1) => {
         this.archetipi = res.archetipi;
         this.clan = res.clan;
 

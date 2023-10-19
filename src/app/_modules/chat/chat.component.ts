@@ -125,7 +125,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) { 
-      console.log("essore in scroll");
+      console.log("errore in scroll");
     }
   }
   radiox(): void {
@@ -156,6 +156,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   dostuffwithdata( data: MyChat) {
 
+    //console.log(data);
+
     this.statuschat = Number (data.Statuschat);
     this.status.Last = data.Last;
     if (this.statuschat === 0)  {
@@ -169,6 +171,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         if ( data.Listachat[i].Tipo === 'A' || data.Listachat[i].Tipo === 'M' || data.Listachat[i].Tipo === '+') {
           data.Listachat[i].Mittente = '';
         }
+        data.Listachat[i].IDDestinatario=Number(data.Listachat[i].IDDestinatario);
         this.listachat.push(data.Listachat[i]);
       }
     }
