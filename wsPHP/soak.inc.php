@@ -40,7 +40,7 @@ function soak($id, $danno, $tipo) {
 			}
 		}
 
-		$danno = round($danno, 0, PHP_ROUND_HALF_DOWN);
+		$danno = floor($danno/2);
 
 		if ( $danno > 0 ) {
 			$IDsalute = $IDsalute - $danno;
