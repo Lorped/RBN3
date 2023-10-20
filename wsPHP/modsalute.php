@@ -51,11 +51,12 @@ $stanza = 23 ;
 
 
 
-$MySql = "SELECT ModSalute, DescSalute Desc FROM Personaggio 
-	LEFT join Livelli_salute on Personaggio.IDsalute = Livelli_salute.IDsalute
+$MySql = "SELECT ModSalute, DescSalute, Personaggio.IDsalute, daurto, aggravati , UsoPS FROM Personaggio 
+	LEFT JOIN Livelli_salute on Personaggio.IDsalute = Livelli_salute.IDsalute
+	LEFT JOIN Generazioni on Personaggio.Generazione = Generazioni.Generazione
 	WHERE Userid = $Userid";
 $Result = mysqli_query($db, $MySql);
-$res = mysqli_fetch_array($Result);
+$res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
 
 $out = $res ;
 
