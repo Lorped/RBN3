@@ -98,6 +98,15 @@ export class ListaPoteri {
   pot: Array<Potere> = [];
 }
 
+export interface modificasalute {
+  ModSalute: number;
+  DescSalute: string;
+  IDsalute: number;
+  daurto: number;
+  aggravati: number;
+  UsoPS: number;
+}
+
 
 @Injectable()
 export class SchedaService {
@@ -229,6 +238,21 @@ export class SchedaService {
       IDattributo: IDattributo,
       IDskill: IDskill,
       difficolta: difficolta,
+      stanza: stanza
+    });
+  }
+
+  checksalute(){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/modsalute.php', {
+      token: user,
+    });
+  }
+
+  cura(stanza: number){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/cura.php', {
+      token: user,
       stanza: stanza
     });
   }

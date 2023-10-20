@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SchedaService, SignupService, getreg1, getreg2 } from '../../_services/index';
+import { SchedaService, SignupService, getreg1, getreg2, modificasalute } from '../../_services/index';
 import { Attributo,  Skill, Status } from '../../globals';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -22,13 +22,21 @@ export class AzioniComponent implements OnInit{
     diffFC: new FormControl(6)
   });
 
+  ModSalute = 0;
+  DescSalute = '';
+
+  IDsalute = 7;
+  daurto = 0 ;
+  aggravati = 0;
+  letali = 0;
+  UsoPS = 0 ;
+
+  usofdv=false;
+
 
   constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService) {}
 
   ngOnInit() {
-
-
-
 
     this.signup.getregistra1().subscribe((data: getreg1)=>{
       this.listaattributi = data.attributi;
@@ -37,6 +45,21 @@ export class AzioniComponent implements OnInit{
     this.signup.getregistra2().subscribe((data: getreg2)=>{
       this.listaskill = data.skill;
       //console.log(this.listaskill);
+    });
+
+    this.schedaservice.checksalute().subscribe((data: modificasalute)=>{
+      this.ModSalute = data.ModSalute;
+      this.DescSalute = data.DescSalute;
+      this.IDsalute = Number(data.IDsalute);
+      this.daurto = Number(data.daurto);
+      this.aggravati = Number(data.aggravati);
+      this.letali = 7 - this.IDsalute - this.daurto -  this.aggravati;
+      this.UsoPS = Number(data.UsoPS);
+      console.log(data);
+
+      if ( this.UsoPS > this.status.PS - 1) {
+        this.UsoPS = this.status.PS -1 ;
+      }
     });
     
   }
@@ -54,6 +77,19 @@ export class AzioniComponent implements OnInit{
     
     this.checkFG.reset();
     this.checkFG.patchValue({diffFC: 6});
+  }
+
+
+  changefdv(){
+    console.log("changefdv");
+  }
+
+  gocura() {
+    console.log ("gocura");
+    this.schedaservice.cura(this.status.Stanza).subscribe( (data:any)=>{
+      console.log(data);
+      this.status.PS=this.status.PS - Number(data.usati);
+    });
   }
 
 }
