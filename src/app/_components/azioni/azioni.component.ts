@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SchedaService, SignupService, getreg1, getreg2, modificasalute } from '../../_services/index';
+import { SchedaService, SignupService, esitocura, getreg1, getreg2, modificasalute } from '../../_services/index';
 import { Attributo,  Skill, Status } from '../../globals';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -86,9 +86,15 @@ export class AzioniComponent implements OnInit{
 
   gocura() {
     console.log ("gocura");
-    this.schedaservice.cura(this.status.Stanza).subscribe( (data:any)=>{
+    this.schedaservice.cura(this.status.Stanza).subscribe( (data:esitocura)=>{
       console.log(data);
       this.status.PS=this.status.PS - Number(data.usati);
+      this.DescSalute = data.DescSalute;
+      this.daurto = Number (data.daurto);
+      this.aggravati = Number (data.aggravati);
+      this.IDsalute = Number(data.IDsalute);
+      this.ModSalute = Number(data.ModSalute);
+      this.letali = 7 - this.IDsalute - this.daurto - this.aggravati;
     });
   }
 

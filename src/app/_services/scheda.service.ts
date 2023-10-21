@@ -107,6 +107,16 @@ export interface modificasalute {
   UsoPS: number;
 }
 
+export interface esitocura {
+  esito: string;
+  IDsalute: number;
+  daurto: number;
+  aggravati: number;
+  DescSalute: string;
+  ModSalute: number;
+  usati: number;
+}
+
 
 @Injectable()
 export class SchedaService {

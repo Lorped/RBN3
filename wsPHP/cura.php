@@ -109,7 +109,12 @@ if ( $daurto > 0 ) {
 
 	}
 
-	$esito = $esito . $daurtocurati  . " danni da urto" ;
+	if ($daurtocurati == 1 ) {
+		$esito = $esito . $daurtocurati  . " danno da urto" ;
+	} else {
+		$esito = $esito . $daurtocurati  . " danni da urto" ;
+	}
+	
 	
 }
 
@@ -134,22 +139,38 @@ if ( $letali > 0 && $disponibili > 0 ) {
 	if ( $daurtocurati > 0 ) {
 		$esito = $esito . " e ";	
 	}
-	$esito = $esito . $letalicurati  . " danni letali" ;
+	if ( $letalicurati == 1) {
+		$esito = $esito . $letalicurati  . " danno letali" ;
+	} else {
+		$esito = $esito . $letalicurati  . " danni letali" ;
+	}
+	
 }
  
+$newaggravati = $aggravati;
 
-
-$MySql = "UPDATE Personaggio SET IDsalute = $newidsalute , daurto = $newdaurto , PS = PS - $usati WHERE Userid = $Userid";
+$MySql = "UPDATE Personaggio SET IDsalute = $newidsalute , daurto = $newdaurto , aggravati = $newaggravati,  PS = PS - $usati WHERE Userid = $Userid";
 mysqli_query($db, $MySql);
 
-$esito = $esito . ">>". $MySql . "<<";
+// $esito = $esito . ">>". $MySql . "<<";
 
 $MySql="INSERT INTO Chat ( Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso , Tipo, Testo, Locazione )
 VALUES ($stanza, $Userid, '$NomeCognome' , 0, '' , '$Sesso', '+', '$esito', '' )";
 mysqli_query($db, $MySql);
 
+$MySql = "SELECT DescSalute, ModSalute from Livelli_salute WHERE IDsalute = $newidsalute";
+$Result = mysqli_query($db, $MySql);
+$res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
+$descsalute = $res['DescSalute'];
+$modsalute = $res['ModSalute'];
+
 $out = [
     'esito' => $esito,
+	'IDsalute' => $newidsalute,
+	'daurto' => $newdaurto,
+	'DescSalute' => $descsalute,
+	'ModSalute' => $modsalute,
+	'aggravati' => $newaggravati,
 	'usati' => $usati
     ];
 
