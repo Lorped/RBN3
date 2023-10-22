@@ -4,7 +4,7 @@
         Modificatori 
         </mat-card-title>
         <mat-card-subtitle>
-            {{DescSalute}}: {{ModSalute}}  &nbsp;  <span *ngIf="IDsalute > -1"> ( <i *ngFor="let i of IDsalute | times" class="fa fa-square"></i><i *ngFor="let i of daurto | times" class="fa fa-minus-square"></i><i *ngFor="let i of letali | times" class="fa fa-check-square"></i><i *ngFor="let i of aggravati | times" class="fa fa-check-square dred"></i> ) </span>
+            {{DescSalute}}: {{ModSalute}}  &nbsp;  <span *ngIf="IDsalute > -1"> ( <i *ngFor="let i of daurto | times" class="fa fa-minus-square white"></i><i *ngFor="let i of letali | times" class="fa fa-times-rectangle white "></i><i *ngFor="let i of aggravati | times" class="fa fa-times-rectangle  dred"></i><i *ngFor="let i of IDsalute | times" class="fa fa-square white"></i> ) </span>
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content style="display: flex;">
@@ -59,10 +59,10 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-        Cura ferite 
+        Cura ferite  - Spesa massima di {{usabili}} PS <button mat-button color="primary" [disabled]="!(status.Alive && status.PS>1 && (letali>0 || daurto >0|| aggravati>0) )" (click)="gocura()"><mat-icon >play_circle_outline</mat-icon></button>
         </mat-card-title>
+        <mat-card-subtitle>
+            <span *ngIf="poolaggravati > 0 ">( Pool Aggravati {{poolaggravati}}/5 )</span>
+        </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-    Spesa di {{usabili}} PS <button mat-button color="primary" [disabled]="!(status.Alive && status.PS>1 && (letali>0 || daurto >0|| aggravati>0) )" (click)="gocura()"><mat-icon >play_circle_outline</mat-icon></button>
-    </mat-card-content>
 </mat-card>

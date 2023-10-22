@@ -57,8 +57,9 @@ export class AzioniComponent implements OnInit{
       this.aggravati = Number(data.aggravati);
       this.letali = 7 - this.IDsalute - this.daurto -  this.aggravati;
       this.UsoPS = Number(data.UsoPS);
+      this.status.PS = Number(data.PS);  // FA FEDE IL DB //
       console.log(data);
-      console.log(this.aggravati);
+      //console.log(this.aggravati);
 
       this.usabili = Math.min(this.status.PS -1 , this.UsoPS);
 
@@ -66,6 +67,9 @@ export class AzioniComponent implements OnInit{
         this.UsoPS = this.status.PS -1 ;
       }
     });
+
+    this.poolaggravati=Number( localStorage.getItem('RBN3poolaggravati') ) ;
+    console.log(this.poolaggravati);
     
   }
 
@@ -101,11 +105,11 @@ export class AzioniComponent implements OnInit{
       this.ModSalute = Number(data.ModSalute);
       this.letali = 7 - this.IDsalute - this.daurto - this.aggravati;
       this.poolaggravati = data.poolaggravati;
-      console.log(this.poolaggravati);
+      // console.log(this.poolaggravati);
       if (this.poolaggravati === 0 ) {
-        sessionStorage.removeItem('RBN3poolaggravati');
+        localStorage.removeItem('RBN3poolaggravati');
       } else {
-        sessionStorage.setItem('RBN3poolaggravati', this.poolaggravati.toString() );
+        localStorage.setItem('RBN3poolaggravati', this.poolaggravati.toString() );
       }
 
     });

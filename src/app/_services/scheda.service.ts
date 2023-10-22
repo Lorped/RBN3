@@ -105,6 +105,7 @@ export interface modificasalute {
   daurto: number;
   aggravati: number;
   UsoPS: number;
+  PS: number;
 }
 
 export interface esitocura {
@@ -262,7 +263,7 @@ export class SchedaService {
 
   cura(stanza: number){
     const user = sessionStorage.getItem('RBN3currentUser') ;
-    const poolaggravati = sessionStorage.getItem('RBN3poolaggravati') ;
+    const poolaggravati = localStorage.getItem('RBN3poolaggravati') ;
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/cura.php', {
       token: user,
       stanza: stanza,

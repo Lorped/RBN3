@@ -51,7 +51,7 @@ $stanza = 23 ;
 
 
 
-$MySql = "SELECT ModSalute, DescSalute, Personaggio.IDsalute, daurto, aggravati , UsoPS FROM Personaggio 
+$MySql = "SELECT ModSalute, DescSalute, Personaggio.IDsalute, daurto, aggravati , UsoPS, PS FROM Personaggio 
 	LEFT JOIN Livelli_salute on Personaggio.IDsalute = Livelli_salute.IDsalute
 	LEFT JOIN Generazioni on Personaggio.Generazione = Generazioni.Generazione
 	WHERE Userid = $Userid";

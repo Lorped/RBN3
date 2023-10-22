@@ -161,7 +161,7 @@ if ( $aggravati > 0 && $disponibili > 0 ) {
 
 		$newaggravati = $aggravati - $aggravaticurati;
 		$poolaggravati = 0 ;
-		$IDsalute = $IDsalute + $aggravaticurati;
+		$newidsalute = $newidsalute + $aggravaticurati;
 
 		if ( $disponibili > $usati  && $newaggravati > 0) {
 			$poolaggravati = $disponibili - $usati;
