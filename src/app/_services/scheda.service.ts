@@ -88,6 +88,8 @@ export class Potere {
   IDtaum = 0 ;  // PER LE TAUMATURGIE
   NomeNecro = '' ;  // PER LE NECROMANZIE
   IDnecro = 0 ;  // PER LE NECROMANZIE
+  Sessvar = '';
+  Sessvar2 = '';
 }
 
 export class ListaPoteri {
