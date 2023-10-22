@@ -30,8 +30,10 @@ export class AzioniComponent implements OnInit{
   aggravati = 0;
   letali = 0;
   UsoPS = 0 ;
+  poolaggravati = 0;
 
   usofdv=false;
+  usabili = 1;
 
 
   constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService) {}
@@ -56,6 +58,9 @@ export class AzioniComponent implements OnInit{
       this.letali = 7 - this.IDsalute - this.daurto -  this.aggravati;
       this.UsoPS = Number(data.UsoPS);
       console.log(data);
+      console.log(this.aggravati);
+
+      this.usabili = Math.min(this.status.PS -1 , this.UsoPS);
 
       if ( this.UsoPS > this.status.PS - 1) {
         this.UsoPS = this.status.PS -1 ;
@@ -95,6 +100,14 @@ export class AzioniComponent implements OnInit{
       this.IDsalute = Number(data.IDsalute);
       this.ModSalute = Number(data.ModSalute);
       this.letali = 7 - this.IDsalute - this.daurto - this.aggravati;
+      this.poolaggravati = data.poolaggravati;
+      console.log(this.poolaggravati);
+      if (this.poolaggravati === 0 ) {
+        sessionStorage.removeItem('RBN3poolaggravati');
+      } else {
+        sessionStorage.setItem('RBN3poolaggravati', this.poolaggravati.toString() );
+      }
+
     });
   }
 

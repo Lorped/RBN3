@@ -115,6 +115,7 @@ export interface esitocura {
   DescSalute: string;
   ModSalute: number;
   usati: number;
+  poolaggravati: number;
 }
 
 
@@ -261,9 +262,11 @@ export class SchedaService {
 
   cura(stanza: number){
     const user = sessionStorage.getItem('RBN3currentUser') ;
+    const poolaggravati = sessionStorage.getItem('RBN3poolaggravati') ;
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/cura.php', {
       token: user,
-      stanza: stanza
+      stanza: stanza,
+      poolaggravati: poolaggravati
     });
   }
 

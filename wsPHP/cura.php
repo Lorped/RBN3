@@ -26,6 +26,8 @@ $token=$request->token;
 
 $stanza=$request->stanza;
 
+$poolaggravati = $request->poolaggravati;
+
 
 if ( CheckJWT ($token) ) {
 	$xx=GetJWT($token);
@@ -86,6 +88,9 @@ $letali = 7 - $IDsalute - $daurto - $aggravati;
 $esito = $NomeCognome . " usa la Potenza del Sangue per curare ";
 
 $newidsalute = $IDsalute ;
+$newdaurto = $daurto;
+$newletali = $letali;
+$newaggravati = $aggravati;
 
 if ( $daurto > 0 ) {
 	if (  $daurto <= 2*$disponibili) {
@@ -140,14 +145,52 @@ if ( $letali > 0 && $disponibili > 0 ) {
 		$esito = $esito . " e ";	
 	}
 	if ( $letalicurati == 1) {
-		$esito = $esito . $letalicurati  . " danno letali" ;
+		$esito = $esito . $letalicurati  . " danno letale" ;
 	} else {
 		$esito = $esito . $letalicurati  . " danni letali" ;
 	}
 	
 }
+
+if ( $aggravati > 0 && $disponibili > 0 ) {
+
+	if ( $poolaggravati + $disponibili >=5 ) {
+		$aggravaticurati = floor ( ($poolaggravati + $disponibili)/5 );
+
+		$usati = $usati +  5*$aggravaticurati -  $poolaggravati;
+
+		$newaggravati = $aggravati - $aggravaticurati;
+		$poolaggravati = 0 ;
+		$IDsalute = $IDsalute + $aggravaticurati;
+
+		if ( $disponibili > $usati  && $newaggravati > 0) {
+			$poolaggravati = $disponibili - $usati;
+			$usati = $usati + $disponibili;
+			$disponibili = 0;
+		} 
+		
+	} else {
+		$poolaggravati = $poolaggravati + $disponibili;
+		$usati = $usati + $disponibili;
+		$disponibili = 0;
+	}
+
+	if ( ($daurtocurati > 0 || $letalicurati> 0) && $aggravaticurati > 0) {
+		$esito = $esito . " e ";	
+	}
+	if ( $aggravaticurati == 1) {
+		$esito = $esito . " 1 danno aggravato" ;
+	} else if ($aggravaticurati > 1) {
+		$esito = $esito . $aggravaticurati  . " danni aggravati" ;
+	}
+
+}
+
+if ( $daurtocurati == 0 && $letalicurati == 0 && $aggravaticurati == 0 ) {
+	$esito = $esito. " le proprie ferite";
+}
  
-$newaggravati = $aggravati;
+
 
 $MySql = "UPDATE Personaggio SET IDsalute = $newidsalute , daurto = $newdaurto , aggravati = $newaggravati,  PS = PS - $usati WHERE Userid = $Userid";
 mysqli_query($db, $MySql);
@@ -171,6 +214,7 @@ $out = [
 	'DescSalute' => $descsalute,
 	'ModSalute' => $modsalute,
 	'aggravati' => $newaggravati,
+	'poolaggravati' => $poolaggravati,
 	'usati' => $usati
     ];
 
