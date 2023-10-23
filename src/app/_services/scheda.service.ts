@@ -100,15 +100,6 @@ export class ListaPoteri {
   pot: Array<Potere> = [];
 }
 
-export interface modificasalute {
-  ModSalute: number;
-  DescSalute: string;
-  IDsalute: number;
-  daurto: number;
-  aggravati: number;
-  UsoPS: number;
-  PS: number;
-}
 
 export interface esitocura {
   esito: string;
@@ -245,23 +236,19 @@ export class SchedaService {
     });
   }
 
-  checkattr (IDattributo: number, IDskill: number, difficolta: number ,  stanza: number) {
+  checkattr (IDattributo: number, IDskill: number, difficolta: number ,  stanza: number, usofdv: boolean) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/check.php', {
       token: user,
       IDattributo: IDattributo,
       IDskill: IDskill,
       difficolta: difficolta,
-      stanza: stanza
+      stanza: stanza,
+      usofdv: usofdv
     });
   }
 
-  checksalute(){
-    const user = sessionStorage.getItem('RBN3currentUser') ;
-    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/modsalute.php', {
-      token: user,
-    });
-  }
+
 
   cura(stanza: number){
     const user = sessionStorage.getItem('RBN3currentUser') ;

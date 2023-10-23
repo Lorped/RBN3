@@ -1,17 +1,18 @@
+<!-- eslint-disable @angular-eslint/template/alt-text -->
 <mat-card>
     <mat-card-header>
         <mat-card-title>
         Modificatori 
         </mat-card-title>
         <mat-card-subtitle>
-            {{DescSalute}}: {{ModSalute}}  &nbsp;  <span *ngIf="IDsalute > -1"> ( <i *ngFor="let i of daurto | times" class="fa fa-minus-square white"></i><i *ngFor="let i of letali | times" class="fa fa-times-rectangle white "></i><i *ngFor="let i of aggravati | times" class="fa fa-times-rectangle  dred"></i><i *ngFor="let i of IDsalute | times" class="fa fa-square white"></i> ) </span>
+            {{myaPG.DescSalute}}: {{myaPG.ModSalute}}  &nbsp;  <span *ngIf="myaPG.IDsalute > -1"> ( <i *ngFor="let i of myaPG.daurto | times" class="fa fa-minus-square white"></i><i *ngFor="let i of letali | times" class="fa fa-times-rectangle white "></i><i *ngFor="let i of this.myaPG.aggravati | times" class="fa fa-times-rectangle  dred"></i><i *ngFor="let i of this.myaPG.IDsalute | times" class="fa fa-square white"></i> ) </span>
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content style="display: flex;">
         Punti sangue: ( {{status.PS}}/{{status.PSmax}} ) &nbsp; <i *ngFor="let i of status.PSmax | times ; let ix = index" class="fa fa-square" [ngClass]="{'dred': (ix < status.PS) , 'white': (ix+1 > status.PS)  }"></i>
           <span class="spacer"></span>
           Uso FdV
-          <mat-checkbox [disabled]="status.FdV < 2" [(ngModel)]="usofdv" (change)="changefdv()" style="margin-top: -0.9em;"></mat-checkbox>
+          <mat-checkbox [disabled]="status.FdV < 2 || this.myaPG.ModSalute === 0 " [(ngModel)]="usofdv" (change)="changefdv()" style="margin-top: -0.9em;"></mat-checkbox>
           <span class="spacer"></span>
           FdV: ( {{status.FdV}}/{{status.FdVmax}} )  &nbsp; <i *ngFor="let i of status.FdVmax | times ; let ix = index" class="fa " [ngClass]="{'fa-circle dred': (ix < status.FdV) , 'fa-times-circle white': ((ix+1 > status.FdV) && (ix < status.FdVmax)) }"></i><i *ngFor="let i of 10-status.FdVmax | times " class="fa fa-circle white" ></i>
     </mat-card-content>
@@ -21,10 +22,12 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-        Check Attributi/Skill 
+            Check Attributi/Skill 
         </mat-card-title>
     </mat-card-header>
-    <mat-card-content>
+
+    <mat-card-content style="display: flex;">
+            
         <form [formGroup]="checkFG">
         <mat-form-field>
             <mat-label>Attributo</mat-label>
@@ -51,18 +54,50 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-         <button mat-button color="primary" [disabled]="!status.Alive || !checkFG.valid" (click)="docheck()"><mat-icon >play_circle_outline</mat-icon></button>
         </form>
+        <span class="spacer"></span>
+        <button mat-button color="primary" [disabled]="!status.Alive || !checkFG.valid" ><mat-icon >play_circle_outline</mat-icon></button>
+
     </mat-card-content>
 </mat-card>
 
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-        Cura ferite  - Spesa massima di {{usabili}} PS <button mat-button color="primary" [disabled]="!(status.Alive && status.PS>1 && (letali>0 || daurto >0|| aggravati>0) )" (click)="gocura()"><mat-icon >play_circle_outline</mat-icon></button>
+        Cura ferite 
         </mat-card-title>
         <mat-card-subtitle>
-            <span *ngIf="poolaggravati > 0 ">( Pool Aggravati {{poolaggravati}}/5 )</span>
+            Spesa massima di {{usabili}} PS 
+            <span *ngIf="poolaggravati > 0 "> - ( Pool Aggravati {{poolaggravati}}/5 )</span>
         </mat-card-subtitle>
+        <span class="spacer"></span>
+        <button mat-button color="primary" [disabled]="!(status.Alive && status.PS>1 && (letali>0 || this.myaPG.daurto >0|| this.myaPG.aggravati>0) )" (click)="gocura()"><mat-icon >play_circle_outline</mat-icon></button>
+    </mat-card-header>
+</mat-card>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Corpo a Corpo - Rissa
+        </mat-card-title>
+        <mat-card-subtitle>
+            <div style="display: inline-flex;">
+            ( Destrezza+Rissa ) &nbsp; <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': (ix < destrezza+rissa+modsalute) , 'white': (ix+1 > destrezza+rissa+modsalute)  }"></i>
+            </div>
+        </mat-card-subtitle>
+        
+        <span class="spacer"></span>
+        <form [formGroup]="rissaFG">            
+            <mat-form-field>
+                <mat-label>Target</mat-label>
+                <mat-select  formControlName="targetFC"> 
+                    <mat-option *ngFor="let cont of presenti"  [value]="cont">
+                        <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+                        {{ cont.NomeCognome }} 
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button color="primary" [disabled]="!status.Alive || !rissaFG.valid" ><mat-icon >play_circle_outline</mat-icon></button>
+        </form>
     </mat-card-header>
 </mat-card>
