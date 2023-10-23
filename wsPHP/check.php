@@ -32,6 +32,8 @@ $difficolta=$request->difficolta;
 
 $stanza = $request -> stanza;
 
+$usofdv = $request -> usofdv;
+
 
 
 if ( CheckJWT ($token) ) {
@@ -64,17 +66,18 @@ $dp = 0;
 
 $dp = dicepool($Userid, $IDattributo, $IDskill, '');
 
+if ( $usofdv == false ) {
+	$MySql = "SELECT ModSalute FROM Personaggio 
+		LEFT join Livelli_salute on Personaggio.IDsalute = Livelli_salute.IDsalute
+		WHERE Userid = $Userid";
+	$Result = mysqli_query($db, $MySql);
+	$res = mysqli_fetch_array($Result);
 
-$MySql = "SELECT ModSalute FROM Personaggio 
-	LEFT join Livelli_salute on Personaggio.IDsalute = Livelli_salute.IDsalute
-	WHERE Userid = $Userid";
-$Result = mysqli_query($db, $MySql);
-$res = mysqli_fetch_array($Result);
+	$dp = $dp + $res['ModSalute'];
 
-$dp = $dp + $res['ModSalute'];
-
-if ( $dp < 0 ) {
-	$dp = 1 ;
+	if ( $dp < 0 ) {
+		$dp = 1 ;
+	}
 }
 
 
@@ -112,6 +115,13 @@ $esito = $esito . " a difficoltà ". $difficolta;
 
 $ee = dado($dp, $difficolta, false);
 $esito = $esito .  $ee['esito'];
+
+if ( $usofdv == true ) {
+	$MySql = "UPDATE Personaggio SET FdV = Fdv - 1 WHERE Userid = $Userid";
+	mysqli_query($db, $MySql);
+	$esito = $esito . " (Usando la propria FdV)";
+}
+
 
 
 

@@ -6,3 +6,7 @@ mat-card, mat-expansion-panel {
   mat-card-title {
     font-size: 1.2em !important;
   }
+
+  mat-card-content {
+    padding-bottom: 0px !important;
+  }

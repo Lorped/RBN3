@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Map, Control, DomUtil, ZoomAnimEvent , geoJson, Layer, MapOptions, tileLayer, latLng, icon, marker, layerGroup  } from 'leaflet';
 import { MapService, TabMunicipi, aMarker } from '../../../_services/map.service';
 import { Router } from '@angular/router';
@@ -30,7 +30,7 @@ const iconDefault = icon({
 
 
 
-export class Mappa0Component implements OnInit {
+export class Mappa0Component  {
   @Output() map$: EventEmitter<Map> = new EventEmitter;
   @Output() zoom$: EventEmitter<number> = new EventEmitter;
   @Input() options: MapOptions= {
@@ -65,11 +65,7 @@ export class Mappa0Component implements OnInit {
 
   constructor( private mapService: MapService, private router: Router, private status: Status) { }
 
-  ngOnInit() {
 
-    
-
-  }
 
 
   onMapReady(map: Map) {
@@ -97,7 +93,7 @@ export class Mappa0Component implements OnInit {
 
           /* CREAZIONE BOX CONTROLLO */
 
-          let info = new Control();
+          const info = new Control();
 
           info.onAdd = function (map) {
             this._div = DomUtil.create('div', 'infobox'); // create a div with a class "infobox"
@@ -108,7 +104,7 @@ export class Mappa0Component implements OnInit {
 
             const ff: TabMunicipi = new(TabMunicipi);    
             if ( props != null) {
-              for ( var i = 0 ; i < Mappa0Component.tabMunicipi.length ; i++) {
+              for ( let i = 0 ; i < Mappa0Component.tabMunicipi.length ; i++) {
                 if (Mappa0Component.tabMunicipi[i].IDzona == props.ID) {
                   ff.Nome =  Mappa0Component.tabMunicipi[i].Nome;
                   ff.Setta = Mappa0Component.tabMunicipi[i].Setta;
@@ -136,7 +132,7 @@ export class Mappa0Component implements OnInit {
           /* CREAZIONE LAYER base */
 
 
-          let baseLayer =  geoJson (this.datibase, {
+          const baseLayer =  geoJson (this.datibase, {
             style: (feature) => ({
               weight: 2,
               opacity: 0.3,
@@ -151,8 +147,8 @@ export class Mappa0Component implements OnInit {
           // CREAZIONE LAYER ZONE 
 
           const mystyle = feature => {
-            var newcolor = '';
-            for (var i  = 0 ; i < Mappa0Component.tabMunicipi.length ; i++) {
+            let newcolor = '';
+            for (let i  = 0 ; i < Mappa0Component.tabMunicipi.length ; i++) {
               if (Mappa0Component.tabMunicipi[i].IDzona == feature.properties.ID) {
                 newcolor = Mappa0Component.tabMunicipi[i].color ;
               }
@@ -176,7 +172,7 @@ export class Mappa0Component implements OnInit {
             layer.bringToFront();
           }
           const resetHighligh = e => {
-            var layer = e.target;
+            const layer = e.target;
               layer.setStyle({
                 weight: 1,
                 opacity: 1,
@@ -198,7 +194,7 @@ export class Mappa0Component implements OnInit {
             });
           }
 
-          let municipiLayer = geoJson ( this.datimunicipi , {
+          const municipiLayer = geoJson ( this.datimunicipi , {
             style: mystyle,
             onEachFeature: onEachFeature
           });
@@ -210,7 +206,7 @@ export class Mappa0Component implements OnInit {
             console.log("onclick");
             console.log(e);
             console.log ( "chat = ", e.target.properties.location);
-            let newloc = e.target.properties.location;
+            const newloc = e.target.properties.location;
             this.status.Stanza = newloc;
             this.status.Last = 0;
             this.status.Alive = false;
@@ -283,7 +279,7 @@ export class Mappa0Component implements OnInit {
     //console.log("zoom", e.target._zoom);
     //console.log("zoom2", this.zoom);
 
-    if ( this.zoom > 12){
+    if ( this.zoom > 11){
       this.myLayers.push(this.allMarkerLayer);
       this.locationON = true;
     }
@@ -297,8 +293,7 @@ export class Mappa0Component implements OnInit {
   }
   
 
-  ngAfterViewInit(): void {
-  }
+
 
   
 

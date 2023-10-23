@@ -88,6 +88,8 @@ export class Potere {
   IDtaum = 0 ;  // PER LE TAUMATURGIE
   NomeNecro = '' ;  // PER LE NECROMANZIE
   IDnecro = 0 ;  // PER LE NECROMANZIE
+  Sessvar = '';
+  Sessvar2 = '';
 }
 
 export class ListaPoteri {
@@ -98,13 +100,16 @@ export class ListaPoteri {
   pot: Array<Potere> = [];
 }
 
-export interface modificasalute {
-  ModSalute: number;
-  DescSalute: string;
+
+export interface esitocura {
+  esito: string;
   IDsalute: number;
   daurto: number;
   aggravati: number;
-  UsoPS: number;
+  DescSalute: string;
+  ModSalute: number;
+  usati: number;
+  poolaggravati: number;
 }
 
 
@@ -231,29 +236,27 @@ export class SchedaService {
     });
   }
 
-  checkattr (IDattributo: number, IDskill: number, difficolta: number ,  stanza: number) {
+  checkattr (IDattributo: number, IDskill: number, difficolta: number ,  stanza: number, usofdv: boolean) {
     const user = sessionStorage.getItem('RBN3currentUser') ;
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/check.php', {
       token: user,
       IDattributo: IDattributo,
       IDskill: IDskill,
       difficolta: difficolta,
-      stanza: stanza
+      stanza: stanza,
+      usofdv: usofdv
     });
   }
 
-  checksalute(){
-    const user = sessionStorage.getItem('RBN3currentUser') ;
-    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/modsalute.php', {
-      token: user,
-    });
-  }
+
 
   cura(stanza: number){
     const user = sessionStorage.getItem('RBN3currentUser') ;
+    const poolaggravati = localStorage.getItem('RBN3poolaggravati') ;
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/cura.php', {
       token: user,
-      stanza: stanza
+      stanza: stanza,
+      poolaggravati: poolaggravati
     });
   }
 

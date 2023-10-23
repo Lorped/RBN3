@@ -17,7 +17,7 @@
             <div class="col-3">{{myaPG.Nome}} {{myaPG.Cognome}}</div>
             <div class="col-2 accent-text">Clan</div>
             <div class="col-2">{{myaPG.Clan}}</div>
-            <div class="col-2 alr accent-text">Generazione</div>
+            <div class="col-2 accent-text">Generazione</div>
             <div class="col-2 alr">{{myaPG.Generazione}}</div>
           </div>
           <div class="row">
@@ -48,7 +48,7 @@
             <div class="col">&nbsp;</div>
             <div class="col accent-text">Liv.Salute</div>
             <div class="col">{{myaPG.DescSalute}}  <span *ngIf="myaPG.ModSalute != 0">({{myaPG.ModSalute}})</span></div>
-            <div class="col-4 alr" *ngIf="myaPG.IDsalute > -1"><i *ngFor="let i of myaPG.daurto | times" class="fa fa-minus-square"></i><i *ngFor="let i of 7 - myaPG.IDsalute - myaPG.daurto - myaPG.aggravati | times" class="fa fa-check-square"></i><i *ngFor="let i of myaPG.aggravati | times" class="fa fa-check-square dred"></i><i *ngFor="let i of myaPG.IDsalute | times" class="fa fa-square"></i></div>
+            <div class="col-4 alr" *ngIf="myaPG.IDsalute > -1"><i *ngFor="let i of myaPG.daurto | times" class="fa fa-minus-square"></i><i *ngFor="let i of 7 - myaPG.IDsalute - myaPG.daurto - myaPG.aggravati | times" class="fa fa-times-rectangle"></i><i *ngFor="let i of myaPG.aggravati | times" class="fa fa-times-rectangle dred"></i><i *ngFor="let i of myaPG.IDsalute | times" class="fa fa-square"></i></div>
           </div>
           <div class="row">
             <div class="col">&nbsp;</div>

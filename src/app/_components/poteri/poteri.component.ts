@@ -46,6 +46,7 @@ export class PoteriComponent implements OnInit  {
       
       for (let i=0 ; i<data.length; i++) {
         const unvariform = new variform();
+        data[i].IDdisciplina = Number ( data[i].IDdisciplina );
         unvariform.idform = data[i].IDdisciplina;
 
         for (let j = 0 ; j < data[i].pot.length ; j++ ) {
@@ -53,6 +54,8 @@ export class PoteriComponent implements OnInit  {
           data[i].pot[j].UsoSangue = Number ( data[i].pot[j].UsoSangue );
           data[i].pot[j].UsoFdV = Number ( data[i].pot[j].UsoFdV );
           data[i].pot[j].TotaleDP = Number ( data[i].pot[j].TotaleDP );
+          data[i].pot[j].IDdisciplina = Number ( data[i].pot[j].IDdisciplina );
+          data[i].pot[j].LivelloPotere = Number ( data[i].pot[j].LivelloPotere );
 
           if ( data[i].pot[j].Target === 'S') {
             const aFormGroup = new FormGroup({
@@ -116,7 +119,6 @@ export class PoteriComponent implements OnInit  {
     }
 
 
-   
     console.log("here");
     console.log ("potere =" , idx );
     console.log("iddisciplina = ", found.IDdisciplina,  );
@@ -150,6 +152,19 @@ export class PoteriComponent implements OnInit  {
 
       this.usofdv = false;
       this.plusfdv = 0;
+
+      if (found.Sessvar !== null ) {
+        const now = new Date();
+        const item = {
+          value: '1',
+          expiry: now.getTime() + 21600000 ,   // 1000*60*60 *6 = 21.600.000 millisecondi in 6 ore 
+        }
+        localStorage.setItem(found.Sessvar, JSON.stringify(item));
+      }
+      if ( found.IDdisciplina === 16  ) {
+        localStorage.setItem("velocita", found.LivelloPotere.toString());
+      }
+
     });
   
 
