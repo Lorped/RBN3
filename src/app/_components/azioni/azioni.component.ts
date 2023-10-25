@@ -199,4 +199,12 @@ export class AzioniComponent implements OnInit{
     }
   }
 
+  gorissa(){
+    this.schedaservice.rissa(this.status.Stanza, this.rissaFG.value.targetFC, this.usofdv).subscribe((data)=>{
+      this.rissaFG.reset();
+      //dovrei fare altro tipo ridurre il contatore delle azioni liberi di velocita //
+      console.log(data);
+    })
+  }
+
 }

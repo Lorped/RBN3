@@ -4,7 +4,7 @@ function soak($id, $danno, $tipo) {
 	include ('db2.inc.php'); //MYSQLI //
 
 
-	$MySql = "SELECT IDsalute, daurto FROM Personaggio WHERE Userid = $id";
+	$MySql = "SELECT IDsalute, daurto, aggravati FROM Personaggio WHERE Userid = $id";
 	$Result = mysqli_query( $db, $MySql);
 	$res= mysqli_fetch_array($Result);
 	$IDsalute = $res['IDsalute'];
@@ -14,12 +14,12 @@ function soak($id, $danno, $tipo) {
 	$letali = 7 - $IDsalute - $daurto - $aggravati;
 
 
-	$MySql = "SELECT Livello FROM Personaggio WHERE Userid = $id AND IDattributo = 3 ";  //COSTITUZIONE
+	$MySql = "SELECT Livello FROM Attributi WHERE Userid = $id AND IDattributo = 3 ";  //COSTITUZIONE
 	$Result = mysqli_query( $db, $MySql);
 	$res= mysqli_fetch_array($Result);
 	$costituzione = $res['Livello'];
 
-	$MySql = "SELECT Livello FROM Discipline WHERE Userid = $id AND IDattributo = 13 ";  //ROBUSTEZZA
+	$MySql = "SELECT LivelloDisc FROM Discipline WHERE Userid = $id AND IDdisciplina = 13 ";  //ROBUSTEZZA
 	$Result = mysqli_query( $db, $MySql);
 	$res= mysqli_fetch_array($Result);
 	$robustezza = $res['LivelloDisc'];
@@ -34,75 +34,106 @@ function soak($id, $danno, $tipo) {
 
 	if ( $tipo == 'U') {
 		
-		for ( $i = 0 ; ($i < $costituzione+$robustezza) && ($danno > 0) ; $i++) {
+		$assorbiti = 0 ;
+		for ( $i = 0 ; $i < $costituzione+$robustezza ; $i++) {
 			if ( mt_rand (1,10) >5 ) {
-				$danno--;
+				$assorbiti++;
 			}
+		}
+		$danno = $danno - $assorbiti;
+		if ($danno <0 ) {
+			$danno = 0 ;
 		}
 
 		$danno = floor($danno/2);
 
 		if ( $danno > 0 ) {
+			$olddaurto = $daurto;
+
 			$IDsalute = $IDsalute - $danno;
 
 			if ($IDsalute < -1 ) {
 				$IDsalute = -1;   // NO MORTE ULTIMA PER DANNI DA URTO
 			}
 
-			$dannieffettivi = (7-$IDsalute)-$letali - $aggravati;
+			$newdaurto = (7-$IDsalute)-$letali - $aggravati;
 
-			$MySql = "UPDATE Personaggio SET IDsalute = $IDsalute , daurto = $dannieffettivi WHERE Userid = $id";
+			$MySql = "UPDATE Personaggio SET IDsalute = $IDsalute , daurto = $newdaurto WHERE Userid = $id";
 			mysqli_query($db, $MySql);
 
-			$danni = $dannieffettivi;
+			$dannieffettivi = $newdaurto - $olddaurto;
+			return $dannieffettivi;
+		} else {
+			return 0;
 		}
-		return $danni;
+		
 
 	} else if ( $tipo == 'L') {
-		for ( $i = 0 ; ($i < $costituzione+$robustezza) && ($danno > 0) ; $i++) {
+		
+		$assorbiti = 0 ;
+		for ( $i = 0 ; $i < $costituzione+$robustezza ; $i++) {
 			if ( mt_rand (1,10) >5 ) {
-				$danno--;
+				$assorbiti++;
 			}
+		}
+		$danno = $danno - $assorbiti;
+		if ($danno <0 ) {
+			$danno = 0 ;
 		}
 
 		if ( $danno > 0 ) {
+			$oldletali = $letali;
 			$IDsalute = $IDsalute - $danno;
+			
 
 			if ($IDsalute < -1 ) {
 				$IDsalute = -1;   // NO MORTE ULTIMA PER DANNI LETALI
 			}
 
-			$dannieffettivi = (7-$IDsalute)-$daurto - $aggravati;
+			$newletali = (7-$IDsalute)-$daurto - $aggravati;
 
 			$MySql = "UPDATE Personaggio SET IDsalute = $IDsalute  WHERE Userid = $id";
 			mysqli_query($db, $MySql);
 
-			$danni = $dannieffettivi;
+			$dannieffettivi = $newletali - $oldletali;
+			return $dannieffettivi;
+		} else {
+			return 0;
 		}
-		return $danni;
+		
 
 	} else if ( $tipo == 'A ') {
-		for ( $i = 0 ; ($i < $robustezza) && ($danno > 0) ; $i++) {
+		
+		$assorbiti= 0;
+		for ( $i = 0 ; $i < $robustezza ; $i++) {
 			if ( mt_rand (1,10) >5 ) {
-				$danno--;
+				$assorbiti++;
 			}
 		}
+		$danno = $danno - $assorbiti;
+		if ($danno <0) {
+			$danno = 0 ;
+		}
+
+
 		if ( $danno > 0 ) {
+			$oldaggravati = $aggravati;
 			$IDsalute = $IDsalute - $danno;
 
 			if ($IDsalute < -2 ) {
 				$IDsalute == -2;   // OPPSS.....
 			}
 
-			$dannieffettivi = (7-$IDsalute)-$daurto - $letali;
+			$newaggravati = (7-$IDsalute)-$daurto - $letali;
 
 			$MySql = "UPDATE Personaggio SET IDsalute = $IDsalute , aggravati = $dannieffettivi WHERE Userid = $id";
 			mysqli_query($db, $MySql);
 
-			$danni = $dannieffettivi;
+			$dannieffettivi = $newaggravati - $oldaggravati;
+			return $dannieffettivi;
+		} else {
+			return 0;
 		}
-		return $danni;
-
 	}
 
 
