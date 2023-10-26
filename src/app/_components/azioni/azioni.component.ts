@@ -95,7 +95,7 @@ export class AzioniComponent implements OnInit{
         this.velocita = Number(found4.LivelloDisc);
       }
 
-      this.velocitaattiva = Number(localStorage.getItem('velocita') );
+      this.velocitaattiva = Number(localStorage.getItem('Velocita') );
 
       if ( this.velocitaattiva == 0) {
         this.destrezza = this.destrezza + this.velocita; 
@@ -105,8 +105,8 @@ export class AzioniComponent implements OnInit{
 
     });
 
-    this.sessvar_letali = this.check_localstorage ( 'letali');
-    this.sessvar_aggravati = this.check_localstorage ( 'aggravati');
+    this.sessvar_letali = this.check_localstorage ( 'Letali');
+    this.sessvar_aggravati = this.check_localstorage ( 'Aggravati');
     
 
     

@@ -10,3 +10,11 @@ mat-card, mat-expansion-panel {
   mat-card-content {
     padding-bottom: 0px !important;
   }
+
+  .icon {
+    width:28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+
+  }

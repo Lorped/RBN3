@@ -7,6 +7,10 @@
         <mat-card-subtitle>
             {{myaPG.DescSalute}}: {{myaPG.ModSalute}}  &nbsp;  <span *ngIf="myaPG.IDsalute > -1"> ( <i *ngFor="let i of myaPG.daurto | times" class="fa fa-minus-square white"></i><i *ngFor="let i of letali | times" class="fa fa-times-rectangle white "></i><i *ngFor="let i of this.myaPG.aggravati | times" class="fa fa-times-rectangle  dred"></i><i *ngFor="let i of this.myaPG.IDsalute | times" class="fa fa-square white"></i> ) </span>
         </mat-card-subtitle>
+        <span class="spacer"></span>
+        <img class="icon" src="assets/icons/velocita.png" *ngIf="velocitaattiva===0 && velocita>0">
+        <img class="icon" src="assets/icons/letali.png" *ngIf="sessvar_letali===true">
+        <img class="icon" src="assets/icons/aggravati.png" *ngIf="sessvar_aggravati===true">
     </mat-card-header>
     <mat-card-content style="display: flex;">
         Punti sangue: ( {{status.PS}}/{{status.PSmax}} ) &nbsp; <i *ngFor="let i of status.PSmax | times ; let ix = index" class="fa fa-square" [ngClass]="{'dred': (ix < status.PS) , 'white': (ix+1 > status.PS)  }"></i>
