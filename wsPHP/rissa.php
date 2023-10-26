@@ -30,11 +30,13 @@ $token=$request->token;
 
 $stanza = $request->stanza;
 $target = $request->target;
+$nometarget = $request->nometarget;
 
 $aggravati = $request -> aggravati;
 $letali = $request -> letali;
 $zulo = $request -> zulo;
-$velocitaattiva -> $request -> $velocitaattiva;
+$velocitaattiva = $request -> velocitaattiva;
+$potenzaattiva = $request -> potenzaattiva;
 $usofdv -> $request -> usofdv;
 
 
@@ -68,7 +70,7 @@ $ModSalute = $res['ModSalute'];
 
 $dp = dicepool( $Userid ,  2, 8 , '') ;
 
-$esito = " DP base = " . $dp;
+    // $esito = " DP base = " . $dp;
 
 if ( $velocitaattiva != true) {
 
@@ -80,12 +82,12 @@ if ( $velocitaattiva != true) {
 
     $dp = $dp + $velocita;
 
-    $esito = $esito . " velocita DP finale = " . $dp;
+    //  $esito = $esito . " velocita DP finale = " . $dp;
 }
 
 if ( $zulo == true ) {
     $dp = $dp + 3;
-    $esito = $esito . " zulo DP finale = " . $dp;
+    //  $esito = $esito . " zulo DP finale = " . $dp;
 }
 
 if ( $usofdv == false ) {
@@ -93,7 +95,7 @@ if ( $usofdv == false ) {
     if ($dp < 0 && $ModSalute != -99 ) {
         $dp = 1 ;
     }
-    $esito = $esito . " NO-FDV MODSALTE DP finale = " . $dp;
+    //  $esito = $esito . " NO-FDV MODSALTE DP finale = " . $dp;
 }
 
 
@@ -101,7 +103,7 @@ $risultato = dado( $dp , 6 );
 
 $successi = $risultato['risultato'];
 
-$esito = $esito . " successi = " . $successi;
+    // $esito = $esito . " successi = " . $successi;
 
 if ( $successi > 0 ) {
 
@@ -110,7 +112,7 @@ if ( $successi > 0 ) {
         $extra = $successi -1 ;
     }
 
-    $esito = $esito . " extra = " . $extra;
+    // $esito = $esito . " extra = " . $extra;
 
     $MySql = "SELECT Livello From Attributi
         WHERE IDattributo = 1 AND Userid = $Userid";
@@ -126,45 +128,87 @@ if ( $successi > 0 ) {
 
     $Potenza = $res['LivelloDisc'];
 
-    $dp_per_danni = $Forza + $Potenza + $extra;
+    if ( $potenzaattiva == true) {
+        $dp_per_danni = $Forza + $extra;
 
-    $esito = $esito . " dp per danni = " . $dp_per_danni;
+            // $esito = $esito . " dp per danni = " . $dp_per_danni . " potenza attiva POT= " . $Potenza;
+    
+        $risultato2 = dado( $dp_per_danni , 6 );
+    
+        $danni = $risultato2 ['risultato'] + $Potenza;
+            
+            // $esito = $esito . " danni = " . $danni;
 
-    $risultato2 = dado( $dp_per_danni , 6 );
+    } else {
+        $dp_per_danni = $Forza + $Potenza + $extra;
 
-    $danni = $risultato2 ['risultato'];
-    $esito = $esito . " danni = " . $danni;
+            // $esito = $esito . " dp per danni = " . $dp_per_danni;
+    
+        $risultato2 = dado( $dp_per_danni , 6 );
+    
+        $danni = $risultato2 ['risultato'];
+       
+            // $esito = $esito . " danni = " . $danni;
 
+    }
+   
+
+    $tipo1="";
+    $tipo2="";
     if ( $letali == true ) {
         $effettivi = soak($target, $danni, 'L');
+        $tipo1 = " letale";
+        $tipo2 = " letali";
     } else if ( $aggravati == true) {
         $effettivi = soak($target, $danni, 'A');
+        $tipo1 = " aggravato";
+        $tipo2 = " aggravati";
     } else {
         $effettivi = soak($target, $danni, 'U');
+        $tipo1 = " da urto";
+        $tipo2 = " da urto";
     }
 
-    $esito = $esito . " effettivi = " . $effettivi;
+        // $esito = $esito . " effettivi = " . $effettivi;
 
 }
 
 
+$esito = $NomeCognome . " attacca corpo a corpo (rissa) ". $nometarget ;
+
+if ( $effettivi == 0 ) {
+    $esito = $esito . " che non subisce nessun danno";
+} else if ( $effettivi == 1 ) {
+    $esito = $esito . " che subisce 1 danno" . $tipo1;
+} else {
+    $esito = $esito . " che subisce " . $effettivi . " danni" . $tipo2;
+}
+
+if ( $target > 0 ) {  // PG
+    $MySql = "SELECT IDsalute From Personaggio WHERE Userid = $target";
+    $Result = mysqli_query($db, $MySql);
+    $res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
+    $ids=$res['IDsalute'];
+
+    if ( $ids == 0 ) {
+        $esito = $esito . " - " . $nometarget . " è INCAPACITATO";
+    }
+    if ( $ids == -1 ) {
+        $esito = $esito . " - " . $nometarget . " è IN TORPORE";
+    }
+    if ( $ids == -2 ) {
+        $esito = $esito . " - " . $nometarget . " è MORTO";
+    }
+}
 
 
-
-
-
-
-
-
-
-
-
+$ModSalute = $res['ModSalute'];
 
 
 
  $MySql="INSERT INTO Chat ( Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso , Tipo, Testo, Locazione )
 VALUES ($stanza, $Userid, '$NomeCognome' , 0, '' , '$Sesso', '+', '$esito', '' )";
-// mysqli_query($db, $MySql);
+ mysqli_query($db, $MySql);
 
 $out = [
     'esito' => $esito

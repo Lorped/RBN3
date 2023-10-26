@@ -44,12 +44,18 @@ export class AzioniComponent implements OnInit{
   rissa = 0 ;
   mischia = 0 ;
   velocita = 0 ;
+
   velocitaattiva = 0;
+  
 
   modsalute = 0;
 
   sessvar_letali = false;
   sessvar_aggravati = false;
+  sessvar_letali1 = false;
+  sessvar_aggravati1 = false;
+  sessvar_zulo = false;
+  potenzaattiva = false;
 
   constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService, private listapresenti: ListpresentiService) {}
 
@@ -97,6 +103,8 @@ export class AzioniComponent implements OnInit{
 
       this.velocitaattiva = Number(localStorage.getItem('Velocita') );
 
+      
+
       if ( this.velocitaattiva == 0) {
         this.destrezza = this.destrezza + this.velocita; 
       }
@@ -107,14 +115,17 @@ export class AzioniComponent implements OnInit{
 
     this.sessvar_letali = this.check_localstorage ( 'Letali');
     this.sessvar_aggravati = this.check_localstorage ( 'Aggravati');
+    this.sessvar_zulo = this.check_localstorage ( 'Zulo');
+    this.potenzaattiva = this.check_localstorage ( 'Potenza');
+
+    this.sessvar_letali1 = this.check_localstorage ( 'Letali1');
+    this.sessvar_aggravati1 = this.check_localstorage ( 'Aggravati1');
     
+    const xx = Number( localStorage.getItem('RBN3poolaggravati') ) ;
+    if (xx) {
+      this.poolaggravati = xx;
+    }
 
-    
-
-
-
-    this.poolaggravati=Number( localStorage.getItem('RBN3poolaggravati') ) ;
-    console.log(this.poolaggravati);
 
     this.listapresenti.getpginstanza(this.status.Stanza, this.status.Userid).subscribe( (data: Array<Presenti>) => {
       this.presenti = data;
@@ -124,9 +135,16 @@ export class AzioniComponent implements OnInit{
       }
 
       const PNG = new Presenti();
-      PNG.NomeCognome = "PNG";
+      PNG.NomeCognome = "PNG-H";
+      PNG.Userid = 0 ;
 
       this.presenti.push(PNG);
+
+      const PNGV = new Presenti();
+      PNGV.NomeCognome = "PNG-V";
+      PNGV.Userid = -1 ;
+
+      this.presenti.push(PNGV);
       //console.log (this.presenti);
 
     });
@@ -158,7 +176,7 @@ export class AzioniComponent implements OnInit{
   gocura() {
     console.log ("gocura");
     this.schedaservice.cura(this.status.Stanza).subscribe( (data:esitocura)=>{
-      console.log(data);
+      // console.log(data);
       this.status.PS=this.status.PS - Number(data.usati);
       this.myaPG.DescSalute = data.DescSalute;
       this.myaPG.daurto = Number (data.daurto);
@@ -166,7 +184,7 @@ export class AzioniComponent implements OnInit{
       this.myaPG.IDsalute = Number(data.IDsalute);
       this.myaPG.ModSalute = Number(data.ModSalute);
       this.letali = 7 - this.myaPG.IDsalute - this.myaPG.daurto - this.myaPG.aggravati;
-      this.poolaggravati = data.poolaggravati;
+      this.poolaggravati = Number (data.poolaggravati);
       // console.log(this.poolaggravati);
       if (this.poolaggravati === 0 ) {
         localStorage.removeItem('RBN3poolaggravati');
@@ -200,11 +218,23 @@ export class AzioniComponent implements OnInit{
   }
 
   gorissa(){
-    this.schedaservice.rissa(this.status.Stanza, this.rissaFG.value.targetFC, this.usofdv).subscribe((data)=>{
-      this.rissaFG.reset();
+    this.schedaservice.rissa(this.status.Stanza, this.rissaFG.value.targetFC.Userid, this.rissaFG.value.targetFC.NomeCognome, this.usofdv).subscribe((data)=>{
+      this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
+
+      if (this.usofdv === true) {
+        this.status.FdV = this.status.FdV - 1 ;
+      }
+      
+      localStorage.removeItem ( 'Potenza');  //potenzaattiva
+      localStorage.removeItem ( 'Letali1');  //letali 1 turno
+      localStorage.removeItem ( 'Aggravati1');  //Aggravati 1 turno
+      this.potenzaattiva = false;
+
       //dovrei fare altro tipo ridurre il contatore delle azioni liberi di velocita //
       console.log(data);
-    })
+    });
+
+    this.rissaFG.reset();
   }
 
 }

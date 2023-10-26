@@ -252,7 +252,10 @@ export class SchedaService {
 
   cura(stanza: number){
     const user = sessionStorage.getItem('RBN3currentUser') ;
-    const poolaggravati = localStorage.getItem('RBN3poolaggravati') ;
+    let poolaggravati = localStorage.getItem('RBN3poolaggravati') ;
+    if (poolaggravati === null) {
+      poolaggravati = "0" ;
+    }
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/cura.php', {
       token: user,
       stanza: stanza,
@@ -260,18 +263,21 @@ export class SchedaService {
     });
   }
 
-  rissa(stanza: number, target: number, usofdv: boolean){
+  rissa(stanza: number, target: number, nometarget: string , usofdv: boolean){
     const user = sessionStorage.getItem('RBN3currentUser') ;
     let aggravati = false;
     let letali = false;
     let zulo = false;
     let velocitaattiva = false;
+    let potenzaattiva = false;
     let  xx  = localStorage.getItem('Aggravati'); 
-    if ( xx ) {
+    let  yy  = localStorage.getItem('Aggravati1'); 
+    if ( xx || yy ) {
       aggravati = true;
     }
     xx = localStorage.getItem('Letali'); 
-    if ( xx ) {
+    yy = localStorage.getItem('Letali1'); 
+    if ( xx || yy ) {
       letali = true;
     }
     xx = localStorage.getItem('Zulo'); 
@@ -282,15 +288,21 @@ export class SchedaService {
     if ( xx ) {
       velocitaattiva = true;
     }
+    xx = localStorage.getItem('Potenza'); 
+    if ( xx ) {
+      potenzaattiva = true;
+    }
 
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/rissa.php', {
       token: user,
       stanza: stanza,
       target: target,
+      nometarget: nometarget,
       aggravati: aggravati,
       letali: letali,
       zulo: zulo,
       velocitaattiva: velocitaattiva,
+      potenzaattiva: potenzaattiva,
       usofdv: usofdv
       
     });

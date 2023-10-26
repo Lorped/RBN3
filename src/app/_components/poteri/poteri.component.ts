@@ -161,6 +161,14 @@ export class PoteriComponent implements OnInit  {
         }
         localStorage.setItem(found.Sessvar, JSON.stringify(item));
       }
+      if (found.Sessvar2 !== null ) {
+        const now = new Date();
+        const item = {
+          value: '1',
+          expiry: now.getTime() + 21600000 ,   // 1000*60*60 *6 = 21.600.000 millisecondi in 6 ore 
+        }
+        localStorage.setItem(found.Sessvar2, JSON.stringify(item));
+      }
       if ( found.IDdisciplina === 16  ) {
         localStorage.setItem("velocita", found.LivelloPotere.toString());
       }
