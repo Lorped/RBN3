@@ -260,4 +260,40 @@ export class SchedaService {
     });
   }
 
+  rissa(stanza: number, target: number, usofdv: boolean){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    let aggravati = false;
+    let letali = false;
+    let zulo = false;
+    let velocitaattiva = false;
+    let  xx  = localStorage.getItem('Aggravati'); 
+    if ( xx ) {
+      aggravati = true;
+    }
+    xx = localStorage.getItem('Letali'); 
+    if ( xx ) {
+      letali = true;
+    }
+    xx = localStorage.getItem('Zulo'); 
+    if ( xx ) {
+      zulo = true;
+    }
+    xx = localStorage.getItem('Velocita'); 
+    if ( xx ) {
+      velocitaattiva = true;
+    }
+
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/rissa.php', {
+      token: user,
+      stanza: stanza,
+      target: target,
+      aggravati: aggravati,
+      letali: letali,
+      zulo: zulo,
+      velocitaattiva: velocitaattiva,
+      usofdv: usofdv
+      
+    });
+  }
+
 }

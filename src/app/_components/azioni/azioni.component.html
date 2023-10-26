@@ -75,7 +75,7 @@
             <span *ngIf="poolaggravati > 0 "> - ( Pool Aggravati {{poolaggravati}}/5 )</span>
         </mat-card-subtitle>
         <span class="spacer"></span>
-        <button mat-button color="primary" [disabled]="!(status.Alive && status.PS>1 && (letali>0 || this.myaPG.daurto >0|| this.myaPG.aggravati>0) )" (click)="gocura()"><mat-icon >play_circle_outline</mat-icon></button>
+        <button mat-button color="primary" [disabled]="!(status.Alive && status.PS>1 && (letali>0 || this.myaPG.daurto >0|| this.myaPG.aggravati>0) || this.myaPG.IDsalute<0)" (click)="gocura()"><mat-icon >play_circle_outline</mat-icon></button>
     </mat-card-header>
 </mat-card>
 
@@ -95,13 +95,13 @@
             <mat-form-field>
                 <mat-label>Target</mat-label>
                 <mat-select  formControlName="targetFC"> 
-                    <mat-option *ngFor="let cont of presenti"  [value]="cont">
+                    <mat-option *ngFor="let cont of presenti"  [value]="cont.Userid">
                         <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
                         {{ cont.NomeCognome }} 
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <button mat-button color="primary" [disabled]="!status.Alive || !rissaFG.valid" ><mat-icon >play_circle_outline</mat-icon></button>
+            <button mat-button color="primary" [disabled]="!status.Alive || !rissaFG.valid || this.myaPG.IDsalute<1" (click)="gorissa()" ><mat-icon >play_circle_outline</mat-icon></button>
         </form>
     </mat-card-header>
 </mat-card>
