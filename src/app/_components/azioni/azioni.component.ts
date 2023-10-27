@@ -55,6 +55,7 @@ export class AzioniComponent implements OnInit{
   sessvar_letali1 = false;
   sessvar_aggravati1 = false;
   sessvar_zulo = false;
+  sessvar_marauder = false;
   potenzaattiva = false;
 
   constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService, private listapresenti: ListpresentiService) {}
@@ -116,6 +117,7 @@ export class AzioniComponent implements OnInit{
     this.sessvar_letali = this.check_localstorage ( 'Letali');
     this.sessvar_aggravati = this.check_localstorage ( 'Aggravati');
     this.sessvar_zulo = this.check_localstorage ( 'Zulo');
+    this.sessvar_marauder = this.check_localstorage ( 'Marauder');
     this.potenzaattiva = this.check_localstorage ( 'Potenza');
 
     this.sessvar_letali1 = this.check_localstorage ( 'Letali1');
@@ -174,7 +176,7 @@ export class AzioniComponent implements OnInit{
 
 
   gocura() {
-    console.log ("gocura");
+    // console.log ("gocura");
     this.schedaservice.cura(this.status.Stanza).subscribe( (data:esitocura)=>{
       // console.log(data);
       this.status.PS=this.status.PS - Number(data.usati);

@@ -268,6 +268,7 @@ export class SchedaService {
     let aggravati = false;
     let letali = false;
     let zulo = false;
+    let marauder = false;
     let velocitaattiva = false;
     let potenzaattiva = false;
     let  xx  = localStorage.getItem('Aggravati'); 
@@ -283,6 +284,10 @@ export class SchedaService {
     xx = localStorage.getItem('Zulo'); 
     if ( xx ) {
       zulo = true;
+    }
+    xx = localStorage.getItem('Marauder'); 
+    if ( xx ) {
+      marauder = true;
     }
     xx = localStorage.getItem('Velocita'); 
     if ( xx ) {
@@ -301,6 +306,7 @@ export class SchedaService {
       aggravati: aggravati,
       letali: letali,
       zulo: zulo,
+      marauder: marauder,
       velocitaattiva: velocitaattiva,
       potenzaattiva: potenzaattiva,
       usofdv: usofdv

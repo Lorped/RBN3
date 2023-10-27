@@ -119,22 +119,22 @@ export class PoteriComponent implements OnInit  {
     }
 
 
-    console.log("here");
-    console.log ("potere =" , idx );
-    console.log("iddisciplina = ", found.IDdisciplina,  );
-    console.log("disciplina = ", found.NomePotere  );
-    console.log("taum = ", found.NomeTaum  );
-    console.log("idtaum = ", found.IDtaum  );
-    console.log("necro = ", found.NomeNecro  );
-    console.log("idnecro = ", found.IDnecro  );
+    //console.log("here");
+    //console.log ("potere =" , idx );
+    //console.log("iddisciplina = ", found.IDdisciplina,  );
+    //console.log("disciplina = ", found.NomePotere  );
+    //console.log("taum = ", found.NomeTaum  );
+    //console.log("idtaum = ", found.IDtaum  );
+    //console.log("necro = ", found.NomeNecro  );
+    //console.log("idnecro = ", found.IDnecro  );
 
     let tt = -1;
     let ttn = '';
 
     if  ( found.Target === 'S' ) {
       const target = this.myvariformarray[itx].myFormGroupArray[s].value.targetFC;
-      console.log("target =", target.NomeCognome );
-      console.log("targetID =", target.Userid );
+      //console.log("target =", target.NomeCognome );
+      //console.log("targetID =", target.Userid );
       tt = target.Userid;
       ttn = target.NomeCognome;
     } 
@@ -156,7 +156,7 @@ export class PoteriComponent implements OnInit  {
       if (found.Sessvar !== null ) {
         const now = new Date();
         const item = {
-          value: '1',
+          value: this.status.Stanza,
           expiry: now.getTime() + 21600000 ,   // 1000*60*60 *6 = 21.600.000 millisecondi in 6 ore 
         }
         localStorage.setItem(found.Sessvar, JSON.stringify(item));
@@ -164,13 +164,13 @@ export class PoteriComponent implements OnInit  {
       if (found.Sessvar2 !== null ) {
         const now = new Date();
         const item = {
-          value: '1',
+          value: this.status.Stanza,
           expiry: now.getTime() + 21600000 ,   // 1000*60*60 *6 = 21.600.000 millisecondi in 6 ore 
         }
         localStorage.setItem(found.Sessvar2, JSON.stringify(item));
       }
       if ( found.IDdisciplina === 16  ) {
-        localStorage.setItem("velocita", found.LivelloPotere.toString());
+        localStorage.setItem("Velocita", found.LivelloPotere.toString());
       }
 
     });

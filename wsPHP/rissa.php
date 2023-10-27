@@ -35,6 +35,7 @@ $nometarget = $request->nometarget;
 $aggravati = $request -> aggravati;
 $letali = $request -> letali;
 $zulo = $request -> zulo;
+$marauder = $request -> marauder;
 $velocitaattiva = $request -> velocitaattiva;
 $potenzaattiva = $request -> potenzaattiva;
 $usofdv -> $request -> usofdv;
@@ -85,10 +86,11 @@ if ( $velocitaattiva != true) {
     //  $esito = $esito . " velocita DP finale = " . $dp;
 }
 
-if ( $zulo == true ) {
+if ( $zulo == true || $marauder == true ) {
     $dp = $dp + 3;
     //  $esito = $esito . " zulo DP finale = " . $dp;
 }
+
 
 if ( $usofdv == false ) {
     $dp = $dp + $ModSalute;
@@ -131,6 +133,10 @@ if ( $successi > 0 ) {
     if ( $potenzaattiva == true) {
         $dp_per_danni = $Forza + $extra;
 
+        if ( $marauder == true) {
+            $dp_per_danni =  $dp_per_danni + 2;
+        }
+
             // $esito = $esito . " dp per danni = " . $dp_per_danni . " potenza attiva POT= " . $Potenza;
     
         $risultato2 = dado( $dp_per_danni , 6 );
@@ -141,6 +147,10 @@ if ( $successi > 0 ) {
 
     } else {
         $dp_per_danni = $Forza + $Potenza + $extra;
+
+        if ( $marauder == true) {
+            $dp_per_danni =  $dp_per_danni + 2;
+        }
 
             // $esito = $esito . " dp per danni = " . $dp_per_danni;
     
