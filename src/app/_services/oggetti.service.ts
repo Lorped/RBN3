@@ -26,7 +26,7 @@ export class oggettibase {
   Nome = '';
   Descrizione = '';
   Costo = 0;
-  Immagine = '';
+  Immagine = 'dummy.png';
   Quantita = 0;
   Unico = '';
 }

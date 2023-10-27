@@ -107,3 +107,29 @@
         </form>
     </mat-card-header>
 </mat-card>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Imbraccia arma
+        </mat-card-title>
+        <mat-card-subtitle>
+            <div style="display: inline-flex;">
+            Arma utilizzata: {{ usato.Nome}}
+            </div>
+        </mat-card-subtitle>
+        <span class="spacer"></span>
+        <form [formGroup]="armaFG">            
+            <mat-form-field>
+                <mat-label>Arma</mat-label>
+                <mat-select  formControlName="armaFC"> 
+                    <mat-option *ngFor="let cont of listaposseduti"  [value]="cont">
+                        <img style="vertical-align:middle;"  src="assets/oggetti/{{cont.Immagine}}" height="25" />
+                        {{ cont.Nome }} 
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button color="primary" [disabled]="! (status.Alive && armaFG.valid && this.myaPG.IDsalute>0 )" (click)="goarma()" ><mat-icon >play_circle_outline</mat-icon></button>
+        </form>
+    </mat-card-header>
+</mat-card>

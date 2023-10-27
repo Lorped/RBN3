@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListpresentiService, Presenti, SchedaService, SignupService, esitocura, getreg1, getreg2 } from '../../_services/index';
+import { ListpresentiService, OggettiService, Presenti, SchedaService, SignupService, esitocura, getreg1, getreg2, posseduti } from '../../_services/index';
 import { Attributo,  Basicpg,  Personaggio,  Skill, Status } from '../../globals';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -24,6 +24,11 @@ export class AzioniComponent implements OnInit{
 
   rissaFG: FormGroup = new FormGroup({
     targetFC:  new FormControl('', [
+      Validators.required]),
+  });
+
+  armaFG: FormGroup = new FormGroup({
+    armaFC:  new FormControl('', [
       Validators.required]),
   });
 
@@ -58,7 +63,11 @@ export class AzioniComponent implements OnInit{
   sessvar_marauder = false;
   potenzaattiva = false;
 
-  constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService, private listapresenti: ListpresentiService) {}
+  listaposseduti: Array<posseduti> = [];
+  usato: posseduti = new posseduti();
+
+  constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService, 
+    private listapresenti: ListpresentiService, private oggettiservice: OggettiService) {}
 
   ngOnInit() {
 
@@ -151,6 +160,26 @@ export class AzioniComponent implements OnInit{
 
     });
     
+
+    this.oggettiservice.getoggetti(this.status.Userid).subscribe( (data: Array<posseduti>) => {
+      const vuoto = new posseduti();
+      vuoto.Nome = " - Nulla - ";
+      this.listaposseduti.push( vuoto );
+      for ( let i = 0 ; i< data.length ; i++) {
+        if ( data[i].Indossato === 'S') {
+          this.listaposseduti.push( data[i]);
+        }
+      }
+      
+      const find = this.listaposseduti.find( xx => xx.Usato === "S");
+
+      this.usato.Nome = " - Nulla - ";
+      if (find) {
+        this.usato = find;
+      }
+      console.log(this.listaposseduti);
+      console.log(this.usato);
+    });
   }
 
 
@@ -238,5 +267,10 @@ export class AzioniComponent implements OnInit{
 
     this.rissaFG.reset();
   }
+
+  goarma(){
+    console.log(this.armaFG.value.armaFC);
+  }
+  
 
 }
