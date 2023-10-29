@@ -129,7 +129,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <button mat-button color="primary" [disabled]="! (status.Alive && armaFG.valid && this.myaPG.IDsalute>0 )" (click)="goarma()" ><mat-icon >play_circle_outline</mat-icon></button>
+            <button mat-button color="primary" [disabled]="! (status.Alive && armaFG.valid && this.myaPG.IDsalute>0 && armaFG.value.armaFC.IDoggetto !== usato.IDoggetto)" (click)="goarma()" ><mat-icon >play_circle_outline</mat-icon></button>
         </form>
     </mat-card-header>
 </mat-card>

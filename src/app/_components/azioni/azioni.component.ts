@@ -270,6 +270,27 @@ export class AzioniComponent implements OnInit{
 
   goarma(){
     console.log(this.armaFG.value.armaFC);
+
+    if (this.armaFG.value.armaFC.IDoggetto === 0 ) {
+      this.oggettiservice.swaponoff('off', 0, this.status.Stanza). subscribe( () => {
+        this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
+
+        this.usato.Nome = " - Nulla - ";
+        this.usato.IDoggetto = 0;
+
+        console.log(this.usato);
+
+      });
+    } else {
+      this.oggettiservice.swaponoff('on', this.armaFG.value.armaFC.IDoggetto, this.status.Stanza). subscribe( () => {
+        this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
+
+        const find = this.listaposseduti.find( xx => xx.IDoggetto === this.armaFG.value.armaFC.IDoggetto);
+        this.usato = find;
+
+      });
+    }
+    
   }
   
 
