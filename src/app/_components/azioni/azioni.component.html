@@ -115,9 +115,10 @@
         </mat-card-title>
         <mat-card-subtitle>
             <div style="display: inline-flex;">
-            Arma utilizzata: {{ usato.Nome}}
+            Arma utilizzata: {{ usato.Nome}} - <img style="vertical-align:middle;"  src="assets/oggetti/{{usato.Immagine}}" height="25" />
             </div>
         </mat-card-subtitle>
+        
         <span class="spacer"></span>
         <form [formGroup]="armaFG">            
             <mat-form-field>
@@ -144,7 +145,7 @@
             ( Destrezza + Armi da Fuoco ) &nbsp; <i *ngFor="let i of (destrezza+fuoco+modsalute)  | times ; let ix = index" class="fa fa-circle dred" ></i>
             </div>
         </mat-card-subtitle>
-        
+        Raffica <mat-checkbox [disabled]="usato.Raffica==='N'" [(ngModel)]="raffica" style="margin-top: -0.9em;"></mat-checkbox>        
         <span class="spacer"></span>
         <form [formGroup]="fuocoFG">            
             <mat-form-field>

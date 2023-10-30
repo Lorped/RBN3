@@ -314,7 +314,7 @@ export class SchedaService {
     });
   }
 
-  fuoco(stanza: number, target: number, nometarget: string , usofdv: boolean){
+  fuoco(stanza: number, target: number, nometarget: string , usofdv: boolean, raffica: boolean){
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/fuoco.php', {
@@ -322,7 +322,8 @@ export class SchedaService {
       stanza: stanza,
       target: target,
       nometarget: nometarget,
-      usofdv: usofdv
+      usofdv: usofdv,
+      raffica: raffica
       
     });
   }

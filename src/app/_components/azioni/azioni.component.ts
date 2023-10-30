@@ -71,6 +71,7 @@ export class AzioniComponent implements OnInit{
   listaposseduti: Array<posseduti> = [];
   usato: posseduti = new posseduti();
   fuoco = 0 ;
+ raffica = false;
 
   constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService, 
     private listapresenti: ListpresentiService, private oggettiservice: OggettiService) {}
@@ -183,6 +184,7 @@ export class AzioniComponent implements OnInit{
     this.oggettiservice.getoggetti(this.status.Userid).subscribe( (data: Array<posseduti>) => {
       const vuoto = new posseduti();
       vuoto.Nome = " - Nulla - ";
+      vuoto.Immagine = "dummy2.png";
       this.listaposseduti.push( vuoto );
       for ( let i = 0 ; i< data.length ; i++) {
         if ( data[i].Indossato === 'S') {
@@ -190,9 +192,11 @@ export class AzioniComponent implements OnInit{
         }
       }
       
+      this.usato.Nome = " - Nulla - ";
+      this.usato.Immagine = "dummy2.png";
+
       const find = this.listaposseduti.find( xx => xx.Usato === "S");
 
-      this.usato.Nome = " - Nulla - ";
       if (find) {
         this.usato = find;
         this.usato.IDtipoOggetto=Number(this.usato.IDtipoOggetto);
@@ -298,6 +302,7 @@ export class AzioniComponent implements OnInit{
         this.usato.Nome = " - Nulla - ";
         this.usato.IDoggetto = 0;
         this.usato.IDtipoOggetto = 0;
+        this.usato.Immagine = 'dummy2.png';
 
         console.log(this.usato);
 
@@ -318,7 +323,7 @@ export class AzioniComponent implements OnInit{
 
 
   gofuoco(){
-    this.schedaservice.fuoco(this.status.Stanza, this.fuocoFG.value.targetFC.Userid, this.fuocoFG.value.targetFC.NomeCognome, this.usofdv).subscribe((data)=>{
+    this.schedaservice.fuoco(this.status.Stanza, this.fuocoFG.value.targetFC.Userid, this.fuocoFG.value.targetFC.NomeCognome, this.usofdv, this.raffica).subscribe((data)=>{
       this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
 
       if (this.usofdv === true) {
@@ -336,6 +341,7 @@ export class AzioniComponent implements OnInit{
     });
 
     this.fuocoFG.reset();
+    this.raffica = false;
   }
   
 
