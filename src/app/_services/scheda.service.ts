@@ -314,4 +314,17 @@ export class SchedaService {
     });
   }
 
+  fuoco(stanza: number, target: number, nometarget: string , usofdv: boolean){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/fuoco.php', {
+      token: user,
+      stanza: stanza,
+      target: target,
+      nometarget: nometarget,
+      usofdv: usofdv
+      
+    });
+  }
+
 }

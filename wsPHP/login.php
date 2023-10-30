@@ -80,19 +80,21 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 
 		}
 		mysqli_query($db, $MySql);
-		if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db) ); }
+		if (mysqli_errno($db)) { die ( mysqli_errno($db).": ".mysqli_error($db). " ".$MySql ); }
 
 		// SISTEMO i PUNTI SANGUE
 		if ( $PSmax == $PS )   {
 			$MySql = "UPDATE Personaggio SET ultimosangue=NOW() WHERE Userid=$Userid ";
 			mysqli_query($db, $MySql);
 			if (mysqli_errno($db)) { 
-				die ( mysqli_errno($db).": ".mysqli_error($db) );
+				die ( mysqli_errno($db).": ".mysqli_error($db). " ".$MySql );
 			}
 		} else {
 			$giornidiff = floor((time() - strtotime($ultimosangue) ) / (24 * 60 * 60));  //giorni per sangue
+
+			
 			$PS=$PS+$giornidiff;
-	
+			
 			/* *** VENTRUE
 			if ( $Esclusione == "S" ) {
 				if ( rand(1,10) == 1  ) {
@@ -108,10 +110,11 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 				$MySql = "UPDATE Personaggio SET PS='$PS' , ultimosangue = NOW() WHERE Userid=$Userid ";	
 			} else {
 				$MySql = "UPDATE Personaggio SET PS='$PS' , ultimosangue = DATE_ADD( ultimosangue, INTERVAL $giornidiff DAY ) WHERE Userid=$Userid ";	
-			}			
+			}		
+			//die ( print $MySql);	
 			mysqli_query($db, $MySql);
 			if (mysqli_errno($db)) { 
-				die ( mysqli_errno($db).": ".mysqli_error($db) );
+				die ( mysqli_errno($db).": ".mysqli_error($db). " ".$MySql );
 			}
 		}
 	
@@ -119,16 +122,16 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 			$MySql = "UPDATE Personaggio SET PS=0 , ultimosangue = NOW() WHERE Userid=$Userid ";
 			mysqli_query($db, $MySql);
 			if (mysqli_errno($db)) { 
-				die ( mysqli_errno($db).": ".mysqli_error($db) );
+				die ( mysqli_errno($db).": ".mysqli_error($db). " ".$MySql );
 			}
 		}
 
 		// E FDV
 		if ( $FdV == $FdVmax ) {
-			$MySql = "UPDATE Personaggio SET ultimofdv=NOW() WHERE Userid=$quserid ";
+			$MySql = "UPDATE Personaggio SET ultimofdv=NOW() WHERE Userid = $Userid ";
 			mysqli_query($db, $MySql);
 			if (mysqli_errno($db)) { 
-				die ( mysqli_errno($db).": ".mysqli_error($db) );
+				die ( mysqli_errno($db).": ".mysqli_error($db). " ".$MySql );
 			}
 		} else {
 			$settimanadiff = floor((time() - strtotime($ultimofdv) ) / (7* 24 * 60 * 60));
@@ -145,7 +148,7 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 
 				mysqli_query($db, $MySql);
 				if (mysqli_errno($db)) { 
-					die ( mysqli_errno($db).": ".mysqli_error($db) );
+					die ( mysqli_errno($db).": ".mysqli_error($db). " ".$MySql );
 				}
 			}
 		}

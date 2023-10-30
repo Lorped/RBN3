@@ -32,6 +32,11 @@ export class AzioniComponent implements OnInit{
       Validators.required]),
   });
 
+  fuocoFG: FormGroup = new FormGroup({
+    targetFC:  new FormControl('', [
+      Validators.required]),
+  });
+
   
 
   letali = 0;  //LI CALCOLO PER SEMPLICITA
@@ -65,6 +70,7 @@ export class AzioniComponent implements OnInit{
 
   listaposseduti: Array<posseduti> = [];
   usato: posseduti = new posseduti();
+  fuoco = 0 ;
 
   constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService, 
     private listapresenti: ListpresentiService, private oggettiservice: OggettiService) {}
@@ -93,9 +99,9 @@ export class AzioniComponent implements OnInit{
 
       this.usabili = Math.min(this.status.PS -1 , this.myaPG.UsoPS);
 
-      const found = this.myPG.listaAttributi.find ( (xx) => Number(xx.IDattributo) === 3);
+      const found = this.myPG.listaAttributi.find ( (xx) => Number(xx.IDattributo) === 2);
       this.destrezza = Number(found.Livello);
-
+     
       const found2 = this.myPG.listaSkill.find ( (xx) => Number(xx.IDskill) === 8);
       if ( found2 != null) {
         this.rissa = Number(found2.Livello);
@@ -111,8 +117,13 @@ export class AzioniComponent implements OnInit{
         this.velocita = Number(found4.LivelloDisc);
       }
 
-      this.velocitaattiva = Number(localStorage.getItem('Velocita') );
+      const found5 = this.myPG.listaSkill.find ( (xx) => Number(xx.IDskill) === 12);
+      if ( found5 != null) {
+        this.fuoco = Number(found5.Livello);
+      }
 
+      this.velocitaattiva = Number(localStorage.getItem('Velocita') );
+      console.log("velocitaatt ", this.velocitaattiva);
       
 
       if ( this.velocitaattiva == 0) {
@@ -120,6 +131,14 @@ export class AzioniComponent implements OnInit{
       }
 
       this.modsalute = this.myaPG.ModSalute;
+
+      console.log("velocita =",this.velocita);
+      console.log("destrezza =",this.destrezza);
+      console.log("rissa =",this.rissa);
+      console.log("mischia =",this.mischia);
+      console.log("fuoco =",this.fuoco);
+      console.log("modsalute =",this.modsalute);
+      
 
     });
 
@@ -176,6 +195,7 @@ export class AzioniComponent implements OnInit{
       this.usato.Nome = " - Nulla - ";
       if (find) {
         this.usato = find;
+        this.usato.IDtipoOggetto=Number(this.usato.IDtipoOggetto);
       }
       console.log(this.listaposseduti);
       console.log(this.usato);
@@ -277,6 +297,7 @@ export class AzioniComponent implements OnInit{
 
         this.usato.Nome = " - Nulla - ";
         this.usato.IDoggetto = 0;
+        this.usato.IDtipoOggetto = 0;
 
         console.log(this.usato);
 
@@ -287,10 +308,34 @@ export class AzioniComponent implements OnInit{
 
         const find = this.listaposseduti.find( xx => xx.IDoggetto === this.armaFG.value.armaFC.IDoggetto);
         this.usato = find;
+        this.usato.IDtipoOggetto=Number(this.usato.IDtipoOggetto);
+        
 
       });
     }
     
+  }
+
+
+  gofuoco(){
+    this.schedaservice.fuoco(this.status.Stanza, this.fuocoFG.value.targetFC.Userid, this.fuocoFG.value.targetFC.NomeCognome, this.usofdv).subscribe((data)=>{
+      this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
+
+      if (this.usofdv === true) {
+        this.status.FdV = this.status.FdV - 1 ;
+      }
+      
+      // Non so perchè avendo potenza e/o facendo aggravati dovrei sparare, ma in caso.... //
+      localStorage.removeItem ( 'Potenza');  //potenzaattiva
+      localStorage.removeItem ( 'Letali1');  //letali 1 turno
+      localStorage.removeItem ( 'Aggravati1');  //Aggravati 1 turno
+      this.potenzaattiva = false;
+
+      //dovrei fare altro tipo ridurre il contatore delle azioni liberi di velocita //
+      console.log(data);
+    });
+
+    this.fuocoFG.reset();
   }
   
 

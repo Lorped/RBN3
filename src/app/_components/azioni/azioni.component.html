@@ -88,7 +88,7 @@
         </mat-card-title>
         <mat-card-subtitle>
             <div style="display: inline-flex;">
-            ( Destrezza+Rissa ) &nbsp; <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': (ix < destrezza+rissa+modsalute) , 'white': (ix+1 > destrezza+rissa+modsalute)  }"></i>
+            ( Destrezza+Rissa ) &nbsp; <i *ngFor="let i of (destrezza+rissa+modsalute) | times ; let ix = index" class="fa fa-circle dred" ></i>
             </div>
         </mat-card-subtitle>
         
@@ -130,6 +130,33 @@
                 </mat-select>
             </mat-form-field>
             <button mat-button color="primary" [disabled]="! (status.Alive && armaFG.valid && this.myaPG.IDsalute>0 && armaFG.value.armaFC.IDoggetto !== usato.IDoggetto)" (click)="goarma()" ><mat-icon >play_circle_outline</mat-icon></button>
+        </form>
+    </mat-card-header>
+</mat-card>
+
+<mat-card *ngIf="usato.IDtipoOggetto === 3 ">
+    <mat-card-header>
+        <mat-card-title>
+            Armi da Fuoco
+        </mat-card-title>
+        <mat-card-subtitle>
+            <div style="display: inline-flex;">
+            ( Destrezza + Armi da Fuoco ) &nbsp; <i *ngFor="let i of (destrezza+fuoco+modsalute)  | times ; let ix = index" class="fa fa-circle dred" ></i>
+            </div>
+        </mat-card-subtitle>
+        
+        <span class="spacer"></span>
+        <form [formGroup]="fuocoFG">            
+            <mat-form-field>
+                <mat-label>Target</mat-label>
+                <mat-select  formControlName="targetFC"> 
+                    <mat-option *ngFor="let cont of presenti"  [value]="cont">
+                        <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+                        {{ cont.NomeCognome }} 
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button color="primary" [disabled]="! (status.Alive && fuocoFG.valid && this.myaPG.IDsalute>0 && this.velocitaattiva === 0 )" (click)="gofuoco()" ><mat-icon >play_circle_outline</mat-icon></button>
         </form>
     </mat-card-header>
 </mat-card>
