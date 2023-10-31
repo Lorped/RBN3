@@ -19,6 +19,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatBadgeModule} from '@angular/material/badge'; 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSliderModule} from '@angular/material/slider';
 import { APP_ROUTES } from './app.routing' ;
 
 import { AuthenticationService } from './_services/index';
@@ -122,7 +123,8 @@ import { AzioniComponent } from './_components/azioni/azioni.component';
     MatBadgeModule,
     MatTabsModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSliderModule
   ],
   providers: [
     AuthenticationService,

@@ -269,6 +269,7 @@ export class SchedaService {
     let letali = false;
     let zulo = false;
     let marauder = false;
+    let artigli = false;
     let velocitaattiva = false;
     let potenzaattiva = false;
     let  xx  = localStorage.getItem('Aggravati'); 
@@ -289,6 +290,10 @@ export class SchedaService {
     if ( xx ) {
       marauder = true;
     }
+    xx = localStorage.getItem('Artigli'); 
+    if ( xx ) {
+      artigli = true;
+    }
     xx = localStorage.getItem('Velocita'); 
     if ( xx ) {
       velocitaattiva = true;
@@ -307,6 +312,7 @@ export class SchedaService {
       letali: letali,
       zulo: zulo,
       marauder: marauder,
+      artigli: artigli,
       velocitaattiva: velocitaattiva,
       potenzaattiva: potenzaattiva,
       usofdv: usofdv
@@ -314,7 +320,7 @@ export class SchedaService {
     });
   }
 
-  fuoco(stanza: number, target: number, nometarget: string , usofdv: boolean, raffica: boolean){
+  fuoco(stanza: number, target: number, nometarget: string , usofdv: boolean, selettore: number){
     const user = sessionStorage.getItem('RBN3currentUser') ;
 
     return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/fuoco.php', {
@@ -323,7 +329,7 @@ export class SchedaService {
       target: target,
       nometarget: nometarget,
       usofdv: usofdv,
-      raffica: raffica
+      selettore: selettore
       
     });
   }

@@ -113,7 +113,7 @@ function soak_PG($id, $danno, $tipo) {
 		}
 		
 
-	} else if ( $tipo == 'A ') {
+	} else if ( $tipo == 'A') {
 		
 		$assorbiti= 0;
 		for ( $i = 0 ; $i < $robustezza ; $i++) {
@@ -175,7 +175,7 @@ function soak_PNG_H( $danno, $tipo) {
 		
 		return $danno;
 		
-	} else if ( $tipo == 'A ') {
+	} else if ( $tipo == 'A') {
 		
 		return $danno;
 	}
@@ -220,7 +220,7 @@ function soak_PNG_V ( $danno, $tipo) {
 
 		return $danno;		
 
-	} else if ( $tipo == 'A ') {
+	} else if ( $tipo == 'A') {
 		
 		$assorbiti= 0;
 		for ( $i = 0 ; $i < $robustezza ; $i++) {

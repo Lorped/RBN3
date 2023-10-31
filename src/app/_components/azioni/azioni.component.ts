@@ -66,12 +66,14 @@ export class AzioniComponent implements OnInit{
   sessvar_aggravati1 = false;
   sessvar_zulo = false;
   sessvar_marauder = false;
+  sessvar_artigli = false;
   potenzaattiva = false;
 
   listaposseduti: Array<posseduti> = [];
   usato: posseduti = new posseduti();
   fuoco = 0 ;
- raffica = false;
+  selettore = 0;
+
 
   constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService, 
     private listapresenti: ListpresentiService, private oggettiservice: OggettiService) {}
@@ -143,6 +145,7 @@ export class AzioniComponent implements OnInit{
 
     });
 
+    this.sessvar_artigli = this.check_localstorage ( 'Artigli');
     this.sessvar_letali = this.check_localstorage ( 'Letali');
     this.sessvar_aggravati = this.check_localstorage ( 'Aggravati');
     this.sessvar_zulo = this.check_localstorage ( 'Zulo');
@@ -194,6 +197,7 @@ export class AzioniComponent implements OnInit{
       
       this.usato.Nome = " - Nulla - ";
       this.usato.Immagine = "dummy2.png";
+      this.selettore = 0;
 
       const find = this.listaposseduti.find( xx => xx.Usato === "S");
 
@@ -303,6 +307,7 @@ export class AzioniComponent implements OnInit{
         this.usato.IDoggetto = 0;
         this.usato.IDtipoOggetto = 0;
         this.usato.Immagine = 'dummy2.png';
+        this.selettore = 0;
 
         console.log(this.usato);
 
@@ -314,6 +319,7 @@ export class AzioniComponent implements OnInit{
         const find = this.listaposseduti.find( xx => xx.IDoggetto === this.armaFG.value.armaFC.IDoggetto);
         this.usato = find;
         this.usato.IDtipoOggetto=Number(this.usato.IDtipoOggetto);
+        this.selettore = 0;
         
 
       });
@@ -323,7 +329,7 @@ export class AzioniComponent implements OnInit{
 
 
   gofuoco(){
-    this.schedaservice.fuoco(this.status.Stanza, this.fuocoFG.value.targetFC.Userid, this.fuocoFG.value.targetFC.NomeCognome, this.usofdv, this.raffica).subscribe((data)=>{
+    this.schedaservice.fuoco(this.status.Stanza, this.fuocoFG.value.targetFC.Userid, this.fuocoFG.value.targetFC.NomeCognome, this.usofdv, this.selettore).subscribe((data)=>{
       this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
 
       if (this.usofdv === true) {
@@ -341,8 +347,18 @@ export class AzioniComponent implements OnInit{
     });
 
     this.fuocoFG.reset();
-    this.raffica = false;
+
   }
   
+  formatLabel(value: number): string {
+    if (value === 0) {
+      return 'Singolo';
+    } else if ( value === 1) {
+      return 'Auto';
+    } else if ( value === 2) {
+      return 'Raffica'
+    }
+    return `${value}`;
+  }
 
 }

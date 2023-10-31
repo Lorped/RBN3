@@ -38,7 +38,7 @@ $marauder = $request -> marauder;
 */ 
 
 $usofdv = $request -> usofdv;
-$rafficausata = $request -> raffica;
+$selettore = $request -> selettore;
 
 
 $MasterAdmin=0;
@@ -111,7 +111,16 @@ if ( $zulo == true || $marauder == true ) {
 }
 */
 
-$dp = $dp + ($rate - 1);
+if ( $selettore == 0 ) {  // colpo singolo
+    $difficolta = 6 - $bonus;
+
+} else if ( $selettore == 1 ) {  // 3 colpi
+    $difficolta = 7 - $bonus;
+    $dp = $dp + 2;
+} else if ( $selettore == 2 ) {  // raffica colpi
+    $difficolta = 7 - $bonus;
+    $dp = $dp + 10;
+}
 
     // $esito = $esito . " bonus tiro DP = " . $dp;
 
@@ -126,21 +135,10 @@ if ( $usofdv == false ) {
 
 $effettivi = 0 ;
 
-$diffbase=6;
-if ( $rate-1 > 0 ) {
-    $diffbase = $diffbase + 1 ;
-}
-if ( $rafficausata == true ) {
-    // $diffbase = $diffbase + 1 ;
-    $dp = $dp + 12 ;
-}
-
-$diffbase = $diffbase - $bonus;
-
-// $esito = $esito . "dp = " . $dp . " diff= " . $diffbase ;
+    // $esito = $esito . "dp = " . $dp . " diff= " . $diffbase ;
 
 
-$risultato = dado( $dp , $diffbase );
+$risultato = dado( $dp , $difficolta );
 
 $successi = $risultato['risultato'];
 
@@ -182,13 +180,17 @@ if ( $successi > 0 ) {
 }
 
 
-if ( $rafficausata == false ) {
+if ( $selettore == 0 ) {
+    $esito = $NomeCognome . " spara  con " . $nomearma . " contro " . $nometarget ;
+} else if ( $selettore == 1) {
     $esito = $NomeCognome . " spara ". $rate . " colpi con " . $nomearma . " contro " . $nometarget ;
-} else {
-    $esito = $NomeCognome . " spara ". " a raffica con " . $nomearma . " contro " . $nometarget ;
+} else if ( $selettore == 2) {
+    $esito = $NomeCognome . " spara una raffica con " . $nomearma . " contro " . $nometarget ;
 }
 
-
+if ( $successi == 0 ) {
+    $esito = $esito . "mancandolo completamente!";
+}
 
 if ( $effettivi == 0 ) {
     $esito = $esito . " che non subisce nessun danno";

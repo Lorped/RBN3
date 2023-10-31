@@ -111,7 +111,7 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-            Imbraccia arma
+            Cambia/Riponi arma
         </mat-card-title>
         <mat-card-subtitle>
             <div style="display: inline-flex;">
@@ -145,7 +145,16 @@
             ( Destrezza + Armi da Fuoco ) &nbsp; <i *ngFor="let i of (destrezza+fuoco+modsalute)  | times ; let ix = index" class="fa fa-circle dred" ></i>
             </div>
         </mat-card-subtitle>
-        Raffica <mat-checkbox [disabled]="usato.Raffica==='N'" [(ngModel)]="raffica" style="margin-top: -0.9em;"></mat-checkbox>        
+        <span *ngIf="usato.Rate !== 1">
+            Sel:
+            <mat-slider min="0" max="1" step="1" showTickMarks discrete [displayWith]="formatLabel" *ngIf="usato.Raffica === 'N' " class="twostep">
+                <input matSliderThumb [(ngModel)]="selettore">
+            </mat-slider>
+            <mat-slider min="0" max="2" step="1" showTickMarks discrete [displayWith]="formatLabel" *ngIf="usato.Raffica === 'S' " class="threestep">
+                <input matSliderThumb [(ngModel)]="selettore">
+            </mat-slider>
+        </span>
+                  
         <span class="spacer"></span>
         <form [formGroup]="fuocoFG">            
             <mat-form-field>

@@ -36,9 +36,10 @@ $aggravati = $request -> aggravati;
 $letali = $request -> letali;
 $zulo = $request -> zulo;
 $marauder = $request -> marauder;
+$artigli = $request -> artigli;
 $velocitaattiva = $request -> velocitaattiva;
 $potenzaattiva = $request -> potenzaattiva;
-$usofdv -> $request -> usofdv;
+$usofdv = $request -> usofdv;
 
 
 $MasterAdmin=0;
@@ -105,7 +106,7 @@ $risultato = dado( $dp , 6 );
 
 $successi = $risultato['risultato'];
 
-    // $esito = $esito . " successi = " . $successi;
+$esito = $esito . " successi = " . $successi;
 
 if ( $successi > 0 ) {
 
@@ -135,6 +136,8 @@ if ( $successi > 0 ) {
 
         if ( $marauder == true) {
             $dp_per_danni =  $dp_per_danni + 2;
+        } else if ( $artigli == true) {
+            $dp_per_danni =  $dp_per_danni + 1;
         }
 
             // $esito = $esito . " dp per danni = " . $dp_per_danni . " potenza attiva POT= " . $Potenza;
@@ -150,6 +153,8 @@ if ( $successi > 0 ) {
 
         if ( $marauder == true) {
             $dp_per_danni =  $dp_per_danni + 2;
+        } else if ( $artigli == true) {
+            $dp_per_danni =  $dp_per_danni + 1;
         }
 
             // $esito = $esito . " dp per danni = " . $dp_per_danni;
@@ -162,6 +167,10 @@ if ( $successi > 0 ) {
 
     }
    
+    $esito = $esito . " dp per danni = " . $dp_per_danni;
+    $esito = $esito . " danni = " . $danni;
+    $esito = $esito . " aggr = " . $aggravati;
+    $esito = $esito . " let = " . $letali;
 
     $tipo1="";
     $tipo2="";
@@ -184,7 +193,7 @@ if ( $successi > 0 ) {
 }
 
 
-$esito = $NomeCognome . " attacca corpo a corpo (rissa) ". $nometarget ;
+$esito =$esito .  $NomeCognome . " attacca corpo a corpo (rissa) ". $nometarget ;
 
 if ( $effettivi == 0 ) {
     $esito = $esito . " che non subisce nessun danno";
