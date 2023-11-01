@@ -116,10 +116,10 @@ if ( $selettore == 0 ) {  // colpo singolo
 
 } else if ( $selettore == 1 ) {  // 3 colpi
     $difficolta = 7 - $bonus;
-    $dp = $dp + 2;
+    $dp = $dp + 3;  
 } else if ( $selettore == 2 ) {  // raffica colpi
     $difficolta = 7 - $bonus;
-    $dp = $dp + 10;
+    $dp = $dp + 12;
 }
 
     // $esito = $esito . " bonus tiro DP = " . $dp;
@@ -166,11 +166,11 @@ if ( $successi > 0 ) {
     // $esito = $esito . " danni = " . $danni;
 
     if ( $target == 0 ) {  // PNG UMANO
-        $effettivi = $effettivi + soak($target, $danni, 'L');
+        $effettivi =  soak($target, $danni, 'L');
         $tipo = "letale";
         $tipo2 = "letali";
     } else {
-        $effettivi = $effettivi + soak($target, $danni, 'U');
+        $effettivi =  soak($target, $danni, 'U');
         $tipo = "da urto";
         $tipo2 = "da urto";
     }
@@ -190,10 +190,12 @@ if ( $selettore == 0 ) {
 
 if ( $successi == 0 ) {
     $esito = $esito . "mancandolo completamente!";
+} else if ( $successi < 0 ) {
+    $esito = $esito . "ottenendo un fallimento critico!";
 }
 
 if ( $effettivi == 0 ) {
-    $esito = $esito . " che non subisce nessun danno";
+    $esito = $esito . " che non subisce nessun danno sostanziale";
 } else if ( $effettivi == 1 ) {
     $esito = $esito . " che subisce 1 danno " . $tipo;
 } else {

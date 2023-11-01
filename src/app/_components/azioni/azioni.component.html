@@ -117,6 +117,16 @@
             <div style="display: inline-flex;">
             Arma utilizzata: {{ usato.Nome}} - <img style="vertical-align:middle;"  src="assets/oggetti/{{usato.Immagine}}" height="25" />
             </div>
+            <div *ngIf="usato.IDtipoOggetto === 3">
+                Danno: <span class="accent-text">{{usato.Danno}}</span> | Precisione: <span class="accent-text">+{{usato.BonusTiro}}</span> | Colpi: <span class="accent-text">{{usato.Caricatore}}</span> |
+                Rate tiro: <span class="accent-text">{{usato.Rate}}</span> | Raffica: <span class="accent-text">{{usato.Raffica}}</span>
+            </div>
+            <div *ngIf="usato.IDtipoOggetto === 1 || usato.IDtipoOggetto === 2 ">
+                Danno: <span class="accent-text">Forza +{{usato.Danno}}</span> | Tipo danno: <span class="accent-text">
+                <span *ngIf="usato.IDtipoOggetto === 1">Da Urto</span>
+                <span *ngIf="usato.IDtipoOggetto === 2">Letale</span>
+                </span> | Bonus/Malus: <span class="accent-text">{{usato.BonusTiro}}</span> 
+            </div>
         </mat-card-subtitle>
         
         <span class="spacer"></span>
