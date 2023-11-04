@@ -37,6 +37,11 @@ export class AzioniComponent implements OnInit{
       Validators.required]),
   });
 
+  mischiaFG: FormGroup = new FormGroup({
+    targetFC:  new FormControl('', [
+      Validators.required]),
+  });
+
   
 
   letali = 0;  //LI CALCOLO PER SEMPLICITA
@@ -360,5 +365,26 @@ export class AzioniComponent implements OnInit{
     }
     return `${value}`;
   }
+
+  gomischia(){
+    this.schedaservice.mischia(this.status.Stanza, this.mischiaFG.value.targetFC.Userid, this.mischiaFG.value.targetFC.NomeCognome, this.usofdv).subscribe((data)=>{
+      this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
+
+      if (this.usofdv === true) {
+        this.status.FdV = this.status.FdV - 1 ;
+      }
+      
+      localStorage.removeItem ( 'Potenza');  //potenzaattiva
+      localStorage.removeItem ( 'Letali1');  //letali 1 turno
+      localStorage.removeItem ( 'Aggravati1');  //Aggravati 1 turno
+      this.potenzaattiva = false;
+
+      //dovrei fare altro tipo ridurre il contatore delle azioni liberi di velocita //
+      console.log(data);
+    });
+
+    this.mischiaFG.reset();
+  }
+
 
 }

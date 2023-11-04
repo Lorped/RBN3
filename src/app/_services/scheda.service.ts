@@ -320,6 +320,50 @@ export class SchedaService {
     });
   }
 
+  mischia(stanza: number, target: number, nometarget: string , usofdv: boolean){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    let aggravati = false;
+    let zulo = false;
+    let marauder = false;
+    let velocitaattiva = false;
+    let potenzaattiva = false;
+    let  xx  = localStorage.getItem('Aggravati'); 
+    const  yy  = localStorage.getItem('Aggravati1'); 
+    if ( xx || yy ) {
+      aggravati = true;
+    }
+    xx = localStorage.getItem('Zulo'); 
+    if ( xx ) {
+      zulo = true;
+    }
+    xx = localStorage.getItem('Marauder'); 
+    if ( xx ) {
+      marauder = true;
+    }
+    xx = localStorage.getItem('Velocita'); 
+    if ( xx ) {
+      velocitaattiva = true;
+    }
+    xx = localStorage.getItem('Potenza'); 
+    if ( xx ) {
+      potenzaattiva = true;
+    }
+
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/mischia.php', {
+      token: user,
+      stanza: stanza,
+      target: target,
+      nometarget: nometarget,
+      aggravati: aggravati,
+      zulo: zulo,
+      marauder: marauder,
+      velocitaattiva: velocitaattiva,
+      potenzaattiva: potenzaattiva,
+      usofdv: usofdv
+      
+    });
+  }
+
   fuoco(stanza: number, target: number, nometarget: string , usofdv: boolean, selettore: number){
     const user = sessionStorage.getItem('RBN3currentUser') ;
 

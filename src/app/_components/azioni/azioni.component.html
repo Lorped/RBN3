@@ -180,3 +180,30 @@
         </form>
     </mat-card-header>
 </mat-card>
+
+<mat-card *ngIf="usato.IDtipoOggetto === 1 || usato.IDtipoOggetto === 2 ">
+    <mat-card-header>
+        <mat-card-title>
+            Armi da Mischia
+        </mat-card-title>
+        <mat-card-subtitle>
+            <div style="display: inline-flex;">
+            ( Destrezza + Armi da Mischia ) &nbsp; <i *ngFor="let i of (destrezza+mischia+modsalute)  | times ; let ix = index" class="fa fa-circle dred" ></i>
+            </div>
+        </mat-card-subtitle>
+                  
+        <span class="spacer"></span>
+        <form [formGroup]="mischiaFG">            
+            <mat-form-field>
+                <mat-label>Target</mat-label>
+                <mat-select  formControlName="targetFC"> 
+                    <mat-option *ngFor="let cont of presenti"  [value]="cont">
+                        <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+                        {{ cont.NomeCognome }} 
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button color="primary" [disabled]="! (status.Alive && mischiaFG.valid && this.myaPG.IDsalute>0  )" (click)="gomischia()" ><mat-icon >play_circle_outline</mat-icon></button>
+        </form>
+    </mat-card-header>
+</mat-card>

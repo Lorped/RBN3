@@ -32,13 +32,14 @@ $stanza = $request->stanza;
 $target = $request->target;
 $nometarget = $request->nometarget;
 
-/*  
+$aggravati = $request -> aggravati;
+$letali = $request -> letali;
 $zulo = $request -> zulo;
 $marauder = $request -> marauder;
-*/ 
 
+$velocitaattiva = $request -> velocitaattiva;
+$potenzaattiva = $request -> potenzaattiva;
 $usofdv = $request -> usofdv;
-$selettore = $request -> selettore;
 
 
 $MasterAdmin=0;
@@ -59,6 +60,7 @@ if ( CheckJWT ($token) ) {
 	die ();
 }
 
+
 $MySql = "SELECT Oggetti.* from Possesso
     LEFT JOIN Oggetti ON Oggetti.IDoggetto=Possesso.IDoggetto
     WHERE Userid = $Userid AND Usato = 'S' ";
@@ -68,14 +70,13 @@ $res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
 $nomearma = $res ['Nome'];
 $danno = $res ['Danno'];
 $bonus = $res ['BonusTiro'];
-$rate = $res ['Rate'];
-$tipooggetto= $res ['IDtipoOggetto'];
-$raffica = $res ['Raffica'];
 
-if ( $tipooggetto != 3 ) {
+$tipooggetto= $res ['IDtipoOggetto'];
+
+
+if ( $tipooggetto != 2 &&  $tipooggetto != 1 ) {
     return ;   // PERCHE' SONO QUI ??
 }
-
 
 
 $MySql = "SELECT ModSalute From Personaggio
@@ -87,42 +88,27 @@ $res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
 $ModSalute = $res['ModSalute'];
 
 
-$dp = dicepool( $Userid ,  2, 12 , '') ;
+$dp = dicepool( $Userid ,  2, 13 , '') ;
 
     // $esito = " DP base = " . $dp;
 
-/** CONTO EFFETTO VELOCITA PERCHE' IN FORMA PASSIVA  */
+if ( $velocitaattiva != true) {
 
-$MySql = "SELECT LivelloDisc FROM Discipline 
-    WHERE IDdisciplina = 16 AND Userid = $Userid";
-$Result = mysqli_query($db, $MySql);
-$res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
-$velocita = $res['LivelloDisc'];
+    $MySql = "SELECT LivelloDisc FROM Discipline 
+        WHERE IDdisciplina = 16 AND Userid = $Userid";
+    $Result = mysqli_query($db, $MySql);
+    $res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
+    $velocita = $res['LivelloDisc'];
 
-$dp = $dp + $velocita;
+    $dp = $dp + $velocita;
 
-    // $esito = $esito . " velocita DP = " . $dp;
+    //  $esito = $esito . " velocita DP finale = " . $dp;
+}
 
-
-/* NON CREDO CHE POSSANO ADOPERARE ARMI !!! */
-/*
 if ( $zulo == true || $marauder == true ) {
     $dp = $dp + 3;
+    //  $esito = $esito . " zulo DP finale = " . $dp;
 }
-*/
-
-if ( $selettore == 0 ) {  // colpo singolo
-    $difficolta = 6 - $bonus;
-
-} else if ( $selettore == 1 ) {  // 3 colpi
-    $difficolta = 7 - $bonus;
-    $dp = $dp + 3;  
-} else if ( $selettore == 2 ) {  // raffica colpi
-    $difficolta = 7 - $bonus;
-    $dp = $dp + 12;
-}
-
-    // $esito = $esito . " bonus tiro DP = " . $dp;
 
 
 if ( $usofdv == false ) {
@@ -130,76 +116,111 @@ if ( $usofdv == false ) {
     if ($dp < 0 && $ModSalute != -99 ) {
         $dp = 1 ;
     }
-    // $esito = $esito . " NO-FDV MODSALTE DP = " . $dp;
+    //  $esito = $esito . " NO-FDV MODSALTE DP finale = " . $dp;
 }
 
-$effettivi = 0 ;
-
-    // $esito = $esito . "dp = " . $dp . " diff= " . $diffbase ;
-
+$difficolta = 6 - $bonus;
 
 $risultato = dado( $dp , $difficolta );
 
 $successi = $risultato['risultato'];
 
-    // $esito = $esito . " successi = " . $successi;
+// $esito = $esito . " successi = " . $successi;
 
-if ( $successi > 0 ) { 
+if ( $successi > 0 ) {
+
     $extra = 0;
     if ( $successi > 1 ) { 
         $extra = $successi -1 ;
     }
+
     // $esito = $esito . " extra = " . $extra;
 
+    $MySql = "SELECT Livello From Attributi
+        WHERE IDattributo = 1 AND Userid = $Userid";
+    $Result = mysqli_query($db, $MySql);
+    $res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
+
+    $Forza = $res['Livello'];
+
+    $MySql = "SELECT LivelloDisc From Discipline
+        WHERE IDdisciplina = 10 AND Userid = $Userid";
+    $Result = mysqli_query($db, $MySql);
+    $res = mysqli_fetch_array($Result, MYSQLI_ASSOC);
+
+    $Potenza = $res['LivelloDisc'];
+
+    if ( $potenzaattiva == true) {
+        $dp_per_danni = $danno + $Forza + $extra;
+
+        if ( $marauder == true || $zulo == true ) {
+            $dp_per_danni =  $dp_per_danni + 3;
+        } 
+
+            // $esito = $esito . " dp per danni = " . $dp_per_danni . " potenza attiva POT= " . $Potenza;
     
-    $dp_per_danni = $danno + $extra;
+        $risultato2 = dado( $dp_per_danni , 6 );
+    
+        $danni = $risultato2 ['risultato'] + $Potenza;
+            
+            // $esito = $esito . " danni = " . $danni;
 
-    $risultato2 = dado( $dp_per_danni , 6 );
-    $danni = $risultato2 ['risultato'];
-
-    /*
-    if ( $rafficausata ) {
-        $danni = ceil( $danni/2);
-    }
-    */
-
-    // $esito = $esito . " danni = " . $danni;
-
-    if ( $target == 0 ) {  // PNG UMANO
-        $effettivi =  soak($target, $danni, 'L');
-        $tipo = "letale";
-        $tipo2 = "letali";
     } else {
-        $effettivi =  soak($target, $danni, 'U');
-        $tipo = "da urto";
-        $tipo2 = "da urto";
+        $dp_per_danni = $danno + $Forza + $Potenza + $extra;
+
+        if ( $marauder == true || $zulo == true ) {
+            $dp_per_danni =  $dp_per_danni + 3;
+        } 
+
+            // $esito = $esito . " dp per danni = " . $dp_per_danni;
+    
+        $risultato2 = dado( $dp_per_danni , 6 );
+    
+        $danni = $risultato2 ['risultato'];
+       
+            // $esito = $esito . " danni = " . $danni;
+
     }
-        
+   
+    // $esito = $esito . " dp per danni = " . $dp_per_danni;
+    // $esito = $esito . " danni = " . $danni;
+    // $esito = $esito . " aggr = " . $aggravati;
+    // $esito = $esito . " let = " . $letali;
 
-    // $esito = $esito . " effettivi dopo colpo " . $colpo . " = ". $effettivi;
+    $tipo1="";
+    $tipo2="";
+    if ( $tipooggetto == 1 ) {
+        $effettivi = soak($target, $danni, 'U');
+        $tipo1 = " da urto";
+        $tipo2 = " da urto";
+    } if ( $tipooggetto == 2 &&  $aggravati == true) {
+        $effettivi = soak($target, $danni, 'A');
+        $tipo1 = " aggravato";
+        $tipo2 = " aggravati";
+    } else {
+        $effettivi = soak($target, $danni, 'L');
+        $tipo1 = " letale";
+        $tipo2 = " letali";
+    }
+
+        // $esito = $esito . " effettivi = " . $effettivi;
+
 }
 
 
-if ( $selettore == 0 ) {
-    $esito = $NomeCognome . " spara  con " . $nomearma . " contro " . $nometarget ;
-} else if ( $selettore == 1) {
-    $esito = $NomeCognome . " spara ". $rate . " colpi con " . $nomearma . " contro " . $nometarget ;
-} else if ( $selettore == 2) {
-    $esito = $NomeCognome . " spara una raffica con " . $nomearma . " contro " . $nometarget ;
-}
+$esito =   $NomeCognome . " attacca con " . $nomearma . " ". $nometarget ;
 
 if ( $successi == 0 ) {
     $esito = $esito . " mancandolo completamente!";
 } else if ( $successi < 0 ) {
     $esito = $esito . " ottenendo un fallimento critico!";
 } else {
-
     if ( $effettivi == 0 ) {
-        $esito = $esito . " che non subisce nessun danno sostanziale";
+        $esito = $esito . " che non subisce nessun danno";
     } else if ( $effettivi == 1 ) {
-        $esito = $esito . " che subisce 1 danno " . $tipo;
+        $esito = $esito . " che subisce 1 danno" . $tipo1;
     } else {
-        $esito = $esito . " che subisce " . $effettivi . " danni " . $tipo2;
+        $esito = $esito . " che subisce " . $effettivi . " danni" . $tipo2;
     }
 }
 
@@ -226,9 +247,8 @@ if ( $target > 0 ) {  // PG
 
 
 
-
-$MySql="INSERT INTO Chat ( Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso , Tipo, Testo, Locazione )
-    VALUES ($stanza, $Userid, '$NomeCognome' , 0, '' , '$Sesso', '+', '$esito', '' )";
+ $MySql="INSERT INTO Chat ( Stanza, IDMittente, Mittente, IDDestinatario, Destinatario, Sesso , Tipo, Testo, Locazione )
+VALUES ($stanza, $Userid, '$NomeCognome' , 0, '' , '$Sesso', '+', '$esito', '' )";
  mysqli_query($db, $MySql);
 
 $out = [

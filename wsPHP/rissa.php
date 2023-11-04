@@ -106,7 +106,7 @@ $risultato = dado( $dp , 6 );
 
 $successi = $risultato['risultato'];
 
-$esito = $esito . " successi = " . $successi;
+// $esito = $esito . " successi = " . $successi;
 
 if ( $successi > 0 ) {
 
@@ -167,10 +167,10 @@ if ( $successi > 0 ) {
 
     }
    
-    $esito = $esito . " dp per danni = " . $dp_per_danni;
-    $esito = $esito . " danni = " . $danni;
-    $esito = $esito . " aggr = " . $aggravati;
-    $esito = $esito . " let = " . $letali;
+    // $esito = $esito . " dp per danni = " . $dp_per_danni;
+    // $esito = $esito . " danni = " . $danni;
+    // $esito = $esito . " aggr = " . $aggravati;
+    // $esito = $esito . " let = " . $letali;
 
     $tipo1="";
     $tipo2="";
@@ -193,15 +193,23 @@ if ( $successi > 0 ) {
 }
 
 
-$esito =$esito .  $NomeCognome . " attacca corpo a corpo (rissa) ". $nometarget ;
+$esito =  $NomeCognome . " attacca corpo a corpo (rissa) ". $nometarget ;
 
-if ( $effettivi == 0 ) {
-    $esito = $esito . " che non subisce nessun danno";
-} else if ( $effettivi == 1 ) {
-    $esito = $esito . " che subisce 1 danno" . $tipo1;
+if ( $successi == 0 ) {
+    $esito = $esito . " mancandolo completamente!";
+} else if ( $successi < 0 ) {
+    $esito = $esito . " ottenendo un fallimento critico!";
 } else {
-    $esito = $esito . " che subisce " . $effettivi . " danni" . $tipo2;
+    if ( $effettivi == 0 ) {
+        $esito = $esito . " che non subisce nessun danno";
+    } else if ( $effettivi == 1 ) {
+        $esito = $esito . " che subisce 1 danno" . $tipo1;
+    } else {
+        $esito = $esito . " che subisce " . $effettivi . " danni" . $tipo2;
+    }
 }
+
+
 
 if ( $target > 0 ) {  // PG
     $MySql = "SELECT IDsalute From Personaggio WHERE Userid = $target";
@@ -221,7 +229,7 @@ if ( $target > 0 ) {  // PG
 }
 
 
-$ModSalute = $res['ModSalute'];
+
 
 
 
