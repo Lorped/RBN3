@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EmitterService, ListpresentiService , Presenti } from '../../_services/index';
 
 import { Subscription, interval } from 'rxjs';
@@ -9,7 +9,7 @@ import { Status } from '../../globals';
   templateUrl: './presenti.component.html',
   styleUrls: ['./presenti.component.css']
 })
-export class PresentiComponent implements OnInit {
+export class PresentiComponent implements OnInit, OnDestroy {
 
   sub1: Subscription;
   sub2: Subscription;
@@ -27,6 +27,9 @@ export class PresentiComponent implements OnInit {
     .subscribe(( data: Array<Presenti> ) => {
         this.listapresenti = data;
         this.numeropresenti = data.length;
+        for (let i= 0 ; i< this.listapresenti.length ; i++){
+          this.listapresenti[i].Userid = Number (this.listapresenti[i].Userid);
+        }
     },
     error => {
       console.log(error);
@@ -39,6 +42,9 @@ export class PresentiComponent implements OnInit {
       .subscribe(( data: Array<Presenti> ) => {
         this.listapresenti = data;
         this.numeropresenti = data.length;
+        for (let i= 0 ; i< this.listapresenti.length ; i++){
+          this.listapresenti[i].Userid = Number (this.listapresenti[i].Userid);
+        }
       });
     });
 
@@ -49,7 +55,9 @@ export class PresentiComponent implements OnInit {
       .subscribe(( data: Array<Presenti> ) => {
         this.listapresenti = data;
         this.numeropresenti = data.length;
-        
+        for (let i= 0 ; i< this.listapresenti.length ; i++){
+          this.listapresenti[i].Userid = Number (this.listapresenti[i].Userid);
+        }
       });
     });
 
@@ -58,7 +66,10 @@ export class PresentiComponent implements OnInit {
       this.listpresentiService.getpresenti()
       .subscribe(( data: Array<Presenti> ) => {
         this.listapresenti = data;
-        this.numeropresenti = data.length;      
+        this.numeropresenti = data.length;
+        for (let i= 0 ; i< this.listapresenti.length ; i++){
+          this.listapresenti[i].Userid = Number (this.listapresenti[i].Userid);
+        }    
       });
     });
 

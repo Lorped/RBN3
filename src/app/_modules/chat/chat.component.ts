@@ -98,7 +98,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
 
   check_localstorage ( key: string) {
-    console.log ( "in check_local");
+    // console.log ( "in check_local");
     const itemStr = localStorage.getItem ( key );
     if ( itemStr) {
       const oggetto = JSON.parse(itemStr);

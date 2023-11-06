@@ -131,7 +131,7 @@ export class AzioniComponent implements OnInit{
       }
 
       this.velocitaattiva = Number(localStorage.getItem('Velocita') );
-      console.log("velocitaatt ", this.velocitaattiva);
+      // console.log("velocitaatt ", this.velocitaattiva);
       
 
       if ( this.velocitaattiva == 0) {
@@ -140,12 +140,12 @@ export class AzioniComponent implements OnInit{
 
       this.modsalute = this.myaPG.ModSalute;
 
-      console.log("velocita =",this.velocita);
-      console.log("destrezza =",this.destrezza);
-      console.log("rissa =",this.rissa);
-      console.log("mischia =",this.mischia);
-      console.log("fuoco =",this.fuoco);
-      console.log("modsalute =",this.modsalute);
+      // console.log("velocita =",this.velocita);
+      // console.log("destrezza =",this.destrezza);
+      // console.log("rissa =",this.rissa);
+      // console.log("mischia =",this.mischia);
+      // console.log("fuoco =",this.fuoco);
+      // console.log("modsalute =",this.modsalute);
       
 
     });
@@ -210,8 +210,8 @@ export class AzioniComponent implements OnInit{
         this.usato = find;
         this.usato.IDtipoOggetto=Number(this.usato.IDtipoOggetto);
       }
-      console.log(this.listaposseduti);
-      console.log(this.usato);
+      // console.log(this.listaposseduti);
+      // console.log(this.usato);
     });
   }
 
@@ -240,6 +240,7 @@ export class AzioniComponent implements OnInit{
   gocura() {
     // console.log ("gocura");
     this.schedaservice.cura(this.status.Stanza).subscribe( (data:esitocura)=>{
+      this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
       // console.log(data);
       this.status.PS=this.status.PS - Number(data.usati);
       this.myaPG.DescSalute = data.DescSalute;
@@ -295,14 +296,15 @@ export class AzioniComponent implements OnInit{
       this.potenzaattiva = false;
 
       //dovrei fare altro tipo ridurre il contatore delle azioni liberi di velocita //
-      console.log(data);
+      //console.log(data);
     });
 
     this.rissaFG.reset();
+    this.usofdv = false;
   }
 
   goarma(){
-    console.log(this.armaFG.value.armaFC);
+    //console.log(this.armaFG.value.armaFC);
 
     if (this.armaFG.value.armaFC.IDoggetto === 0 ) {
       this.oggettiservice.swaponoff('off', 0, this.status.Stanza). subscribe( () => {
@@ -314,7 +316,7 @@ export class AzioniComponent implements OnInit{
         this.usato.Immagine = 'dummy2.png';
         this.selettore = 0;
 
-        console.log(this.usato);
+        //console.log(this.usato);
 
       });
     } else {
@@ -348,10 +350,11 @@ export class AzioniComponent implements OnInit{
       this.potenzaattiva = false;
 
       //dovrei fare altro tipo ridurre il contatore delle azioni liberi di velocita //
-      console.log(data);
+      //console.log(data);
     });
 
     this.fuocoFG.reset();
+    this.usofdv = false;
 
   }
   
@@ -380,10 +383,11 @@ export class AzioniComponent implements OnInit{
       this.potenzaattiva = false;
 
       //dovrei fare altro tipo ridurre il contatore delle azioni liberi di velocita //
-      console.log(data);
+      //console.log(data);
     });
 
     this.mischiaFG.reset();
+    this.usofdv = false;
   }
 
 
