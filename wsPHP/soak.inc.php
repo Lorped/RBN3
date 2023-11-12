@@ -46,10 +46,18 @@ function soak_PG($id, $danno, $tipo) {
 	if ( $tipo == 'U') {
 		
 		$assorbiti = 0 ;
+		$uni = 0;
 		for ( $i = 0 ; $i < $costituzione+$robustezza ; $i++) {
-			if ( mt_rand (1,10) > 5 ) {
+			$tiro = mt_rand (1,10) ;
+			if ( $tiro >5 ) {
 				$assorbiti++;
+			} else if ( $tiro == 1) {
+				$uni = $uni++ ;
 			}
+		}
+		$assorbiti= $assorbiti - $uni;
+		if ( $assorbiti < 0) {
+			$assorbiti = 0 ;
 		}
 		$danno = $danno - $assorbiti;
 		if ($danno <0 ) {
@@ -82,10 +90,18 @@ function soak_PG($id, $danno, $tipo) {
 	} else if ( $tipo == 'L') {
 		
 		$assorbiti = 0 ;
+		$uni = 0 ;
 		for ( $i = 0 ; $i < $costituzione+$robustezza ; $i++) {
-			if ( mt_rand (1,10) > 5 ) {
+			$tiro = mt_rand (1,10) ;
+			if ( $tiro >5 ) {
 				$assorbiti++;
+			} else if ( $tiro == 1) {
+				$uni = $uni++ ;
 			}
+		}
+		$assorbiti= $assorbiti - $uni;
+		if ( $assorbiti < 0) {
+			$assorbiti = 0 ;
 		}
 		$danno = $danno - $assorbiti;
 		if ($danno <0 ) {
@@ -113,13 +129,21 @@ function soak_PG($id, $danno, $tipo) {
 		}
 		
 
-	} else if ( $tipo == 'A ') {
+	} else if ( $tipo == 'A') {
 		
 		$assorbiti= 0;
+		$uni = 0;
 		for ( $i = 0 ; $i < $robustezza ; $i++) {
-			if ( mt_rand (1,10) >5 ) {
+			$tiro = mt_rand (1,10) ;
+			if ( $tiro >5 ) {
 				$assorbiti++;
+			} else if ( $tiro == 1) {
+				$uni = $uni++ ;
 			}
+		}
+		$assorbiti= $assorbiti - $uni;
+		if ( $assorbiti < 0) {
+			$assorbiti = 0 ;
 		}
 		$danno = $danno - $assorbiti;
 		if ($danno <0) {
@@ -159,10 +183,18 @@ function soak_PNG_H( $danno, $tipo) {
 	if ( $tipo == 'U') {
 		
 		$assorbiti = 0 ;
+		$uni=0;
 		for ( $i = 0 ; $i < $costituzione+$robustezza ; $i++) {
-			if ( mt_rand (1,10) > 5 ) {
+			$tiro = mt_rand (1,10) ;
+			if ( $tiro >5 ) {
 				$assorbiti++;
+			} else if ( $tiro == 1) {
+				$uni = $uni++ ;
 			}
+		}
+		$assorbiti= $assorbiti - $uni;
+		if ( $assorbiti < 0) {
+			$assorbiti = 0 ;
 		}
 		$danno = $danno - $assorbiti;
 		if ($danno <0 ) {
@@ -175,7 +207,7 @@ function soak_PNG_H( $danno, $tipo) {
 		
 		return $danno;
 		
-	} else if ( $tipo == 'A ') {
+	} else if ( $tipo == 'A') {
 		
 		return $danno;
 	}
@@ -185,16 +217,23 @@ function soak_PNG_H( $danno, $tipo) {
 function soak_PNG_V ( $danno, $tipo) {
 	
 	$costituzione = 3;
-
 	$robustezza = 1;
 
 	if ( $tipo == 'U') {
 		
 		$assorbiti = 0 ;
+		$uni=0;
 		for ( $i = 0 ; $i < $costituzione+$robustezza ; $i++) {
-			if ( mt_rand (1,10) > 5 ) {
+			$tiro = mt_rand (1,10) ;
+			if ( $tiro >5 ) {
 				$assorbiti++;
+			} else if ( $tiro == 1) {
+				$uni = $uni++ ;
 			}
+		}
+		$assorbiti= $assorbiti - $uni;
+		if ( $assorbiti < 0) {
+			$assorbiti = 0 ;
 		}
 		$danno = $danno - $assorbiti;
 		if ($danno <0 ) {
@@ -208,10 +247,18 @@ function soak_PNG_V ( $danno, $tipo) {
 	} else if ( $tipo == 'L') {
 		
 		$assorbiti = 0 ;
+		$uni = 0;
 		for ( $i = 0 ; $i < $costituzione+$robustezza ; $i++) {
-			if ( mt_rand (1,10) > 5 ) {
+			$tiro = mt_rand (1,10) ;
+			if ( $tiro >5 ) {
 				$assorbiti++;
+			} else if ( $tiro == 1) {
+				$uni = $uni++ ;
 			}
+		}
+		$assorbiti= $assorbiti - $uni;
+		if ( $assorbiti < 0) {
+			$assorbiti = 0 ;
 		}
 		$danno = $danno - $assorbiti;
 		if ($danno <0 ) {
@@ -220,13 +267,21 @@ function soak_PNG_V ( $danno, $tipo) {
 
 		return $danno;		
 
-	} else if ( $tipo == 'A ') {
+	} else if ( $tipo == 'A') {
 		
 		$assorbiti= 0;
+		$uni = 0 ;
 		for ( $i = 0 ; $i < $robustezza ; $i++) {
-			if ( mt_rand (1,10) >5 ) {
+			$tiro = mt_rand (1,10) ;
+			if ( $tiro >5 ) {
 				$assorbiti++;
+			} else if ( $tiro == 1) {
+				$uni = $uni++ ;
 			}
+		}
+		$assorbiti= $assorbiti - $uni;
+		if ( $assorbiti < 0) {
+			$assorbiti = 0 ;
 		}
 		$danno = $danno - $assorbiti;
 		if ($danno <0) {

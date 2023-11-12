@@ -203,9 +203,9 @@ export class Mappa0Component  {
 
           // MARKERS 
           const clickOnMarker = e => {
-            console.log("onclick");
-            console.log(e);
-            console.log ( "chat = ", e.target.properties.location);
+            //console.log("onclick");
+            //console.log(e);
+            //console.log ( "chat = ", e.target.properties.location);
             const newloc = e.target.properties.location;
             this.status.Stanza = newloc;
             this.status.Last = 0;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListpresentiService, Presenti, SchedaService, SignupService, esitocura, getreg1, getreg2 } from '../../_services/index';
+import { ListpresentiService, OggettiService, Presenti, SchedaService, SignupService, esitocura, getreg1, getreg2, posseduti } from '../../_services/index';
 import { Attributo,  Basicpg,  Personaggio,  Skill, Status } from '../../globals';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -23,6 +23,21 @@ export class AzioniComponent implements OnInit{
   });
 
   rissaFG: FormGroup = new FormGroup({
+    targetFC:  new FormControl('', [
+      Validators.required]),
+  });
+
+  armaFG: FormGroup = new FormGroup({
+    armaFC:  new FormControl('', [
+      Validators.required]),
+  });
+
+  fuocoFG: FormGroup = new FormGroup({
+    targetFC:  new FormControl('', [
+      Validators.required]),
+  });
+
+  mischiaFG: FormGroup = new FormGroup({
     targetFC:  new FormControl('', [
       Validators.required]),
   });
@@ -55,9 +70,18 @@ export class AzioniComponent implements OnInit{
   sessvar_letali1 = false;
   sessvar_aggravati1 = false;
   sessvar_zulo = false;
+  sessvar_marauder = false;
+  sessvar_artigli = false;
   potenzaattiva = false;
 
-  constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService, private listapresenti: ListpresentiService) {}
+  listaposseduti: Array<posseduti> = [];
+  usato: posseduti = new posseduti();
+  fuoco = 0 ;
+  selettore = 0;
+
+
+  constructor ( private signup: SignupService, public status: Status, public schedaservice: SchedaService, 
+    private listapresenti: ListpresentiService, private oggettiservice: OggettiService) {}
 
   ngOnInit() {
 
@@ -83,9 +107,9 @@ export class AzioniComponent implements OnInit{
 
       this.usabili = Math.min(this.status.PS -1 , this.myaPG.UsoPS);
 
-      const found = this.myPG.listaAttributi.find ( (xx) => Number(xx.IDattributo) === 3);
+      const found = this.myPG.listaAttributi.find ( (xx) => Number(xx.IDattributo) === 2);
       this.destrezza = Number(found.Livello);
-
+     
       const found2 = this.myPG.listaSkill.find ( (xx) => Number(xx.IDskill) === 8);
       if ( found2 != null) {
         this.rissa = Number(found2.Livello);
@@ -101,8 +125,13 @@ export class AzioniComponent implements OnInit{
         this.velocita = Number(found4.LivelloDisc);
       }
 
-      this.velocitaattiva = Number(localStorage.getItem('Velocita') );
+      const found5 = this.myPG.listaSkill.find ( (xx) => Number(xx.IDskill) === 12);
+      if ( found5 != null) {
+        this.fuoco = Number(found5.Livello);
+      }
 
+      this.velocitaattiva = Number(localStorage.getItem('Velocita') );
+      // console.log("velocitaatt ", this.velocitaattiva);
       
 
       if ( this.velocitaattiva == 0) {
@@ -111,11 +140,21 @@ export class AzioniComponent implements OnInit{
 
       this.modsalute = this.myaPG.ModSalute;
 
+      // console.log("velocita =",this.velocita);
+      // console.log("destrezza =",this.destrezza);
+      // console.log("rissa =",this.rissa);
+      // console.log("mischia =",this.mischia);
+      // console.log("fuoco =",this.fuoco);
+      // console.log("modsalute =",this.modsalute);
+      
+
     });
 
+    this.sessvar_artigli = this.check_localstorage ( 'Artigli');
     this.sessvar_letali = this.check_localstorage ( 'Letali');
     this.sessvar_aggravati = this.check_localstorage ( 'Aggravati');
     this.sessvar_zulo = this.check_localstorage ( 'Zulo');
+    this.sessvar_marauder = this.check_localstorage ( 'Marauder');
     this.potenzaattiva = this.check_localstorage ( 'Potenza');
 
     this.sessvar_letali1 = this.check_localstorage ( 'Letali1');
@@ -149,6 +188,31 @@ export class AzioniComponent implements OnInit{
 
     });
     
+
+    this.oggettiservice.getoggetti(this.status.Userid).subscribe( (data: Array<posseduti>) => {
+      const vuoto = new posseduti();
+      vuoto.Nome = " - Nulla - ";
+      vuoto.Immagine = "dummy2.png";
+      this.listaposseduti.push( vuoto );
+      for ( let i = 0 ; i< data.length ; i++) {
+        if ( data[i].Indossato === 'S') {
+          this.listaposseduti.push( data[i]);
+        }
+      }
+      
+      this.usato.Nome = " - Nulla - ";
+      this.usato.Immagine = "dummy2.png";
+      this.selettore = 0;
+
+      const find = this.listaposseduti.find( xx => xx.Usato === "S");
+
+      if (find) {
+        this.usato = find;
+        this.usato.IDtipoOggetto=Number(this.usato.IDtipoOggetto);
+      }
+      // console.log(this.listaposseduti);
+      // console.log(this.usato);
+    });
   }
 
 
@@ -174,8 +238,9 @@ export class AzioniComponent implements OnInit{
 
 
   gocura() {
-    console.log ("gocura");
+    // console.log ("gocura");
     this.schedaservice.cura(this.status.Stanza).subscribe( (data:esitocura)=>{
+      this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
       // console.log(data);
       this.status.PS=this.status.PS - Number(data.usati);
       this.myaPG.DescSalute = data.DescSalute;
@@ -231,10 +296,99 @@ export class AzioniComponent implements OnInit{
       this.potenzaattiva = false;
 
       //dovrei fare altro tipo ridurre il contatore delle azioni liberi di velocita //
-      console.log(data);
+      //console.log(data);
     });
 
     this.rissaFG.reset();
+    this.usofdv = false;
   }
+
+  goarma(){
+    //console.log(this.armaFG.value.armaFC);
+
+    if (this.armaFG.value.armaFC.IDoggetto === 0 ) {
+      this.oggettiservice.swaponoff('off', 0, this.status.Stanza). subscribe( () => {
+        this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
+
+        this.usato.Nome = " - Nulla - ";
+        this.usato.IDoggetto = 0;
+        this.usato.IDtipoOggetto = 0;
+        this.usato.Immagine = 'dummy2.png';
+        this.selettore = 0;
+
+        //console.log(this.usato);
+
+      });
+    } else {
+      this.oggettiservice.swaponoff('on', this.armaFG.value.armaFC.IDoggetto, this.status.Stanza). subscribe( () => {
+        this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
+
+        const find = this.listaposseduti.find( xx => xx.IDoggetto === this.armaFG.value.armaFC.IDoggetto);
+        this.usato = find;
+        this.usato.IDtipoOggetto=Number(this.usato.IDtipoOggetto);
+        this.selettore = 0;
+        
+
+      });
+    }
+    
+  }
+
+
+  gofuoco(){
+    this.schedaservice.fuoco(this.status.Stanza, this.fuocoFG.value.targetFC.Userid, this.fuocoFG.value.targetFC.NomeCognome, this.usofdv, this.selettore).subscribe((data)=>{
+      this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
+
+      if (this.usofdv === true) {
+        this.status.FdV = this.status.FdV - 1 ;
+      }
+      
+      // Non so perchè avendo potenza e/o facendo aggravati dovrei sparare, ma in caso.... //
+      localStorage.removeItem ( 'Potenza');  //potenzaattiva
+      localStorage.removeItem ( 'Letali1');  //letali 1 turno
+      localStorage.removeItem ( 'Aggravati1');  //Aggravati 1 turno
+      this.potenzaattiva = false;
+
+      //dovrei fare altro tipo ridurre il contatore delle azioni liberi di velocita //
+      //console.log(data);
+    });
+
+    this.fuocoFG.reset();
+    this.usofdv = false;
+
+  }
+  
+  formatLabel(value: number): string {
+    if (value === 0) {
+      return 'Singolo';
+    } else if ( value === 1) {
+      return 'Auto';
+    } else if ( value === 2) {
+      return 'Raffica'
+    }
+    return `${value}`;
+  }
+
+  gomischia(){
+    this.schedaservice.mischia(this.status.Stanza, this.mischiaFG.value.targetFC.Userid, this.mischiaFG.value.targetFC.NomeCognome, this.usofdv).subscribe((data)=>{
+      this.schedaservice.updateazionato( Date() ) ;  //giusto per mettere un valore nuovo
+
+      if (this.usofdv === true) {
+        this.status.FdV = this.status.FdV - 1 ;
+      }
+      
+      localStorage.removeItem ( 'Potenza');  //potenzaattiva
+      localStorage.removeItem ( 'Letali1');  //letali 1 turno
+      localStorage.removeItem ( 'Aggravati1');  //Aggravati 1 turno
+      this.potenzaattiva = false;
+
+      //dovrei fare altro tipo ridurre il contatore delle azioni liberi di velocita //
+      //console.log(data);
+    });
+
+    this.mischiaFG.reset();
+    this.usofdv = false;
+  }
+
 
 }

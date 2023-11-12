@@ -42,7 +42,7 @@ export class OggettipgComponent implements OnInit{
 
     this.oggettiservice.checkckat().subscribe( (data: Checkchat) => {
       if ( Number(data.c) !== 0 ) {
-        console.log(data);
+        // console.log(data);
         this.swaplock = true;
       }
 

@@ -18,3 +18,12 @@ mat-card, mat-expansion-panel {
     border: 0;
 
   }
+
+  .threestep, mat-slider.threestep {
+    min-width: unset;
+    width: 70px;
+  }
+  .twostep, mat-slider.twostep {
+    min-width: unset;
+    width: 35px;
+  }

@@ -26,7 +26,7 @@ export class oggettibase {
   Nome = '';
   Descrizione = '';
   Costo = 0;
-  Immagine = '';
+  Immagine = 'dummy.png';
   Quantita = 0;
   Unico = '';
 }
@@ -97,6 +97,17 @@ export class OggettiService {
       token: user,
       id: id,
       tipo: tipo
+    });
+  }
+
+  swaponoff(tipo: string , id: number, stanza: number){
+    const user = sessionStorage.getItem('RBN3currentUser') ;
+    // console.log(id);
+    return this.http.post('https://www.roma-by-night.it/RBN3/wsPHP/swaponoff.php', {
+      token: user,
+      id: id,
+      tipo: tipo,
+      stanza: stanza
     });
   }
 

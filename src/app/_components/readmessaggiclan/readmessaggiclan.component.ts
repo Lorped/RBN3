@@ -35,7 +35,7 @@ export class ReadmessaggiclanComponent implements OnInit {
 
   SendMsg(){
     this.messaggiService.sendmessaggioclan(this.status.clancontattoID, this.testo)
-    .subscribe( (data) => {
+    .subscribe( () => {
       this.testo='';
       this.mymulti.nativeElement.innerHTML = '';
 

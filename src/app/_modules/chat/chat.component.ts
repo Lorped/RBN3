@@ -93,6 +93,25 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     });
 
 
+
+  }
+
+
+  check_localstorage ( key: string) {
+    // console.log ( "in check_local");
+    const itemStr = localStorage.getItem ( key );
+    if ( itemStr) {
+      const oggetto = JSON.parse(itemStr);
+      const now = new Date()
+      // compare the expiry time of the item with the current time
+      if (now.getTime() > oggetto.expiry) {
+        // If the item is expired, delete the item from storage
+        localStorage.removeItem(key);
+      }
+      if (Number(oggetto.value) !== this.status.Stanza) {
+        localStorage.removeItem(key);
+      }
+    }
   }
 
 
@@ -113,6 +132,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       });
     });
 
+    this.check_localstorage('Letali');
+    this.check_localstorage('Aggravati');
+    this.check_localstorage('Zulo');
+    this.check_localstorage('Marauder');
 
   }
 

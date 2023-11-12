@@ -88,7 +88,7 @@
         </mat-card-title>
         <mat-card-subtitle>
             <div style="display: inline-flex;">
-            ( Destrezza+Rissa ) &nbsp; <i *ngFor="let i of 10 | times ; let ix = index" class="fa fa-circle" [ngClass]="{'dred': (ix < destrezza+rissa+modsalute) , 'white': (ix+1 > destrezza+rissa+modsalute)  }"></i>
+            ( Destrezza+Rissa ) &nbsp; <i *ngFor="let i of (destrezza+rissa+modsalute) | times ; let ix = index" class="fa fa-circle dred" ></i>
             </div>
         </mat-card-subtitle>
         
@@ -104,6 +104,106 @@
                 </mat-select>
             </mat-form-field>
             <button mat-button color="primary" [disabled]="! (status.Alive && rissaFG.valid && this.myaPG.IDsalute>0 )" (click)="gorissa()" ><mat-icon >play_circle_outline</mat-icon></button>
+        </form>
+    </mat-card-header>
+</mat-card>
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Cambia/Riponi arma
+        </mat-card-title>
+        <mat-card-subtitle>
+            <div style="display: inline-flex;">
+            Arma utilizzata: {{ usato.Nome}} - <img style="vertical-align:middle;"  src="assets/oggetti/{{usato.Immagine}}" height="25" />
+            </div>
+            <div *ngIf="usato.IDtipoOggetto === 3">
+                Danno: <span class="accent-text">{{usato.Danno}}</span> | Precisione: <span class="accent-text">+{{usato.BonusTiro}}</span> | Colpi: <span class="accent-text">{{usato.Caricatore}}</span> |
+                Rate tiro: <span class="accent-text">{{usato.Rate}}</span> | Raffica: <span class="accent-text">{{usato.Raffica}}</span>
+            </div>
+            <div *ngIf="usato.IDtipoOggetto === 1 || usato.IDtipoOggetto === 2 ">
+                Danno: <span class="accent-text">Forza +{{usato.Danno}}</span> | Tipo danno: <span class="accent-text">
+                <span *ngIf="usato.IDtipoOggetto === 1">Da Urto</span>
+                <span *ngIf="usato.IDtipoOggetto === 2">Letale</span>
+                </span> | Bonus/Malus: <span class="accent-text">{{usato.BonusTiro}}</span> 
+            </div>
+        </mat-card-subtitle>
+        
+        <span class="spacer"></span>
+        <form [formGroup]="armaFG">            
+            <mat-form-field>
+                <mat-label>Arma</mat-label>
+                <mat-select  formControlName="armaFC"> 
+                    <mat-option *ngFor="let cont of listaposseduti"  [value]="cont">
+                        <img style="vertical-align:middle;"  src="assets/oggetti/{{cont.Immagine}}" height="25" />
+                        {{ cont.Nome }} 
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button color="primary" [disabled]="! (status.Alive && armaFG.valid && this.myaPG.IDsalute>0 && armaFG.value.armaFC.IDoggetto !== usato.IDoggetto)" (click)="goarma()" ><mat-icon >play_circle_outline</mat-icon></button>
+        </form>
+    </mat-card-header>
+</mat-card>
+
+<mat-card *ngIf="usato.IDtipoOggetto === 3 ">
+    <mat-card-header>
+        <mat-card-title>
+            Armi da Fuoco
+        </mat-card-title>
+        <mat-card-subtitle>
+            <div style="display: inline-flex;">
+            ( Destrezza + Armi da Fuoco ) &nbsp; <i *ngFor="let i of (destrezza+fuoco+modsalute)  | times ; let ix = index" class="fa fa-circle dred" ></i>
+            </div>
+        </mat-card-subtitle>
+        <span *ngIf="usato.Rate !== 1">
+            Sel:
+            <mat-slider min="0" max="1" step="1" showTickMarks discrete [displayWith]="formatLabel" *ngIf="usato.Raffica === 'N' " class="twostep">
+                <input matSliderThumb [(ngModel)]="selettore">
+            </mat-slider>
+            <mat-slider min="0" max="2" step="1" showTickMarks discrete [displayWith]="formatLabel" *ngIf="usato.Raffica === 'S' " class="threestep">
+                <input matSliderThumb [(ngModel)]="selettore">
+            </mat-slider>
+        </span>
+                  
+        <span class="spacer"></span>
+        <form [formGroup]="fuocoFG">            
+            <mat-form-field>
+                <mat-label>Target</mat-label>
+                <mat-select  formControlName="targetFC"> 
+                    <mat-option *ngFor="let cont of presenti"  [value]="cont">
+                        <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+                        {{ cont.NomeCognome }} 
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button color="primary" [disabled]="! (status.Alive && fuocoFG.valid && this.myaPG.IDsalute>0 && this.velocitaattiva === 0 )" (click)="gofuoco()" ><mat-icon >play_circle_outline</mat-icon></button>
+        </form>
+    </mat-card-header>
+</mat-card>
+
+<mat-card *ngIf="usato.IDtipoOggetto === 1 || usato.IDtipoOggetto === 2 ">
+    <mat-card-header>
+        <mat-card-title>
+            Armi da Mischia
+        </mat-card-title>
+        <mat-card-subtitle>
+            <div style="display: inline-flex;">
+            ( Destrezza + Armi da Mischia ) &nbsp; <i *ngFor="let i of (destrezza+mischia+modsalute)  | times ; let ix = index" class="fa fa-circle dred" ></i>
+            </div>
+        </mat-card-subtitle>
+                  
+        <span class="spacer"></span>
+        <form [formGroup]="mischiaFG">            
+            <mat-form-field>
+                <mat-label>Target</mat-label>
+                <mat-select  formControlName="targetFC"> 
+                    <mat-option *ngFor="let cont of presenti"  [value]="cont">
+                        <img style="vertical-align:middle;"  src="assets/{{cont.URLImg}}" height="25" />
+                        {{ cont.NomeCognome }} 
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button color="primary" [disabled]="! (status.Alive && mischiaFG.valid && this.myaPG.IDsalute>0  )" (click)="gomischia()" ><mat-icon >play_circle_outline</mat-icon></button>
         </form>
     </mat-card-header>
 </mat-card>
