@@ -51,6 +51,9 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		$ultimosangue=$res['ultimosangue'];
 		$IDsalute=$res['IDsalute'];
 		$ultimofdv=$res['ultimofdv'];
+		$ultimodanno=$res['ultimodanno'];
+		$Generazione = $res['Generazione'];
+		$Valsentiero = $res['Valsentiero'];
 
 
 		$payload = [
@@ -119,11 +122,18 @@ if (isset($postdata) && $email != "" && $password !="" ) {
 		}
 	
 		if ($IDsalute < 0) { // torpore - MU - I PS NON AUMENTANO
-			$MySql = "UPDATE Personaggio SET PS=0 , ultimosangue = NOW() WHERE Userid=$Userid ";
-			mysqli_query($db, $MySql);
-			if (mysqli_errno($db)) { 
-				die ( mysqli_errno($db).": ".mysqli_error($db). " ".$MySql );
+
+			$oretorpore = floor((time() - strtotime($ultimodanno) ) / (60 * 60));  //ore
+
+			if ($oretorpore > 48 - 2*$Generazione - $Valsentiero) {
+				$MySql = "UPDATE Personaggio SET IDsalute = 0 ,  ultimosangue = NOW() , ultimodanno = NOW() WHERE Userid=$Userid ";
+				mysqli_query($db, $MySql);
+				if (mysqli_errno($db)) { 
+					die ( mysqli_errno($db).": ".mysqli_error($db). " ".$MySql );
+				}
+
 			}
+
 		}
 
 		// E FDV

@@ -77,7 +77,7 @@ function soak_PG($id, $danno, $tipo) {
 
 			$newdaurto = (7-$IDsalute)-$letali - $aggravati;
 
-			$MySql = "UPDATE Personaggio SET IDsalute = $IDsalute , daurto = $newdaurto WHERE Userid = $id";
+			$MySql = "UPDATE Personaggio SET IDsalute = $IDsalute , daurto = $newdaurto , ultimodanno=NOW() WHERE Userid = $id";
 			mysqli_query($db, $MySql);
 
 			$dannieffettivi = $newdaurto - $olddaurto;
@@ -119,7 +119,7 @@ function soak_PG($id, $danno, $tipo) {
 
 			$newletali = (7-$IDsalute)-$daurto - $aggravati;
 
-			$MySql = "UPDATE Personaggio SET IDsalute = $IDsalute  WHERE Userid = $id";
+			$MySql = "UPDATE Personaggio SET IDsalute = $IDsalute , ultimodanno=NOW()  WHERE Userid = $id";
 			mysqli_query($db, $MySql);
 
 			$dannieffettivi = $newletali - $oldletali;
@@ -161,7 +161,7 @@ function soak_PG($id, $danno, $tipo) {
 
 			$newaggravati = (7-$IDsalute)-$daurto - $letali;
 
-			$MySql = "UPDATE Personaggio SET IDsalute = $IDsalute , aggravati = $dannieffettivi WHERE Userid = $id";
+			$MySql = "UPDATE Personaggio SET IDsalute = $IDsalute , aggravati = $dannieffettivi , ultimodanno=NOW() WHERE Userid = $id";
 			mysqli_query($db, $MySql);
 
 			$dannieffettivi = $newaggravati - $oldaggravati;
