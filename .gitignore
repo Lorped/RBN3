@@ -47,3 +47,6 @@ codice.txt
 
 src/assets/loc/*
 src/assets/OLD+WIP/
+
+db2.inc.php
+db.inc.php
