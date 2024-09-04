@@ -23,7 +23,7 @@ include ('token.php');
 // $token=$_GET['token'];
 
 
-$out="";
+$out=[];
 
 $Mysql="SELECT ID, Breve , Descrizione, latit, longit FROM Mappa WHERE (latit <> 0) ";
 $Results=mysqli_query($db, $Mysql);

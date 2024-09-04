@@ -40,7 +40,7 @@ if ( CheckJWT($token)  ) {
 }
 
 
-$out="";
+$out=[];
 
 $Mysql="SELECT Padre, Entra FROM Mappa WHERE ID = $Dove";
 $Results=mysqli_query($db, $Mysql);

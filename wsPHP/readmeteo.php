@@ -29,7 +29,18 @@ $res=mysqli_fetch_array($Result,MYSQLI_ASSOC);
 if ( mysqli_num_rows($Result) == 0 ) {
 	// OLD
 	$Url = "https://api.openweathermap.org/data/2.5/weather?q=Roma,IT&appid=dace55e43d30c124e29bc999a04871d3&units=metric&lang=it";
-	$json = file_get_contents($Url);
+	//$json = file_get_contents($Url);
+	
+	//
+	
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, $Url);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curl, CURLOPT_HEADER, false);
+	$json = curl_exec($curl);
+	curl_close($curl);
+	
+	
 	$out = json_decode($json);
 	
 	//print_r($out);

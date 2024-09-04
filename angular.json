@@ -95,18 +95,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "rbn3:build"
+            "browserTarget": "rbn3:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "rbn3:build:production"
+              "browserTarget": "rbn3:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "rbn3:build"
+            "browserTarget": "rbn3:build"
           }
         },
         "test": {
