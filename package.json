@@ -48,7 +48,7 @@
     "@angular-eslint/schematics": "^21.1.0",
     "@angular-eslint/template-parser": "17.2.1",
     "@angular/cli": "^21.2.21",
-    "@angular/compiler-cli": "^17.2.0",
+    "@angular/compiler-cli": "^22.2.0",
     "@angular/language-service": "^17.2.0",
     "@types/bootstrap": "^4.3.2",
     "@types/jasmine": "~3.5.10",
